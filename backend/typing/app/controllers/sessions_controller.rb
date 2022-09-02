@@ -19,4 +19,4 @@ class SessionsController < ApplicationController
 
 end
 
-#curl POST http://localhost:3000/login -H 'Content-Type: application/json' -d '{"password":"my_password","email":"myemail"}' -v
+# curl POST http://localhost:3000/login -H 'Content-Type: application/json' -d '{"password":"test","email":"adamgrharvey@gmail.com"}' -v
