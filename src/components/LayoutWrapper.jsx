@@ -1,10 +1,12 @@
 // wraps all components
 // imported into App.js
 import SectionContainer from './SectionContainer';
+import HomepageHeader from './HomepageHeader';
 
 const LayoutWrapper = ({ children }) => {
   return (
     <SectionContainer>
+      <HomepageHeader />
       <div className="flex h-screen flex-col justify-between font-sans">
         <header className="flex items-center justify-between py-10">
           <div>
