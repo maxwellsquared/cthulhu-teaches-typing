@@ -22,6 +22,13 @@ const LayoutWrapper = ({ children }) => {
                 </a>
               ))}
             </div>
+            <div className="hidden sm:block">
+              {['Login'].map((link) => (
+                <a key={link} href={'/login'} className="p-1 font-medium sm:p-4">
+                  {link}
+                </a>
+              ))}
+            </div>
           </div>
         </header>
         <main className="mb-auto">{children}</main>
