@@ -1,15 +1,15 @@
 class UsersController < ApplicationController
 
   def new
-    @user = User.new
+    # @user = User.new
   end
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] = "User created."
-      # redirect_to root_path
+      # flash[:notice] = "User created."
+      render json: @user
     else
-      flash[:alert] = "error created."
+      # flash[:alert] = "error created."
       # render 'new'
   end
   end
