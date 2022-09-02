@@ -10,12 +10,12 @@ class UsersController < ApplicationController
       render json: @user
     else
       # flash[:alert] = "error created."
-      # render 'new'
+      render json: @user.errors.full_messages
   end
   end
   private
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password)
   end
 
 

@@ -1,10 +1,7 @@
 class User < ApplicationRecord
-  has_secure_password
   validates :name, presence: true
-  validates :password_confirmation, presence: true
   validates :email, presence: true
-  validates :password, length: {minimum: 6}
-  validates :password_confirmation, length: {minimum: 6}
+  validates :password, presence: true
   validates :email, uniqueness: { case_sensitive: false }
 
   def self.authenticate_with_credentials(email, password)
@@ -16,3 +13,5 @@ class User < ApplicationRecord
     end
   end
 end
+
+# curl POST http://localhost:3000/users -H 'Content-Type: application/json' -d '{"name":"my_login","password":"my_password","email":"myemail"}' -v

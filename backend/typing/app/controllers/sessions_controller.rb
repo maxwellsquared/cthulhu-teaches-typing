@@ -1,20 +1,22 @@
 class SessionsController < ApplicationController
 
   def create
-    if user = User.authenticate_with_credentials(params[:session][:email], params[:session][:password])
-      session[:user_id] = user.id
-      flash[:notice] = "Logged in successfully."
-      
-      # redirect_to '/'
-    else
-      flash.now[:notice] = "There was something wrong with your login details."
-      # render 'new'
+    
+    if (@user = User.find_by(email: params[:session][:email].strip.downcase))
+      if (@user.email == params[:session][:email] && @user.password == params[:session][:password])
+        @user = User.find_by(email: params[:session][:email].strip.downcase)
+        render json: @user
+      else
+        render json: "There was something wrong with your login details."
+      end
+    else   
+      render json: "There was something wrong with your login details."
     end
   end
   def destroy
     session[:user_id] = nil
-    flash[:notice] = "You have been logged out."
-    # redirect_to root_path
   end
 
 end
+
+#curl POST http://localhost:3000/login -H 'Content-Type: application/json' -d '{"password":"my_password","email":"myemail"}' -v
