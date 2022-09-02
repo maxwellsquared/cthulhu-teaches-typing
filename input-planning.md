@@ -13,5 +13,5 @@ This document is just pseudocode for planning out the text input function.
 4. If the character typed !== the next character:
    a. User feedback (BZZZZ! WRONGO! screenshake)
    b. Mistakes ++
-5. WPM = (succesfulCharacters / 5) / minutes rounded down to int
+5. WPM = ((succesfulCharacters / 5) / minutes) rounded down to int
 6. Accuracy = 1 - (mistakes/successfulCharacters) expressed as %
