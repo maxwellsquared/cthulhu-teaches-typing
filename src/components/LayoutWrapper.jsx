@@ -16,8 +16,8 @@ const LayoutWrapper = ({ children }) => {
           </div>
           <div className="flex items-center text-base leading-5">
             <div className="hidden sm:block">
-              {['About', 'More'].map((link) => (
-                <a key={link} href={'/link'} className="p-1 font-medium sm:p-4">
+              {['About'].map((link) => (
+                <a key={link} href={'/about'} className="p-1 font-medium sm:p-4">
                   {link}
                 </a>
               ))}
