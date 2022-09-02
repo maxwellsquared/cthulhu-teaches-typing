@@ -10,15 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_01_231329) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_02_175319) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "keyboards", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "users_id"
+    t.index ["users_id"], name: "index_keyboards_on_users_id"
+  end
 
   create_table "submissions", force: :cascade do |t|
     t.integer "wpm"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "users_id"
+    t.bigint "keyboards_id"
+    t.index ["keyboards_id"], name: "index_submissions_on_keyboards_id"
     t.index ["users_id"], name: "index_submissions_on_users_id"
   end
 
@@ -31,5 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_231329) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "keyboards", "users", column: "users_id"
+  add_foreign_key "submissions", "keyboards", column: "keyboards_id"
   add_foreign_key "submissions", "users", column: "users_id"
 end
