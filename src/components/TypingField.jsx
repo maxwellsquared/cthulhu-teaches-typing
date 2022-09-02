@@ -1,8 +1,6 @@
-import { MantineProvider, Container, Input } from '@mantine/core';
 import { useState, useEffect } from 'react';
 import RandomWords from '../helpers/RandomWords';
 import Span from './Span';
-import { SegmentedControl } from '@mantine/core';
 
 export default function TypingField() {
   const [currentlyTypedWord, setCurrentlyTypedWord] = useState(''); // This is the word that the user is currently typing
@@ -82,40 +80,19 @@ export default function TypingField() {
 
   // !! needs to be separated into a different component
 
-  const NumberOfWordsPicker = () => {
-    return (
-      <SegmentedControl
-        value={numberOfWords}
-        onChange={setNumberOfWords}
-        data={[
-          { label: '25', value: 25 },
-          { label: '50', value: 50 },
-          { label: '100', value: 100 },
-          { label: '200', value: 200 },
-          { label: '300', value: 300 },
-        ]}
-      />
-    );
-  };
-
   return (
-    <MantineProvider withGlobalStyles withNormalizeCSS>
+    <>
       <h1>Press any key to start</h1>
-      <Container size="lg">
-        <NumberOfWordsPicker setNumberOfWords={setNumberOfWords} />
-      </Container>
-      <Container size="lg">
-        {displayWordsArr}
-        <Input
-          placeholder="Type here"
-          radius="md"
-          size="md"
-          value={currentlyTypedWord}
-          onChange={(event) => handleInput(event)}
-        />
-        <p>current word: {randomWordArray[currentWordIndex]}</p>
-        <p>number of correct words: {numOfCorrectWords}</p>
-      </Container>
-    </MantineProvider>
+      <div className="font-serif">{displayWordsArr}</div>
+      <input
+        placeholder="Type here"
+        radius="md"
+        size="md"
+        value={currentlyTypedWord}
+        onChange={(event) => handleInput(event)}
+      />
+      <p>current word: {randomWordArray[currentWordIndex]}</p>
+      <p>number of correct words: {numOfCorrectWords}</p>
+    </>
   );
 }
