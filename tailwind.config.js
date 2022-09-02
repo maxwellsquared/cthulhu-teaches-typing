@@ -10,13 +10,16 @@ module.exports = {
       'cosmic-purple': '#1C122C',
       'pale-gold': '#EEDCB2',
       'blood-red': '#8C3D34',
-      candle: '#E9B12E',
+      'candle': '#E9B12E',
     },
     fontFamily: {
       // if changing, import font into 'src/index.css'
-      sans: ['Open Sans', 'sans-serif'],
+      // font-family: brother-1816, sans-serif;
+
+      sans: ['brother-1816', 'sans-serif'],
       serif: ['Anonymous Pro', 'serif'],
       timer: ['Chakra Petch', 'sans-serif'],
+      mono: ['courier-prime', 'monospace']
     },
     extend: {},
   },
