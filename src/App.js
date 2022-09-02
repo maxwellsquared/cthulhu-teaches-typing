@@ -3,6 +3,8 @@ import { useState } from 'react';
 import TypingField from './components/TypingField';
 import HomepageHeader from './components/HomepageHeader';
 import LayoutWrapper from './components/LayoutWrapper';
+import { Routes, Route } from "react-router-dom"
+import About from "./components/About/About"
 
 import { UserContext } from './helpers/context';
 
@@ -12,7 +14,19 @@ export default function App() {
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <LayoutWrapper>
+      <div className="App">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="about" element={<About />} />
+      </Routes>
+    </div>
+  )
+}
+
+// !! needs refactoring to another file
+function Home() {
+  return (
+    <LayoutWrapper>
         <HomepageHeader />
         <TypingField />
       </LayoutWrapper>
