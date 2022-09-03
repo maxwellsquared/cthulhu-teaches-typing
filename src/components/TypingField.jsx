@@ -21,6 +21,8 @@ export default function TypingField() {
   // const [timeLimit, setTimeLimit] = useState(); // stores the time limit for the test
   const timeLimit = 1; // temporary hardcoded 1 minute time limit
   const numWords = timeLimit * 225; // sets length of text to be typed
+  const [counter, setCounter] = useState(60);
+  const [started, setStarted] = useState(false);
 
   // page load
   useEffect(() => {
@@ -32,6 +34,17 @@ export default function TypingField() {
     setTotalChars(0);
     setMistakes(0);
   }, []);
+
+  //timer - will need to be told to start when user starts typing.
+  // checks if started or counter state changes, timer begins when the test starts. updates every second.
+  useEffect(() => {
+    if (started) {
+      const timer =
+      counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+    return () => clearInterval(timer);
+    }
+
+  }, [counter, started]);
 
   // called on update
   useEffect(() => {
@@ -50,6 +63,7 @@ export default function TypingField() {
 
   // successful entry of a character
   const userSuccess = function () {
+    
     setThisWorks('YAY!!!!!');
     setCorrectChars((prev) => {
       return prev + 1;
@@ -88,9 +102,11 @@ export default function TypingField() {
     // this is doubled! check it out later.
     if (inputValue !== lastKey) userMistake();
 
-    //
+    
     setFreshInput(true);
     userSuccess();
+    // starts test status to 'started == true' on first input
+    setStarted(true);
   };
 
   //     3. If the character typed === the next character:
@@ -115,6 +131,7 @@ export default function TypingField() {
         <div className="font-mono">MISTAKES: {totalChars - correctChars}</div>
         <div className="font-mono">DOES THIS WORK?: {thisWorks}</div>
         <div className="font-mono">Test info: {testText}</div>
+        <div className="font-mono">Timer: {counter}</div>
       </div>
       <input
         placeholder="Type here"
