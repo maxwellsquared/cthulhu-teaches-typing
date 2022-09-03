@@ -3,4 +3,97 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&family=Chakra+Petch:wght@300;400;600&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
-@import url('https://use.typekit.net/ktn2qhx.css')
+@import url('https://use.typekit.net/ktn2qhx.css');
+
+body {
+  background-color: #1c122c;
+  overflow: hidden;
+}
+
+h1 {
+  font-family: brother-1816, sans-serif;
+  font-weight: 900;
+  color: #eedcb2;
+  text-decoration: none;
+}
+
+p {
+  color: red;
+}
+
+.typing {
+  font-size: 60px;
+  color: #eedcb2;
+  display: flex;
+  white-space: nowrap;
+  font-family: courier-prime, monospace;
+}
+
+.shaken {
+  animation: shake 0.4s, turn-red 0.4s;
+}
+
+.timer {
+  font-size: 80px;
+  color: #eedcb2;
+  font-family: brother-1816, sans-serif;
+}
+
+.timer-countdown {
+  color: #8c3d34;
+  animation: shake 0.4s, turn-red 0.4s;
+}
+
+.typing-left {
+  text-align: right;
+  color: #e9b12e;
+  white-space: pre;
+}
+
+.typing-right {
+  text-align: left;
+  white-space: pre;
+}
+
+.testing-info {
+  font-size: 25px;
+  color: antiquewhite;
+}
+
+.navbuttons {
+  color: #eedcb2;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate(-1px, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate(2px, 4px);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate(-4px, -7px);
+  }
+
+  40%,
+  60% {
+    transform: translate(4px, 0);
+  }
+}
+
+@keyframes turn-red {
+  10%,
+  90% {
+    color: #eedcb2;
+  }
+
+  50% {
+    color: red;
+  }
+}
