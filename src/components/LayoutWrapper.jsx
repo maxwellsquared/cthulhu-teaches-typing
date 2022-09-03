@@ -1,7 +1,6 @@
 // wraps all components
 // imported into App.js
 import SectionContainer from './SectionContainer';
-import { NavLink } from 'react-router-dom';
 
 const LayoutWrapper = ({ children }) => {
   return (
