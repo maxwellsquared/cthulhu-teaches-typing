@@ -2,9 +2,9 @@ import { useState, useEffect, useContext } from 'react';
 import RandomWords from '../helpers/RandomWords';
 import LoggedInWelcomeBanner from './LoggedInWelcomeBanner';
 
-export default function TypingField({ userRef }) {
-  console.log('userRef in TypingField', userRef);
+import { UserContext } from '../helpers/context';
 
+export default function TypingField() {
   const [leftChars, setLeftChars] = useState(''); // stores the characters on the left side of the cursor
   const [rightChars, setRightChars] = useState(''); // stores the characters on the left side of the cursor
   const [nextChar, setNextChar] = useState(); // stores the correct next character to type
@@ -23,6 +23,9 @@ export default function TypingField({ userRef }) {
   // const [timeLimit, setTimeLimit] = useState(); // stores the time limit for the test
   const timeLimit = 1; // temporary hardcoded 1 minute time limit
   const numWords = timeLimit * 225; // sets length of text to be typed
+
+  const { user, setUser } = useContext(UserContext);
+  console.log('user from TypingField.jsx', user);
 
   // page load
   useEffect(() => {
@@ -104,33 +107,10 @@ export default function TypingField({ userRef }) {
   //     a. User feedback (BZZZZ! WRONGO! screenshake)
   //     b. Mistakes ++
 
-  if (userRef) {
-    return (
-      <div>
-        <h1>LOGGED IN with {userRef.current.name}</h1>
-        <div className="typing-field">
-          <div className="left-chars">{leftChars}</div>
-          <div className="right-chars">{rightChars}</div>
-          <div className="cursor">|</div>
-          <input
-            className="input-field"
-            type="text"
-            placeholder="Start typing here"
-            onChange={handleInput}
-          />
-        </div>
-        <div className="stats">
-          <p>Correct characters: {correctChars}</p>
-          <p>Total characters: {totalChars}</p>
-          <p>Mistakes: {mistakes}</p>
-        </div>
-        <div className="test-text">{testText}</div>
-        <div className="this-works">{thisWorks}</div>
-      </div>
-    );
-  } else {
+
     return (
       <>
+      {user ? <LoggedInWelcomeBanner /> : null}
         <h1>NOT LOGGED IN</h1>
         <h1>New TypingField Test</h1>
         <div className="typing-area">
@@ -154,7 +134,6 @@ export default function TypingField({ userRef }) {
         />
       </>
     );
-  }
 }
 
 // export default function TypingFieldOld() {
