@@ -5,11 +5,9 @@ import { UserContext } from '../helpers/context';
 
 // this should be the main page, displayed when URL is '/'
 const Home = () => {
-  const { user } = useContext(UserContext);
-
   return (
     <LayoutWrapper>
-      <TypingField userRef={user} />
+      <TypingField />
     </LayoutWrapper>
   );
 };

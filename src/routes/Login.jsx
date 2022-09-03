@@ -1,7 +1,6 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import axios from 'axios';
 import { UserContext } from '../helpers/context';
-import { useContext, useRef } from 'react';
 import LayoutWrapper from '../components/LayoutWrapper';
 import TypingField from '../components/TypingField';
 import { Routes, Route } from 'react-router-dom';
@@ -23,7 +22,6 @@ function Login() {
     // function to set UserRef and user state
     const successfulLogin = (response) => {
       loggedInUserRef.current = response.data;
-      setUser(loggedInUserRef.current); // ?? note sure if we actually need this.
     };
 
     const postRequest = new Promise((resolve, reject) => {
@@ -60,7 +58,7 @@ function Login() {
           path={`/`}
           element={
             <LayoutWrapper>
-              <TypingField userRef={loggedInUserRef.current} />
+              <TypingField userRef={loggedInUserRef} />
             </LayoutWrapper>
           }
         />

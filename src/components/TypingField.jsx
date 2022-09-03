@@ -1,9 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
 import RandomWords from '../helpers/RandomWords';
 import LoggedInWelcomeBanner from './LoggedInWelcomeBanner';
-import { UserContext } from '../helpers/context';
 
-export default function TypingField() {
+export default function TypingField({ userRef }) {
+  console.log('userRef in TypingField', userRef);
+
   const [leftChars, setLeftChars] = useState(''); // stores the characters on the left side of the cursor
   const [rightChars, setRightChars] = useState(''); // stores the characters on the left side of the cursor
   const [nextChar, setNextChar] = useState(); // stores the correct next character to type
@@ -22,11 +23,6 @@ export default function TypingField() {
   // const [timeLimit, setTimeLimit] = useState(); // stores the time limit for the test
   const timeLimit = 1; // temporary hardcoded 1 minute time limit
   const numWords = timeLimit * 225; // sets length of text to be typed
-
-  // useContext is used to access the user object
-  // !! we can useContext to access the user object in any component instead of passing props
-  // used this to show welcome banner if user is logged in
-  const { user } = useContext(UserContext);
 
   // page load
   useEffect(() => {
@@ -110,7 +106,7 @@ export default function TypingField() {
 
   return (
     <>
-      {user.name ? <LoggedInWelcomeBanner /> : null}
+      <LoggedInWelcomeBanner userRef={userRef} />
       <h1>New TypingField Test</h1>
       <div className="typing-area">
         <div className="font-mono">TYPED: {leftChars}</div>

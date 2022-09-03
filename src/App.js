@@ -8,7 +8,9 @@ import Home from './routes/Home';
 
 // parent component for all other components
 export default function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
+
+  console.log('user in app', user);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
