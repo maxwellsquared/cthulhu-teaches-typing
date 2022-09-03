@@ -1,11 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import RandomWords from '../helpers/RandomWords';
+import LoggedInWelcomeBanner from './LoggedInWelcomeBanner';
+
+import { UserContext } from '../helpers/context';
 
 export default function TypingField() {
+  // timer functionality
+  const [counter, setCounter] = useState(15);
+  const [started, setStarted] = useState(false);
+
+  // user functionality
+  const { user, setUser } = useContext(UserContext);
+
   const [leftChars, setLeftChars] = useState(''); // stores the characters on the left side of the cursor
   const [rightChars, setRightChars] = useState(''); // stores the characters on the left side of the cursor
   const [nextChar, setNextChar] = useState(); // stores the correct next character to type
-
   const [lastKey, setLastKey] = useState(); // stores the last character typed
 
   const [correctChars, setCorrectChars] = useState(0); // stores number of correct characters entered
@@ -13,12 +22,10 @@ export default function TypingField() {
   const [mistakes, setMistakes] = useState(0); // set number of mistakes player has made
 
   const [xPosition, setXPosition] = useState(0); // set number of characters typing division is offset by
-
   const [divClassName, setDivClassName] = useState('typing'); // give the typing div the 'typing shaken' class and it'll turn red and shake
-
-  // set style(s) for the full typing area
+  const [timerClass, setTimerClass] = useState('timer');
   const [fullDivStyle, setFullDivStyle] = useState({
-    position: 'relative',
+    position: 'relative', // set typing division style (in order to set position)
     left: '0ch',
   });
 
@@ -30,7 +37,7 @@ export default function TypingField() {
   const timeLimit = 1; // temporary hardcoded 1 minute time limit
   const numWords = timeLimit * 225; // sets length of text to be typed
 
-  // page load
+  // ---- CALLED ON PAGE LOAD ----
   useEffect(() => {
     //set random words based on time limit as a string
     const initialRandomWords = RandomWords(numWords).toString();
@@ -39,9 +46,10 @@ export default function TypingField() {
     setLeftChars('');
     setTotalChars(0);
     setMistakes(0);
+    console.log('user from TypingField.jsx', user); // log user
   }, []);
 
-  // called on update
+  // ---- CALLED ON UPDATE ----
   useEffect(() => {
     setNextChar(rightChars[0]); // set the next character to be the first character of the right string
     setMistakes(totalChars - correctChars);
@@ -50,8 +58,23 @@ export default function TypingField() {
     });
   });
 
+  // ---- TIMER FUNCTION ----
+  useEffect(() => {
+    // checks if started or counter state changes, timer begins when the test starts. updates every second.
+    if (started) {
+      const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+      if (counter < 10) setTimerRed(); // set the timer red for the last 10 seconds
+      return () => clearInterval(timer);
+    }
+  }, [counter, started]);
+
+  // make the timer red
+  const setTimerRed = function () {
+    setTimerClass('timer timer-countdown');
+  };
+
   // take the first character off RightCars and add it to LeftChars
-  const moveChars = function (withSpace) {
+  const moveChars = function () {
     let xSize = 1;
     // let leftXSize = 0;
     setLeftChars((prevState) => {
@@ -83,8 +106,10 @@ export default function TypingField() {
     }, 250);
   };
 
-  // handle user input
+  // ---- INPUT FUNCTION ----
   const handleInput = function (event) {
+    setStarted(true); // starts test status to 'started == true' on first input
+
     // get the value of the input and set the last key to that character
     let inputValue = event.target.value;
 
@@ -115,7 +140,9 @@ export default function TypingField() {
 
   return (
     <>
-      <h1>New TypingField Test</h1>
+      {user ? <LoggedInWelcomeBanner /> : null}
+      <h1>NOT LOGGED IN</h1>
+      <h1>TypingField Test</h1>
       <div className={divClassName} style={fullDivStyle}>
         <div className="typing-left">{leftChars}</div>
         <div className="typing-right">{rightChars}</div>
@@ -128,6 +155,7 @@ export default function TypingField() {
         // ^ sets to display nothing and not have any extra input chars
         onChange={(event) => handleInput(event)}
       />
+      <div className={timerClass}>TIME: {counter}</div>
       <div className="testing-info">
         <div className="font-mono">LAST KEY: '{lastKey}'</div>
         <div className="font-mono">TOTAL ENTRIES: {correctChars}</div>

@@ -33,6 +33,17 @@ p {
   animation: shake 0.4s, turn-red 0.4s;
 }
 
+.timer {
+  font-size: 80px;
+  color: #eedcb2;
+  font-family: brother-1816, sans-serif;
+}
+
+.timer-countdown {
+  color: #8c3d34;
+  animation: shake 0.4s, turn-red 0.4s;
+}
+
 .typing-left {
   text-align: right;
   color: #e9b12e;
