@@ -19,6 +19,9 @@ module.exports = {
         serif: ['Anonymous Pro', 'serif'],
         timer: ['Chakra Petch', 'sans-serif'],
       },
+      minWidth: {
+        45: '45px',
+      },
     },
   },
   plugins: [],

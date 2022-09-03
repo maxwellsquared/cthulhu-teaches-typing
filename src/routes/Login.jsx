@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../helpers/context';
-import LayoutWrapper from '../components/LayoutWrapper';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
@@ -52,7 +51,7 @@ function Login() {
 
   // if status code == 401 -> go sad route
   return (
-    <LayoutWrapper>
+    <>
       {statusCode === 401 && <h1>Invalid Credentials</h1>}
       <form
         onSubmit={(event) => {
@@ -92,7 +91,7 @@ function Login() {
           Login
         </button>
       </form>
-    </LayoutWrapper>
+    </>
   );
 }
 

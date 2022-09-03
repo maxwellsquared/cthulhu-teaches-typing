@@ -6,6 +6,8 @@ import About from './routes/About';
 import Login from './routes/Login';
 import Home from './routes/Home';
 import Nav from './components/Nav';
+import LayoutWrapper from './components/LayoutWrapper';
+import './App.css';
 
 // parent component for all other components
 export default function App() {
@@ -17,12 +19,14 @@ export default function App() {
       <UserContext.Provider value={{ user, setUser }}>
         <Nav />
 
-        <Routes>
-          {/* reacts to changes to the URL */}
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
+        <LayoutWrapper>
+          <Routes>
+            {/* reacts to changes to the URL */}
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </LayoutWrapper>
       </UserContext.Provider>
     </BrowserRouter>
   );

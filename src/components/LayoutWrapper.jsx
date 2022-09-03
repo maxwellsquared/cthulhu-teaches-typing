@@ -1,14 +1,48 @@
-// wraps all components
-// imported into App.js
-import SectionContainer from './SectionContainer';
+import { Link } from 'react-router-dom';
 
 const LayoutWrapper = ({ children }) => {
   return (
-    <SectionContainer>
-      <div className="flex h-screen flex-col justify-between font-sans">
+    <div className="mx-auto max-w-3xl flex-col justify-between px-4 sm:px-6 xl:max-w-5xl xl:px-0">
+      <div className="main-height flex flex-col justify-between font-sans">
         <main className="mb-auto">{children}</main>
+        <footer>
+          <div className="container flex flex-wrap items-center justify-between font-light text-pale-gold">
+            <Link to="/" className="flex items-center">
+              <span className="self-center text-xl hover:text-candle">HOME</span>
+            </Link>
+            <ul className="mt-0 flex flex-row p-4">
+              <li>
+                <Link
+                  to="/login"
+                  className="p-0 py-2 pr-4 pl-3 hover:text-candle"
+                  aria-current="about"
+                >
+                  LOGIN
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/login"
+                  className="p-0 py-2 pr-4 pl-3 hover:text-candle"
+                  aria-current="about"
+                >
+                  SIGNUP
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about"
+                  className="p-0 py-2 pr-4 pl-3 hover:text-candle"
+                  aria-current="about"
+                >
+                  ABOUT
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </footer>
       </div>
-    </SectionContainer>
+    </div>
   );
 };
 

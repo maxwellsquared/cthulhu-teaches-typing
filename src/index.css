@@ -65,6 +65,7 @@ p {
 }
 
 @keyframes shake {
+
   10%,
   90% {
     transform: translate(-1px, 0);
@@ -88,6 +89,7 @@ p {
 }
 
 @keyframes turn-red {
+
   10%,
   90% {
     color: #eedcb2;
@@ -96,4 +98,8 @@ p {
   50% {
     color: red;
   }
+}
+
+.main-height {
+  height: 90vh;
 }
