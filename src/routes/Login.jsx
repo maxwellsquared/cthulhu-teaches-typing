@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../helpers/context';
 import LayoutWrapper from '../components/LayoutWrapper';
@@ -10,15 +10,12 @@ function Login() {
   const [password, setPassword] = useState('');
   const [statusCode, setStatusCode] = useState(0);
 
-  const loggedInUserRef = useRef(null); // initialize ref to null, no user yet
-
   // used to redirect to home page after login
   const navigate = useNavigate();
 
   // function to set UserRef and user state
   const successfulLogin = (response) => {
-    loggedInUserRef.current = response.data;
-    setUser(loggedInUserRef.current);
+    setUser(response.data);
   };
 
   // async function to login, called when login button is clicked

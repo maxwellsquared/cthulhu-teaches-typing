@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 import { UserContext } from './helpers/context';
@@ -9,9 +9,6 @@ import Home from './routes/Home';
 // parent component for all other components
 export default function App() {
   const [user, setUser] = useState();
-
-  // useRef to store user data
-  const loggedInUserRef = useRef(user); // initialize ref to null, no user yet
 
   // this will wrap all other components
   return (
