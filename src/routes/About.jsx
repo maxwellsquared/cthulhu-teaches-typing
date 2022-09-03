@@ -1,10 +1,12 @@
-import React from 'react';
+import LayoutWrapper from '../components/LayoutWrapper';
 
 function About() {
   return (
-    <div>
-      <h1 className="mt-5">This is the about page</h1>
-    </div>
+    <LayoutWrapper>
+      <div className="flex h-full flex-col items-center justify-center">
+        <h1 className="text-4xl font-bold">About</h1>
+      </div>
+    </LayoutWrapper>
   );
 }
 

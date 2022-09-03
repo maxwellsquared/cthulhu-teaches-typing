@@ -55,18 +55,11 @@ function Login() {
   if (loggedInUserRef.current && statusCode === 200) {
     const { name, email } = loggedInUserRef.current;
     return (
-      <Routes>
-        <Route
-          path={`/`}
-          element={
-            <LayoutWrapper>
-              <h1>Welcome {name}</h1>
-              <h2>Your email is {email}</h2>
-              <TypingField />
-            </LayoutWrapper>
-          }
-        />
-      </Routes>
+      <LayoutWrapper>
+        <h1>Welcome {name}</h1>
+        <h2>Your email is {email}</h2>
+        <TypingField />
+      </LayoutWrapper>
     );
   }
 
