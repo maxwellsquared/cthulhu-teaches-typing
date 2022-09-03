@@ -5,6 +5,10 @@ import LoggedInWelcomeBanner from './LoggedInWelcomeBanner';
 import { UserContext } from '../helpers/context';
 
 export default function TypingField() {
+  // const [timeLimit, setTimeLimit] = useState(); // stores the time limit for the numWords
+  const timeLimit = 1; // temporary hardcoded 1 minute time limit
+  const numWords = timeLimit * 225; // sets length of text to be typed
+
   // timer functionality
   const [counter, setCounter] = useState(60);
   const [started, setStarted] = useState(false);
@@ -12,9 +16,11 @@ export default function TypingField() {
   // user functionality
   const { user, setUser } = useContext(UserContext);
 
+  const initialRandomWords = RandomWords(numWords).toString();
+
   const [leftChars, setLeftChars] = useState(''); // stores the characters on the left side of the cursor
-  const [rightChars, setRightChars] = useState(''); // stores the characters on the left side of the cursor
-  const [nextChar, setNextChar] = useState(); // stores the correct next character to type
+  const [rightChars, setRightChars] = useState(initialRandomWords.replace(/,/g, ' ')); // stores the characters on the left side of the cursor
+  const [nextChar, setNextChar] = useState([]); // stores the correct next character to type
   const [lastKey, setLastKey] = useState(); // stores the last character typed
 
   const [correctChars, setCorrectChars] = useState(0); // stores number of correct characters entered
@@ -33,30 +39,14 @@ export default function TypingField() {
   const [successfulTyping, setsuccessfulTyping] = useState('enter some text first');
   const [testText, setTestText] = useState();
 
-  // const [timeLimit, setTimeLimit] = useState(); // stores the time limit for the test
-  const timeLimit = 1; // temporary hardcoded 1 minute time limit
-  const numWords = timeLimit * 225; // sets length of text to be typed
-
-  // ---- CALLED ON PAGE LOAD ----
-  useEffect(() => {
-    //set random words based on time limit as a string
-    const initialRandomWords = RandomWords(numWords).toString();
-    // set right characters to random words
-    setRightChars(initialRandomWords.replace(/,/g, ' ')); // replaces commas with spaces
-    setLeftChars('');
-    setTotalChars(0);
-    setMistakes(0);
-    console.log('user from TypingField.jsx', user); // log user
-  }, []);
-
   // ---- CALLED ON UPDATE ----
-  useEffect(() => {
+  const handleKeyPress = () => {
     setNextChar(rightChars[0]); // set the next character to be the first character of the right string
     setMistakes(totalChars - correctChars);
     setFullDivStyle((prev) => {
       return { ...prev, left: `${xPosition}ch` };
     });
-  });
+  };
 
   // ---- TIMER FUNCTION ----
   useEffect(() => {
@@ -154,6 +144,7 @@ export default function TypingField() {
         value=""
         // ^ sets to display nothing and not have any extra input chars
         onChange={(event) => handleInput(event)}
+        onKeyPress={() => handleKeyPress()}
       />
       <div className={timerClass}>TIME: {counter}</div>
       <div className="testing-info">
