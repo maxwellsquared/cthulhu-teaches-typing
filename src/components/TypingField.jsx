@@ -35,7 +35,6 @@ export default function TypingField() {
     setMistakes(0);
   }, []);
 
-  //timer - will need to be told to start when user starts typing.
   // checks if started or counter state changes, timer begins when the test starts. updates every second.
   useEffect(() => {
     if (started) {
