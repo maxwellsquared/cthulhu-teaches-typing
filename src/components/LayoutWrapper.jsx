@@ -9,7 +9,9 @@ const LayoutWrapper = ({ children }) => {
         <nav className="flex items-center justify-between py-10">
           <div>
             <div className="flex items-center justify-between">
-              <div className="mr-3">CTHULHU TEACHES TYPES</div>
+              <a href={'/'} className="mr-3">
+                CTHULHU TEACHES TYPES
+              </a>
             </div>
           </div>
           <div className="flex items-center text-base leading-5">

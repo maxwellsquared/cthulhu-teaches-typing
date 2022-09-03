@@ -104,14 +104,14 @@ function Login() {
             setPassword(event.target.value);
           }}
         />
+        <button
+          onClick={() => {
+            sendRequest(email, password, user, setUser);
+          }}
+        >
+          Login
+        </button>
       </form>
-      <button
-        onClick={() => {
-          sendRequest(email, password, user, setUser);
-        }}
-      >
-        Login
-      </button>
     </LayoutWrapper>
   );
 }
