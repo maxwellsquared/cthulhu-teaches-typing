@@ -6,7 +6,7 @@ import { UserContext } from '../helpers/context';
 
 export default function TypingField() {
   // timer functionality
-  const [counter, setCounter] = useState(15);
+  const [counter, setCounter] = useState(60);
   const [started, setStarted] = useState(false);
 
   // user functionality
