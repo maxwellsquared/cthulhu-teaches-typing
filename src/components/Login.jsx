@@ -3,14 +3,14 @@ import axios from 'axios';
 import { UserContext } from '../helpers/context';
 import { useContext, useRef } from 'react';
 
+import TypingField from './TypingField';
+
 function Login() {
   const { user, setUser } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  console.log('user', user);
 
-  const loggedInUserRef = useRef(null);
-  console.log('loggedInUserRef', loggedInUserRef);
+  const loggedInUserRef = useRef(null); // initialize ref to null, no user yet
 
   function sendRequest(email, password, user, setUser) {
     let loginData = {
@@ -18,9 +18,10 @@ function Login() {
       password: password,
     };
 
+    // function to set UserRef and user state
     const successfullLogin = (response) => {
       loggedInUserRef.current = response.data;
-      setUser(loggedInUserRef.current);
+      setUser(loggedInUserRef.current); // ?? note sure if we actually need this.
     };
 
     const postRequest = new Promise((resolve, reject) => {
@@ -31,21 +32,34 @@ function Login() {
           },
         })
         .then((res) => {
-          console.log('res.data', res.data);
           setUser({ name: res.data.name });
-          successfullLogin(res);
+          // if server returns 200 (success)
+          if (res.status === 200) {
+            successfullLogin(res);
+          }
           resolve(res.data);
-          // need to use useRef to update the state of the user
         })
         .catch((err) => {
           console.log(err);
           reject(err);
         });
     });
-
-    console.log(postRequest);
   }
 
+  // if status code == 200 -> go happy route
+  // * need to add correct component to render, props, etc.
+  if (loggedInUserRef.current) {
+    const { name, email } = loggedInUserRef.current;
+    return (
+      <div>
+        <h1>Welcome {name}</h1>
+        <h2>Your email is {email}</h2>
+        <TypingField />
+      </div>
+    );
+  }
+
+  // if status code != 200 -> go sad route
   return (
     <Fragment>
       <form
