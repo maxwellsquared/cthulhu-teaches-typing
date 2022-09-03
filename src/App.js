@@ -26,13 +26,13 @@ export default function App() {
             </Link>
             <ul className="mt-0 flex flex-row p-4">
               <li>
-                <Link to="/about" className="p-0 py-2 pr-4 pl-3" aria-current="about">
-                  ABOUT
+                <Link to="/Login" className="p-0 py-2 pr-4 pl-3" aria-current="about">
+                  LOGIN
                 </Link>
               </li>
               <li>
                 <Link to="/Login" className="p-0 py-2 pr-4 pl-3" aria-current="about">
-                  LOGIN
+                  SIGNUP
                 </Link>
               </li>
             </ul>
