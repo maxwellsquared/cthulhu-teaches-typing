@@ -2,8 +2,8 @@ import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { UserContext } from '../helpers/context';
 import { useContext, useRef } from 'react';
-import LayoutWrapper from './LayoutWrapper';
-import TypingField from './TypingField';
+import LayoutWrapper from '../components/LayoutWrapper';
+import TypingField from '../components/TypingField';
 import { Routes, Route } from 'react-router-dom';
 
 function Login() {

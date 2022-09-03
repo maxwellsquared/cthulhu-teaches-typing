@@ -4,10 +4,11 @@ import TypingField from './components/TypingField';
 import HomepageHeader from './components/HomepageHeader';
 import LayoutWrapper from './components/LayoutWrapper';
 import { Routes, Route } from 'react-router-dom';
-import About from './components/About/About';
-import Login from './components/Login';
+import About from './routes/About';
+import Login from './routes/Login';
 import { UserContext } from './helpers/context';
-import Home from './components/Home';
+import Home from './routes/Home';
+import Nav from './components/Nav';
 
 // parent component for all other components
 export default function App() {
