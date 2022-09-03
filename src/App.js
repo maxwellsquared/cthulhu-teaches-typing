@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 import About from './components/About/About';
 import Login from './components/Login';
 import { UserContext } from './helpers/context';
+import Home from './components/Home';
 
 // parent component for all other components
 export default function App() {
@@ -27,15 +28,5 @@ export default function App() {
         />
       </Routes>
     </UserContext.Provider>
-  );
-}
-
-// !! needs refactoring to another file
-function Home() {
-  return (
-    <LayoutWrapper>
-      <HomepageHeader />
-      <TypingField />
-    </LayoutWrapper>
   );
 }
