@@ -131,8 +131,7 @@ export default function TypingField() {
   return (
     <>
       {user ? <LoggedInWelcomeBanner /> : null}
-      <h1>NOT LOGGED IN</h1>
-      <h1>TypingField Test</h1>
+
       <div className={divClassName} style={fullDivStyle}>
         <div className="typing-left">{leftChars}</div>
         <div className="typing-right">{rightChars}</div>

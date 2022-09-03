@@ -5,7 +5,6 @@ import TypingField from '../components/TypingField';
 const Home = () => {
   return (
     <LayoutWrapper>
-      <h1>HOME</h1>
       <TypingField />
     </LayoutWrapper>
   );
