@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   get "logout", to: "sessions#destroy"
   post "login", to: "sessions#create"
   delete "logout", to: "sessions#destroy"
+
   resources :users, except: [:new]
+
+  post "submit", to: "submissions#create"
+
   
   match '*all', controller: 'application', action: 'cors_preflight_check', via: [:options]
 end

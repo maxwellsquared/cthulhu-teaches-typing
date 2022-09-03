@@ -148,7 +148,7 @@ export default function TypingField() {
       <div className={timerClass}>TIME: {counter}</div>
       <div className="testing-info">
         <div className="font-mono">LAST KEY: '{lastKey}'</div>
-        <div className="font-mono">TOTAL ENTRIES: {correctChars}</div>
+        <div className="font-mono">TOTAL ENTRIES: {totalChars}</div>
         <div className="font-mono">SUCCESSFUL ENTRIES: {correctChars}</div>
         <div className="font-mono">MISTAKES: {mistakes}</div>
         <div className="font-mono">CHARACTER RESULT: {successfulTyping}</div>
