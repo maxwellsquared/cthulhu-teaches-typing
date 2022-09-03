@@ -9,6 +9,7 @@ function Login() {
   const { user, setUser } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [statusCode, setStatusCode] = useState(0);
 
   const loggedInUserRef = useRef(null); // initialize ref to null, no user yet
 
@@ -19,7 +20,7 @@ function Login() {
     };
 
     // function to set UserRef and user state
-    const successfullLogin = (response) => {
+    const successfulLogin = (response) => {
       loggedInUserRef.current = response.data;
       setUser(loggedInUserRef.current); // ?? note sure if we actually need this.
     };
@@ -35,12 +36,14 @@ function Login() {
           setUser({ name: res.data.name });
           // if server returns 200 (success)
           if (res.status === 200) {
-            successfullLogin(res);
+            successfulLogin(res);
+            setStatusCode(res.status);
           }
           resolve(res.data);
         })
         .catch((err) => {
           console.log(err);
+          setStatusCode(err.response.status);
           reject(err);
         });
     });
@@ -48,7 +51,7 @@ function Login() {
 
   // if status code == 200 -> go happy route
   // * need to add correct component to render, props, etc.
-  if (loggedInUserRef.current) {
+  if (loggedInUserRef.current && statusCode === 200) {
     const { name, email } = loggedInUserRef.current;
     return (
       <div>
@@ -59,9 +62,10 @@ function Login() {
     );
   }
 
-  // if status code != 200 -> go sad route
+  // if status code == 401 -> go sad route
   return (
     <Fragment>
+      {statusCode === 401 && <h1>Invalid Credentials</h1>}
       <form
         onSubmit={(event) => {
           event.preventDefault();
