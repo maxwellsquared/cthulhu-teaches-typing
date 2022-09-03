@@ -104,31 +104,57 @@ export default function TypingField({ userRef }) {
   //     a. User feedback (BZZZZ! WRONGO! screenshake)
   //     b. Mistakes ++
 
-  return (
-    <>
-      <LoggedInWelcomeBanner userRef={userRef} />
-      <h1>New TypingField Test</h1>
-      <div className="typing-area">
-        <div className="font-mono">TYPED: {leftChars}</div>
-        <div className="font-mono">TO TYPE: {rightChars}</div>
-        <hr></hr>
-        <div className="font-mono">LAST KEY: {lastKey}</div>
-        <div className="font-mono">TOTAL ENTRIES: {correctChars}</div>
-        <div className="font-mono">SUCCESSFUL ENTRIES: {correctChars}</div>
-        <div className="font-mono">MISTAKES: {totalChars - correctChars}</div>
-        <div className="font-mono">DOES THIS WORK?: {thisWorks}</div>
-        <div className="font-mono">Test info: {testText}</div>
+  if (userRef) {
+    return (
+      <div>
+        <h1>LOGGED IN with {userRef.current.name}</h1>
+        <div className="typing-field">
+          <div className="left-chars">{leftChars}</div>
+          <div className="right-chars">{rightChars}</div>
+          <div className="cursor">|</div>
+          <input
+            className="input-field"
+            type="text"
+            placeholder="Start typing here"
+            onChange={handleInput}
+          />
+        </div>
+        <div className="stats">
+          <p>Correct characters: {correctChars}</p>
+          <p>Total characters: {totalChars}</p>
+          <p>Mistakes: {mistakes}</p>
+        </div>
+        <div className="test-text">{testText}</div>
+        <div className="this-works">{thisWorks}</div>
       </div>
-      <input
-        placeholder="Type here"
-        radius="md"
-        size="md"
-        value=""
-        // ^ sets to display nothing and not have any extra input chars
-        onChange={(event) => handleInput(event)}
-      />
-    </>
-  );
+    );
+  } else {
+    return (
+      <>
+        <h1>NOT LOGGED IN</h1>
+        <h1>New TypingField Test</h1>
+        <div className="typing-area">
+          <div className="font-mono">TYPED: {leftChars}</div>
+          <div className="font-mono">TO TYPE: {rightChars}</div>
+          <hr></hr>
+          <div className="font-mono">LAST KEY: {lastKey}</div>
+          <div className="font-mono">TOTAL ENTRIES: {correctChars}</div>
+          <div className="font-mono">SUCCESSFUL ENTRIES: {correctChars}</div>
+          <div className="font-mono">MISTAKES: {totalChars - correctChars}</div>
+          <div className="font-mono">DOES THIS WORK?: {thisWorks}</div>
+          <div className="font-mono">Test info: {testText}</div>
+        </div>
+        <input
+          placeholder="Type here"
+          radius="md"
+          size="md"
+          value=""
+          // ^ sets to display nothing and not have any extra input chars
+          onChange={(event) => handleInput(event)}
+        />
+      </>
+    );
+  }
 }
 
 // export default function TypingFieldOld() {

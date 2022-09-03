@@ -3,7 +3,7 @@ import axios from 'axios';
 import { UserContext } from '../helpers/context';
 import LayoutWrapper from '../components/LayoutWrapper';
 import TypingField from '../components/TypingField';
-import { Routes, Route } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 function Login() {
   const { user, setUser } = useContext(UserContext);
@@ -13,15 +13,16 @@ function Login() {
 
   const loggedInUserRef = useRef(null); // initialize ref to null, no user yet
 
+  // function to set UserRef and user state
+  const successfulLogin = (response) => {
+    loggedInUserRef.current = response.data;
+    setUser(loggedInUserRef.current);
+  };
+
   function sendRequest(email, password, user, setUser) {
     let loginData = {
       email: email,
       password: password,
-    };
-
-    // function to set UserRef and user state
-    const successfulLogin = (response) => {
-      loggedInUserRef.current = response.data;
     };
 
     const postRequest = new Promise((resolve, reject) => {
@@ -51,12 +52,7 @@ function Login() {
   // if status code == 200 -> go happy route
   // * need to add correct component to render, props, etc.
   if (loggedInUserRef.current && statusCode === 200) {
-    const { name, email } = loggedInUserRef.current;
-    return (
-      <LayoutWrapper>
-        <TypingField userRef={loggedInUserRef} />
-      </LayoutWrapper>
-    );
+    return <Redirect to="/" />;
   }
 
   // if status code == 401 -> go sad route

@@ -4,11 +4,11 @@ import { useContext } from 'react';
 import { UserContext } from '../helpers/context';
 
 // this should be the main page, displayed when URL is '/'
-const Home = () => {
+const Home = ({ user }) => {
   return (
     <LayoutWrapper>
       <h1>HOME</h1>
-      <TypingField />
+      <TypingField userRef={user} />
     </LayoutWrapper>
   );
 };
