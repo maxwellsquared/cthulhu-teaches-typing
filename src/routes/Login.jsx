@@ -60,9 +60,7 @@ function Login() {
           path={`/`}
           element={
             <LayoutWrapper>
-              <h1>Welcome {name}</h1>
-              <h2>Your email is {email}</h2>
-              <TypingField />
+              <TypingField userRef={loggedInUserRef.current} />
             </LayoutWrapper>
           }
         />
@@ -82,7 +80,7 @@ function Login() {
       >
         <input
           value={email}
-          type="text"
+          type="email"
           placeholder="Email"
           onChange={(event) => {
             setEmail(event.target.value);
