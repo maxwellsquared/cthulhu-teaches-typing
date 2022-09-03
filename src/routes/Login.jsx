@@ -65,7 +65,7 @@ function Login() {
 
   // if status code == 401 -> go sad route
   return (
-    <>
+    <LayoutWrapper>
       {statusCode === 401 && <h1>Invalid Credentials</h1>}
       <form
         onSubmit={(event) => {
@@ -105,7 +105,7 @@ function Login() {
       >
         Login
       </button>
-    </>
+    </LayoutWrapper>
   );
 }
 
