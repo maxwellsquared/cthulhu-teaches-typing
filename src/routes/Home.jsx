@@ -4,10 +4,10 @@ import HomepageHeader from '../components/HomepageHeader';
 
 const Home = () => {
   return (
-    <LayoutWrapper>
+    <>
       <HomepageHeader />
       <TypingField />
-    </LayoutWrapper>
+    </>
   );
 };
 

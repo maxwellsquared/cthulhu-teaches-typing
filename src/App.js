@@ -17,7 +17,7 @@ export default function App() {
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<LayoutWrapper children={<Home />} />}></Route>
         <Route path="about" element={<About />} />
         <Route path="login" element={<Login />} />
       </Routes>
