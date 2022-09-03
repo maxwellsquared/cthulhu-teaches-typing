@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import RandomWords from '../helpers/RandomWords';
-import Span from './Span';
+import LoggedInWelcomeBanner from './LoggedInWelcomeBanner';
+
+import { UserContext } from '../helpers/context';
 
 export default function TypingField() {
   const [leftChars, setLeftChars] = useState(''); // stores the characters on the left side of the cursor
@@ -24,6 +26,9 @@ export default function TypingField() {
   const [counter, setCounter] = useState(60);
   const [started, setStarted] = useState(false);
 
+  const { user, setUser } = useContext(UserContext);
+  console.log('user from TypingField.jsx', user);
+
   // page load
   useEffect(() => {
     //set random words based on time limit as a string
@@ -38,11 +43,9 @@ export default function TypingField() {
   // checks if started or counter state changes, timer begins when the test starts. updates every second.
   useEffect(() => {
     if (started) {
-      const timer =
-      counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-    return () => clearInterval(timer);
+      const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+      return () => clearInterval(timer);
     }
-
   }, [counter, started]);
 
   // called on update
@@ -62,7 +65,6 @@ export default function TypingField() {
 
   // successful entry of a character
   const userSuccess = function () {
-    
     setThisWorks('YAY!!!!!');
     setCorrectChars((prev) => {
       return prev + 1;
@@ -77,6 +79,8 @@ export default function TypingField() {
 
   // handle user input
   const handleInput = function (event) {
+    // starts test status to 'started == true' on first input
+    setStarted(true);
     // get the value of the input and set the last key to that character
     let inputValue = event.target.value;
     if (inputValue === ' ' && nextChar === ' ') {
@@ -101,11 +105,8 @@ export default function TypingField() {
     // this is doubled! check it out later.
     if (inputValue !== lastKey) userMistake();
 
-    
     setFreshInput(true);
     userSuccess();
-    // starts test status to 'started == true' on first input
-    setStarted(true);
   };
 
   //     3. If the character typed === the next character:
@@ -119,6 +120,8 @@ export default function TypingField() {
 
   return (
     <>
+      {user ? <LoggedInWelcomeBanner /> : null}
+      <h1>NOT LOGGED IN</h1>
       <h1>New TypingField Test</h1>
       <div className="typing-area">
         <div className="font-mono">TYPED: {leftChars}</div>
@@ -130,7 +133,7 @@ export default function TypingField() {
         <div className="font-mono">MISTAKES: {totalChars - correctChars}</div>
         <div className="font-mono">DOES THIS WORK?: {thisWorks}</div>
         <div className="font-mono">Test info: {testText}</div>
-        <div className="font-mono">Timer: {counter}</div>
+        <div className="font-mono">Time left: {counter}</div>
       </div>
       <input
         placeholder="Type here"

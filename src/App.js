@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 import { UserContext } from './helpers/context';
 import About from './routes/About';
@@ -8,15 +8,34 @@ import Home from './routes/Home';
 
 // parent component for all other components
 export default function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
 
+  // this will wrap all other components
   return (
-    <UserContext.Provider value={{ user, setUser }}>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="login" element={<Login />} />
-      </Routes>
-    </UserContext.Provider>
+    <BrowserRouter>
+      <UserContext.Provider value={{ user, setUser }}>
+        <h1>This is the main, App.js</h1>
+        <nav>
+          <ul>
+            <li>
+              {/* Link only updates the URL */}
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          </ul>
+        </nav>
+        <Routes>
+          {/* reacts to changes to the URL */}
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </UserContext.Provider>
+    </BrowserRouter>
   );
 }

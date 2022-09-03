@@ -1,10 +1,8 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../helpers/context';
-import { useContext, useRef } from 'react';
 import LayoutWrapper from '../components/LayoutWrapper';
-import TypingField from '../components/TypingField';
-import { Routes, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const { user, setUser } = useContext(UserContext);
@@ -12,18 +10,19 @@ function Login() {
   const [password, setPassword] = useState('');
   const [statusCode, setStatusCode] = useState(0);
 
-  const loggedInUserRef = useRef(null); // initialize ref to null, no user yet
+  // used to redirect to home page after login
+  const navigate = useNavigate();
 
+  // function to set UserRef and user state
+  const successfulLogin = (response) => {
+    setUser(response.data);
+  };
+
+  // async function to login, called when login button is clicked
   function sendRequest(email, password, user, setUser) {
     let loginData = {
       email: email,
       password: password,
-    };
-
-    // function to set UserRef and user state
-    const successfulLogin = (response) => {
-      loggedInUserRef.current = response.data;
-      setUser(loggedInUserRef.current); // ?? note sure if we actually need this.
     };
 
     const postRequest = new Promise((resolve, reject) => {
@@ -39,6 +38,7 @@ function Login() {
           if (res.status === 200) {
             successfulLogin(res);
             setStatusCode(res.status);
+            navigate('/');
           }
           resolve(res.data);
         })
@@ -48,26 +48,6 @@ function Login() {
           reject(err);
         });
     });
-  }
-
-  // if status code == 200 -> go happy route
-  // * need to add correct component to render, props, etc.
-  if (loggedInUserRef.current && statusCode === 200) {
-    const { name, email } = loggedInUserRef.current;
-    return (
-      <Routes>
-        <Route
-          path={`/`}
-          element={
-            <LayoutWrapper>
-              <h1>Welcome {name}</h1>
-              <h2>Your email is {email}</h2>
-              <TypingField />
-            </LayoutWrapper>
-          }
-        />
-      </Routes>
-    );
   }
 
   // if status code == 401 -> go sad route
@@ -82,7 +62,7 @@ function Login() {
       >
         <input
           value={email}
-          type="text"
+          type="email"
           placeholder="Email"
           onChange={(event) => {
             setEmail(event.target.value);
