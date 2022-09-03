@@ -10,11 +10,8 @@ import Home from './routes/Home';
 export default function App() {
   const [user, setUser] = useState();
 
-
-
   // useRef to store user data
   const loggedInUserRef = useRef(user); // initialize ref to null, no user yet
-  console.log('loggedInUserRef from App.js', loggedInUserRef);
 
   // this will wrap all other components
   return (

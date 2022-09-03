@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import axios from 'axios';
 import { UserContext } from '../helpers/context';
 import LayoutWrapper from '../components/LayoutWrapper';
-import TypingField from '../components/TypingField';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
@@ -13,6 +12,7 @@ function Login() {
 
   const loggedInUserRef = useRef(null); // initialize ref to null, no user yet
 
+  // used to redirect to home page after login
   const navigate = useNavigate();
 
   // function to set UserRef and user state
@@ -21,6 +21,7 @@ function Login() {
     setUser(loggedInUserRef.current);
   };
 
+  // async function to login, called when login button is clicked
   function sendRequest(email, password, user, setUser) {
     let loginData = {
       email: email,
@@ -40,9 +41,6 @@ function Login() {
           if (res.status === 200) {
             successfulLogin(res);
             setStatusCode(res.status);
-            console.log('All from sendRequest');
-            console.log(res.status);
-            console.log(loggedInUserRef.current);
             navigate('/');
           }
           resolve(res.data);
@@ -54,12 +52,6 @@ function Login() {
         });
     });
   }
-
-  // if status code == 200 -> go happy route
-  // * need to add correct component to render, props, etc.
-  // if (loggedInUserRef.current && statusCode === 200) {
-  //   return <Redirect to="/" />;
-  // }
 
   // if status code == 401 -> go sad route
   return (
