@@ -10,7 +10,7 @@ const LayoutWrapper = ({ children }) => {
         <header className="flex items-center justify-between py-10">
           <div>
             <div className="flex items-center justify-between">
-              <div className="mr-3">SANS FONT</div>
+              <div className="mr-3">CTHULHU TEACHES TYPES</div>
             </div>
           </div>
           <div className="flex items-center text-base leading-5">

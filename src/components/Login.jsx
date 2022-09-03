@@ -2,8 +2,9 @@ import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { UserContext } from '../helpers/context';
 import { useContext, useRef } from 'react';
-
+import LayoutWrapper from './LayoutWrapper';
 import TypingField from './TypingField';
+import { Routes, Route } from 'react-router-dom';
 
 function Login() {
   const { user, setUser } = useContext(UserContext);
@@ -54,17 +55,24 @@ function Login() {
   if (loggedInUserRef.current && statusCode === 200) {
     const { name, email } = loggedInUserRef.current;
     return (
-      <div>
-        <h1>Welcome {name}</h1>
-        <h2>Your email is {email}</h2>
-        <TypingField />
-      </div>
+      <Routes>
+        <Route
+          path={`/`}
+          element={
+            <LayoutWrapper>
+              <h1>Welcome {name}</h1>
+              <h2>Your email is {email}</h2>
+              <TypingField />
+            </LayoutWrapper>
+          }
+        />
+      </Routes>
     );
   }
 
   // if status code == 401 -> go sad route
   return (
-    <Fragment>
+    <LayoutWrapper>
       {statusCode === 401 && <h1>Invalid Credentials</h1>}
       <form
         onSubmit={(event) => {
@@ -104,7 +112,7 @@ function Login() {
       >
         Login
       </button>
-    </Fragment>
+    </LayoutWrapper>
   );
 }
 
