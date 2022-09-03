@@ -7,6 +7,7 @@ import { UserContext } from '../helpers/context';
 const Home = () => {
   return (
     <LayoutWrapper>
+      <h1>HOME</h1>
       <TypingField />
     </LayoutWrapper>
   );
