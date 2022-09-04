@@ -59,7 +59,14 @@ export default function TypingField() {
       if (counter < 10) setTimerRed(); // set the timer red for the last 10 seconds
       return () => clearInterval(timer);
     }
-  }, [counter, started, xPosition]);
+  }, [counter, started]);
+
+  useEffect(() => {
+    setFullDivStyle((prev) => {
+      return { ...prev, left: `${xPosition}ch` }
+    });
+  }, [leftChars]);
+
 
   // make the timer red
   const setTimerRed = function () {
@@ -96,25 +103,28 @@ export default function TypingField() {
 
   // ---- INPUT FUNCTION ----
   const handleInput = function (event) {
-    setTotalChars(prev => prev + 1);
-    console.log('input:', input);
-    if (!started) {
-      setStarted(true); // starts test status to 'started == true' on first input
-    }
-    if (input !== " " && event.slice(-1) === ' ') {
-      console.log(input, randomWords[0])
-      if (input === randomWords[0]) {
-        setCorrectChars(prev => prev + randomWords[0].length + 1)
-      }
-      setSubmissions(prev => [...prev, input])
-      setRandomWords(prev => [...prev.slice(1)])
-      moveChars(randomWords[0].length);
-      setInput(''); 
-
+    if (event === ' ' && input === '') { 
+      // spacebar without any input does nothing
     } else {
-      setInput(event);
-    }
+      setTotalChars(prev => prev + 1);
+      console.log('input:', input);
+      if (!started) {
+        setStarted(true); // starts test status to 'started == true' on first input
+      }
+      if (event.slice(-1) === ' ') { // if space bar pressed
+        console.log(input, randomWords[0])
+        if (input === randomWords[0]) {
+          setCorrectChars(prev => prev + randomWords[0].length + 1)
+        }
+        setSubmissions(prev => [...prev, input])
+        setRandomWords(prev => [...prev.slice(1)])
+        moveChars(randomWords[0].length);
+        setInput('');
 
+      } else {
+        setInput(event);
+      }
+    }
 
   };
 
