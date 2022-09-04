@@ -61,6 +61,7 @@ export default function TypingField() {
     }
   }, [counter, started]);
 
+  // --- UPDATES WORDS SECTIONS
   useEffect(() => {
     setFullDivStyle((prev) => {
       return { ...prev, left: `${xPosition}ch` }
