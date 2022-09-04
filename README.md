@@ -23,6 +23,15 @@ Users in the database:
   3 | Max Kuhn      | maxkuhn@gmail.com        | test     |                 | 2022-09-02 20:37:48.976708 | 2022-09-02 20:37:48.976708
 ```
 
+Icons:
+
+https://react-icons.github.io/react-icons
+
+Use like so:
+```jsx
+import { XIcon } from '@heroicons/react/outline'
+```
+
 
 ## Routes to know
 
