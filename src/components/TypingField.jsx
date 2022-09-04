@@ -2,8 +2,11 @@ import { useState, useEffect, useContext } from 'react';
 import RandomWords from '../helpers/RandomWords';
 import LoggedInWelcomeBanner from './LoggedInWelcomeBanner';
 import ResultsModal from './ResultsModal';
+import Modal from 'react-modal';
 
 import { UserContext } from '../helpers/context';
+
+const initialTimer = 30;
 
 export default function TypingField() {
   // const [timeLimit, setTimeLimit] = useState(); // stores the time limit for the numWords
@@ -11,7 +14,7 @@ export default function TypingField() {
   const numWords = timeLimit * 225; // sets length of text to be typed
 
   // timer functionality
-  const [counter, setCounter] = useState(60);
+  const [counter, setCounter] = useState(initialTimer); // gets this from initialTimer
   const [started, setStarted] = useState(false);
 
   // user functionality
@@ -21,12 +24,15 @@ export default function TypingField() {
 
   const [leftChars, setLeftChars] = useState(''); // stores the characters on the left side of the cursor
   const [rightChars, setRightChars] = useState(initialRandomWords.replace(/,/g, ' ')); // stores the characters on the left side of the cursor
-  const [nextChar, setNextChar] = useState([]); // stores the correct next character to type
+  const [nextChar, setNextChar] = useState(rightChars[0]); // stores the correct next character to type
   const [lastKey, setLastKey] = useState(); // stores the last character typed
 
   const [correctChars, setCorrectChars] = useState(0); // stores number of correct characters entered
   const [totalChars, setTotalChars] = useState(0); // stores total number of characters entered
   const [mistakes, setMistakes] = useState(0); // set number of mistakes player has made
+  const [wordsPerMinute, setWordsPerMinute] = useState('meatball'); // set WPM to pass along
+  const [accuracy, setAccuracy] = useState('gabagool');
+  const [isComplete, setIsComplete] = useState(false);
 
   const [xPosition, setXPosition] = useState(0); // set number of characters typing division is offset by
   const [divClassName, setDivClassName] = useState('typing'); // give the typing div the 'typing shaken' class and it'll turn red and shake
@@ -40,7 +46,9 @@ export default function TypingField() {
   const [successfulTyping, setsuccessfulTyping] = useState('enter some text first');
   const [testText, setTestText] = useState();
 
-  // ---- CALLED ON UPDATE ----
+  // ---- ON PAGE LOAD ----
+
+  // ---- CALLED ON EVERY KEY PRESS ----
   const handleKeyPress = () => {
     setNextChar(rightChars[0]); // set the next character to be the first character of the right string
     setMistakes(totalChars - correctChars);
@@ -55,9 +63,17 @@ export default function TypingField() {
     if (started) {
       const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
       if (counter < 10) setTimerRed(); // set the timer red for the last 10 seconds
+      if (counter === 0) gameOver();
       return () => clearInterval(timer);
     }
   }, [counter, started]);
+
+  // ---- GAME OVER ----
+  const gameOver = function () {
+    setAccuracy(Math.floor(100 * (1 - mistakes / totalChars)));
+    setWordsPerMinute(Math.floor((correctChars / 5) / (initialTimer / 60)));
+    setIsComplete(true);
+  };
 
   // make the timer red
   const setTimerRed = function () {
@@ -132,7 +148,12 @@ export default function TypingField() {
   return (
     <>
       {user ? <LoggedInWelcomeBanner /> : null}
-      <ResultsModal />
+      <ResultsModal
+        gameOver={isComplete}
+        wpm={wordsPerMinute}
+        accuracy={accuracy}
+        user={user ? user : 'anon'}
+      />
       <div className={divClassName} style={fullDivStyle}>
         <div className="typing-left">{leftChars}</div>
         <div className="typing-right">{rightChars}</div>
@@ -154,6 +175,9 @@ export default function TypingField() {
         <div className="font-mono">MISTAKES: {mistakes}</div>
         <div className="font-mono">CHARACTER RESULT: {successfulTyping}</div>
         <div className="font-mono">Test info: {testText}</div>
+        <div className="font-mono">
+          GAME OVER? {isComplete ? 'GAME OVER MAN' : 'no, keep playing'}
+        </div>
       </div>
     </>
   );

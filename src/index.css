@@ -18,7 +18,7 @@ h1 {
 }
 
 p {
-  color: red;
+  /* color: red; */
 }
 
 .typing {
@@ -64,8 +64,57 @@ p {
   color: #eedcb2;
 }
 
-@keyframes shake {
+.Modal {
+  background-color: rgba(25, 0, 25, 0.9);
+  position: absolute;
+  top: 10vh;
+  left: 10vw;
+  right: 10vw;
+  bottom: 25vh;
+  display: flex;
+  outline: 0;
+}
 
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.Modal button {
+  color: #eedcb2;
+  background-color: #8c3d34;
+  margin: 15px;
+  padding: 20px;
+  font-family: brother-1816, sans-serif;
+  font-weight: 900;
+}
+
+.modal-container {
+  margin: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.modal-header {
+  font-size: 80px;
+}
+
+.player-data {
+  font-size: 60px;
+  color: #eedcb2;
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  font-family: courier-prime, monospace;
+}
+
+@keyframes shake {
   10%,
   90% {
     transform: translate(-1px, 0);
@@ -89,7 +138,6 @@ p {
 }
 
 @keyframes turn-red {
-
   10%,
   90% {
     color: #eedcb2;
