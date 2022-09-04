@@ -16,7 +16,7 @@ export default function TypingField() {
   // user functionality
   const { user, setUser } = useContext(UserContext);
 
-  const [randomWords, setRandomWords] = useState(RandomWords(numWords))
+  const [randomWords, setRandomWords] = useState(RandomWords(numWords));
   const initialRandomWords = randomWords.toString();
   const [submissions, setSubmissions] = useState([]);
 
@@ -25,7 +25,7 @@ export default function TypingField() {
   const [nextChar, setNextChar] = useState([]); // stores the correct next character to type
   const [lastKey, setLastKey] = useState(); // stores the last character typed
 
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const [correctChars, setCorrectChars] = useState(0); // stores number of correct characters entered
   const [totalChars, setTotalChars] = useState(0); // stores total number of characters entered
   const [mistakes, setMistakes] = useState(0); // set number of mistakes player has made
@@ -64,10 +64,9 @@ export default function TypingField() {
   // --- UPDATES WORDS SECTIONS
   useEffect(() => {
     setFullDivStyle((prev) => {
-      return { ...prev, left: `${xPosition}ch` }
+      return { ...prev, left: `${xPosition}ch` };
     });
   }, [leftChars]);
-
 
   // make the timer red
   const setTimerRed = function () {
@@ -94,45 +93,40 @@ export default function TypingField() {
   // };
   // take the first character off RightCars and add it to LeftChars
   const moveChars = function (length) {
-
-    setLeftChars(prev => prev + `${randomWords[0]} `);
-    setRightChars(prev => prev.slice(length + 1));
+    setLeftChars((prev) => prev + `${randomWords[0]} `);
+    setRightChars((prev) => prev.slice(length + 1));
     // set the amount to move the div over by
-    setXPosition(prev => prev - (length + 1));
+    setXPosition((prev) => prev - (length + 1));
   };
-
 
   // ---- INPUT FUNCTION ----
   const handleInput = function (event) {
-    if (event === ' ' && input === '') { 
+    if (event === ' ' && input === '') {
       // spacebar without any input does nothing
     } else {
-      setTotalChars(prev => prev + 1);
+      setTotalChars((prev) => prev + 1);
       console.log('input:', input);
       if (!started) {
         setStarted(true); // starts test status to 'started == true' on first input
       }
-      if (event.slice(-1) === ' ') { // if space bar pressed
-        console.log(input, randomWords[0])
+      if (event.slice(-1) === ' ') {
+        // if space bar pressed
+        console.log(input, randomWords[0]);
         if (input === randomWords[0]) {
-          setCorrectChars(prev => prev + randomWords[0].length + 1)
+          setCorrectChars((prev) => prev + randomWords[0].length + 1);
         }
-        setSubmissions(prev => [...prev, input])
-        setRandomWords(prev => [...prev.slice(1)])
+        setSubmissions((prev) => [...prev, input]);
+        setRandomWords((prev) => [...prev.slice(1)]);
         moveChars(randomWords[0].length);
         setInput('');
-
       } else {
         setInput(event);
       }
     }
-
   };
 
   return (
     <>
-      {user ? <LoggedInWelcomeBanner /> : null}
-
       <div className={divClassName} style={fullDivStyle}>
         <div className="typing-left">{leftChars}</div>
         <div className="typing-right">{rightChars}</div>
