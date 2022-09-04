@@ -16,13 +16,16 @@ export default function TypingField() {
   // user functionality
   const { user, setUser } = useContext(UserContext);
 
-  const initialRandomWords = RandomWords(numWords).toString();
+  const [randomWords, setRandomWords] = useState(RandomWords(numWords))
+  const initialRandomWords = randomWords.toString();
+  const [submissions, setSubmissions] = useState([]);
 
   const [leftChars, setLeftChars] = useState(''); // stores the characters on the left side of the cursor
-  const [rightChars, setRightChars] = useState(initialRandomWords.replace(/,/g, ' ')); // stores the characters on the left side of the cursor
+  const [rightChars, setRightChars] = useState(initialRandomWords.replace(/,/g, ' ')); // stores the characters on the right side of the cursor
   const [nextChar, setNextChar] = useState([]); // stores the correct next character to type
   const [lastKey, setLastKey] = useState(); // stores the last character typed
 
+  const [input, setInput] = useState("");
   const [correctChars, setCorrectChars] = useState(0); // stores number of correct characters entered
   const [totalChars, setTotalChars] = useState(0); // stores total number of characters entered
   const [mistakes, setMistakes] = useState(0); // set number of mistakes player has made
@@ -42,7 +45,7 @@ export default function TypingField() {
   // ---- CALLED ON UPDATE ----
   const handleKeyPress = () => {
     setNextChar(rightChars[0]); // set the next character to be the first character of the right string
-    setMistakes(totalChars - correctChars);
+    //setMistakes(totalChars - correctChars);
     setFullDivStyle((prev) => {
       return { ...prev, left: `${xPosition}ch` };
     });
@@ -58,74 +61,72 @@ export default function TypingField() {
     }
   }, [counter, started]);
 
+  // --- UPDATES WORDS SECTIONS
+  useEffect(() => {
+    setFullDivStyle((prev) => {
+      return { ...prev, left: `${xPosition}ch` }
+    });
+  }, [leftChars]);
+
+
   // make the timer red
   const setTimerRed = function () {
     setTimerClass('timer timer-countdown');
   };
 
+  // // successful entry of a character
+  // const userSuccess = function () {
+  //   setsuccessfulTyping('YAY!!!!!');
+  //   setCorrectChars((prev) => {
+  //     return prev + 1;
+  //   });
+  //   moveChars();
+  //   setDivClassName('typing'); // removing this causes the shaken animations to trigger for some reason???
+  // };
+
+  // // unsuccessful entry of a character
+  // const userMistake = function () {
+  //   setsuccessfulTyping('BIG BUMMER');
+  //   setDivClassName('typing shaken'); // give the whole typing div a shake and flash red
+  //   setTimeout(() => {
+  //     setDivClassName('typing'); // set the typing div back to normal after 250ms
+  //   }, 250);
+  // };
   // take the first character off RightCars and add it to LeftChars
-  const moveChars = function () {
-    let xSize = 1;
-    // let leftXSize = 0;
-    setLeftChars((prevState) => {
-      return prevState + rightChars[0];
-    });
-    setRightChars(rightChars.slice(1));
+  const moveChars = function (length) {
+
+    setLeftChars(prev => prev + `${randomWords[0]} `);
+    setRightChars(prev => prev.slice(length + 1));
     // set the amount to move the div over by
-    setXPosition((prev) => {
-      return prev - xSize;
-    });
+    setXPosition(prev => prev - (length + 1));
   };
 
-  // successful entry of a character
-  const userSuccess = function () {
-    setsuccessfulTyping('YAY!!!!!');
-    setCorrectChars((prev) => {
-      return prev + 1;
-    });
-    moveChars();
-    setDivClassName('typing'); // removing this causes the shaken animations to trigger for some reason???
-  };
-
-  // unsuccessful entry of a character
-  const userMistake = function () {
-    setsuccessfulTyping('BIG BUMMER');
-    setDivClassName('typing shaken'); // give the whole typing div a shake and flash red
-    setTimeout(() => {
-      setDivClassName('typing'); // set the typing div back to normal after 250ms
-    }, 250);
-  };
 
   // ---- INPUT FUNCTION ----
   const handleInput = function (event) {
-    setStarted(true); // starts test status to 'started == true' on first input
+    if (event === ' ' && input === '') { 
+      // spacebar without any input does nothing
+    } else {
+      setTotalChars(prev => prev + 1);
+      console.log('input:', input);
+      if (!started) {
+        setStarted(true); // starts test status to 'started == true' on first input
+      }
+      if (event.slice(-1) === ' ') { // if space bar pressed
+        console.log(input, randomWords[0])
+        if (input === randomWords[0]) {
+          setCorrectChars(prev => prev + randomWords[0].length + 1)
+        }
+        setSubmissions(prev => [...prev, input])
+        setRandomWords(prev => [...prev.slice(1)])
+        moveChars(randomWords[0].length);
+        setInput('');
 
-    // get the value of the input and set the last key to that character
-    let inputValue = event.target.value;
-
-    setLastKey(inputValue[inputValue.length - 1]);
-
-    if (inputValue === ' ' && nextChar === ' ') {
-      moveChars(true);
-      return;
-    }
-    if (inputValue === ' ') {
-      return; // do nothing if the user types space and doesn't need to
-    }
-    setTotalChars((prev) => {
-      return prev + 1;
-    });
-
-    setTestText(() => {
-      return `Next char is '${nextChar}.' Input was '${inputValue}' and that's ok.`;
-    });
-
-    if (inputValue !== nextChar) {
-      userMistake();
-      return;
+      } else {
+        setInput(event);
+      }
     }
 
-    userSuccess();
   };
 
   return (
@@ -140,9 +141,9 @@ export default function TypingField() {
         placeholder="Type here"
         radius="md"
         size="md"
-        value=""
+        value={input}
         // ^ sets to display nothing and not have any extra input chars
-        onChange={(event) => handleInput(event)}
+        onChange={(event) => handleInput(event.target.value)}
         onKeyPress={() => handleKeyPress()}
       />
       <div className={timerClass}>TIME: {counter}</div>
