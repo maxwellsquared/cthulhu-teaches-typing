@@ -5,7 +5,7 @@ const wpmCalculator = function(totalChars, mistakes) {
   let wpmObject = {
     correctKeystrokes: correctChars / 5,
     incorrectKeystrokes: mistakes / 5,
-    WPM: Math.round(correctKeystrokes / time )
+    WPM: Math.round(this.correctKeystrokes / time )
   }
 
   return wpmObject;
