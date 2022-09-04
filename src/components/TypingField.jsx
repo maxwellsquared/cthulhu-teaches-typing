@@ -6,22 +6,22 @@ export default function TypingField() {
   const [counter, setCounter] = useState(60);
   const [started, setStarted] = useState(false);
 
+  // text to be typed
   const [randomWords, setRandomWords] = useState(RandomWords({ time: 1, numWords: 225 })); // returns array of 225 words
   const initialRandomWords = randomWords.toString(); // converts array to string
 
+  // inputs from user
+  const [input, setInput] = useState('');
   const [leftChars, setLeftChars] = useState(''); // stores the characters on the left side of the cursor
   const [rightChars, setRightChars] = useState(initialRandomWords.replace(/,/g, ' ')); // stores the characters on the right side of the cursor
   const [lastKey, setLastKey] = useState(); // stores the last character typed
 
-  console.log('leftChars: ', leftChars);
-  console.log('rightChars: ', rightChars);
-  console.log('lastKey: ', lastKey);
-
-  const [input, setInput] = useState('');
+  // stats
   const [correctChars, setCorrectChars] = useState(0); // stores number of correct characters entered
   const [totalChars, setTotalChars] = useState(0); // stores total number of characters entered
   const [mistakes, setMistakes] = useState(0); // set number of mistakes player has made
 
+  // changes classNames
   const [xPosition, setXPosition] = useState(0); // set number of characters typing division is offset by
   const [divClassName, setDivClassName] = useState('typing'); // give the typing div the 'typing shaken' class and it'll turn red and shake
   const [timerClass, setTimerClass] = useState('timer');
