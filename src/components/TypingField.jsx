@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import RandomWords from '../helpers/RandomWords';
 import LoggedInWelcomeBanner from './LoggedInWelcomeBanner';
+import ResultsModal from './ResultsModal';
 
 import { UserContext } from '../helpers/context';
 
@@ -131,7 +132,7 @@ export default function TypingField() {
   return (
     <>
       {user ? <LoggedInWelcomeBanner /> : null}
-
+      <ResultsModal />
       <div className={divClassName} style={fullDivStyle}>
         <div className="typing-left">{leftChars}</div>
         <div className="typing-right">{rightChars}</div>
