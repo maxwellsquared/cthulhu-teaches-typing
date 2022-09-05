@@ -28,14 +28,14 @@ const Nav = () => {
           {user ? (
             <>
               <li>
-                <button
-                  to="/"
+                <Link
+                  to="/user"
                   aria-current="User Settings"
                   className="mx-2 flex gap-2 hover:text-blood-red"
                 >
                   <BiCog className="text-2xl" />
                   <span>{user.name}</span>
-                </button>
+                </Link>
               </li>
               <li>
                 <Link
