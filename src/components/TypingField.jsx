@@ -30,14 +30,13 @@ export default function TypingField() {
     left: '0ch',
   });
 
-  // ---- CALLED ON UPDATE ----
-  const handleKeyPress = () => {
-    // setMistakes(totalChars - correctChars);
-    setLastKey(input[input.length - 1]); // set the last key to be the last character of the input string
-    setFullDivStyle((prev) => {
-      return { ...prev, left: `${xPosition}ch` };
-    });
-  };
+  // console.log('input: ', input);
+  // console.log('leftChars: ', leftChars);
+  // console.log('rightChars: ', rightChars);
+  // console.log('lastKey: ', lastKey);
+  // console.log('correctChars: ', correctChars);
+  // console.log('totalChars: ', totalChars);
+  // console.log('mistakes: ', mistakes);
 
   // ---- TIMER FUNCTION ----
   useEffect(() => {
@@ -66,9 +65,17 @@ export default function TypingField() {
 
   // ---- INPUT FUNCTION ----
   const handleInput = function (event) {
+    console.log(event);
     if (event === ' ' && input === '') {
+      return;
     } else {
+      setLastKey(input[input.length - 1]); // set the last key to be the last character of the input string
       setTotalChars((prev) => prev + 1);
+      setFullDivStyle((prev) => {
+        console.log('setting full div style');
+        return { ...prev, left: `${xPosition}ch` };
+      });
+
       if (!started) {
         setStarted(true); // starts test status to 'started == true' on first input
       }
@@ -87,7 +94,7 @@ export default function TypingField() {
     }
   };
 
-  return (  
+  return (
     <>
       <div className={divClassName} style={fullDivStyle}>
         <div className="typing-left">{leftChars}</div>
@@ -101,8 +108,7 @@ export default function TypingField() {
         value={input}
         // ^ sets to display nothing and not have any extra input chars
         onChange={(event) => handleInput(event.target.value)}
-        onKeyPress={() => handleKeyPress()}
-        autofocus="autofocus"
+        autoFocus="autofocus"
       />
       <div className={timerClass}>TIME: {counter}</div>
       <div className="testing-info">
