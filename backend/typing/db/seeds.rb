@@ -24,14 +24,14 @@ User.create({
 })
 Submission.create({
   wpm: 200,
-  users_id: 1
+  user_id: 1
 })
 Submission.create({
   wpm: 150,
-  users_id: 2
+  user_id: 2
 })
 Submission.create({
   wpm: 100,
-  users_id: 3
+  user_id: 3
 })
 puts "Done"

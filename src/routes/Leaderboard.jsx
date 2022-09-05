@@ -1,13 +1,13 @@
 import axios from "axios";
-import { useState, CSSProperties } from "react";
+import { useState, CSSProperties, useEffect } from "react";
 import BarLoader from "react-spinners/BarLoader";
 
 
 
 function Leaderboard() {
   const [loading, setLoading] = useState(true);
-
-  function sendRequest(setLoading) {
+  const [leaderboardData, setLeaderboardData] = useState();
+  function sendRequest(setLeaderboardData, setLoading) {
     return (new Promise((resolve, reject) => {
       axios
         .get(`http://localhost:3000/api/leaderboard`, {
@@ -19,30 +19,40 @@ function Leaderboard() {
           // if server returns 200 (success)
           if (res.status === 200) {
           }
-          //setLoading(false);
+          setLoading(false);
+          setLeaderboardData(res.data);
           resolve(res.data);
 
         })
         .catch((err) => {
           console.log(err);
-          //setLoading(false);
+          setLoading(false);
           reject(err);
         });
     }))
-
-
   }
-  let leaderboardData;
-  let leaderboardPromise = sendRequest(setLoading);
-  leaderboardPromise.then((data) => {
-    leaderboardData = data;
-    console.log(leaderboardData);
-  })
+  useEffect(() => {
+    sendRequest(setLeaderboardData, setLoading);
+  }, [])
 
+  useEffect(() => {
+    if (leaderboardData) {
+      console.log(leaderboardData);
+    }
+  }, [leaderboardData])
 
   return (
-    loading ? <BarLoader color={'#5118a7'}/> : <h1 className="mt-5">This is the Leaderboard</h1>
-  );
+    loading ? <BarLoader color={'#5118a7'} width={'50%'}height={8}/> : 
+    <ul>
+    {leaderboardData.map(item => {
+      return <li>{item['wpm']}</li>;
+    })}
+  </ul>
+
+
+  )
+
+
 
 }
 
