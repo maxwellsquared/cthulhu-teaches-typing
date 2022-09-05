@@ -70,12 +70,7 @@ function Leaderboard() {
           <td>{index+1}</td>
           <td>{username}</td>
           <td>{item['wpm']}</td>
-          <td>{date.getMonth()+1+
-          "/"+(date.getDate())+
-          "/"+date.getFullYear()+
-          " "+date.getHours()+
-          ":"+date.getMinutes()+
-          ":"+date.getSeconds()}</td>
+          <td>{date.toLocaleString()}</td>
         </tr>
       );
     })}
