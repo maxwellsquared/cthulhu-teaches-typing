@@ -1,35 +1,27 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import RandomWords from '../helpers/RandomWords';
-import LoggedInWelcomeBanner from './LoggedInWelcomeBanner';
-
-import { UserContext } from '../helpers/context';
 
 export default function TypingField() {
-  // const [timeLimit, setTimeLimit] = useState(); // stores the time limit for the numWords
-  const timeLimit = 1; // temporary hardcoded 1 minute time limit
-  const numWords = timeLimit * 225; // sets length of text to be typed
-
   // timer functionality
   const [counter, setCounter] = useState(60);
   const [started, setStarted] = useState(false);
 
-  // user functionality
-  const { user, setUser } = useContext(UserContext);
+  // text to be typed
+  const [randomWords, setRandomWords] = useState(RandomWords({ time: 1, numWords: 225 })); // returns array of 225 words
+  const initialRandomWords = randomWords.toString(); // converts array to string
 
-  const [randomWords, setRandomWords] = useState(RandomWords(numWords));
-  const initialRandomWords = randomWords.toString();
-  const [submissions, setSubmissions] = useState([]);
-
+  // inputs from user
+  const [input, setInput] = useState('');
   const [leftChars, setLeftChars] = useState(''); // stores the characters on the left side of the cursor
   const [rightChars, setRightChars] = useState(initialRandomWords.replace(/,/g, ' ')); // stores the characters on the right side of the cursor
-  const [nextChar, setNextChar] = useState([]); // stores the correct next character to type
   const [lastKey, setLastKey] = useState(); // stores the last character typed
 
-  const [input, setInput] = useState('');
+  // stats
   const [correctChars, setCorrectChars] = useState(0); // stores number of correct characters entered
   const [totalChars, setTotalChars] = useState(0); // stores total number of characters entered
   const [mistakes, setMistakes] = useState(0); // set number of mistakes player has made
 
+  // changes classNames
   const [xPosition, setXPosition] = useState(0); // set number of characters typing division is offset by
   const [divClassName, setDivClassName] = useState('typing'); // give the typing div the 'typing shaken' class and it'll turn red and shake
   const [timerClass, setTimerClass] = useState('timer');
@@ -38,14 +30,10 @@ export default function TypingField() {
     left: '0ch',
   });
 
-  // state variables for testing
-  const [successfulTyping, setsuccessfulTyping] = useState('enter some text first');
-  const [testText, setTestText] = useState();
-
   // ---- CALLED ON UPDATE ----
   const handleKeyPress = () => {
-    setNextChar(rightChars[0]); // set the next character to be the first character of the right string
-    //setMistakes(totalChars - correctChars);
+    // setMistakes(totalChars - correctChars);
+    setLastKey(input[input.length - 1]); // set the last key to be the last character of the input string
     setFullDivStyle((prev) => {
       return { ...prev, left: `${xPosition}ch` };
     });
@@ -56,7 +44,7 @@ export default function TypingField() {
     // checks if started or counter state changes, timer begins when the test starts. updates every second.
     if (started) {
       const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-      if (counter < 10) setTimerRed(); // set the timer red for the last 10 seconds
+      if (counter < 10) setTimerClass('timer timer-countdown'); // set the timer red for the last 10 seconds
       return () => clearInterval(timer);
     }
   }, [counter, started]);
@@ -68,29 +56,6 @@ export default function TypingField() {
     });
   }, [leftChars]);
 
-  // make the timer red
-  const setTimerRed = function () {
-    setTimerClass('timer timer-countdown');
-  };
-
-  // // successful entry of a character
-  // const userSuccess = function () {
-  //   setsuccessfulTyping('YAY!!!!!');
-  //   setCorrectChars((prev) => {
-  //     return prev + 1;
-  //   });
-  //   moveChars();
-  //   setDivClassName('typing'); // removing this causes the shaken animations to trigger for some reason???
-  // };
-
-  // // unsuccessful entry of a character
-  // const userMistake = function () {
-  //   setsuccessfulTyping('BIG BUMMER');
-  //   setDivClassName('typing shaken'); // give the whole typing div a shake and flash red
-  //   setTimeout(() => {
-  //     setDivClassName('typing'); // set the typing div back to normal after 250ms
-  //   }, 250);
-  // };
   // take the first character off RightCars and add it to LeftChars
   const moveChars = function (length) {
     setLeftChars((prev) => prev + `${randomWords[0]} `);
@@ -102,10 +67,8 @@ export default function TypingField() {
   // ---- INPUT FUNCTION ----
   const handleInput = function (event) {
     if (event === ' ' && input === '') {
-      // spacebar without any input does nothing
     } else {
       setTotalChars((prev) => prev + 1);
-      console.log('input:', input);
       if (!started) {
         setStarted(true); // starts test status to 'started == true' on first input
       }
@@ -115,7 +78,6 @@ export default function TypingField() {
         if (input === randomWords[0]) {
           setCorrectChars((prev) => prev + randomWords[0].length + 1);
         }
-        setSubmissions((prev) => [...prev, input]);
         setRandomWords((prev) => [...prev.slice(1)]);
         moveChars(randomWords[0].length);
         setInput('');
@@ -125,7 +87,7 @@ export default function TypingField() {
     }
   };
 
-  return (
+  return (  
     <>
       <div className={divClassName} style={fullDivStyle}>
         <div className="typing-left">{leftChars}</div>
@@ -148,8 +110,6 @@ export default function TypingField() {
         <div className="font-mono">TOTAL ENTRIES: {totalChars}</div>
         <div className="font-mono">SUCCESSFUL ENTRIES: {correctChars}</div>
         <div className="font-mono">MISTAKES: {mistakes}</div>
-        <div className="font-mono">CHARACTER RESULT: {successfulTyping}</div>
-        <div className="font-mono">Test info: {testText}</div>
       </div>
     </>
   );
