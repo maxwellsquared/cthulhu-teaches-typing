@@ -28,6 +28,7 @@ export default function ResultsModal(props) {
         className="Modal"
         overlayClassName="Overlay"
         disableAutoFocus={true}
+        ariaHideApp={false}
       >
         <div className="modal-container">
           <h1 className="modal-header">CONGRATULATIONS!</h1>
