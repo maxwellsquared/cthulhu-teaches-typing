@@ -22,4 +22,16 @@ User.create({
   email: "maxkuhn@gmail.com",
   password: "test"
 })
+Submission.create({
+  wpm: 200,
+  users_id: 1
+})
+Submission.create({
+  wpm: 150,
+  users_id: 2
+})
+Submission.create({
+  wpm: 100,
+  users_id: 3
+})
 puts "Done"
