@@ -44,7 +44,8 @@ table {
   width: 100%;
 }
 
-td, th {
+td,
+th {
   border: 1px solid #25173a;
   text-align: left;
   padding: 8px;
@@ -88,16 +89,15 @@ input {
 
 .Modal {
   background-color: rgba(25, 0, 25, 0.9);
-  position: absolute;
-  top: 10vh;
-  left: 10vw;
-  right: 10vw;
-  bottom: 25vh;
+  margin: auto;
+  margin-top: 100px;
+  height: auto;
+  width: fit-content;
   display: flex;
   outline: 0;
   font-family: brother-1816, sans-serif;
   font-size: 60px;
-  color:#EEDCB2;
+  color: #EEDCB2;
 }
 
 .Overlay {
@@ -178,4 +178,3 @@ input {
 .main-height {
   height: 90vh;
 }
-

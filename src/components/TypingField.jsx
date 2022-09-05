@@ -57,10 +57,10 @@ export default function TypingField() {
   // ---- GAME OVER ----
   const gameOver = function () {
     setAccuracy(Math.floor(100 * (1 - mistakes / totalChars)));
-    setWordsPerMinute(Math.floor((correctChars / 5) / (initialTimer / 60)));
+    setWordsPerMinute(Math.floor(correctChars / 5 / (initialTimer / 60)));
     setIsComplete(true);
   };
-  
+
   // --- UPDATES WORDS SECTIONS
   useEffect(() => {
     setFullDivStyle((prev) => {

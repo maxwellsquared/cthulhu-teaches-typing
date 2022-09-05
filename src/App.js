@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
-import { UserContext } from './helpers/context';
+import { UserContext, ModalContext } from './helpers/context';
 import About from './routes/About';
 import Login from './routes/Login';
 import Home from './routes/Home';
@@ -13,6 +13,7 @@ import './App.css';
 // parent component for all other components
 export default function App() {
   const [user, setUser] = useState();
+  const [modal, setModal] = useState(false);
 
   // this will wrap all other components
   return (
