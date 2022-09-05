@@ -22,7 +22,7 @@ p {
 }
 
 .typing {
-  font-size: 60px;
+  font-size: 40px;
   color: #eedcb2;
   display: flex;
   white-space: nowrap;
@@ -37,6 +37,21 @@ p {
   font-size: 80px;
   color: #eedcb2;
   font-family: brother-1816, sans-serif;
+}
+
+input {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 28px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  color: #EEDCB2;
+  border-bottom: 2px solid #EEDCB2;
+  border-color: #EEDCB2;
+  background-color: #25173a;
+  box-shadow: 0 0 1px #EEDCB2;
+  border: 1px solid #EEDCB2;
+  outline: none;
 }
 
 .timer-countdown {
@@ -103,3 +118,4 @@ p {
 .main-height {
   height: 90vh;
 }
+
