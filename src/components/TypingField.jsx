@@ -69,7 +69,6 @@ export default function TypingField() {
     if (event === ' ' && input === '') {
     } else {
       setTotalChars((prev) => prev + 1);
-      console.log('input:', input);
       if (!started) {
         setStarted(true); // starts test status to 'started == true' on first input
       }
@@ -88,7 +87,7 @@ export default function TypingField() {
     }
   };
 
-  return (
+  return (  
     <>
       <div className={divClassName} style={fullDivStyle}>
         <div className="typing-left">{leftChars}</div>
