@@ -251,11 +251,13 @@ const listOfWords = [
   'wet',
 ];
 
-const RandomWords = (limit) => {
+const RandomWords = ({ time, numWords }) => {
+  let limit = time * numWords;
   const randomWordArray = [];
   for (let i = 0; i < limit; i++) {
     randomWordArray.push(listOfWords[Math.floor(Math.random() * listOfWords.length)]);
   }
+  // must return an array, other functions use the index to get the word
   return randomWordArray;
 };
 
