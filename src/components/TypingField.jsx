@@ -132,13 +132,15 @@ export default function TypingField() {
         <div className="typing-right">{rightChars}</div>
       </div>
       <input
-        placeholder="Type here"
+        className="font-sans"
+        placeholder=""
         radius="md"
         size="md"
         value={input}
         // ^ sets to display nothing and not have any extra input chars
         onChange={(event) => handleInput(event.target.value)}
         onKeyPress={() => handleKeyPress()}
+        autofocus="autofocus"
       />
       <div className={timerClass}>TIME: {counter}</div>
       <div className="testing-info">
