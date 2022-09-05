@@ -30,6 +30,9 @@ export default function TypingField() {
     left: '0ch',
   });
 
+  // ?? in progress to track index of last character typed
+  const [lastCharIndex, setLastCharIndex] = useState(0);
+
   // console.log('input: ', input);
   // console.log('leftChars: ', leftChars);
   // console.log('rightChars: ', rightChars);
@@ -65,14 +68,18 @@ export default function TypingField() {
 
   // ---- INPUT FUNCTION ----
   const handleInput = function (event) {
-    console.log(event);
     if (event === ' ' && input === '') {
       return;
     } else {
+      // ?? work in progress
+
+      characterCheck(randomWords[0], lastCharIndex, event);
+
       setLastKey(input[input.length - 1]); // set the last key to be the last character of the input string
+      // !! not sure if we need setLastKey
+
       setTotalChars((prev) => prev + 1);
       setFullDivStyle((prev) => {
-        console.log('setting full div style');
         return { ...prev, left: `${xPosition}ch` };
       });
 
@@ -81,7 +88,9 @@ export default function TypingField() {
       }
       if (event.slice(-1) === ' ') {
         // if space bar pressed
-        console.log(input, randomWords[0]);
+
+        console.log('reset setLastCharIndex to 0');
+        setLastCharIndex(0);
         if (input === randomWords[0]) {
           setCorrectChars((prev) => prev + randomWords[0].length + 1);
         }
@@ -90,6 +99,22 @@ export default function TypingField() {
         setInput('');
       } else {
         setInput(event);
+      }
+    }
+  };
+
+
+  // takes in the current random word and the last key pressed and compares them
+  const characterCheck = (word, charIndexOfWord, keyPressed) => {
+    let lastCharFromKey = keyPressed[keyPressed.length - 1];
+
+    setLastCharIndex((prev) => prev + 1);
+
+    if (word[charIndexOfWord] === lastCharFromKey) {
+      console.log('correct letter for that word');
+    } else {
+      if (keyPressed[keyPressed.length - 1] !== ' ') {
+        console.log('incorrect letter for that word');
       }
     }
   };
