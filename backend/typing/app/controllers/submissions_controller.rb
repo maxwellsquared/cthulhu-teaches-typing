@@ -16,9 +16,9 @@ class SubmissionsController < ApplicationController
   end
   private
   def submission_params
-    params.require(:submission).permit(:wpm, :users_id)
+    params.require(:submission).permit(:wpm, :user_id)
   end
 end
 
-# curl POST http://localhost:3000/submit -H 'Content-Type: application/json' -d '{"wpm":100,"users_id": 1}' -v
+# curl POST http://localhost:3000/submit -H 'Content-Type: application/json' -d '{"wpm":100,"user_id": 1}' -v
 # curl GET http://localhost:3000/api/leaderboard -H 'Content-Type: application/json' -v
