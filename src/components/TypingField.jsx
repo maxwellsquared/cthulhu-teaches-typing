@@ -30,14 +30,12 @@ export default function TypingField() {
     left: '0ch',
   });
 
-  // ---- CALLED ON UPDATE ----
-  const handleKeyPress = () => {
-    // setMistakes(totalChars - correctChars);
-    setLastKey(input[input.length - 1]); // set the last key to be the last character of the input string
-    setFullDivStyle((prev) => {
-      return { ...prev, left: `${xPosition}ch` };
-    });
-  };
+  //  used in characterCheck to check if the last character typed was correct
+  const [lastCharIndex, setLastCharIndex] = useState(0);
+  const [backspacePressed, setBackspacePressed] = useState(false);
+  const [numCorrectChars, setNumCorrectChars] = useState(0);
+  const [numTotalChars, setNumTotalChars] = useState(0);
+  const [numMistakes, setNumMistakes] = useState(0);
 
   // ---- TIMER FUNCTION ----
   useEffect(() => {
@@ -52,6 +50,10 @@ export default function TypingField() {
   // --- UPDATES WORDS SECTIONS
   useEffect(() => {
     setFullDivStyle((prev) => {
+      // !! stretch
+      // if word mistake in the word and don't correct it, and update the word section, then we pass the mistake into the total mistake
+      // only update total mistakes on moving the word over
+      // allows you to pass a style into the entire div
       return { ...prev, left: `${xPosition}ch` };
     });
   }, [leftChars]);
@@ -67,27 +69,78 @@ export default function TypingField() {
   // ---- INPUT FUNCTION ----
   const handleInput = function (event) {
     if (event === ' ' && input === '') {
+      return;
+    }
+
+    // TODO: add functionality to check if the last character typed was correct
+    characterCheck(randomWords[0], lastCharIndex, event, backspacePressed);
+
+    setLastKey(input[input.length - 1]); // set the last key to be the last character of the input string
+
+    setTotalChars((prev) => prev + 1);
+    setFullDivStyle((prev) => {
+      return { ...prev, left: `${xPosition}ch` };
+    });
+
+    if (!started) {
+      // starts test status to 'started == true' on first input
+      setStarted(true);
+    }
+
+    if (event.slice(-1) === ' ') {
+      // if space bar pressed
+
+      setLastCharIndex(0); // reset lastCharIndex to 0 if space pressed. Used by characterCheck
+
+      if (input === randomWords[0]) {
+        setCorrectChars((prev) => prev + randomWords[0].length + 1);
+      }
+
+      setRandomWords((prev) => [...prev.slice(1)]);
+      moveChars(randomWords[0].length);
+      setInput('');
     } else {
-      setTotalChars((prev) => prev + 1);
-      if (!started) {
-        setStarted(true); // starts test status to 'started == true' on first input
-      }
-      if (event.slice(-1) === ' ') {
-        // if space bar pressed
-        console.log(input, randomWords[0]);
-        if (input === randomWords[0]) {
-          setCorrectChars((prev) => prev + randomWords[0].length + 1);
-        }
-        setRandomWords((prev) => [...prev.slice(1)]);
-        moveChars(randomWords[0].length);
-        setInput('');
-      } else {
-        setInput(event);
-      }
+      setInput(event);
     }
   };
 
-  return (  
+  // takes in the current random word and the last key pressed and compares them
+  const characterCheck = (word, charIndexOfWord, keyPressed, backspacePressed) => {
+    if (backspacePressed) {
+      setLastCharIndex((prev) => prev - 1);
+      return;
+    }
+
+    let lastCharFromKey = keyPressed[keyPressed.length - 1];
+
+    setLastCharIndex((prev) => prev + 1);
+
+    // don't check if the last character is a space
+    if (lastCharFromKey === ' ') {
+      return;
+    }
+
+    setNumTotalChars((prev) => prev + 1);
+
+    if (word[charIndexOfWord] === lastCharFromKey) {
+      console.log('✅✅✅✅ correct letter for that word ✅✅✅✅');
+      setNumCorrectChars((prev) => prev + 1);
+    } else {
+      console.log('❌❌❌ incorrect letter for that word ❌❌❌');
+      setNumMistakes((prev) => prev + 1);
+    }
+  };
+
+  // ---- BACKSPACE FUNCTION ----
+  const detailedInput = (event) => {
+    if (event.key === 'Backspace') {
+      setBackspacePressed(true);
+    } else {
+      setBackspacePressed(false);
+    }
+  };
+
+  return (
     <>
       <div className={divClassName} style={fullDivStyle}>
         <div className="typing-left">{leftChars}</div>
@@ -101,8 +154,8 @@ export default function TypingField() {
         value={input}
         // ^ sets to display nothing and not have any extra input chars
         onChange={(event) => handleInput(event.target.value)}
-        onKeyPress={() => handleKeyPress()}
-        autofocus="autofocus"
+        onKeyDown={(event) => detailedInput(event)}
+        autoFocus="autofocus"
       />
       <div className={timerClass}>TIME: {counter}</div>
       <div className="testing-info">
@@ -110,6 +163,9 @@ export default function TypingField() {
         <div className="font-mono">TOTAL ENTRIES: {totalChars}</div>
         <div className="font-mono">SUCCESSFUL ENTRIES: {correctChars}</div>
         <div className="font-mono">MISTAKES: {mistakes}</div>
+        <div className="font-mono">numCorrectChars: {numCorrectChars}</div>
+        <div className="font-mono">numTotalChars: {numTotalChars}</div>
+        <div className="font-mono">numMistakes: {numMistakes}</div>
       </div>
     </>
   );
