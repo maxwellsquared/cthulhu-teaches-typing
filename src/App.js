@@ -6,6 +6,7 @@ import About from './routes/About';
 import Login from './routes/Login';
 import Home from './routes/Home';
 import Nav from './components/Nav';
+import Leaderboard from './routes/Leaderboard';
 import LayoutWrapper from './components/LayoutWrapper';
 import './App.css';
 
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
           </Routes>
         </LayoutWrapper>
       </UserContext.Provider>
