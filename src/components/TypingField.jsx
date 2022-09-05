@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import RandomWords from '../helpers/RandomWords';
+import ResultsModal from './ResultsModal';
+
 
 export default function TypingField() {
   // timer functionality
-  const [counter, setCounter] = useState(60);
+  const initialTimer = 15; // use constant for initial timer and pass to counter--needed for WPM
+  const [counter, setCounter] = useState(initialTimer);
   const [started, setStarted] = useState(false);
 
   // text to be typed
@@ -20,6 +23,9 @@ export default function TypingField() {
   const [correctChars, setCorrectChars] = useState(0); // stores number of correct characters entered
   const [totalChars, setTotalChars] = useState(0); // stores total number of characters entered
   const [mistakes, setMistakes] = useState(0); // set number of mistakes player has made
+  const [wordsPerMinute, setWordsPerMinute] = useState('meatball'); // set WPM to pass along
+  const [accuracy, setAccuracy] = useState('gabagool');
+  const [isComplete, setIsComplete] = useState(false);
 
   // changes classNames
   const [xPosition, setXPosition] = useState(0); // set number of characters typing division is offset by
@@ -43,10 +49,18 @@ export default function TypingField() {
     if (started) {
       const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
       if (counter < 10) setTimerClass('timer timer-countdown'); // set the timer red for the last 10 seconds
+      if (counter === 0) gameOver(); // call gameOver, calculate states and display modal
       return () => clearInterval(timer);
     }
   }, [counter, started]);
 
+  // ---- GAME OVER ----
+  const gameOver = function () {
+    setAccuracy(Math.floor(100 * (1 - mistakes / totalChars)));
+    setWordsPerMinute(Math.floor((correctChars / 5) / (initialTimer / 60)));
+    setIsComplete(true);
+  };
+  
   // --- UPDATES WORDS SECTIONS
   useEffect(() => {
     setFullDivStyle((prev) => {
@@ -142,6 +156,12 @@ export default function TypingField() {
 
   return (
     <>
+      <ResultsModal
+        gameOver={isComplete}
+        wpm={wordsPerMinute}
+        accuracy={accuracy}
+        // user={user ? user : 'anon'}
+      />
       <div className={divClassName} style={fullDivStyle}>
         <div className="typing-left">{leftChars}</div>
         <div className="typing-right">{rightChars}</div>
