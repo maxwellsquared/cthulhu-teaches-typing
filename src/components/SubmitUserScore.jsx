@@ -5,15 +5,12 @@ import { UserContext } from '../helpers/context';
 const SubmitUserScore = ({ wpm, accuracy, closeModal }) => {
   const { user } = useContext(UserContext);
 
-  console.log('wpm', wpm);
-  console.log('user', user);
-
   const data = {
     wpm: wpm,
     user_id: user.id,
   };
 
-  const postRequest = (data) => {
+  const postRequest = () => {
     axios
       .post(`http://localhost:3000/submit`, data, {
         headers: {
@@ -21,7 +18,7 @@ const SubmitUserScore = ({ wpm, accuracy, closeModal }) => {
         },
       })
       .then((res) => {
-        console.log('Success');
+        console.log('Success: user score submitted');
       })
       .catch((err) => {
         console.log('Error has occurred');
@@ -29,7 +26,7 @@ const SubmitUserScore = ({ wpm, accuracy, closeModal }) => {
       });
   };
 
-  return <button onClick={postRequest(data)}>SUBMIT SCORE</button>;
+  return <button onClick={() => postRequest()}>SUBMIT SCORE</button>;
 };
 
 export default SubmitUserScore;
