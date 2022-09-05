@@ -1,8 +1,16 @@
 import { useState, useEffect, useContext } from 'react';
 import RandomWords from '../helpers/RandomWords';
 import LoggedInWelcomeBanner from './LoggedInWelcomeBanner';
-
+import {Howl, Howler} from 'howler';
 import { UserContext } from '../helpers/context';
+
+// const sfx = {
+//   thwock: new Howl({src: '../../../public/sounds/thwock.wav'})
+// };
+
+const keyStroke = new Howl({src: './sounds/thwock.wav', volume: 0.1});
+const countdown = new Howl({src: './sounds/countdown-tick.wav', rate: 1.1});
+const bell = new Howl({src: './sounds/bell-tolling.mp3'});
 
 export default function TypingField() {
   // const [timeLimit, setTimeLimit] = useState(); // stores the time limit for the numWords
@@ -10,7 +18,7 @@ export default function TypingField() {
   const numWords = timeLimit * 225; // sets length of text to be typed
 
   // timer functionality
-  const [counter, setCounter] = useState(60);
+  const [counter, setCounter] = useState(15);
   const [started, setStarted] = useState(false);
 
   // user functionality
@@ -41,6 +49,7 @@ export default function TypingField() {
   // state variables for testing
   const [successfulTyping, setsuccessfulTyping] = useState('enter some text first');
   const [testText, setTestText] = useState();
+  const [soundStarted, setSoundStarted] = useState(false);
 
   // ---- CALLED ON UPDATE ----
   const handleKeyPress = () => {
@@ -56,7 +65,11 @@ export default function TypingField() {
     // checks if started or counter state changes, timer begins when the test starts. updates every second.
     if (started) {
       const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-      if (counter < 10) setTimerRed(); // set the timer red for the last 10 seconds
+      if (counter < 10) {
+        setTimerRed(); // set the timer red for the last 10 seconds
+        playCountdown();
+      }
+      if (counter === 0) bell.play();
       return () => clearInterval(timer);
     }
   }, [counter, started]);
@@ -73,24 +86,14 @@ export default function TypingField() {
     setTimerClass('timer timer-countdown');
   };
 
-  // // successful entry of a character
-  // const userSuccess = function () {
-  //   setsuccessfulTyping('YAY!!!!!');
-  //   setCorrectChars((prev) => {
-  //     return prev + 1;
-  //   });
-  //   moveChars();
-  //   setDivClassName('typing'); // removing this causes the shaken animations to trigger for some reason???
-  // };
+  // setup countdown noise
+  const playCountdown = function() {
+    let localTruth = false;
+    if (soundStarted) localTruth = true;
+    if (!soundStarted) countdown.play();
+    setSoundStarted(true);
+  };
 
-  // // unsuccessful entry of a character
-  // const userMistake = function () {
-  //   setsuccessfulTyping('BIG BUMMER');
-  //   setDivClassName('typing shaken'); // give the whole typing div a shake and flash red
-  //   setTimeout(() => {
-  //     setDivClassName('typing'); // set the typing div back to normal after 250ms
-  //   }, 250);
-  // };
   // take the first character off RightCars and add it to LeftChars
   const moveChars = function (length) {
     setLeftChars((prev) => prev + `${randomWords[0]} `);
@@ -99,8 +102,10 @@ export default function TypingField() {
     setXPosition((prev) => prev - (length + 1));
   };
 
+
   // ---- INPUT FUNCTION ----
   const handleInput = function (event) {
+    keyStroke.play();
     if (event === ' ' && input === '') {
       // spacebar without any input does nothing
     } else {
