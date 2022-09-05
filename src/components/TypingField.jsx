@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import RandomWords from '../helpers/RandomWords';
+import Wpm from './Wpm';
 
 export default function TypingField() {
   // timer functionality
@@ -159,6 +160,9 @@ export default function TypingField() {
       />
       <div className={timerClass}>TIME: {counter}</div>
       <div className="testing-info">
+        {counter === 0 ? (
+          <Wpm correctCharacters={numCorrectChars} numMistakes={numMistakes} />
+        ) : null}
         <div className="font-mono">LAST KEY: '{lastKey}'</div>
         <div className="font-mono">TOTAL ENTRIES: {totalChars}</div>
         <div className="font-mono">SUCCESSFUL ENTRIES: {correctChars}</div>
