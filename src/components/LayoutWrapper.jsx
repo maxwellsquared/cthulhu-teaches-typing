@@ -10,6 +10,9 @@ const LayoutWrapper = ({ children }) => {
             <Link to="/" className="flex items-center">
               <span className="self-center text-xl hover:text-candle">HOME</span>
             </Link>
+            <Link to="/leaderboard" className="flex items-center">
+              <span className="self-center text-xl hover:text-candle">LEADERBOARD</span>
+            </Link>
             <ul className="mt-0 flex flex-row p-4">
               <li>
                 <Link

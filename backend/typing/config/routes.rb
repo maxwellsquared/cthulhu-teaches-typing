@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :users, except: [:new]
 
   post "submit", to: "submissions#create"
+  get "api/leaderboard", to: "submissions#show"
 
   
   match '*all', controller: 'application', action: 'cors_preflight_check', via: [:options]
