@@ -1,10 +1,13 @@
 import axios from "axios";
-import { useState, CSSProperties, useEffect } from "react";
+import { useState, CSSProperties, useEffect, Fragment } from "react";
 import BarLoader from "react-spinners/BarLoader";
+import { useContext } from 'react';
+import { UserContext } from '../helpers/context';
 
 
 
 function Leaderboard() {
+  const { user, setUser } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const [leaderboardData, setLeaderboardData] = useState();
   function sendRequest(setLeaderboardData, setLoading) {
@@ -42,13 +45,42 @@ function Leaderboard() {
   }, [leaderboardData])
 
   return (
+    
     loading ? <BarLoader color={'#5118a7'} width={'50%'}height={8}/> : 
-    <ul>
-    {leaderboardData.map(item => {
-      return <li>{item['wpm']}</li>;
+    
+    <Fragment>
+    <h1>Leaderboard</h1>
+    <table>
+      <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>WPM</th>
+        <th>Date</th>
+      </tr>
+      {leaderboardData.map((item, index) => {
+        let date = new Date(item['created_at']);
+        let username = item['name']
+        if (user) {
+          if (user.id === item.user_id) {
+            username = `${item['name']} (you)`;
+          }
+         }
+      return( 
+        <tr>
+          <td>{index+1}</td>
+          <td>{username}</td>
+          <td>{item['wpm']}</td>
+          <td>{date.getMonth()+1+
+          "/"+(date.getDate())+
+          "/"+date.getFullYear()+
+          " "+date.getHours()+
+          ":"+date.getMinutes()+
+          ":"+date.getSeconds()}</td>
+        </tr>
+      );
     })}
-  </ul>
-
+    </table>
+    </Fragment>
 
   )
 

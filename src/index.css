@@ -39,6 +39,25 @@ p {
   font-family: brother-1816, sans-serif;
 }
 
+table {
+  font-family: brother-1816, sans-serif;
+  font-weight: 900;
+  color: #eedcb2;
+  text-decoration: none;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #25173a;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #25173a;
+}
+
 input {
   width: 100%;
   padding: 12px 20px;

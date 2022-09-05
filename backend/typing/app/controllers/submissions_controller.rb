@@ -3,7 +3,7 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new
   end
   def show # /api/leaderboard
-    @submissions = Submission.joins(:user).select("submissions.*, users.*").order(wpm: :desc)
+    @submissions = Submission.joins(:user).select("submissions.*, users.*").order(wpm: :desc).limit(10)
     render json: @submissions
   end
   def create
