@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../helpers/context';
 import axios from 'axios';
+import BarLoader from 'react-spinners/BarLoader';
 
 const User = () => {
   const { user } = useContext(UserContext);
@@ -32,16 +33,25 @@ const User = () => {
     }
   }, []);
 
-  const statsArr = userStats?.map((stat) => {
-    return (
-      <div key={stat.id} className="font-mono text-blood-red">
-        <p>WPM: {stat.wpm}</p>
-        <p>Date: {stat.created_at}</p>
-      </div>
-    );
-  });
+  const statsArr = (data) => {
+    let arr = data.map((stat) => {
+      let date = new Date(stat['created_at']);
 
-  return <>{statsArr}</>;
+      return (
+        <div key={stat.id} className="font-mono text-blood-red">
+          <p>WPM: {stat.wpm}</p>
+          <p>Date: {date.toLocaleString()}</p>
+        </div>
+      );
+    });
+    return arr;
+  };
+
+  return (
+    <>
+      {userStats ? statsArr(userStats) : <BarLoader color={'#5118a7'} width={'50%'} height={8} />}
+    </>
+  );
 };
 
 export default User;
