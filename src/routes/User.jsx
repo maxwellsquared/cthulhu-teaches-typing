@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../helpers/context';
 import axios from 'axios';
 import BarLoader from 'react-spinners/BarLoader';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+import { Line, CartesianGrid, XAxis, YAxis, Tooltip, Area, AreaChart, Legend } from 'recharts';
 
 const User = () => {
   const { user } = useContext(UserContext);
@@ -31,13 +31,21 @@ const User = () => {
   }, []);
 
   const renderLineChat = (
-    <LineChart width={800} height={400} data={userStats}>
-      <Line type="monotone" dataKey="wpm" stroke="#8884d8" />
-      <CartesianGrid stroke="#ccc" />
+    <AreaChart width={800} height={400} data={userStats}>
+      <defs>
+        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+        </linearGradient>
+      </defs>
+      <Line type="monotone" dataKey="wpm" stroke="#EEDCB2" />
+      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
       <XAxis dataKey="name" />
       <YAxis />
       <Tooltip />
-    </LineChart>
+      <Area type="monotone" dataKey="wpm" stroke="#EEDCB2" fillOpacity={1} fill="url(#colorUv)" />
+      <Legend verticalAlign="top" height={36} />
+    </AreaChart>
   );
 
   // function to get average wpm
@@ -50,10 +58,10 @@ const User = () => {
   };
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center">
+    <div className="mt-10 flex flex-col items-center justify-center">
       {userStats ? (
         <div className="flex flex-col items-center justify-center">
-          <h1 className="text-4xl font-bold text-blood-red">{user.name}, here's your stats</h1>
+          <h1 className="mb-3 text-4xl font-bold text-blood-red">{user.name} Stats</h1>
           {renderLineChat}
           <h1 className="text-2xl font-bold text-blood-red">Average WPM: {getAverageWpm()}</h1>
         </div>

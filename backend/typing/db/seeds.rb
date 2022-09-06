@@ -6,32 +6,148 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-puts "Seeding"
+puts 'Seeding'
 User.create({
-  name: "Adam Harvey",
-  email: "adamgrharvey@gmail.com",
-  password: "test"
-})
+              name: 'Adam Harvey',
+              email: 'adamgrharvey@gmail.com',
+              password: 'test'
+            })
 User.create({
-  name: "Curtis Warcup",
-  email: "curtis.gwarcup@gmail.com",
-  password: "test"
-})
+              name: 'Curtis Warcup',
+              email: 'curtis.gwarcup@gmail.com',
+              password: 'test'
+            })
 User.create({
-  name: "Max Kuhn",
-  email: "maxkuhn@gmail.com",
-  password: "test"
-})
+              name: 'Max Kuhn',
+              email: 'maxkuhn@gmail.com',
+              password: 'test'
+            })
 Submission.create({
-  wpm: 200,
-  user_id: 1
-})
+                    wpm: 25,
+                    user_id: 1
+                  })
 Submission.create({
-  wpm: 150,
-  user_id: 2
-})
+                    wpm: 32,
+                    user_id: 1
+                  })
 Submission.create({
-  wpm: 100,
-  user_id: 3
-})
-puts "Done"
+                    wpm: 56,
+                    user_id: 1
+                  })
+Submission.create({
+                    wpm: 43,
+                    user_id: 1
+                  })
+Submission.create({
+                    wpm: 55,
+                    user_id: 1
+                  })
+Submission.create({
+                    wpm: 25,
+                    user_id: 1
+                  })
+Submission.create({
+                    wpm: 32,
+                    user_id: 1
+                  })
+Submission.create({
+                    wpm: 56,
+                    user_id: 1
+                  })
+Submission.create({
+                    wpm: 43,
+                    user_id: 1
+                  })
+Submission.create({
+                    wpm: 55,
+                    user_id: 1
+                  })
+Submission.create({
+                    wpm: 15,
+                    user_id: 2
+                  })
+Submission.create({
+                    wpm: 45,
+                    user_id: 2
+                  })
+Submission.create({
+                    wpm: 61,
+                    user_id: 2
+                  })
+Submission.create({
+                    wpm: 52,
+                    user_id: 2
+                  })
+Submission.create({
+                    wpm: 38,
+                    user_id: 2
+                  })
+Submission.create({
+                    wpm: 15,
+                    user_id: 2
+                  })
+Submission.create({
+                    wpm: 45,
+                    user_id: 2
+                  })
+Submission.create({
+                    wpm: 61,
+                    user_id: 2
+                  })
+Submission.create({
+                    wpm: 52,
+                    user_id: 2
+                  })
+Submission.create({
+                    wpm: 38,
+                    user_id: 2
+                  })
+Submission.create({
+                    wpm: 62,
+                    user_id: 3
+                  })
+Submission.create({
+                    wpm: 50,
+                    user_id: 3
+                  })
+Submission.create({
+                    wpm: 34,
+                    user_id: 3
+                  })
+Submission.create({
+                    wpm: 57,
+                    user_id: 3
+                  })
+Submission.create({
+                    wpm: 43,
+                    user_id: 3
+                  })
+Submission.create({
+                    wpm: 49,
+                    user_id: 3
+                  })
+Submission.create({
+                    wpm: 62,
+                    user_id: 3
+                  })
+Submission.create({
+                    wpm: 50,
+                    user_id: 3
+                  })
+Submission.create({
+                    wpm: 34,
+                    user_id: 3
+                  })
+Submission.create({
+                    wpm: 57,
+                    user_id: 3
+                  })
+Submission.create({
+                    wpm: 43,
+                    user_id: 3
+                  })
+Submission.create({
+                    wpm: 49,
+                    user_id: 3
+                  })
+puts 'Done'
