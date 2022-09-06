@@ -15,7 +15,6 @@ function Login() {
 
   // function to set UserRef and user state
   const successfulLogin = (response) => {
-    console.log(response);
     setUser(response.data);
     getKeyboardsByUserId(response.data.id);
   };
@@ -40,7 +39,6 @@ function Login() {
           if (res.status === 200) {
             successfulLogin(res);
             setStatusCode(res.status);
-
             navigate('/');
           }
           resolve(res.data);
@@ -54,6 +52,7 @@ function Login() {
   }
 
   // axios request to get user keyboards using user id
+  // runs in the successfulLogin function
   const getKeyboardsByUserId = (userId) => {
     const config = {
       method: 'get',
