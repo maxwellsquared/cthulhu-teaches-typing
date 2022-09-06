@@ -34,6 +34,7 @@ export default function TypingField() {
   const [fullDivStyle, setFullDivStyle] = useState({
     position: 'relative', // set typing division style (in order to set position)
     left: '0ch',
+    'margin-top': '120px'
   });
 
   //  used in characterCheck to check if the last character typed was correct
