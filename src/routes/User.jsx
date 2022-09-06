@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../helpers/context';
 import axios from 'axios';
 import BarLoader from 'react-spinners/BarLoader';
-import { Line, CartesianGrid, XAxis, YAxis, Tooltip, Area, AreaChart, Legend } from 'recharts';
+import { CartesianGrid, XAxis, YAxis, Tooltip, Area, AreaChart, Legend } from 'recharts';
 
 const User = () => {
   const { user } = useContext(UserContext);
@@ -35,7 +35,7 @@ const User = () => {
   const renderLineChat = (
     <AreaChart width={800} height={400} data={userStats}>
       <defs>
-        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="wpm" x1="0" y1="0" x2="0" y2="1">
           <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
           <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
         </linearGradient>
@@ -44,7 +44,7 @@ const User = () => {
       <XAxis dataKey="name" />
       <YAxis />
       <Tooltip />
-      <Area type="monotone" dataKey="wpm" stroke="#EEDCB2" fillOpacity={1} fill="url(#colorUv)" />
+      <Area type="monotone" dataKey="wpm" stroke="#EEDCB2" fillOpacity={1} fill="url(#wpm)" />
 
       <Legend verticalAlign="top" height={36} />
     </AreaChart>
@@ -53,7 +53,7 @@ const User = () => {
   const renderAccuracy = (
     <AreaChart width={800} height={400} data={userStats}>
       <defs>
-        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="accuracy" x1="0" y1="0" x2="0" y2="1">
           <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
           <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
         </linearGradient>
@@ -67,17 +67,17 @@ const User = () => {
         dataKey="accuracy"
         stroke="#82ca9d"
         fillOpacity={1}
-        fill="url(#82ca9d)"
+        fill="url(#accuracy)"
       />
       <Legend verticalAlign="top" height={36} />
     </AreaChart>
   );
 
   // function to get average wpm
-  const getAverageWpm = () => {
+  const getAverage = (key) => {
     let total = 0;
     userStats.forEach((stat) => {
-      total += stat.wpm;
+      total += stat[key];
     });
     return Math.round(total / userStats.length);
   };
@@ -88,8 +88,11 @@ const User = () => {
         <div className="flex flex-col items-center justify-center">
           <h1 className="mb-3 text-4xl font-bold text-blood-red">{user.name} Stats</h1>
           {renderLineChat}
-          <h1 className="text-2xl font-bold text-blood-red">Average WPM: {getAverageWpm()}</h1>
+          <h1 className="text-2xl font-bold text-blood-red">Average WPM: {getAverage('wpm')}</h1>
           {renderAccuracy}
+          <h1 className="text-2xl font-bold text-blood-red">{`Average Accuracy: ${getAverage(
+            'accuracy'
+          )}%`}</h1>
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center">

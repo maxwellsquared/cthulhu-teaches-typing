@@ -182,4 +182,9 @@ Submission.create({
                     user_id: 3,
                     accuracy: 94
                   })
+
+#  seeds for keyboards table
+Keyboards.create({
+  
+})
 puts 'Done'
