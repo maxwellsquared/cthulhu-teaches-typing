@@ -8,11 +8,12 @@ const User = () => {
   const { user } = useContext(UserContext);
 
   const [userStats, setUserStats] = useState();
+  const [userKeyboards, setUserKeyboards] = useState();
 
   // axios get request to get user data
-  const getUserData = () => {
+  const getUserData = (userId) => {
     axios
-      .get(`http://localhost:3000/api/user/${user.id}`)
+      .get(`http://localhost:3000/api/user/${userId}`)
       .then((res) => {
         console.log('Success: user data retrieved');
         setUserStats(res.data); // set user data to state
@@ -23,14 +24,35 @@ const User = () => {
       });
   };
 
+  // axios request to get user keyboards using user id
+  const getKeyboardsByUserId = (userId) => {
+    const config = {
+      method: 'get',
+      url: `http://localhost:3000/keyboards/${userId}`,
+      headers: {},
+    };
+
+    axios(config)
+      .then((res) => {
+        console.log('Success: user keyboards retrieved');
+        setUserKeyboards(res.data); // set user keyboards to state
+      })
+      .catch((err) => {
+        console.log('Error has occurred');
+        console.log(err);
+      });
+  };
+
   // useEffect to only load user data once
   useEffect(() => {
     if (user) {
-      getUserData();
+      getUserData(user.id);
+      getKeyboardsByUserId(user.id);
     }
   }, []);
 
   console.log(userStats);
+  console.log(userKeyboards);
 
   const renderLineChat = (
     <AreaChart width={800} height={400} data={userStats}>
