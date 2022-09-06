@@ -184,7 +184,44 @@ Submission.create({
                   })
 
 #  seeds for keyboards table
-Keyboards.create({
-  
-})
+Keyboard.create({
+                  name: 'GMMK Pro',
+                  user_id: 1
+                })
+Keyboard.create({
+                  name: 'Keychron Q1',
+                  user_id: 1
+                })
+Keyboard.create({
+                  name: 'Owlab Mr Suit',
+                  user_id: 1
+                })
+Keyboard.create({
+                  name: 'QK65',
+                  user_id: 2
+                })
+Keyboard.create({
+                  name: 'Zoom 65',
+                  user_id: 2
+                })
+Keyboard.create({
+                  name: 'GMMK Pro',
+                  user_id: 2
+                })
+Keyboard.create({
+                  name: 'Portico 75',
+                  user_id: 2
+                })
+Keyboard.create({
+                  name: 'Apple Butterfly Keyboard',
+                  user_id: 3
+                })
+Keyboard.create({
+                  name: 'Mode Sonnet',
+                  user_id: 3
+                })
+Keyboard.create({
+                  name: 'Keycult No. 2/65',
+                  user_id: 3
+                })
 puts 'Done'
