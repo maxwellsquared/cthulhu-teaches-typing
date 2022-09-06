@@ -30,6 +30,8 @@ const User = () => {
     }
   }, []);
 
+  console.log(userStats);
+
   const renderLineChat = (
     <AreaChart width={800} height={400} data={userStats}>
       <defs>
@@ -38,12 +40,35 @@ const User = () => {
           <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
         </linearGradient>
       </defs>
-      <Line type="monotone" dataKey="wpm" stroke="#EEDCB2" />
       <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
       <XAxis dataKey="name" />
       <YAxis />
       <Tooltip />
       <Area type="monotone" dataKey="wpm" stroke="#EEDCB2" fillOpacity={1} fill="url(#colorUv)" />
+
+      <Legend verticalAlign="top" height={36} />
+    </AreaChart>
+  );
+
+  const renderAccuracy = (
+    <AreaChart width={800} height={400} data={userStats}>
+      <defs>
+        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+        </linearGradient>
+      </defs>
+      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+      <XAxis dataKey="name" />
+      <YAxis domain={[(dataMin) => dataMin - 5, (dataMax) => dataMax]} />
+      <Tooltip />
+      <Area
+        type="monotone"
+        dataKey="accuracy"
+        stroke="#82ca9d"
+        fillOpacity={1}
+        fill="url(#82ca9d)"
+      />
       <Legend verticalAlign="top" height={36} />
     </AreaChart>
   );
@@ -64,6 +89,7 @@ const User = () => {
           <h1 className="mb-3 text-4xl font-bold text-blood-red">{user.name} Stats</h1>
           {renderLineChat}
           <h1 className="text-2xl font-bold text-blood-red">Average WPM: {getAverageWpm()}</h1>
+          {renderAccuracy}
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center">

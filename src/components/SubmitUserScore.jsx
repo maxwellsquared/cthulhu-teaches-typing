@@ -10,6 +10,7 @@ const SubmitUserScore = ({ wpm, accuracy, closeModal }) => {
   const data = {
     wpm: wpm,
     user_id: user.id,
+    accuracy: accuracy,
   };
 
   const postRequest = () => {
