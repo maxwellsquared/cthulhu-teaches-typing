@@ -8,7 +8,6 @@ const User = () => {
   const { user } = useContext(UserContext);
 
   const [userStats, setUserStats] = useState();
-  const [error, setError] = useState();
 
   // axios get request to get user data
   const getUserData = () => {
@@ -16,16 +15,13 @@ const User = () => {
       .get(`http://localhost:3000/api/user/${user.id}`)
       .then((res) => {
         console.log('Success: user data retrieved');
-        setUserStats(res.data);
+        setUserStats(res.data); // set user data to state
       })
       .catch((err) => {
         console.log('Error has occurred');
         console.log(err);
-        setError('Error: user data could not be retrieved');
       });
   };
-
-  console.log(userStats);
 
   // useEffect to only load user data once
   useEffect(() => {
@@ -44,12 +40,22 @@ const User = () => {
     </LineChart>
   );
 
+  // function to get average wpm
+  const getAverageWpm = () => {
+    let total = 0;
+    userStats.forEach((stat) => {
+      total += stat.wpm;
+    });
+    return Math.round(total / userStats.length);
+  };
+
   return (
     <div className="flex h-screen flex-col items-center justify-center">
       {userStats ? (
         <div className="flex flex-col items-center justify-center">
-          <h1 className="text-4xl font-bold text-blood-red">User Stats</h1>
+          <h1 className="text-4xl font-bold text-blood-red">{user.name}, here's your stats</h1>
           {renderLineChat}
+          <h1 className="text-2xl font-bold text-blood-red">Average WPM: {getAverageWpm()}</h1>
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center">

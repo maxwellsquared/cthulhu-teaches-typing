@@ -18,7 +18,7 @@ class SubmissionsController < ApplicationController
   end
 
   def history
-    @submissions = Submission.where(user_id: params[:id]).order(created_at: :desc)
+    @submissions = Submission.where(user_id: params[:id]).order(created_at: :asc)
     render json: @submissions
   end
 
