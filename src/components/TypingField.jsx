@@ -2,11 +2,12 @@ import { useState, useEffect, useContext } from 'react';
 import RandomWords from '../helpers/RandomWords';
 import ResultsModal from './ResultsModal';
 import { UserContext } from '../helpers/context';
+import KeyboardDropdown from './KeyboardDropdown';
 
 export default function TypingField() {
   const { user, userKeyboards } = useContext(UserContext);
   console.log('userKeyboards from typing field: ', userKeyboards);
-  console.log('user from typing field: ', user);
+
   // timer functionality
   const initialTimer = 15; // use constant for initial timer and pass to counter--needed for WPM
   const [counter, setCounter] = useState(initialTimer);
@@ -37,7 +38,7 @@ export default function TypingField() {
   const [fullDivStyle, setFullDivStyle] = useState({
     position: 'relative', // set typing division style (in order to set position)
     left: '0ch',
-    'margin-top': '120px'
+    'margin-top': '120px',
   });
 
   //  used in characterCheck to check if the last character typed was correct
@@ -191,7 +192,10 @@ export default function TypingField() {
         <div className="font-mono">numTotalChars: {numTotalChars}</div>
         <div className="font-mono">numMistakes: {numMistakes}</div>
         <div className="font-mono">Logged in as: {user ? user.name : 'not logged in'}</div>
-        <div>Keyboard names: {userKeyboards ? userKeyboards[0].name : 'you need to log in'}</div>
+        <label for="keyboards" className="text-m mb-2 block font-mono">
+          Select a keyboard
+        </label>
+        {userKeyboards ? <KeyboardDropdown /> : 'you need to log in'}
       </div>
     </>
   );

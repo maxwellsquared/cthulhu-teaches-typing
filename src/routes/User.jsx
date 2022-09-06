@@ -29,7 +29,6 @@ const User = () => {
       getUserData(user.id);
     }
   }, []);
-  console.log(userKeyboards);
 
   // array of keyboard names as a list
   const keyboardList = (keyboards) => {

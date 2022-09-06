@@ -15,11 +15,21 @@ import './App.css';
 export default function App() {
   const [user, setUser] = useState();
   const [userKeyboards, setUserKeyboards] = useState();
+  const [currentKeyboard, setCurrentKeyboard] = useState();
 
   // this will wrap all other components
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{ user, setUser, userKeyboards, setUserKeyboards }}>
+      <UserContext.Provider
+        value={{
+          user,
+          setUser,
+          userKeyboards,
+          setUserKeyboards,
+          currentKeyboard,
+          setCurrentKeyboard,
+        }}
+      >
         <Nav />
 
         <LayoutWrapper>
