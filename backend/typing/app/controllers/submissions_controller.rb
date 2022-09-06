@@ -25,7 +25,7 @@ class SubmissionsController < ApplicationController
   private
 
   def submission_params
-    params.require(:submission).permit(:wpm, :user_id)
+    params.require(:submission).permit(:wpm, :user_id, :accuracy)
   end
 end
 

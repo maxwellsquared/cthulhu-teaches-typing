@@ -55,8 +55,8 @@ export default function TypingField() {
 
   // ---- GAME OVER ----
   const gameOver = function () {
-    setAccuracy(Math.floor(100 * (1 - mistakes / totalChars)));
-    setWordsPerMinute(Math.floor(correctChars / 5 / (initialTimer / 60)));
+    setAccuracy(Math.floor(100 * (1 - numMistakes / numTotalChars)));
+    setWordsPerMinute(Math.floor(numCorrectChars / 5 / (initialTimer / 60)));
     setIsComplete(true);
   };
 
