@@ -6,18 +6,18 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  get "test", to: "test#show"
-  get "signup", to: "users#new"
-  get "login", to: "sessions#new"
-  get "logout", to: "sessions#destroy"
-  post "login", to: "sessions#create"
-  delete "logout", to: "sessions#destroy"
+  get 'test', to: 'test#show'
+  get 'signup', to: 'users#new'
+  get 'login', to: 'sessions#new'
+  get 'logout', to: 'sessions#destroy'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
 
   resources :users, except: [:new]
 
-  post "submit", to: "submissions#create"
-  get "api/leaderboard", to: "submissions#show"
+  post 'submit', to: 'submissions#create'
+  get 'api/leaderboard', to: 'submissions#show'
+  get 'api/user/:id', to: 'submissions#history'
 
-  
   match '*all', controller: 'application', action: 'cors_preflight_check', via: [:options]
 end
