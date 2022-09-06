@@ -16,14 +16,16 @@ const Nav = () => {
   return (
     <nav className="rounded px-2 py-2.5 font-normal text-pale-gold">
       <div className="container mx-auto flex flex-wrap items-center justify-between">
+        <div className="logo-text">
         <Link to="/" className="flex items-center hover:text-candle">
           <img
-            src="https://www.svgrepo.com/show/51020/keyboard.svg"
-            className="mr-3 h-6 sm:h-9"
+            src="./images/logo.png"
+            className="mr-3 h-20 sm:h-20"
             alt="logo"
           />
-          <span className="self-center text-xl">Cthulhu's Keyboard</span>
+          <span className="logo-drip">CTHULHU</span> <span className="logo-lite">&nbsp;TEACHES TYPING</span>
         </Link>
+        </div>
         <ul className="mt-0 flex flex-row p-4 font-light">
           {user ? (
             <>
