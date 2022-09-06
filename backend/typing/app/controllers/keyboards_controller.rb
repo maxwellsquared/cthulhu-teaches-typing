@@ -12,6 +12,12 @@ class KeyboardsController < ApplicationController
     end
   end
 
+  def show
+    # select all keyboards for a user
+    @keyboards = Keyboard.where(user_id: params[:id])
+    render json: @keyboards
+  end
+
   private
 
   def keyboard_params
@@ -20,3 +26,4 @@ class KeyboardsController < ApplicationController
 end
 
 # curl POST http://localhost:3000/keyboards/new -H 'Content-Type: application/json' -d '{"name": "Test Keyboard","user_id": 1}' -v
+# curl GET http://localhost:3000/keyboards/1 -H 'Content-Type: application/json' -v
