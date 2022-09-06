@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../helpers/context';
 import axios from 'axios';
 import BarLoader from 'react-spinners/BarLoader';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 
 const User = () => {
   const { user } = useContext(UserContext);
@@ -33,24 +34,30 @@ const User = () => {
     }
   }, []);
 
-  const statsArr = (data) => {
-    let arr = data.map((stat) => {
-      let date = new Date(stat['created_at']);
-
-      return (
-        <div key={stat.id} className="font-mono text-blood-red">
-          <p>WPM: {stat.wpm}</p>
-          <p>Date: {date.toLocaleString()}</p>
-        </div>
-      );
-    });
-    return arr;
-  };
+  const renderLineChat = (
+    <LineChart width={800} height={400} data={userStats}>
+      <Line type="monotone" dataKey="wpm" stroke="#8884d8" />
+      <CartesianGrid stroke="#ccc" />
+      <XAxis dataKey="name" />
+      <YAxis />
+      <Tooltip />
+    </LineChart>
+  );
 
   return (
-    <>
-      {userStats ? statsArr(userStats) : <BarLoader color={'#5118a7'} width={'50%'} height={8} />}
-    </>
+    <div className="flex h-screen flex-col items-center justify-center">
+      {userStats ? (
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-4xl font-bold text-blood-red">User Stats</h1>
+          {renderLineChat}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center">
+          <BarLoader color={'#f00'} loading={true} size={150} />
+          <p className="text-2xl font-bold text-blood-red">Loading...</p>
+        </div>
+      )}
+    </div>
   );
 };
 
