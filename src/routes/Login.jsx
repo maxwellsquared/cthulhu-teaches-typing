@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FiLock } from 'react-icons/fi';
 
 function Login() {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, userKeyboards, setUserKeyboards } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [statusCode, setStatusCode] = useState(0);
@@ -15,7 +15,9 @@ function Login() {
 
   // function to set UserRef and user state
   const successfulLogin = (response) => {
+    console.log(response);
     setUser(response.data);
+    getKeyboardsByUserId(response.data.id);
   };
 
   // async function to login, called when login button is clicked
@@ -38,6 +40,7 @@ function Login() {
           if (res.status === 200) {
             successfulLogin(res);
             setStatusCode(res.status);
+
             navigate('/');
           }
           resolve(res.data);
@@ -49,6 +52,25 @@ function Login() {
         });
     });
   }
+
+  // axios request to get user keyboards using user id
+  const getKeyboardsByUserId = (userId) => {
+    const config = {
+      method: 'get',
+      url: `http://localhost:3000/keyboards/${userId}`,
+      headers: {},
+    };
+
+    axios(config)
+      .then((res) => {
+        console.log('Success: user keyboards retrieved');
+        setUserKeyboards(res.data); // set user keyboards to state
+      })
+      .catch((err) => {
+        console.log('Error has occurred');
+        console.log(err);
+      });
+  };
 
   // if status code == 401 -> go sad route
   return (

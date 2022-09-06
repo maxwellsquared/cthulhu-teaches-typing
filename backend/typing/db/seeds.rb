@@ -22,166 +22,6 @@ User.create({
               email: 'maxkuhn@gmail.com',
               password: 'test'
             })
-Submission.create({
-                    wpm: 25,
-                    user_id: 1,
-                    accuracy: 88
-                  })
-Submission.create({
-                    wpm: 32,
-                    user_id: 1,
-                    accuracy: 95
-                  })
-Submission.create({
-                    wpm: 56,
-                    user_id: 1,
-                    accuracy: 90
-                  })
-Submission.create({
-                    wpm: 43,
-                    user_id: 1,
-                    accuracy: 75
-                  })
-Submission.create({
-                    wpm: 55,
-                    user_id: 1,
-                    accuracy: 99
-                  })
-Submission.create({
-                    wpm: 25,
-                    user_id: 1,
-                    accuracy: 100
-                  })
-Submission.create({
-                    wpm: 32,
-                    user_id: 1,
-                    accuracy: 92
-                  })
-Submission.create({
-                    wpm: 56,
-                    user_id: 1,
-                    accuracy: 88
-                  })
-Submission.create({
-                    wpm: 43,
-                    user_id: 1,
-                    accuracy: 65
-                  })
-Submission.create({
-                    wpm: 55,
-                    user_id: 1,
-                    accuracy: 97
-                  })
-Submission.create({
-                    wpm: 15,
-                    user_id: 2,
-                    accuracy: 100
-                  })
-Submission.create({
-                    wpm: 45,
-                    user_id: 2,
-                    accuracy: 87
-                  })
-Submission.create({
-                    wpm: 61,
-                    user_id: 2,
-                    accuracy: 99
-                  })
-Submission.create({
-                    wpm: 52,
-                    user_id: 2,
-                    accuracy: 90
-                  })
-Submission.create({
-                    wpm: 38,
-                    user_id: 2,
-                    accuracy: 100
-                  })
-Submission.create({
-                    wpm: 15,
-                    user_id: 2,
-                    accuracy: 100
-                  })
-Submission.create({
-                    wpm: 45,
-                    user_id: 2,
-                    accuracy: 76
-                  })
-Submission.create({
-                    wpm: 61,
-                    user_id: 2,
-                    accuracy: 98
-                  })
-Submission.create({
-                    wpm: 52,
-                    user_id: 2,
-                    accuracy: 89
-                  })
-Submission.create({
-                    wpm: 38,
-                    user_id: 2,
-                    accuracy: 100
-                  })
-Submission.create({
-                    wpm: 62,
-                    user_id: 3,
-                    accuracy: 82
-                  })
-Submission.create({
-                    wpm: 50,
-                    user_id: 3,
-                    accuracy: 76
-                  })
-Submission.create({
-                    wpm: 34,
-                    user_id: 3,
-                    accuracy: 100
-                  })
-Submission.create({
-                    wpm: 57,
-                    user_id: 3,
-                    accuracy: 98
-                  })
-Submission.create({
-                    wpm: 43,
-                    user_id: 3,
-                    accuracy: 92
-                  })
-Submission.create({
-                    wpm: 49,
-                    user_id: 3,
-                    accuracy: 94
-                  })
-Submission.create({
-                    wpm: 62,
-                    user_id: 3,
-                    accuracy: 82
-                  })
-Submission.create({
-                    wpm: 50,
-                    user_id: 3,
-                    accuracy: 76
-                  })
-Submission.create({
-                    wpm: 34,
-                    user_id: 3,
-                    accuracy: 100
-                  })
-Submission.create({
-                    wpm: 57,
-                    user_id: 3,
-                    accuracy: 100
-                  })
-Submission.create({
-                    wpm: 43,
-                    user_id: 3,
-                    accuracy: 76
-                  })
-Submission.create({
-                    wpm: 49,
-                    user_id: 3,
-                    accuracy: 94
-                  })
 
 #  seeds for keyboards table
 Keyboard.create({
@@ -224,4 +64,198 @@ Keyboard.create({
                   name: 'Keycult No. 2/65',
                   user_id: 3
                 })
+
+Submission.create({
+                    wpm: 25,
+                    user_id: 1,
+                    accuracy: 88,
+                    keyboard_id: 1
+                  })
+Submission.create({
+                    wpm: 32,
+                    user_id: 1,
+                    accuracy: 95,
+                    keyboard_id: 1
+                  })
+Submission.create({
+                    wpm: 56,
+                    user_id: 1,
+                    accuracy: 90,
+                    keyboard_id: 1
+                  })
+Submission.create({
+                    wpm: 43,
+                    user_id: 1,
+                    accuracy: 75,
+                    keyboard_id: 1
+                  })
+Submission.create({
+                    wpm: 55,
+                    user_id: 1,
+                    accuracy: 99,
+                    keyboard_id: 2
+                  })
+Submission.create({
+                    wpm: 25,
+                    user_id: 1,
+                    accuracy: 100,
+                    keyboard_id: 2
+                  })
+Submission.create({
+                    wpm: 32,
+                    user_id: 1,
+                    accuracy: 92,
+                    keyboard_id: 2
+                  })
+Submission.create({
+                    wpm: 56,
+                    user_id: 1,
+                    accuracy: 88,
+                    keyboard_id: 3
+                  })
+Submission.create({
+                    wpm: 43,
+                    user_id: 1,
+                    accuracy: 65,
+                    keyboard_id: 3
+                  })
+Submission.create({
+                    wpm: 55,
+                    user_id: 1,
+                    accuracy: 97,
+                    keyboard_id: 2
+                  })
+Submission.create({
+                    wpm: 15,
+                    user_id: 2,
+                    accuracy: 100,
+                    keyboard_id: 1
+                  })
+Submission.create({
+                    wpm: 45,
+                    user_id: 2,
+                    accuracy: 87,
+                    keyboard_id: 1
+                  })
+Submission.create({
+                    wpm: 61,
+                    user_id: 2,
+                    accuracy: 99,
+                    keyboard_id: 1
+                  })
+Submission.create({
+                    wpm: 52,
+                    user_id: 2,
+                    accuracy: 90,
+                    keyboard_id: 1
+                  })
+Submission.create({
+                    wpm: 38,
+                    user_id: 2,
+                    accuracy: 100,
+                    keyboard_id: 2
+                  })
+Submission.create({
+                    wpm: 15,
+                    user_id: 2,
+                    accuracy: 100,
+                    keyboard_id: 2
+                  })
+Submission.create({
+                    wpm: 45,
+                    user_id: 2,
+                    accuracy: 76,
+                    keyboard_id: 2
+                  })
+Submission.create({
+                    wpm: 61,
+                    user_id: 2,
+                    accuracy: 98,
+                    keyboard_id: 3
+                  })
+Submission.create({
+                    wpm: 52,
+                    user_id: 2,
+                    accuracy: 89,
+                    keyboard_id: 3
+                  })
+Submission.create({
+                    wpm: 38,
+                    user_id: 2,
+                    accuracy: 100,
+                    keyboard_id: 4
+                  })
+Submission.create({
+                    wpm: 62,
+                    user_id: 3,
+                    accuracy: 82,
+                    keyboard_id: 1
+                  })
+Submission.create({
+                    wpm: 50,
+                    user_id: 3,
+                    accuracy: 76,
+                    keyboard_id: 1
+                  })
+Submission.create({
+                    wpm: 34,
+                    user_id: 3,
+                    accuracy: 100,
+                    keyboard_id: 1
+                  })
+Submission.create({
+                    wpm: 57,
+                    user_id: 3,
+                    accuracy: 98,
+                    keyboard_id: 2
+                  })
+Submission.create({
+                    wpm: 43,
+                    user_id: 3,
+                    accuracy: 92,
+                    keyboard_id: 2
+                  })
+Submission.create({
+                    wpm: 49,
+                    user_id: 3,
+                    accuracy: 94,
+                    keyboard_id: 2
+                  })
+Submission.create({
+                    wpm: 62,
+                    user_id: 3,
+                    accuracy: 82,
+                    keyboard_id: 2
+                  })
+Submission.create({
+                    wpm: 50,
+                    user_id: 3,
+                    accuracy: 76,
+                    keyboard_id: 3
+                  })
+Submission.create({
+                    wpm: 34,
+                    user_id: 3,
+                    accuracy: 100,
+                    keyboard_id: 3
+                  })
+Submission.create({
+                    wpm: 57,
+                    user_id: 3,
+                    accuracy: 100,
+                    keyboard_id: 3
+                  })
+Submission.create({
+                    wpm: 43,
+                    user_id: 3,
+                    accuracy: 76,
+                    keyboard_id: 2
+                  })
+Submission.create({
+                    wpm: 49,
+                    user_id: 3,
+                    accuracy: 94,
+                    keyboard_id: 2
+                  })
+
 puts 'Done'

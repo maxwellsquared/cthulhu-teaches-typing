@@ -1,8 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import RandomWords from '../helpers/RandomWords';
 import ResultsModal from './ResultsModal';
+import { UserContext } from '../helpers/context';
 
 export default function TypingField() {
+  const { user, userKeyboards } = useContext(UserContext);
+  console.log('userKeyboards from typing field: ', userKeyboards);
+  console.log('user from typing field: ', user);
   // timer functionality
   const initialTimer = 15; // use constant for initial timer and pass to counter--needed for WPM
   const [counter, setCounter] = useState(initialTimer);
@@ -185,6 +189,8 @@ export default function TypingField() {
         <div className="font-mono">numCorrectChars: {numCorrectChars}</div>
         <div className="font-mono">numTotalChars: {numTotalChars}</div>
         <div className="font-mono">numMistakes: {numMistakes}</div>
+        <div className="font-mono">Logged in as: {user ? user.name : 'not logged in'}</div>
+        <div>Keyboard names: {userKeyboards ? userKeyboards[0].name : 'you need to log in'}</div>
       </div>
     </>
   );
