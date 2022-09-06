@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import RandomWords from '../helpers/RandomWords';
 import ResultsModal from './ResultsModal';
 
-
 export default function TypingField() {
   // timer functionality
   const initialTimer = 15; // use constant for initial timer and pass to counter--needed for WPM
