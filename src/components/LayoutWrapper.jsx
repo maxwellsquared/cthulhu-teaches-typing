@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const LayoutWrapper = ({ children }) => {
   return (
-    <div className="mx-auto max-w-3xl flex-col justify-between px-4 sm:px-6 xl:max-w-5xl xl:px-0">
+    <div className="mx-auto max-w-3xl flex-col justify-between px-4 sm:px-6 xl:max-w-5xl xl:px-0 ">
       <div className="main-height flex flex-col justify-between font-sans">
         <main className="mb-auto">{children}</main>
         <footer>

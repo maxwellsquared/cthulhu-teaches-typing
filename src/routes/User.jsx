@@ -51,8 +51,23 @@ const User = () => {
     }
   }, []);
 
-  console.log(userStats);
-  console.log(userKeyboards);
+  // array of keyboard names as a list
+  const keyboardList = (keyboards) => {
+    console.log('userKeyboards: ', keyboards);
+    if (keyboards) {
+      const keyboardNames = userKeyboards.map((keyboard) => {
+        return (
+          <li className="text-lg text-pale-gold" key={keyboard.id}>
+            {keyboard.name}
+          </li>
+        );
+      });
+      return keyboardNames;
+    }
+
+    const noKeyboards = <li>You have no keyboards</li>;
+    return noKeyboards;
+  };
 
   const renderLineChat = (
     <AreaChart width={800} height={400} data={userStats}>
@@ -115,6 +130,8 @@ const User = () => {
           <h1 className="text-2xl font-bold text-blood-red">{`Average Accuracy: ${getAverage(
             'accuracy'
           )}%`}</h1>
+          <h1 className="mt-3 mb-2 text-2xl font-bold text-blood-red">Keyboards</h1>
+          <ul>{keyboardList(userKeyboards)}</ul>
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center">
