@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   post 'submit', to: 'submissions#create'
   get 'api/leaderboard', to: 'submissions#show'
   get 'api/user/:id', to: 'submissions#history'
+  post 'keyboards/new', to: 'keyboards#create' # create a new keyboard for a user
+  get 'keyboards/:id', to: 'keyboards#show' # get keyboard by user_id
 
   match '*all', controller: 'application', action: 'cors_preflight_check', via: [:options]
 end

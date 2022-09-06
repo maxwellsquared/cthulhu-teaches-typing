@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { UserContext, ModalContext } from './helpers/context';
+import { UserContext } from './helpers/context';
 import About from './routes/About';
 import Login from './routes/Login';
 import Home from './routes/Home';
@@ -13,13 +13,23 @@ import './App.css';
 
 // parent component for all other components
 export default function App() {
-  const [user, setUser] = useState();
-  const [modal, setModal] = useState(false);
+  const [user, setUser] = useState(); // user state, set at login
+  const [userKeyboards, setUserKeyboards] = useState(); // array of keyboards for the user, set at login
+  const [currentKeyboard, setCurrentKeyboard] = useState(); // this is the id of the current keyboard, set when user goes to TypingField
 
   // this will wrap all other components
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{ user, setUser }}>
+      <UserContext.Provider
+        value={{
+          user,
+          setUser,
+          userKeyboards,
+          setUserKeyboards,
+          currentKeyboard,
+          setCurrentKeyboard,
+        }}
+      >
         <Nav />
 
         <LayoutWrapper>
