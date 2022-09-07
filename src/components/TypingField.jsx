@@ -7,7 +7,6 @@ import SubmittedWords from './SubmittedWords';
 
 export default function TypingField() {
   const { user, userKeyboards } = useContext(UserContext);
-  console.log('userKeyboards from typing field: ', userKeyboards);
 
   // timer functionality
   const initialTimer = 15; // use constant for initial timer and pass to counter--needed for WPM
@@ -40,7 +39,6 @@ export default function TypingField() {
   const [fullDivStyle, setFullDivStyle] = useState({
     position: 'relative', // set typing division style (in order to set position)
     left: '0ch',
-    'margin-top': '120px',
   });
 
   //  used in characterCheck to check if the last character typed was correct
@@ -81,7 +79,7 @@ export default function TypingField() {
 
   // take the word off rightChars and pass the whole word to SubmittedWords
   const moveChars = function (length, isCorrect) {
-    setLeftWords((prev) => [...prev, {word: randomWords[0],  isCorrect: isCorrect}]);
+    setLeftWords((prev) => [...prev, { word: randomWords[0], isCorrect: isCorrect }]);
     setLeftChars((prev) => prev + `${randomWords[0]} `);
     setRightChars((prev) => prev.slice(length + 1));
     // set the amount to move the div over by
@@ -95,7 +93,6 @@ export default function TypingField() {
       setDivClassName('typing');
     }, 250);
   };
-
 
   // ---- INPUT FUNCTION ----
   const handleInput = function (event) {
@@ -182,23 +179,28 @@ export default function TypingField() {
         accuracy={accuracy}
         // user={user ? user : 'anon'}
       />
-      <div className={divClassName} style={fullDivStyle}>
-        <div className="typing-left"><SubmittedWords words={leftWords} /></div>
-        <div className="typing-right">{rightChars}</div>
+      <div className="my-20">
+        <div className={timerClass}>TIME: {counter}</div>
+        <div className={divClassName} style={fullDivStyle}>
+          <div className="typing-left">
+            <SubmittedWords words={leftWords} />
+          </div>
+          <div className="typing-right">{rightChars}</div>
+        </div>
+        <input
+          className="font-sans"
+          placeholder=""
+          radius="md"
+          size="md"
+          value={input}
+          // ^ sets to display nothing and not have any extra input chars
+          onChange={(event) => handleInput(event.target.value)}
+          onKeyDown={(event) => detailedInput(event)}
+          autoFocus="autofocus"
+        />
       </div>
-      <input
-        className="font-sans"
-        placeholder=""
-        radius="md"
-        size="md"
-        value={input}
-        // ^ sets to display nothing and not have any extra input chars
-        onChange={(event) => handleInput(event.target.value)}
-        onKeyDown={(event) => detailedInput(event)}
-        autoFocus="autofocus"
-      />
-      <div className={timerClass}>TIME: {counter}</div>
-      <div className="testing-info">
+      {userKeyboards && user ? <KeyboardDropdown /> : 'you need to log in'}
+      {/* <div className="testing-info">
         <div className="font-mono">LAST KEY: '{lastKey}'</div>
         <div className="font-mono">TOTAL ENTRIES: {totalChars}</div>
         <div className="font-mono">SUCCESSFUL ENTRIES: {correctChars}</div>
@@ -206,12 +208,7 @@ export default function TypingField() {
         <div className="font-mono">numCorrectChars: {numCorrectChars}</div>
         <div className="font-mono">numTotalChars: {numTotalChars}</div>
         <div className="font-mono">numMistakes: {numMistakes}</div>
-        <div className="font-mono">Logged in as: {user ? user.name : 'not logged in'}</div>
-        <label for="keyboards" className="text-m mb-2 block font-mono">
-          Select a keyboard
-        </label>
-        {userKeyboards ? <KeyboardDropdown /> : 'you need to log in'}
-      </div>
+      </div> */}
     </>
   );
 }

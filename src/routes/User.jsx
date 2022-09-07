@@ -3,11 +3,14 @@ import { UserContext } from '../helpers/context';
 import axios from 'axios';
 import BarLoader from 'react-spinners/BarLoader';
 import { CartesianGrid, XAxis, YAxis, Tooltip, Area, AreaChart, Legend } from 'recharts';
+import KeyboardDropdown from '../components/KeyboardDropdown';
 
 const User = () => {
-  const { user, userKeyboards } = useContext(UserContext);
+  const { user, userKeyboards, currentKeyboard } = useContext(UserContext);
 
   const [userStats, setUserStats] = useState();
+
+  console.log('user data: ', userStats);
 
   // axios get request to get user data
   const getUserData = (userId) => {
@@ -47,7 +50,50 @@ const User = () => {
     return noKeyboards;
   };
 
-  const renderLineChat = (
+  // returns data for a specific keyboard_id, or all keyboards if keyboard_id is undefined
+  // used to generate graph with wpm and accuracy data
+  const getKeyboardData = (keyboard_id) => {
+    if (keyboard_id && userStats) {
+      // convert keyboard_id into a number
+      let keyboardInteger = parseInt(keyboard_id);
+      // create array of user stats which contain the keyboardInteger
+      const keyboardStats = userStats.filter((stat) => stat.keyboard_id === keyboardInteger);
+      return keyboardStats;
+    }
+    // return all the keyboards and user stats if no keyboard_id is provided
+    return userStats;
+  };
+
+  const specificKeyboardStats = (
+    <AreaChart width={800} height={400} data={getKeyboardData(currentKeyboard)}>
+      <defs>
+        <linearGradient id="wpm" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+        </linearGradient>
+        <linearGradient id="accuracy" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="#8C3D34" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="#8C3D34" stopOpacity={0} />
+        </linearGradient>
+      </defs>
+      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+      <XAxis dataKey="name" />
+      <YAxis />
+      <Tooltip />
+      <Area type="monotone" dataKey="wpm" stroke="#EEDCB2" fillOpacity={1} fill="url(#wpm)" />
+      <Area
+        type="monotone"
+        dataKey="accuracy"
+        stroke="#8C3D34"
+        fillOpacity={1}
+        fill="url(#accuracy)"
+      />
+
+      <Legend verticalAlign="top" height={36} />
+    </AreaChart>
+  );
+
+  const wpmStatsChart = (
     <AreaChart width={800} height={400} data={userStats}>
       <defs>
         <linearGradient id="wpm" x1="0" y1="0" x2="0" y2="1">
@@ -65,7 +111,7 @@ const User = () => {
     </AreaChart>
   );
 
-  const renderAccuracy = (
+  const accuracyStatsChart = (
     <AreaChart width={800} height={400} data={userStats}>
       <defs>
         <linearGradient id="accuracy" x1="0" y1="0" x2="0" y2="1">
@@ -98,23 +144,30 @@ const User = () => {
   };
 
   return (
-    <div className="mt-10 flex flex-col items-center justify-center">
+    <div className="my-10 flex flex-col items-center justify-center">
       {userStats ? (
         <div className="flex flex-col items-center justify-center">
-          <h1 className="mb-3 text-4xl font-bold text-blood-red">{user.name} Stats</h1>
-          {renderLineChat}
-          <h1 className="text-2xl font-bold text-blood-red">Average WPM: {getAverage('wpm')}</h1>
-          {renderAccuracy}
-          <h1 className="text-2xl font-bold text-blood-red">{`Average Accuracy: ${getAverage(
+          <h1 className="mb-3 text-4xl font-bold text-pale-gold">Keyboard Stats</h1>
+          <KeyboardDropdown />
+          {specificKeyboardStats}
+
+          <h1 className="mb-3 text-4xl font-bold text-pale-gold">Overall Stats</h1>
+          {wpmStatsChart}
+
+          <h1 className="text-2xl font-bold text-pale-gold">Average WPM: {getAverage('wpm')}</h1>
+          {accuracyStatsChart}
+
+          <h1 className="text-2xl font-bold text-pale-gold">{`Average Accuracy: ${getAverage(
             'accuracy'
           )}%`}</h1>
-          <h1 className="mt-3 mb-2 text-2xl font-bold text-blood-red">Keyboards</h1>
-          <ul>{keyboardList(userKeyboards)}</ul>
+
+          {/* <h1 className="mt-3 mb-2 text-2xl font-bold text-pale-gold">Keyboards</h1>
+          <ul>{keyboardList(userKeyboards)}</ul> */}
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center">
           <BarLoader color={'#f00'} loading={true} size={150} />
-          <p className="text-2xl font-bold text-blood-red">Loading...</p>
+          <p className="text-2xl font-bold text-pale-gold">Loading...</p>
         </div>
       )}
     </div>
