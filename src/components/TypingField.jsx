@@ -198,7 +198,9 @@ export default function TypingField() {
         autoFocus="autofocus"
       />
       <div className={timerClass}>TIME: {counter}</div>
+      {userKeyboards && user ? <KeyboardDropdown /> : 'you need to log in'}
       <div className="testing-info">
+        <div className="font-mono">Logged in as: {user ? user.name : 'not logged in'}</div>
         <div className="font-mono">LAST KEY: '{lastKey}'</div>
         <div className="font-mono">TOTAL ENTRIES: {totalChars}</div>
         <div className="font-mono">SUCCESSFUL ENTRIES: {correctChars}</div>
@@ -206,11 +208,6 @@ export default function TypingField() {
         <div className="font-mono">numCorrectChars: {numCorrectChars}</div>
         <div className="font-mono">numTotalChars: {numTotalChars}</div>
         <div className="font-mono">numMistakes: {numMistakes}</div>
-        <div className="font-mono">Logged in as: {user ? user.name : 'not logged in'}</div>
-        <label htmlFor="keyboards" className="text-m mb-2 block font-mono">
-          Select a keyboard
-        </label>
-        {userKeyboards && user ? <KeyboardDropdown /> : 'you need to log in'}
       </div>
     </>
   );

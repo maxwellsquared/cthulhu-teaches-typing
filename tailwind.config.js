@@ -9,6 +9,7 @@ module.exports = {
       // theme is where you can configure the colors, spacing, etc.
       colors: {
         'cosmic-purple': '#1C122C',
+        'lighter-purple': '#1C122B',
         'pale-gold': '#EEDCB2',
         'blood-red': '#8C3D34',
         candle: '#E9B12E',

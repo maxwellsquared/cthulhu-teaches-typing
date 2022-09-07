@@ -64,8 +64,8 @@ const User = () => {
     return userStats;
   };
 
-  const areaChartKeyboardData = (
-    <AreaChart width={600} height={300} data={getKeyboardData(currentKeyboard)}>
+  const specificKeyboardStats = (
+    <AreaChart width={800} height={400} data={getKeyboardData(currentKeyboard)}>
       <defs>
         <linearGradient id="wpm" x1="0" y1="0" x2="0" y2="1">
           <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
@@ -93,7 +93,7 @@ const User = () => {
     </AreaChart>
   );
 
-  const renderLineChat = (
+  const wpmStatsChart = (
     <AreaChart width={800} height={400} data={userStats}>
       <defs>
         <linearGradient id="wpm" x1="0" y1="0" x2="0" y2="1">
@@ -111,7 +111,7 @@ const User = () => {
     </AreaChart>
   );
 
-  const renderAccuracy = (
+  const accuracyStatsChart = (
     <AreaChart width={800} height={400} data={userStats}>
       <defs>
         <linearGradient id="accuracy" x1="0" y1="0" x2="0" y2="1">
@@ -144,20 +144,25 @@ const User = () => {
   };
 
   return (
-    <div className="mt-10 flex flex-col items-center justify-center">
-      <KeyboardDropdown />
-      {areaChartKeyboardData}
+    <div className="my-10 flex flex-col items-center justify-center">
       {userStats ? (
         <div className="flex flex-col items-center justify-center">
-          <h1 className="mb-3 text-4xl font-bold text-blood-red">{user.name} Stats</h1>
-          {renderLineChat}
+          <h1 className="mb-3 text-4xl font-bold text-blood-red">Keyboard Stats</h1>
+          <KeyboardDropdown />
+          {specificKeyboardStats}
+
+          <h1 className="mb-3 text-4xl font-bold text-blood-red">Overall Stats</h1>
+          {wpmStatsChart}
+
           <h1 className="text-2xl font-bold text-blood-red">Average WPM: {getAverage('wpm')}</h1>
-          {renderAccuracy}
+          {accuracyStatsChart}
+
           <h1 className="text-2xl font-bold text-blood-red">{`Average Accuracy: ${getAverage(
             'accuracy'
           )}%`}</h1>
-          <h1 className="mt-3 mb-2 text-2xl font-bold text-blood-red">Keyboards</h1>
-          <ul>{keyboardList(userKeyboards)}</ul>
+
+          {/* <h1 className="mt-3 mb-2 text-2xl font-bold text-blood-red">Keyboards</h1>
+          <ul>{keyboardList(userKeyboards)}</ul> */}
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center">
