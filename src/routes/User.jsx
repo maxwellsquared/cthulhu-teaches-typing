@@ -147,27 +147,27 @@ const User = () => {
     <div className="my-10 flex flex-col items-center justify-center">
       {userStats ? (
         <div className="flex flex-col items-center justify-center">
-          <h1 className="mb-3 text-4xl font-bold text-blood-red">Keyboard Stats</h1>
+          <h1 className="mb-3 text-4xl font-bold text-pale-gold">Keyboard Stats</h1>
           <KeyboardDropdown />
           {specificKeyboardStats}
 
-          <h1 className="mb-3 text-4xl font-bold text-blood-red">Overall Stats</h1>
+          <h1 className="mb-3 text-4xl font-bold text-pale-gold">Overall Stats</h1>
           {wpmStatsChart}
 
-          <h1 className="text-2xl font-bold text-blood-red">Average WPM: {getAverage('wpm')}</h1>
+          <h1 className="text-2xl font-bold text-pale-gold">Average WPM: {getAverage('wpm')}</h1>
           {accuracyStatsChart}
 
-          <h1 className="text-2xl font-bold text-blood-red">{`Average Accuracy: ${getAverage(
+          <h1 className="text-2xl font-bold text-pale-gold">{`Average Accuracy: ${getAverage(
             'accuracy'
           )}%`}</h1>
 
-          {/* <h1 className="mt-3 mb-2 text-2xl font-bold text-blood-red">Keyboards</h1>
+          {/* <h1 className="mt-3 mb-2 text-2xl font-bold text-pale-gold">Keyboards</h1>
           <ul>{keyboardList(userKeyboards)}</ul> */}
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center">
           <BarLoader color={'#f00'} loading={true} size={150} />
-          <p className="text-2xl font-bold text-blood-red">Loading...</p>
+          <p className="text-2xl font-bold text-pale-gold">Loading...</p>
         </div>
       )}
     </div>

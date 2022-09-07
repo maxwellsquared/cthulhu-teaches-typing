@@ -39,7 +39,6 @@ export default function TypingField() {
   const [fullDivStyle, setFullDivStyle] = useState({
     position: 'relative', // set typing division style (in order to set position)
     left: '0ch',
-    marginTop: '120px',
   });
 
   //  used in characterCheck to check if the last character typed was correct
@@ -180,27 +179,28 @@ export default function TypingField() {
         accuracy={accuracy}
         // user={user ? user : 'anon'}
       />
-      <div className={divClassName} style={fullDivStyle}>
-        <div className="typing-left">
-          <SubmittedWords words={leftWords} />
+      <div className="my-20">
+        <div className={timerClass}>TIME: {counter}</div>
+        <div className={divClassName} style={fullDivStyle}>
+          <div className="typing-left">
+            <SubmittedWords words={leftWords} />
+          </div>
+          <div className="typing-right">{rightChars}</div>
         </div>
-        <div className="typing-right">{rightChars}</div>
+        <input
+          className="font-sans"
+          placeholder=""
+          radius="md"
+          size="md"
+          value={input}
+          // ^ sets to display nothing and not have any extra input chars
+          onChange={(event) => handleInput(event.target.value)}
+          onKeyDown={(event) => detailedInput(event)}
+          autoFocus="autofocus"
+        />
       </div>
-      <input
-        className="font-sans"
-        placeholder=""
-        radius="md"
-        size="md"
-        value={input}
-        // ^ sets to display nothing and not have any extra input chars
-        onChange={(event) => handleInput(event.target.value)}
-        onKeyDown={(event) => detailedInput(event)}
-        autoFocus="autofocus"
-      />
-      <div className={timerClass}>TIME: {counter}</div>
       {userKeyboards && user ? <KeyboardDropdown /> : 'you need to log in'}
-      <div className="testing-info">
-        <div className="font-mono">Logged in as: {user ? user.name : 'not logged in'}</div>
+      {/* <div className="testing-info">
         <div className="font-mono">LAST KEY: '{lastKey}'</div>
         <div className="font-mono">TOTAL ENTRIES: {totalChars}</div>
         <div className="font-mono">SUCCESSFUL ENTRIES: {correctChars}</div>
@@ -208,7 +208,7 @@ export default function TypingField() {
         <div className="font-mono">numCorrectChars: {numCorrectChars}</div>
         <div className="font-mono">numTotalChars: {numTotalChars}</div>
         <div className="font-mono">numMistakes: {numMistakes}</div>
-      </div>
+      </div> */}
     </>
   );
 }
