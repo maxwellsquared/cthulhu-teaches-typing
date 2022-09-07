@@ -4,6 +4,7 @@ import ResultsModal from './ResultsModal';
 import { UserContext } from '../helpers/context';
 import KeyboardDropdown from './KeyboardDropdown';
 import SubmittedWords from './SubmittedWords';
+import LoginToast from './LoginMessage';
 
 export default function TypingField() {
   const { user, userKeyboards } = useContext(UserContext);
@@ -199,7 +200,7 @@ export default function TypingField() {
           autoFocus="autofocus"
         />
       </div>
-      {userKeyboards && user ? <KeyboardDropdown /> : 'you need to log in'}
+      {userKeyboards && user ? <KeyboardDropdown /> : <LoginToast />}
       {/* <div className="testing-info">
         <div className="font-mono">LAST KEY: '{lastKey}'</div>
         <div className="font-mono">TOTAL ENTRIES: {totalChars}</div>

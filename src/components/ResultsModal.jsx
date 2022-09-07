@@ -28,7 +28,7 @@ export default function ResultsModal(props) {
   };
 
   return (
-    <div>
+    <>
       <Modal
         isOpen={modalIsOpen}
         className="Modal"
@@ -47,6 +47,6 @@ export default function ResultsModal(props) {
           {user ? <div>SCORE SUBMITTED ✅</div> : <div />}
         </div>
       </Modal>
-    </div>
+    </>
   );
 }
