@@ -18,6 +18,8 @@ const KeyboardDropdown = () => {
     setCurrentKeyboard(keyboard);
   };
 
+  console.log('currentKeyboard: ', currentKeyboard);
+
   return (
     <select
       className="border border-gray-300 bg-gray-500 text-gray-900"

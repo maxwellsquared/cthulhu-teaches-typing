@@ -7,7 +7,6 @@ import SubmittedWords from './SubmittedWords';
 
 export default function TypingField() {
   const { user, userKeyboards } = useContext(UserContext);
-  console.log('userKeyboards from typing field: ', userKeyboards);
 
   // timer functionality
   const initialTimer = 15; // use constant for initial timer and pass to counter--needed for WPM

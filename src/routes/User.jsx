@@ -3,9 +3,10 @@ import { UserContext } from '../helpers/context';
 import axios from 'axios';
 import BarLoader from 'react-spinners/BarLoader';
 import { CartesianGrid, XAxis, YAxis, Tooltip, Area, AreaChart, Legend } from 'recharts';
+import KeyboardDropdown from '../components/KeyboardDropdown';
 
 const User = () => {
-  const { user, userKeyboards } = useContext(UserContext);
+  const { user, userKeyboards, currentKeyboard } = useContext(UserContext);
 
   const [userStats, setUserStats] = useState();
 
@@ -46,6 +47,22 @@ const User = () => {
     const noKeyboards = <li>You have no keyboards</li>;
     return noKeyboards;
   };
+
+  // returns data for a specific keyboard_id, or all keyboards if keyboard_id is undefined
+  const getKeyboardData = (keyboard_id) => {
+    if (keyboard_id && userStats) {
+      // convert keyboard_id into a number
+      let keyboardInteger = parseInt(keyboard_id);
+      // create array of user stats which contain the keyboardInteger
+      const keyboardStats = userStats.filter((stat) => stat.keyboard_id === keyboardInteger);
+      return keyboardStats;
+    }
+    // return all the keyboards and user stats if no keyboard_id is provided
+    return userStats;
+  };
+
+  console.log('currentKeyboard: ', currentKeyboard);
+  console.log('getKeyboardData', getKeyboardData(currentKeyboard));
 
   const renderLineChat = (
     <AreaChart width={800} height={400} data={userStats}>
@@ -99,6 +116,7 @@ const User = () => {
 
   return (
     <div className="mt-10 flex flex-col items-center justify-center">
+      <KeyboardDropdown />
       {userStats ? (
         <div className="flex flex-col items-center justify-center">
           <h1 className="mb-3 text-4xl font-bold text-blood-red">{user.name} Stats</h1>
