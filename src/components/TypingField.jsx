@@ -2,9 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import RandomWords from '../helpers/RandomWords';
 import ResultsModal from './ResultsModal';
 import { UserContext } from '../helpers/context';
-import KeyboardDropdown from './KeyboardDropdown';
 import SubmittedWords from './SubmittedWords';
-import LoginToast from './LoginMessage';
 
 export default function TypingField() {
   const { user, userKeyboards } = useContext(UserContext);
@@ -48,11 +46,13 @@ export default function TypingField() {
   const [numCorrectChars, setNumCorrectChars] = useState(0);
   const [numTotalChars, setNumTotalChars] = useState(0);
   const [numMistakes, setNumMistakes] = useState(0);
+  const [placeholder, setPlaceholder] = useState('Type here!');
 
   // ---- TIMER FUNCTION ----
   useEffect(() => {
     // checks if started or counter state changes, timer begins when the test starts. updates every second.
     if (started) {
+      setPlaceholder('');
       const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
       if (counter < 10) setTimerClass('timer timer-countdown'); // set the timer red for the last 10 seconds
       if (counter === 0) gameOver(); // call gameOver, calculate states and display modal
@@ -180,7 +180,7 @@ export default function TypingField() {
         accuracy={accuracy}
         // user={user ? user : 'anon'}
       />
-      <div className="my-20">
+      <div className="input-container my-20">
         <div className={timerClass}>TIME: {counter}</div>
         <div className={divClassName} style={fullDivStyle}>
           <div className="typing-left">
@@ -188,9 +188,10 @@ export default function TypingField() {
           </div>
           <div className="typing-right">{rightChars}</div>
         </div>
+
         <input
           className="font-sans"
-          placeholder=""
+          placeholder={placeholder}
           radius="md"
           size="md"
           value={input}
@@ -200,7 +201,6 @@ export default function TypingField() {
           autoFocus="autofocus"
         />
       </div>
-      {userKeyboards && user ? <KeyboardDropdown /> : <LoginToast />}
       {/* <div className="testing-info">
         <div className="font-mono">LAST KEY: '{lastKey}'</div>
         <div className="font-mono">TOTAL ENTRIES: {totalChars}</div>
