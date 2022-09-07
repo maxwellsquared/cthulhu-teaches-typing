@@ -10,6 +10,8 @@ const User = () => {
 
   const [userStats, setUserStats] = useState();
 
+  console.log('user data: ', userStats);
+
   // axios get request to get user data
   const getUserData = (userId) => {
     axios
@@ -49,6 +51,7 @@ const User = () => {
   };
 
   // returns data for a specific keyboard_id, or all keyboards if keyboard_id is undefined
+  // used to generate graph with wpm and accuracy data
   const getKeyboardData = (keyboard_id) => {
     if (keyboard_id && userStats) {
       // convert keyboard_id into a number
@@ -61,8 +64,34 @@ const User = () => {
     return userStats;
   };
 
-  console.log('currentKeyboard: ', currentKeyboard);
-  console.log('getKeyboardData', getKeyboardData(currentKeyboard));
+  const areaChartKeyboardData = (
+    <AreaChart width={600} height={300} data={getKeyboardData(currentKeyboard)}>
+      <defs>
+        <linearGradient id="wpm" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+        </linearGradient>
+        <linearGradient id="accuracy" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="#8C3D34" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="#8C3D34" stopOpacity={0} />
+        </linearGradient>
+      </defs>
+      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+      <XAxis dataKey="name" />
+      <YAxis />
+      <Tooltip />
+      <Area type="monotone" dataKey="wpm" stroke="#EEDCB2" fillOpacity={1} fill="url(#wpm)" />
+      <Area
+        type="monotone"
+        dataKey="accuracy"
+        stroke="#8C3D34"
+        fillOpacity={1}
+        fill="url(#accuracy)"
+      />
+
+      <Legend verticalAlign="top" height={36} />
+    </AreaChart>
+  );
 
   const renderLineChat = (
     <AreaChart width={800} height={400} data={userStats}>
@@ -117,6 +146,7 @@ const User = () => {
   return (
     <div className="mt-10 flex flex-col items-center justify-center">
       <KeyboardDropdown />
+      {areaChartKeyboardData}
       {userStats ? (
         <div className="flex flex-col items-center justify-center">
           <h1 className="mb-3 text-4xl font-bold text-blood-red">{user.name} Stats</h1>
