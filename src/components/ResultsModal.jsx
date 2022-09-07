@@ -44,7 +44,7 @@ export default function ResultsModal(props) {
             <p>ACCURACY: {props.accuracy}%</p>
           </div>
           <button onClick={closeModal}>CLOSE</button>
-          <div>SCORE SUBMITTED ✅</div>
+          {user ? <div>SCORE SUBMITTED ✅</div> : <div />}
         </div>
       </Modal>
     </div>
