@@ -2,19 +2,25 @@ import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../helpers/context';
 import Modal from 'react-modal';
 import SubmitUserScore from './SubmitUserScore';
+import submitScore from '../helpers/submitScore';
 
 // Modal.setAppElement(document.getElementById('app'));
 
 export default function ResultsModal(props) {
   const [modalIsOpen, setModalIsOpen] = useState(props.gameOver);
   const [userClosed, setUserClosed] = useState(props.gameOver);
-
-  const { user } = useContext(UserContext);
+  const { user, currentKeyboard } = useContext(UserContext);
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
+    console.log(props.gameOver);
     let localSwitch = props.gameOver;
     if (userClosed) localSwitch = false;
     setModalIsOpen(localSwitch);
+    if (user && props.gameOver && !submitted) {
+      submitScore(props.wpm, props.accuracy, user.id, currentKeyboard);
+      setSubmitted(true);
+    }
   });
 
   const closeModal = function () {
@@ -38,7 +44,7 @@ export default function ResultsModal(props) {
             <p>ACCURACY: {props.accuracy}%</p>
           </div>
           <button onClick={closeModal}>CLOSE</button>
-          {user ? <SubmitUserScore wpm={props.wpm} accuracy={props.accuracy} /> : null}
+          <div>SCORE SUBMITTED ✅</div>
         </div>
       </Modal>
     </div>
