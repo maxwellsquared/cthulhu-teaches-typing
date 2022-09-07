@@ -19,6 +19,7 @@ module.exports = {
         sans: ['Open Sans', 'sans-serif'],
         serif: ['Anonymous Pro', 'serif'],
         timer: ['Chakra Petch', 'sans-serif'],
+        brother: ['brother-1816', 'sans-serif'],
       },
       minWidth: {
         45: '45px',
