@@ -39,6 +39,14 @@ h1 {
   font-family: courier-prime, monospace;
 }
 
+.correct {
+  color:#e9b12e;
+}
+
+.mistake {
+  color:#8c3d34;
+}
+
 .shaken {
   animation: shake 0.4s, turn-red 0.4s;
 }

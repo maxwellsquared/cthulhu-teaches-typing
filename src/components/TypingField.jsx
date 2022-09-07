@@ -3,6 +3,7 @@ import RandomWords from '../helpers/RandomWords';
 import ResultsModal from './ResultsModal';
 import { UserContext } from '../helpers/context';
 import KeyboardDropdown from './KeyboardDropdown';
+import SubmittedWords from './SubmittedWords';
 
 export default function TypingField() {
   const { user, userKeyboards } = useContext(UserContext);
@@ -19,6 +20,7 @@ export default function TypingField() {
 
   // inputs from user
   const [input, setInput] = useState('');
+  const [leftWords, setLeftWords] = useState([]);
   const [leftChars, setLeftChars] = useState(''); // stores the characters on the left side of the cursor
   const [rightChars, setRightChars] = useState(initialRandomWords.replace(/,/g, ' ')); // stores the characters on the right side of the cursor
   const [lastKey, setLastKey] = useState(); // stores the last character typed
@@ -77,13 +79,23 @@ export default function TypingField() {
     });
   }, [leftChars]);
 
-  // take the first character off RightCars and add it to LeftChars
-  const moveChars = function (length) {
+  // take the word off rightChars and pass the whole word to SubmittedWords
+  const moveChars = function (length, isCorrect) {
+    setLeftWords((prev) => [...prev, {word: randomWords[0],  isCorrect: isCorrect}]);
     setLeftChars((prev) => prev + `${randomWords[0]} `);
     setRightChars((prev) => prev.slice(length + 1));
     // set the amount to move the div over by
     setXPosition((prev) => prev - (length + 1));
   };
+
+  // --- SCREENSHAKE ---
+  const screenShake = () => {
+    setDivClassName('typing shaken');
+    setTimeout(() => {
+      setDivClassName('typing');
+    }, 250);
+  };
+
 
   // ---- INPUT FUNCTION ----
   const handleInput = function (event) {
@@ -113,10 +125,13 @@ export default function TypingField() {
 
       if (input === randomWords[0]) {
         setCorrectChars((prev) => prev + randomWords[0].length + 1);
+        moveChars(randomWords[0].length, true); // move over characters and pass 'correct' to the styling component
       }
-
+      if (input !== randomWords[0]) {
+        moveChars(randomWords[0].length, false); // move over characters and pass 'mistake' to styling
+        screenShake();
+      }
       setRandomWords((prev) => [...prev.slice(1)]);
-      moveChars(randomWords[0].length);
       setInput('');
     } else {
       setInput(event);
@@ -168,7 +183,7 @@ export default function TypingField() {
         // user={user ? user : 'anon'}
       />
       <div className={divClassName} style={fullDivStyle}>
-        <div className="typing-left">{leftChars}</div>
+        <div className="typing-left"><SubmittedWords words={leftWords} /></div>
         <div className="typing-right">{rightChars}</div>
       </div>
       <input
