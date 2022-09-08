@@ -3,6 +3,7 @@ import { UserContext } from '../helpers/context';
 import Modal from 'react-modal';
 import SubmitUserScore from './SubmitUserScore';
 import submitScore from '../helpers/submitScore';
+import { Link } from 'react-router-dom';
 
 // Modal.setAppElement(document.getElementById('app'));
 
@@ -13,7 +14,6 @@ export default function ResultsModal(props) {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    console.log(props.gameOver);
     let localSwitch = props.gameOver;
     if (userClosed) localSwitch = false;
     setModalIsOpen(localSwitch);
@@ -28,7 +28,7 @@ export default function ResultsModal(props) {
   };
 
   return (
-    <div>
+    <>
       <Modal
         isOpen={modalIsOpen}
         className="Modal"
@@ -43,10 +43,31 @@ export default function ResultsModal(props) {
             <p>WPM: {props.wpm}</p>
             <p>ACCURACY: {props.accuracy}%</p>
           </div>
-          <button onClick={closeModal}>CLOSE</button>
-          {user ? <div>SCORE SUBMITTED ✅</div> : <div />}
+          <button
+            className="text-xlg mt-10 transform rounded-lg
+			text-cosmic-purple hover:bg-blood-red-hover"
+            onClick={closeModal}
+          >
+            CLOSE
+          </button>
+          {user ? (
+            <>
+              <div className="font-gold-hover mt-10 transform rounded-lg text-lg text-blood-red">
+                Results has been automatically added to your keyboard stats!
+              </div>
+              <Link
+                className="font-gold-hover mt-3 transform rounded-lg text-lg text-blood-red"
+                to="/user"
+              >
+                See all results{' '}
+                <span className="text-link-green underline hover:text-pale-gold">here</span>
+              </Link>
+            </>
+          ) : (
+            <div />
+          )}
         </div>
       </Modal>
-    </div>
+    </>
   );
 }

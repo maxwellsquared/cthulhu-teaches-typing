@@ -21,7 +21,7 @@ const KeyboardDropdown = () => {
   console.log('currentKeyboard: ', currentKeyboard);
 
   return (
-    <div className="m-5 flex max-w-xs flex-col">
+    <div className="flex max-w-xs flex-col">
       <label htmlFor="keyboards" className="mb-2 block font-mono text-lg text-pale-gold">
         Select your keyboard
       </label>

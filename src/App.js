@@ -34,7 +34,6 @@ export default function App() {
 
         <LayoutWrapper>
           <Routes>
-            {/* reacts to changes to the URL */}
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />

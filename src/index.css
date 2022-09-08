@@ -40,11 +40,11 @@ h1 {
 }
 
 .correct {
-  color:#e9b12e;
+  color: #e9b12e;
 }
 
 .mistake {
-  color:#8c3d34;
+  color: #8c3d34;
 }
 
 .shaken {
@@ -78,18 +78,25 @@ tr:nth-child(even) {
 }
 
 input {
-  width: 100%;
   padding: 12px 20px;
   font-size: 28px;
   margin: 8px 0;
   box-sizing: border-box;
   color: #EEDCB2;
-  border-bottom: 2px solid #EEDCB2;
-  border-color: #EEDCB2;
-  background-color: #25173a;
-  box-shadow: 0 0 1px #EEDCB2;
-  border: 1px solid #EEDCB2;
-  outline: none;
+  background-color: #1C122C;
+  border: none;
+  outline: 0;
+  border-width: 0 0 2px;
+  border-bottom: 2px solid #8C3D34;
+}
+
+input:focus {
+  border-color: #8C3D34;
+}
+
+input::placeholder {
+  color: #EEDCB2;
+  opacity: 0.5;
 }
 
 .timer-countdown {
@@ -134,7 +141,6 @@ input {
 .Modal button {
   color: #eedcb2;
   background-color: #8c3d34;
-  margin: 15px;
   padding: 20px;
   font-family: brother-1816, sans-serif;
   font-weight: 900;
