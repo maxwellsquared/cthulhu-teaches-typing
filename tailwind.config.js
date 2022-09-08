@@ -13,7 +13,9 @@ module.exports = {
         'pale-gold': '#EEDCB2',
         'gold-hover': '#EAC775',
         'blood-red': '#8C3D34',
+        'blood-red-hover': '#662C26',
         candle: '#E9B12E',
+        'link-green': '#2D888C',
         incorrectInput: 'rgba(248, 41, 41, 0.09)',
       },
       fontFamily: {
