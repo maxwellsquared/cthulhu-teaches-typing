@@ -10,14 +10,11 @@ const User = () => {
 
   const [userStats, setUserStats] = useState();
 
-  console.log('user data: ', userStats);
-
   // axios get request to get user data
   const getUserData = (userId) => {
     axios
       .get(`http://localhost:3000/api/user/${userId}`)
       .then((res) => {
-        console.log('Success: user data retrieved');
         setUserStats(res.data); // set user data to state
       })
       .catch((err) => {
@@ -68,19 +65,19 @@ const User = () => {
     <AreaChart width={800} height={400} data={getKeyboardData(currentKeyboard)}>
       <defs>
         <linearGradient id="wpm" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-          <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+          <stop offset="5%" stopColor="#2D888C" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="#2D888C" stopOpacity={0} />
         </linearGradient>
         <linearGradient id="accuracy" x1="0" y1="0" x2="0" y2="1">
           <stop offset="5%" stopColor="#8C3D34" stopOpacity={0.8} />
           <stop offset="95%" stopColor="#8C3D34" stopOpacity={0} />
         </linearGradient>
       </defs>
-      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+      <CartesianGrid stroke="#4E3278" strokeDasharray="3 3" />
       <XAxis dataKey="name" />
       <YAxis />
       <Tooltip />
-      <Area type="monotone" dataKey="wpm" stroke="#EEDCB2" fillOpacity={1} fill="url(#wpm)" />
+      <Area type="monotone" dataKey="wpm" stroke="#2D888C" fillOpacity={1} fill="url(#wpm)" />
       <Area
         type="monotone"
         dataKey="accuracy"
@@ -94,39 +91,39 @@ const User = () => {
   );
 
   const wpmStatsChart = (
-    <AreaChart width={800} height={400} data={userStats}>
+    <AreaChart width={800} height={400} data={userStats} syncId="chartSync">
       <defs>
         <linearGradient id="wpm" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-          <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+          <stop offset="5%" stopColor="#2D888C" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="#2D888C" stopOpacity={0} />
         </linearGradient>
       </defs>
-      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+      <CartesianGrid stroke="#4E3278" strokeDasharray="3 3" />
       <XAxis dataKey="name" />
       <YAxis />
       <Tooltip />
-      <Area type="monotone" dataKey="wpm" stroke="#EEDCB2" fillOpacity={1} fill="url(#wpm)" />
+      <Area type="monotone" dataKey="wpm" stroke="#2D888C" fillOpacity={1} fill="url(#wpm)" />
 
       <Legend verticalAlign="top" height={36} />
     </AreaChart>
   );
 
   const accuracyStatsChart = (
-    <AreaChart width={800} height={400} data={userStats}>
+    <AreaChart width={800} height={400} data={userStats} syncId="chartSync">
       <defs>
         <linearGradient id="accuracy" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-          <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+          <stop offset="5%" stopColor="#8C3D34" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="#8C3D34" stopOpacity={0} />
         </linearGradient>
       </defs>
-      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+      <CartesianGrid stroke="#4E3278" strokeDasharray="3 3" />
       <XAxis dataKey="name" />
       <YAxis domain={[(dataMin) => dataMin - 5, (dataMax) => dataMax]} />
       <Tooltip />
       <Area
         type="monotone"
         dataKey="accuracy"
-        stroke="#82ca9d"
+        stroke="#8C3D34"
         fillOpacity={1}
         fill="url(#accuracy)"
       />
@@ -146,28 +143,42 @@ const User = () => {
   return (
     <div className="my-10 flex flex-col items-center justify-center">
       {userStats ? (
-        <div className="flex flex-col items-center justify-center">
-          <h1 className="mb-3 text-4xl font-bold text-pale-gold">Keyboard Stats</h1>
-          <KeyboardDropdown />
-          {specificKeyboardStats}
+        <>
+          <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-blood-red-hover bg-darker-purple p-2">
+            <h1 className="my-3 text-4xl font-bold text-pale-gold">Keyboard Stats</h1>
+            <KeyboardDropdown />
+            <div className="mr-7">{specificKeyboardStats}</div>
+          </div>
 
-          <h1 className="mb-3 text-4xl font-bold text-pale-gold">Overall Stats</h1>
-          {wpmStatsChart}
+          <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-blood-red-hover bg-darker-purple p-2">
+            <h1 className="my-3 text-4xl font-bold text-pale-gold">Overall Stats</h1>
+            <div className="mr-7">{wpmStatsChart}</div>
+            <div className="mr-7">{accuracyStatsChart}</div>
+          </div>
 
-          <h1 className="text-2xl font-bold text-pale-gold">Average WPM: {getAverage('wpm')}</h1>
-          {accuracyStatsChart}
+          <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-blood-red-hover bg-darker-purple p-2">
+            <h1 className="my-3 text-4xl font-bold text-pale-gold">Averages</h1>
 
-          <h1 className="text-2xl font-bold text-pale-gold">{`Average Accuracy: ${getAverage(
-            'accuracy'
-          )}%`}</h1>
-
-          {/* <h1 className="mt-3 mb-2 text-2xl font-bold text-pale-gold">Keyboards</h1>
-          <ul>{keyboardList(userKeyboards)}</ul> */}
-        </div>
+            <table class="mb-5 w-9/12 table-auto text-center text-lg">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2 text-center">Words Per Minute</th>
+                  <th className="px-4 py-2 text-center">Accuracy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border px-4 py-2 text-center">{getAverage('wpm')}</td>
+                  <td className="border px-4 py-2 text-center">{getAverage('accuracy')}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </>
       ) : (
         <div className="flex flex-col items-center justify-center">
           <BarLoader color={'#f00'} loading={true} size={150} />
-          <p className="text-2xl font-bold text-pale-gold">Loading...</p>
+          <p className="text-2xl font-bold text-blood-red">Loading...</p>
         </div>
       )}
     </div>

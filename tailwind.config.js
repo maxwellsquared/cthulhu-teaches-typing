@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         'cosmic-purple': '#1C122C',
         'lighter-purple': '#1C122B',
+        'darker-purple': '#10142B',
         'pale-gold': '#EEDCB2',
         'gold-hover': '#EAC775',
         'blood-red': '#8C3D34',
