@@ -11,6 +11,7 @@ module.exports = {
         'cosmic-purple': '#1C122C',
         'lighter-purple': '#1C122B',
         'pale-gold': '#EEDCB2',
+        'gold-hover': '#EAC775',
         'blood-red': '#8C3D34',
         candle: '#E9B12E',
         incorrectInput: 'rgba(248, 41, 41, 0.09)',

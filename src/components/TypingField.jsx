@@ -191,7 +191,7 @@ export default function TypingField() {
         </div>
 
         <input
-          className={`rounded-md font-sans ${incorrectCharCSS}`}
+          className={`rounded-t-lg font-sans ${incorrectCharCSS}`}
           placeholder={placeholder}
           radius="md"
           size="md"

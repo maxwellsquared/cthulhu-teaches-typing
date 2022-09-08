@@ -5,11 +5,11 @@ const LoginMessage = () => {
   return (
     <Link
       to="/login"
-      className="flex max-w-sm items-center justify-center gap-8 rounded-lg bg-pale-gold px-4 py-3 text-lg text-cosmic-purple
-			hover:bg-candle"
+      className="flex max-w-sm transform items-center justify-center gap-2 rounded-lg bg-pale-gold px-4 py-3 text-lg
+			text-cosmic-purple shadow-lg transition duration-500 hover:scale-105 hover:bg-gold-hover "
       role="alert"
     >
-      <FiLogIn size={30} />
+      <FiLogIn size={25} />
       <p>Log in to submit your score!</p>
     </Link>
   );
