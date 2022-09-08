@@ -47,6 +47,7 @@ export default function TypingField() {
   const [numTotalChars, setNumTotalChars] = useState(0);
   const [numMistakes, setNumMistakes] = useState(0);
   const [placeholder, setPlaceholder] = useState('Type here!');
+  const [incorrectCharCSS, setIncorrectCharCSS] = useState('');
 
   // ---- TIMER FUNCTION ----
   useEffect(() => {
@@ -155,11 +156,11 @@ export default function TypingField() {
     setNumTotalChars((prev) => prev + 1);
 
     if (word[charIndexOfWord] === lastCharFromKey) {
-      console.log('✅✅✅✅ correct letter for that word ✅✅✅✅');
       setNumCorrectChars((prev) => prev + 1);
+      setIncorrectCharCSS('');
     } else {
-      console.log('❌❌❌ incorrect letter for that word ❌❌❌');
       setNumMistakes((prev) => prev + 1);
+      setIncorrectCharCSS('bg-incorrectInput');
     }
   };
 
@@ -190,7 +191,7 @@ export default function TypingField() {
         </div>
 
         <input
-          className="font-sans"
+          className={`rounded-md font-sans ${incorrectCharCSS}`}
           placeholder={placeholder}
           radius="md"
           size="md"

@@ -13,6 +13,7 @@ module.exports = {
         'pale-gold': '#EEDCB2',
         'blood-red': '#8C3D34',
         candle: '#E9B12E',
+        incorrectInput: 'rgba(248, 41, 41, 0.09)',
       },
       fontFamily: {
         // if changing, import font into 'src/index.css'

@@ -13,7 +13,6 @@ export default function ResultsModal(props) {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    console.log(props.gameOver);
     let localSwitch = props.gameOver;
     if (userClosed) localSwitch = false;
     setModalIsOpen(localSwitch);
