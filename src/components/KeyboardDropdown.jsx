@@ -21,12 +21,12 @@ const KeyboardDropdown = () => {
   console.log('currentKeyboard: ', currentKeyboard);
 
   return (
-    <div className="flex max-w-xs flex-col">
-      <label htmlFor="keyboards" className="mb-2 block font-mono text-lg text-pale-gold">
+    <div className="justify flex items-center gap-4">
+      <label htmlFor="keyboards" className="block font-mono text-lg text-pale-gold ">
         Select your keyboard
       </label>
       <select
-        className="rounded-lg border bg-lighter-purple p-2.5 text-pale-gold focus:border-blood-red focus:ring-blood-red"
+        className="rounded-lg border bg-lighter-purple p-2 text-pale-gold focus:border-blood-red focus:ring-blood-red"
         onChange={(event) => handleKeyboardClick(event.currentTarget.value)}
       >
         {userKeyboards.map((keyboard) => (
