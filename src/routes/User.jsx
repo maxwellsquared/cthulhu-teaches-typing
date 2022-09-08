@@ -68,19 +68,19 @@ const User = () => {
     <AreaChart width={800} height={400} data={getKeyboardData(currentKeyboard)}>
       <defs>
         <linearGradient id="wpm" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-          <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+          <stop offset="5%" stopColor="#2D888C" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="#2D888C" stopOpacity={0} />
         </linearGradient>
         <linearGradient id="accuracy" x1="0" y1="0" x2="0" y2="1">
           <stop offset="5%" stopColor="#8C3D34" stopOpacity={0.8} />
           <stop offset="95%" stopColor="#8C3D34" stopOpacity={0} />
         </linearGradient>
       </defs>
-      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+      <CartesianGrid stroke="#4E3278" strokeDasharray="3 3" />
       <XAxis dataKey="name" />
       <YAxis />
       <Tooltip />
-      <Area type="monotone" dataKey="wpm" stroke="#EEDCB2" fillOpacity={1} fill="url(#wpm)" />
+      <Area type="monotone" dataKey="wpm" stroke="#2D888C" fillOpacity={1} fill="url(#wpm)" />
       <Area
         type="monotone"
         dataKey="accuracy"
@@ -94,39 +94,39 @@ const User = () => {
   );
 
   const wpmStatsChart = (
-    <AreaChart width={800} height={400} data={userStats}>
+    <AreaChart width={800} height={400} data={userStats} syncId="chartSync">
       <defs>
         <linearGradient id="wpm" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-          <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+          <stop offset="5%" stopColor="#2D888C" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="#2D888C" stopOpacity={0} />
         </linearGradient>
       </defs>
-      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+      <CartesianGrid stroke="#4E3278" strokeDasharray="3 3" />
       <XAxis dataKey="name" />
       <YAxis />
       <Tooltip />
-      <Area type="monotone" dataKey="wpm" stroke="#EEDCB2" fillOpacity={1} fill="url(#wpm)" />
+      <Area type="monotone" dataKey="wpm" stroke="#2D888C" fillOpacity={1} fill="url(#wpm)" />
 
       <Legend verticalAlign="top" height={36} />
     </AreaChart>
   );
 
   const accuracyStatsChart = (
-    <AreaChart width={800} height={400} data={userStats}>
+    <AreaChart width={800} height={400} data={userStats} syncId="chartSync">
       <defs>
         <linearGradient id="accuracy" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-          <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+          <stop offset="5%" stopColor="#8C3D34" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="#8C3D34" stopOpacity={0} />
         </linearGradient>
       </defs>
-      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+      <CartesianGrid stroke="#4E3278" strokeDasharray="3 3" />
       <XAxis dataKey="name" />
       <YAxis domain={[(dataMin) => dataMin - 5, (dataMax) => dataMax]} />
       <Tooltip />
       <Area
         type="monotone"
         dataKey="accuracy"
-        stroke="#82ca9d"
+        stroke="#8C3D34"
         fillOpacity={1}
         fill="url(#accuracy)"
       />
@@ -160,14 +160,11 @@ const User = () => {
           <h1 className="text-2xl font-bold text-pale-gold">{`Average Accuracy: ${getAverage(
             'accuracy'
           )}%`}</h1>
-
-          {/* <h1 className="mt-3 mb-2 text-2xl font-bold text-pale-gold">Keyboards</h1>
-          <ul>{keyboardList(userKeyboards)}</ul> */}
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center">
           <BarLoader color={'#f00'} loading={true} size={150} />
-          <p className="text-2xl font-bold text-pale-gold">Loading...</p>
+          <p className="text-2xl font-bold text-blood-red">Loading...</p>
         </div>
       )}
     </div>
