@@ -16,6 +16,7 @@ export default function App() {
   const [user, setUser] = useState(); // user state, set at login
   const [userKeyboards, setUserKeyboards] = useState(); // array of keyboards for the user, set at login
   const [currentKeyboard, setCurrentKeyboard] = useState(); // this is the id of the current keyboard, set when user goes to TypingField
+  const [userScore, setUserScore] = useState(); // this is the score of the user, gets set when the user finishes typing
 
   // this will wrap all other components
   return (
@@ -28,6 +29,8 @@ export default function App() {
           setUserKeyboards,
           currentKeyboard,
           setCurrentKeyboard,
+          userScore,
+          setUserScore,
         }}
       >
         <Nav />
