@@ -146,21 +146,38 @@ const User = () => {
   return (
     <div className="my-10 flex flex-col items-center justify-center">
       {userStats ? (
-        <div className="flex flex-col items-center justify-center">
-          <h1 className="mb-3 text-4xl font-bold text-pale-gold">Keyboard Stats</h1>
-          <KeyboardDropdown />
-          {specificKeyboardStats}
+        <>
+          <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-blood-red-hover bg-darker-purple p-2">
+            <h1 className="my-3 text-4xl font-bold text-pale-gold">Keyboard Stats</h1>
+            <KeyboardDropdown />
+            <div className="mr-7">{specificKeyboardStats}</div>
+          </div>
 
-          <h1 className="mb-3 text-4xl font-bold text-pale-gold">Overall Stats</h1>
-          {wpmStatsChart}
+          <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-blood-red-hover bg-darker-purple p-2">
+            <h1 className="my-3 text-4xl font-bold text-pale-gold">Overall Stats</h1>
+            <div className="mr-7">{wpmStatsChart}</div>
+            <div className="mr-7">{accuracyStatsChart}</div>
+          </div>
 
-          <h1 className="text-2xl font-bold text-pale-gold">Average WPM: {getAverage('wpm')}</h1>
-          {accuracyStatsChart}
+          <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-blood-red-hover bg-darker-purple p-2">
+            <h1 className="my-3 text-4xl font-bold text-pale-gold">Averages</h1>
 
-          <h1 className="text-2xl font-bold text-pale-gold">{`Average Accuracy: ${getAverage(
-            'accuracy'
-          )}%`}</h1>
-        </div>
+            <table class="mb-5 w-9/12 table-auto text-center text-lg">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2 text-center">Words Per Minute</th>
+                  <th className="px-4 py-2 text-center">Accuracy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border px-4 py-2 text-center">{getAverage('wpm')}</td>
+                  <td className="border px-4 py-2 text-center">{getAverage('accuracy')}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </>
       ) : (
         <div className="flex flex-col items-center justify-center">
           <BarLoader color={'#f00'} loading={true} size={150} />
