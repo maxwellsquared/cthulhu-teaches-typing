@@ -90,7 +90,7 @@ function Login() {
             }}
             autoComplete="off"
           >
-            <div className="-space-y-px rounded-md shadow-sm">
+            <div className="space-y-px rounded-md shadow-sm">
               <div>
                 <label htmlFor="email-address" className="sr-only">
                   Email address
@@ -100,7 +100,7 @@ function Login() {
                   type="email"
                   name="email"
                   placeholder="Email Address"
-                  className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className="relative block w-full appearance-none rounded-t-lg border border-blood-red bg-incorrectInput px-3 py-2 text-pale-gold placeholder-gray-500 focus:z-10 focus:border-gold-hover focus:outline-none focus:ring-blood-red"
                   onChange={(event) => {
                     setEmail(event.target.value);
                   }}
@@ -116,7 +116,7 @@ function Login() {
                   name="password"
                   placeholder="Password"
                   required
-                  className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm"
+                  className="relative block w-full appearance-none rounded-b-lg border border-blood-red bg-incorrectInput px-3 py-2 text-pale-gold placeholder-gray-500 focus:z-10 focus:border-gold-hover focus:outline-none focus:ring-blood-red"
                   onChange={(event) => {
                     setPassword(event.target.value);
                   }}
@@ -140,7 +140,7 @@ function Login() {
             </div>
 
             <button
-              className="group relative flex w-full justify-center rounded-md border border-transparent bg-gray-200 py-2 px-4 text-sm font-medium text-blood-red hover:bg-pale-gold focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              className="group relative flex w-full transform justify-center rounded-md border border-transparent bg-pale-gold py-2 px-4 text-lg font-medium text-blood-red transition duration-300 ease-in-out hover:scale-105 hover:bg-gold-hover focus:outline-none focus:ring-2 focus:ring-blood-red focus:ring-offset-2"
               onClick={() => {
                 sendRequest(email, password, user, setUser);
               }}
