@@ -4,9 +4,11 @@ import { useContext } from 'react';
 import { UserContext } from '../helpers/context';
 
 import { BiCog } from 'react-icons/bi';
+import KeyboardDropdown from './KeyboardDropdown';
+import LoginMessage from './LoginMessage';
 
 const Nav = () => {
-  const { user } = useContext(UserContext);
+  const { user, userKeyboards } = useContext(UserContext);
 
   // simulate a user user logging out by refreshing the page, which will reset the user context
   function refreshPage() {
@@ -23,9 +25,11 @@ const Nav = () => {
             <span className="logo-lite">&nbsp;TEACHES TYPING</span>
           </Link>
         </div>
-        <ul className="mt-0 flex flex-row p-4 font-light">
+        <ul className="flex items-center  gap-2 font-light">
           {user ? (
             <>
+              {user && userKeyboards ? <KeyboardDropdown /> : null}
+
               <li>
                 <Link
                   to="/user"
@@ -39,7 +43,7 @@ const Nav = () => {
               <li>
                 <Link
                   to="/"
-                  className="mx-3 rounded-lg bg-pale-gold p-0 py-1 px-6 text-black"
+                  className="mx-3 rounded-lg bg-pale-gold py-1 px-6 text-black"
                   aria-current="logout"
                   onClick={refreshPage}
                 >

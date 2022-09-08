@@ -10,14 +10,11 @@ const User = () => {
 
   const [userStats, setUserStats] = useState();
 
-  console.log('user data: ', userStats);
-
   // axios get request to get user data
   const getUserData = (userId) => {
     axios
       .get(`http://localhost:3000/api/user/${userId}`)
       .then((res) => {
-        console.log('Success: user data retrieved');
         setUserStats(res.data); // set user data to state
       })
       .catch((err) => {

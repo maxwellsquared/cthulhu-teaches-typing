@@ -10,9 +10,7 @@ const Home = () => {
   return (
     <>
       <TypingField />
-      <div className="self-center">
-        {userKeyboards && user ? <KeyboardDropdown /> : <LoginMessage />}
-      </div>
+      <div className="self-center">{userKeyboards && user ? null : <LoginMessage />}</div>
     </>
   );
 };
