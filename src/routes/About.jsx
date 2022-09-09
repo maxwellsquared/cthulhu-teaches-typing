@@ -7,6 +7,7 @@ import { UserContext } from '../helpers/context';
 import RandomWords from '../helpers/RandomWords';
 import SubmittedWords from '../components/SubmittedWords';
 import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generator';
+import MultiplayerResultsModal from '../components/MultiplayerResultsModal';
 
 const About = function () {
   const { user, userKeyboards, userScore, setUserScore } = useContext(UserContext);
@@ -59,6 +60,9 @@ const About = function () {
 
   const [scoresFromServer, setScoresFromServer] = useState([]); // !! array of scores from server
 
+  // if user is not logged in, generate a random username
+  const guestName = uniqueNamesGenerator({ dictionaries: [adjectives, animals] });
+
   // !! setups socket connection
   useEffect(() => {
     socket.on('connect', () => {
@@ -99,8 +103,6 @@ const About = function () {
     setAccuracy(Math.floor(100 * (1 - numMistakes / numTotalChars)));
     setWordsPerMinute(Math.floor(numCorrectChars / 5 / (initialTimer / 60)));
 
-    const guestName = uniqueNamesGenerator({ dictionaries: [adjectives, animals] });
-
     // create data object to send to server
     // TODO: send score to server
     setUserScore({
@@ -116,7 +118,6 @@ const About = function () {
   // --- UPDATES WORDS SECTIONS
   useEffect(() => {
     setFullDivStyle((prev) => {
-
       return { ...prev, left: `${xPosition}ch` };
     });
   }, [leftChars]);
@@ -244,21 +245,9 @@ const About = function () {
   return (
     <>
       <h1>MultiPlayer</h1>
-      <h1 className="font-mono text-green-500">
-        Winner: {getHighestWpm(scoresFromServer).user} with {getHighestWpm(scoresFromServer).wpm}{' '}
-        words per minute!
-      </h1>
-      <ul>
-        {scoresFromServer.map((score, index) => {
-          return (
-            <li key={index} className="text-red-500">
-              {score.user} - {score.wpm} wpm
-            </li>
-          );
-        })}
-      </ul>
 
       <div className="input-container my-20">
+        {user ? null : <h1 className="font-mono text-2xl text-pale-gold">Welcome {guestName}</h1>}
         <div className={timerClass}>TIME: {counter}</div>
         <div className={divClassName} style={fullDivStyle}>
           <div className="typing-left">
@@ -278,6 +267,23 @@ const About = function () {
           onKeyDown={(event) => detailedInput(event)}
           autoFocus="autofocus"
         />
+        {/* {isComplete ? (
+          <div className="flex flex-col font-mono text-pale-gold">
+            <h1 className="text-2xl">Multiplayer Winner: {getHighestWpm(scoresFromServer).user}</h1>
+            <h3 className="text-xl">Words Per Minute: {getHighestWpm(scoresFromServer).wpm}</h3>
+            <h3 className="text-xl">Accuracy: {getHighestWpm(scoresFromServer).accuracy}%</h3>
+            <ul>
+              {scoresFromServer.map((score, index) => {
+                return (
+                  <li key={index} className="text-red-500">
+                    {score.user} - {score.wpm} wpm
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ) : null} */}
+        <MultiplayerResultsModal gameOver={isComplete} />
       </div>
     </>
   );
