@@ -9,7 +9,7 @@ const About = function () {
   const { user, userKeyboards, userScore, setUserScore } = useContext(UserContext);
 
   // timer functionality
-  const initialTimer = 15; // use constant for initial timer and pass to counter--needed for WPM
+  const initialTimer = 5; // use constant for initial timer and pass to counter--needed for WPM
   const [counter, setCounter] = useState(initialTimer);
   const [started, setStarted] = useState(false);
 
@@ -61,21 +61,9 @@ const About = function () {
       console.log('texts', texts);
     });
 
-    // listen to the scores event from the server
-    socket.on('scores', (arg) => {
-      console.log('score from server', arg);
-      setTextFromServer(
-        `Game over! Your WPM was ${arg.score.wpm} and your accuracy was ${arg.score.accuracy}`
-      );
-    });
-
-    socket.on('game-over', (arg) => {
-      console.log('game over from server', arg);
-      console.log('words per minute: ', arg.score.wpm);
-      console.log('accuracy: ', arg.score.accuracy);
-      setTextFromServer(
-        `Game over! Your WPM was ${arg.score.wpm} and your accuracy was ${arg.score.accuracy}`
-      );
+    socket.on('highestWpm', (winner) => {
+      console.log('highestWpm', highestWpm);
+      setTextFromServer(`Game over!  ${winner.name} has won with ${winner.wpm} words per minute!`);
     });
 
     // when user goes to page, send a message
@@ -83,12 +71,22 @@ const About = function () {
     return () => socket.disconnect(); // prevents memory leaks
   }, [textFromServer]);
 
-  // if a game is complete, send the score to the sockets server
+  // TODO if a game is complete, send the score to the sockets server
   useEffect(() => {
+    console.log('isComplete', isComplete);
+    console.log('words per minute', wordsPerMinute);
     if (isComplete) {
-      socket.emit('scores', {
-        score: userScore,
-      });
+      const finalResult = {
+        userName: user.name,
+        wpm: wordsPerMinute,
+        accuracy: accuracy,
+        numTotalChars: numTotalChars,
+        numCorrectChars: numCorrectChars,
+        numMistakes: numMistakes,
+      };
+      console.log('finalResult', finalResult);
+      // where to send the score, access on server with arg.score
+      socket.emit('scores', finalResult);
     }
   }, [isComplete]);
 
@@ -154,7 +152,6 @@ const About = function () {
       return;
     }
 
-    // TODO: add functionality to check if the last character typed was correct
     characterCheck(randomWords[0], lastCharIndex, event, backspacePressed);
 
     setLastKey(input[input.length - 1]); // set the last key to be the last character of the input string
