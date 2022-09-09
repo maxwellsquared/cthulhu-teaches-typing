@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { UserContext } from './helpers/context';
+import { CodeContext, UserContext } from './helpers/context';
 import About from './routes/About';
 import Login from './routes/Login';
 import Home from './routes/Home';
@@ -16,6 +16,7 @@ export default function App() {
   const [user, setUser] = useState(); // user state, set at login
   const [userKeyboards, setUserKeyboards] = useState(); // array of keyboards for the user, set at login
   const [currentKeyboard, setCurrentKeyboard] = useState(); // this is the id of the current keyboard, set when user goes to TypingField
+  const [codeEntered, setCodeEntered] = useState();
 
   // this will wrap all other components
   return (
@@ -30,17 +31,20 @@ export default function App() {
           setCurrentKeyboard,
         }}
       >
-        <Nav />
+        <CodeContext.Provider value={{ codeEntered, setCodeEntered }}>
 
-        <LayoutWrapper>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/user" element={<User />} />
-          </Routes>
-        </LayoutWrapper>
+          <Nav />
+
+          <LayoutWrapper>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/leaderboard" element={<Leaderboard />} />
+              <Route path="/user" element={<User />} />
+            </Routes>
+          </LayoutWrapper>
+        </CodeContext.Provider>
       </UserContext.Provider>
     </BrowserRouter>
   );
