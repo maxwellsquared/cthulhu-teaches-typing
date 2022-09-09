@@ -10,7 +10,6 @@ import Nav from './components/Nav';
 import Leaderboard from './routes/Leaderboard';
 import LayoutWrapper from './components/LayoutWrapper';
 import './App.css';
-import { keyboard } from '@testing-library/user-event/dist/keyboard';
 
 // parent component for all other components
 export default function App() {
@@ -20,12 +19,11 @@ export default function App() {
 
   useEffect(() => {
     setUser(JSON.parse(window.localStorage.getItem("user")));
-   // setUserKeyboards(JSON.parse(window.localStorage.getItem("keyboards")));
   }, []);
 
   useEffect(() => {
     window.localStorage.setItem("user", JSON.stringify(user));
-    //window.localStorage.setItem("keyboards", JSON.stringify(userKeyboards));
+
   }, [user]);
 
   // this will wrap all other components
