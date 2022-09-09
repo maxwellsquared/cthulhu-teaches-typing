@@ -11,6 +11,21 @@ import Leaderboard from './routes/Leaderboard';
 import LayoutWrapper from './components/LayoutWrapper';
 import './App.css';
 
+//three.js testing
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Stars } from '@react-three/drei';
+import * as THREE from 'three';
+import { MeshStandardMaterial } from 'three';
+
+function Box() {
+  return (
+    <mesh rotation={[-0.3, -0.5, 0]}>
+      <boxBufferGeometry attach="geometry" />
+      <meshStandardMaterial attach="material" color="#BADA55" />
+    </mesh>
+  );
+}
+
 // parent component for all other components
 export default function App() {
   const [user, setUser] = useState(); // user state, set at login
@@ -30,6 +45,11 @@ export default function App() {
           setCurrentKeyboard,
         }}
       >
+        <Canvas id="bg">
+          <Box />
+          <Stars />
+          <spotLight position={[10, 15, 10]} angle={0.3} />
+        </Canvas>
         <Nav />
 
         <LayoutWrapper>
