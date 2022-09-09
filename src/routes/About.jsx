@@ -11,8 +11,7 @@ import MultiplayerResultsModal from '../components/MultiplayerResultsModal';
 import { BeatLoader } from 'react-spinners';
 
 const About = function () {
-  const { user, userScore, setUserScore } =
-    useContext(UserContext);
+  const { user, userScore, setUserScore } = useContext(UserContext);
 
   // timer functionality
   const initialTimer = 5; // use constant for initial timer and pass to counter--needed for WPM
@@ -63,7 +62,7 @@ const About = function () {
   // if user is not logged in, generate a random username
   // const guestName = uniqueNamesGenerator({ dictionaries: [adjectives, animals] });
   const [guestName, setGuestName] = useState(
-    uniqueNamesGenerator({ dictionaries: [adjectives, animals] })
+    uniqueNamesGenerator({ dictionaries: [adjectives, animals] }).toUpperCase()
   );
   const [disableTyping, setDisableTyping] = useState(true);
   const [waiting, setWaiting] = useState(true);
@@ -71,7 +70,6 @@ const About = function () {
   // !! setups socket connection
   useEffect(() => {
     socket.on('connect', () => {
-      setMultiplayerConnected(true);
       console.log('connected to server');
       //joins waiting room
       socket.emit('waiting', 'waiting');
@@ -277,10 +275,14 @@ const About = function () {
 
   return (
     <>
-      <h1>MultiPlayer</h1>
-
+      <h1 className="mt-20 text-center text-7xl text-blood-red underline">1 vs 1 Mode</h1>
       <div className="input-container my-20">
-        {user ? null : <h1 className="font-mono text-2xl text-pale-gold">Welcome {guestName}</h1>}
+        {user ? null : (
+          <h1 className="-ml-10 font-mono text-4xl text-pale-gold">
+            Welcome{' '}
+            <span className="font-serif text-5xl font-extrabold text-blood-red"> {guestName}</span>
+          </h1>
+        )}
 
         <div className={timerClass}>TIME: {counter}</div>
         <div className={divClassName} style={fullDivStyle}>
