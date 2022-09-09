@@ -5,9 +5,11 @@ const io = require('socket.io')(http, {
 });
 
 io.on('connection', (socket) => {
-  socket.on('message', (message) => {
-    console.log(message);
-    io.emit('message', `${message}`);
+  // listen for a score being sent from the client
+  socket.on('scores', (arg) => {
+    console.log('arg', arg);
+    // send the score to all clients
+    io.emit('scores', arg);
   });
 });
 

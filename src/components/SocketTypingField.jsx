@@ -4,7 +4,7 @@ import ResultsModal from './ResultsModal';
 import { UserContext } from '../helpers/context';
 import SubmittedWords from './SubmittedWords';
 
-export default function TypingField() {
+export default function SocketTypingField() {
   const { user, userKeyboards, userScore, setUserScore } = useContext(UserContext);
 
   // timer functionality
@@ -209,15 +209,6 @@ export default function TypingField() {
           autoFocus="autofocus"
         />
       </div>
-      {/* <div className="testing-info">
-        <div className="font-mono">LAST KEY: '{lastKey}'</div>
-        <div className="font-mono">TOTAL ENTRIES: {totalChars}</div>
-        <div className="font-mono">SUCCESSFUL ENTRIES: {correctChars}</div>
-        <div className="font-mono">MISTAKES: {mistakes}</div>
-        <div className="font-mono">numCorrectChars: {numCorrectChars}</div>
-        <div className="font-mono">numTotalChars: {numTotalChars}</div>
-        <div className="font-mono">numMistakes: {numMistakes}</div>
-      </div> */}
     </>
   );
 }
