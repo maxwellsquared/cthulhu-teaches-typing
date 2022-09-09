@@ -58,7 +58,9 @@ const About = function () {
   const [textFromServer, setTextFromServer] = useState('');
   const [isConnected, setIsConnected] = useState(false);
 
-  // setups socket connection
+  const [scoresFromServer, setScoresFromServer] = useState([]); // !! array of scores from server
+
+  // !! setups socket connection
   useEffect(() => {
     socket.on('connect', () => {
       setIsConnected(true);
@@ -69,8 +71,8 @@ const About = function () {
     });
 
     socket.on('FromAPI', (data) => {
-      console.log('FromAPI', data);
-      setTextFromServer(data);
+      // add data to scoresFromServer
+      setScoresFromServer((scoresFromServer) => [...scoresFromServer, data]);
     });
 
     return () => {
@@ -93,17 +95,18 @@ const About = function () {
     }
   }, [counter, started]);
 
-  // ---- GAME OVER ----
+  //!! ---- GAME OVER ----
   const gameOver = function () {
-    // submit score to socket server
     setAccuracy(Math.floor(100 * (1 - numMistakes / numTotalChars)));
     setWordsPerMinute(Math.floor(numCorrectChars / 5 / (initialTimer / 60)));
 
+    // create data object to send to server
     // TODO: send score to server
     setUserScore({
-      user: user ? user.name : 'Guest',
+      user: user ? user.name : 'Guest Player',
       wpm: Math.floor(numCorrectChars / 5 / (initialTimer / 60)),
       accuracy: Math.floor((numCorrectChars / numTotalChars) * 100),
+      numCorrectChars: numCorrectChars,
     });
     // todo: once the game is over, send the score to the server
     setIsComplete(true);
@@ -206,6 +209,7 @@ const About = function () {
 
   // ---- BACKSPACE FUNCTION ----
   const detailedInput = (event) => {
+    console.log(event);
     if (event.key === 'Backspace') {
       setBackspacePressed(true);
     } else {
@@ -213,26 +217,48 @@ const About = function () {
     }
   };
 
-  // if (isComplete) {
-  //   console.log('userScore', userScore);
-  //   // TODO: send a message to the server
-  //   socket.emit('FromClient', userScore);
-  // }
-
-  // useEffect to send the score to the server when the game is over
+  //!! useEffect to send the score to the server when the game is over
   useEffect(() => {
     if (isComplete) {
-      console.log('userScore', userScore);
+      console.log('userScore sent to server', userScore);
+
+      //! send the score to the server
       socket.emit('FromClient', userScore);
     }
+    // rerenders when isComplete changes
   }, [isComplete]);
 
-  console.log('textFromServer', textFromServer);
+  //! function to compare all scores from scoresFromServer and return the highest wpm
+  const getHighestWpm = (scores) => {
+    let highestWpm = 0;
+    let winnerStats = {};
+    scores.forEach((score) => {
+      if (score.wpm > highestWpm) {
+        highestWpm = score.wpm;
+        winnerStats = score;
+      }
+    });
+    return winnerStats;
+  };
+
+  console.log('all scoresFromServer', scoresFromServer);
 
   return (
     <>
-      <h1>About</h1>
-      <h1 className="font-mono text-green-500">Words Per Minute: {textFromServer}</h1>
+      <h1>MultiPlayer</h1>
+      <h1 className="font-mono text-green-500">
+        Winner: {getHighestWpm(scoresFromServer).user} with {getHighestWpm(scoresFromServer).wpm}{' '}
+        words per minute!
+      </h1>
+      <ul>
+        {scoresFromServer.map((score, index) => {
+          return (
+            <li key={index} className="text-red-500">
+              {score.user} - {score.wpm} wpm
+            </li>
+          );
+        })}
+      </ul>
 
       <div className="input-container my-20">
         <div className={timerClass}>TIME: {counter}</div>
