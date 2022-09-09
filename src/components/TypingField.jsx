@@ -52,9 +52,6 @@ export default function TypingField() {
   const [placeholder, setPlaceholder] = useState('Type here!');
   const [incorrectCharCSS, setIncorrectCharCSS] = useState('');
 
-  // testing
-  const [testingVisible, setTestingVisible] = useState(false);
-
   // ---- TIMER FUNCTION ----
   useEffect(() => {
     // checks if started or counter state changes, timer begins when the test starts. updates every second.
