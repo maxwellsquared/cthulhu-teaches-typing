@@ -117,6 +117,11 @@ io.on('connect', (socket) => {
     console.log('Client disconnected');
     clearInterval(interval);
   });
+
+  // receive message from client
+  socket.on('FromClient', (message) => {
+    console.log('Message from client:', message);
+  });
 });
 
 const getApiAndEmit = (socket) => {
