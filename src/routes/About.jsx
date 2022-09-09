@@ -99,7 +99,6 @@ const About = function () {
     setAccuracy(Math.floor(100 * (1 - numMistakes / numTotalChars)));
     setWordsPerMinute(Math.floor(numCorrectChars / 5 / (initialTimer / 60)));
 
-
     // TODO: send score to server
     setUserScore({
       user: user ? user.name : 'Guest',
@@ -214,12 +213,21 @@ const About = function () {
     }
   };
 
+  // if (isComplete) {
+  //   console.log('userScore', userScore);
+  //   // TODO: send a message to the server
+  //   socket.emit('FromClient', userScore);
+  // }
 
-  if (isComplete) {
-    console.log('userScore', userScore);
-    // TODO: send a message to the server
-    socket.emit('FromClient', userScore);
-  }
+  // useEffect to send the score to the server when the game is over
+  useEffect(() => {
+    if (isComplete) {
+      console.log('userScore', userScore);
+      socket.emit('FromClient', userScore);
+    }
+  }, [isComplete]);
+
+  console.log('textFromServer', textFromServer);
 
   return (
     <>

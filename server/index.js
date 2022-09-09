@@ -21,8 +21,8 @@ io.on('connect', (socket) => {
   socket.on('FromClient', (results) => {
     console.log('Message from client:', results);
     const response = `Server received: ${results.user}, with a WPM of ${results.wpm}`;
-    // send message to client
-    socket.emit('FromAPI', response);
+    // send message to ALL clients
+    io.sockets.emit('FromAPI', response);
   });
 });
 
