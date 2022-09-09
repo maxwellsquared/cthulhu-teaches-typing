@@ -56,7 +56,7 @@ const About = function () {
 
   /// sockets
   const [textFromServer, setTextFromServer] = useState('');
-  const [isConnected, setIsConnected] = useState();
+  const [isConnected, setIsConnected] = useState(false);
 
   // setups socket connection
   useEffect(() => {
@@ -79,27 +79,6 @@ const About = function () {
     };
   }, []);
 
-  // TODO if a game is complete, send the score to the sockets server
-  // useEffect(() => {
-  //   // if game is complete, create an object with the user's score
-  //   // send the object to the server
-  //   if (isComplete) {
-  //     const finalResult = {
-  //       userName: user.name,
-  //       wpm: wordsPerMinute,
-  //       accuracy: accuracy,
-  //       numTotalChars: numTotalChars,
-  //       numCorrectChars: numCorrectChars,
-  //       numMistakes: numMistakes,
-  //     };
-  //     console.log('finalResult', finalResult); // log the final result
-  //     // where to send the score, access on server with arg.score
-  //     socket.emit('scores', finalResult);
-  //   }
-  // }, [isComplete]);
-
-  /// sockets above
-
   // ---- TIMER FUNCTION ----
   useEffect(() => {
     // checks if started or counter state changes, timer begins when the test starts. updates every second.
@@ -119,11 +98,16 @@ const About = function () {
     // submit score to socket server
     setAccuracy(Math.floor(100 * (1 - numMistakes / numTotalChars)));
     setWordsPerMinute(Math.floor(numCorrectChars / 5 / (initialTimer / 60)));
+
+
+    // TODO: send score to server
     setUserScore({
+      user: user ? user.name : 'Guest',
       wpm: Math.floor(numCorrectChars / 5 / (initialTimer / 60)),
       accuracy: Math.floor((numCorrectChars / numTotalChars) * 100),
     });
-    // setIsComplete(true);
+    // todo: once the game is over, send the score to the server
+    setIsComplete(true);
   };
 
   // --- UPDATES WORDS SECTIONS
@@ -190,8 +174,6 @@ const About = function () {
       setRandomWords((prev) => [...prev.slice(1)]);
       setInput('');
     } else {
-      // send a message to the server
-      socket.emit('FromClient', input);
       setInput(event);
     }
   };
@@ -232,7 +214,12 @@ const About = function () {
     }
   };
 
-  console.log('Client Connected? ', isConnected);
+
+  if (isComplete) {
+    console.log('userScore', userScore);
+    // TODO: send a message to the server
+    socket.emit('FromClient', userScore);
+  }
 
   return (
     <>
