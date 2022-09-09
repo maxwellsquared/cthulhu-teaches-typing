@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 // import io from 'socket.io-client';
-import socketIOClient from 'socket.io-client';
+import io from 'socket.io-client';
 const ENDPOINT = 'http://127.0.0.1:8080';
 
 import { UserContext } from '../helpers/context';
@@ -55,14 +55,24 @@ const About = function () {
 
   /// sockets
   const [textFromServer, setTextFromServer] = useState('');
+  const [isConnected, setIsConnected] = useState();
+  const [lastPong, setLastPong] = useState(null);
 
   // setups socket connection
   // const socket = io('ws://localhost:8080'); // url of the server
   useEffect(() => {
-    //!! from article
-    const socket = socketIOClient(ENDPOINT);
+    const socket = io(ENDPOINT);
+    
+    socket.on('connect', () => {
+      setIsConnected(true);
+    });
+
+    socket.on('disconnect', () => {
+      setIsConnected(false);
+    });
 
     socket.on('FromAPI', (data) => {
+      console.log('FromAPI', data);
       setTextFromServer(data);
     });
     // listen for a score being sent from the client
@@ -70,26 +80,31 @@ const About = function () {
     //   console.log('winner in client :', data);
     //   // setTextFromServer(`Game over!  ${winner.name} has won with ${winner.wpm} words per minute!`);
     // });
+
+    return () => {
+      socket.off('connect');
+      socket.off('disconnect');
+    };
   }, []);
 
   // TODO if a game is complete, send the score to the sockets server
-  useEffect(() => {
-    // if game is complete, create an object with the user's score
-    // send the object to the server
-    if (isComplete) {
-      const finalResult = {
-        userName: user.name,
-        wpm: wordsPerMinute,
-        accuracy: accuracy,
-        numTotalChars: numTotalChars,
-        numCorrectChars: numCorrectChars,
-        numMistakes: numMistakes,
-      };
-      console.log('finalResult', finalResult); // log the final result
-      // where to send the score, access on server with arg.score
-      socket.emit('scores', finalResult);
-    }
-  }, [isComplete]);
+  // useEffect(() => {
+  //   // if game is complete, create an object with the user's score
+  //   // send the object to the server
+  //   if (isComplete) {
+  //     const finalResult = {
+  //       userName: user.name,
+  //       wpm: wordsPerMinute,
+  //       accuracy: accuracy,
+  //       numTotalChars: numTotalChars,
+  //       numCorrectChars: numCorrectChars,
+  //       numMistakes: numMistakes,
+  //     };
+  //     console.log('finalResult', finalResult); // log the final result
+  //     // where to send the score, access on server with arg.score
+  //     socket.emit('scores', finalResult);
+  //   }
+  // }, [isComplete]);
 
   /// sockets above
 
@@ -116,7 +131,7 @@ const About = function () {
       wpm: Math.floor(numCorrectChars / 5 / (initialTimer / 60)),
       accuracy: Math.floor((numCorrectChars / numTotalChars) * 100),
     });
-    setIsComplete(true);
+    // setIsComplete(true);
   };
 
   // --- UPDATES WORDS SECTIONS
@@ -222,6 +237,8 @@ const About = function () {
       setBackspacePressed(false);
     }
   };
+
+  console.log('Client Connected? ', isConnected);
 
   return (
     <>

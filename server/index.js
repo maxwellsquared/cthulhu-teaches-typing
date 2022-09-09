@@ -105,12 +105,14 @@ const port = 8080;
 
 let interval;
 
-io.on('connection', (socket) => {
+io.on('connect', (socket) => {
   console.log('New client connected');
   if (interval) {
     clearInterval(interval);
   }
   interval = setInterval(() => getApiAndEmit(socket), 1000);
+
+  // when client disconnects
   socket.on('disconnect', () => {
     console.log('Client disconnected');
     clearInterval(interval);
