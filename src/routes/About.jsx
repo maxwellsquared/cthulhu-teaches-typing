@@ -86,9 +86,8 @@ const About = function () {
     });
 
     socket.on('startGame', (seconds) => {
-      console.log('game starting in', seconds, 'seconds');
+      // runs when numberInWaitingRoom === 2 on server
       startCountdown();
-
       // use setTimeout to start game after 5 seconds
       setTimeout(() => {
         setStarted(true);
@@ -102,7 +101,7 @@ const About = function () {
     };
   }, []);
 
-  //!! start countdown timer
+  // start countdown timer
   const startCountdown = () => {
     const interval = setInterval(() => {
       setRemainingSeconds((remainingSeconds) => remainingSeconds - 1);
@@ -127,20 +126,19 @@ const About = function () {
     }
   }, [counter, started]);
 
-  //!! ---- GAME OVER ----
+  // ---- GAME OVER ----
   const gameOver = function () {
     setAccuracy(Math.floor(100 * (1 - numMistakes / numTotalChars)));
     setWordsPerMinute(Math.floor(numCorrectChars / 5 / (initialTimer / 60)));
 
     // create data object to send to server
-    // TODO: send score to server
     setUserScore({
       user: user ? user.name : guestName,
       wpm: Math.floor(numCorrectChars / 5 / (initialTimer / 60)),
       accuracy: Math.floor((numCorrectChars / numTotalChars) * 100),
       numCorrectChars: numCorrectChars,
     });
-    // todo: once the game is over, send the score to the server
+
     setIsComplete(true);
   };
 
@@ -232,7 +230,6 @@ const About = function () {
 
   // ---- BACKSPACE FUNCTION ----
   const detailedInput = (event) => {
-    console.log(event);
     if (event.key === 'Backspace') {
       setBackspacePressed(true);
     } else {
@@ -240,18 +237,16 @@ const About = function () {
     }
   };
 
-  //!! useEffect to send the score to the server when the game is over
+  // to send the score to the server when the game is over
   useEffect(() => {
     if (isComplete) {
-      console.log('userScore sent to server', userScore);
-
-      //! send the score to the server
+      // send the score to the server
       socket.emit('FromClient', userScore);
     }
     // rerenders when isComplete changes
   }, [isComplete]);
 
-  //! function to compare all scores from scoresFromServer and return the highest wpm
+  // function to compare all scores from scoresFromServer and return the highest wpm
   const getHighestWpm = (scores) => {
     let highestWpm = 0;
     let winnerStats = {};
@@ -310,7 +305,14 @@ const About = function () {
               className="h-24 w-80 rounded-lg bg-pale-gold py-1 px-6 text-center font-mono text-2xl text-cosmic-purple"
               onClick={joinWaitingRoom}
             >
-              {waiting ? 'Join Waiting Room' : <BeatLoader color="#8C3D34" size={30} />}
+              {waiting ? (
+                'Join Waiting Room'
+              ) : (
+                <>
+                  <span className="text-base">Waiting for players to join</span>
+                  <BeatLoader color="#8C3D34" size={8} />
+                </>
+              )}
             </button>
             {waiting ? null : (
               <h1 className="mt-5 -ml-4 text-4xl">Remaining seconds: {remainingSeconds}</h1>

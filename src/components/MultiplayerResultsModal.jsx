@@ -39,14 +39,24 @@ export default function ResultsModal(props) {
         ariaHideApp={false}
       >
         <div className="modal-container">
-          <h1 className="modal-header">CONGRATULATIONS!</h1>
-          <div className="player-data">
-            <p>WINNER: {winner.user}</p>
-            <p>WPM: {winner.wpm}</p>
-            <p>ACCURACY: {winner.accuracy}%</p>
+          <h1>CONGRATULATIONS!</h1>
+          <div className="text-3xl text-pale-gold">
+            <p>
+              WINNER:
+              <span className="text-blood-red"> {winner.user}</span>
+            </p>
+            <p>
+              WPM:
+              <span className="text-blood-red"> {winner.wpm}</span>
+            </p>
+            <p>
+              ACCURACY:
+              <span className="text-blood-red"> {winner.accuracy}%</span>
+            </p>
           </div>
           <ul>
             {scoresFromServer.map((score, index) => {
+              // if score.user is the 
               return (
                 <li key={index} className="text-red-500">
                   {score.user} - {score.wpm} wpm
