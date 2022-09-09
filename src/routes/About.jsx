@@ -8,9 +8,10 @@ import RandomWords from '../helpers/RandomWords';
 import SubmittedWords from '../components/SubmittedWords';
 import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generator';
 import MultiplayerResultsModal from '../components/MultiplayerResultsModal';
+import { BeatLoader } from 'react-spinners';
 
 const About = function () {
-  const { user, userScore, setUserScore, multiplayerConnected, setMultiplayerConnected } =
+  const { user, userScore, setUserScore } =
     useContext(UserContext);
 
   // timer functionality
@@ -57,10 +58,15 @@ const About = function () {
 
   /// sockets
   const [scoresFromServer, setScoresFromServer] = useState([]); // !! array of scores from server
-  const [numberInRoom, setNumberInRoom] = useState(0); // !! number of players in room
+  const [remainingSeconds, setRemainingSeconds] = useState(5); // !! seconds remaining before game starts
 
   // if user is not logged in, generate a random username
-  const guestName = uniqueNamesGenerator({ dictionaries: [adjectives, animals] });
+  // const guestName = uniqueNamesGenerator({ dictionaries: [adjectives, animals] });
+  const [guestName, setGuestName] = useState(
+    uniqueNamesGenerator({ dictionaries: [adjectives, animals] })
+  );
+  const [disableTyping, setDisableTyping] = useState(true);
+  const [waiting, setWaiting] = useState(true);
 
   // !! setups socket connection
   useEffect(() => {
@@ -81,9 +87,15 @@ const About = function () {
       setScoresFromServer((scoresFromServer) => [...scoresFromServer, data]);
     });
 
-
     socket.on('startGame', (seconds) => {
       console.log('game starting in', seconds, 'seconds');
+      startCountdown();
+
+      // use setTimeout to start game after 5 seconds
+      setTimeout(() => {
+        setStarted(true);
+        setDisableTyping(false);
+      }, seconds * 1000);
     });
 
     return () => {
@@ -91,6 +103,17 @@ const About = function () {
       socket.off('disconnect');
     };
   }, []);
+
+  //!! start countdown timer
+  const startCountdown = () => {
+    const interval = setInterval(() => {
+      setRemainingSeconds((remainingSeconds) => remainingSeconds - 1);
+    }, 1000);
+
+    setTimeout(() => {
+      clearInterval(interval);
+    }, 5050);
+  };
 
   // ---- TIMER FUNCTION ----
   useEffect(() => {
@@ -161,11 +184,6 @@ const About = function () {
     setFullDivStyle((prev) => {
       return { ...prev, left: `${xPosition}ch` };
     });
-
-    if (!started) {
-      // starts test status to 'started == true' on first input
-      setStarted(true);
-    }
 
     if (event.slice(-1) === ' ') {
       // if space bar pressed
@@ -253,18 +271,17 @@ const About = function () {
   const joinWaitingRoom = () => {
     //increment the number of players in the waiting room
     socket.emit('joinWaitingRoom');
+    // set waiting to be true
+    setWaiting(false);
   };
 
   return (
     <>
       <h1>MultiPlayer</h1>
-      <h1>{multiplayerConnected ? 'Connect!' : 'Not connected'}</h1>
 
       <div className="input-container my-20">
         {user ? null : <h1 className="font-mono text-2xl text-pale-gold">Welcome {guestName}</h1>}
-        <button className="btn btn-primary" onClick={joinWaitingRoom}>
-          Start
-        </button>
+
         <div className={timerClass}>TIME: {counter}</div>
         <div className={divClassName} style={fullDivStyle}>
           <div className="typing-left">
@@ -276,6 +293,7 @@ const About = function () {
         <input
           className={`rounded-t-lg font-sans ${incorrectCharCSS}`}
           placeholder={placeholder}
+          disabled={disableTyping}
           radius="md"
           size="md"
           value={input}
@@ -284,6 +302,19 @@ const About = function () {
           autoFocus="autofocus"
         />
 
+        {!disableTyping ? null : (
+          <div className="mt-10 flex flex-col align-middle">
+            <button
+              className="h-24 w-80 rounded-lg bg-pale-gold py-1 px-6 text-center font-mono text-2xl text-cosmic-purple"
+              onClick={joinWaitingRoom}
+            >
+              {waiting ? 'Join Waiting Room' : <BeatLoader color="#8C3D34" size={30} />}
+            </button>
+            {waiting ? null : (
+              <h1 className="mt-5 -ml-4 text-4xl">Remaining seconds: {remainingSeconds}</h1>
+            )}
+          </div>
+        )}
         <MultiplayerResultsModal
           gameOver={isComplete}
           scoresFromServer={scoresFromServer}
