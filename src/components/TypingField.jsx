@@ -1,11 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
 import RandomWords from '../helpers/RandomWords';
 import ResultsModal from './ResultsModal';
-import { UserContext } from '../helpers/context';
+import { UserContext, CodeContext } from '../helpers/context';
 import SubmittedWords from './SubmittedWords';
 
 export default function TypingField() {
   const { user, userKeyboards } = useContext(UserContext);
+  const { codeEntered, setCodeEntered } = useContext(CodeContext);
 
   // timer functionality
   const initialTimer = 15; // use constant for initial timer and pass to counter--needed for WPM
@@ -18,6 +19,8 @@ export default function TypingField() {
 
   // inputs from user
   const [input, setInput] = useState('');
+  const [keyStrokes, setKeyStrokes] = useState([]); // stores keystrokes for Konami Code
+  const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
   const [leftWords, setLeftWords] = useState([]);
   const [leftChars, setLeftChars] = useState(''); // stores the characters on the left side of the cursor
   const [rightChars, setRightChars] = useState(initialRandomWords.replace(/,/g, ' ')); // stores the characters on the right side of the cursor
@@ -48,6 +51,9 @@ export default function TypingField() {
   const [numMistakes, setNumMistakes] = useState(0);
   const [placeholder, setPlaceholder] = useState('Type here!');
   const [incorrectCharCSS, setIncorrectCharCSS] = useState('');
+
+  // testing
+  const [testingVisible, setTestingVisible] = useState(false);
 
   // ---- TIMER FUNCTION ----
   useEffect(() => {
@@ -164,13 +170,27 @@ export default function TypingField() {
     }
   };
 
-  // ---- BACKSPACE FUNCTION ----
+  // ---- BACKSPACE FUNCTION AND CODE CHECK ----
   const detailedInput = (event) => {
     if (event.key === 'Backspace') {
       setBackspacePressed(true);
     } else {
       setBackspacePressed(false);
     }
+    setKeyStrokes(prev => [...prev, event.key]);
+    console.log(keyStrokes);
+    if (compareArrays(keyStrokes, konamiCode)) {
+      setCodeEntered(true);
+    }
+  };
+
+  // --- compare arrays ----
+  const compareArrays = function (array1, array2) {
+    if (array1.length !== array2.length) return false;
+    for (let i = 0; i < array1.length; i++) {
+      if (array1[i] !== array2[i]) return false;
+    }
+    return true;
   };
 
   return (
@@ -181,6 +201,7 @@ export default function TypingField() {
         accuracy={accuracy}
         // user={user ? user : 'anon'}
       />
+      <div style={{color: 'white', visibility: codeEntered ? 'visible' : 'hidden'}}>CONGRATULATION!!!! VISIBLE</div>
       <div className="input-container my-20">
         <div className={timerClass}>TIME: {counter}</div>
         <div className={divClassName} style={fullDivStyle}>
