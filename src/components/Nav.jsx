@@ -12,6 +12,7 @@ const Nav = () => {
 
   // simulate a user user logging out by refreshing the page, which will reset the user context
   function refreshPage() {
+    window.localStorage.clear();
     window.location.reload(false);
   }
 
@@ -26,9 +27,9 @@ const Nav = () => {
           </Link>
         </div>
         <ul className="flex items-center  gap-2 font-light">
-          {user ? (
+          {user && user !== 'null' ? (
             <>
-              {user && userKeyboards ? <KeyboardDropdown /> : null}
+              {user  && userKeyboards ? <KeyboardDropdown /> : null}
 
               <li>
                 <Link

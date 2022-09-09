@@ -14,7 +14,7 @@ export default function TypingField() {
 
   // text to be typed
   const [randomWords, setRandomWords] = useState(RandomWords({ time: 1, numWords: 225 })); // returns array of 225 words
-  const initialRandomWords = randomWords.toString(); // converts array to string
+  let initialRandomWords = randomWords.toString(); // converts array to string
 
   // inputs from user
   const [input, setInput] = useState('');
@@ -48,6 +48,38 @@ export default function TypingField() {
   const [numMistakes, setNumMistakes] = useState(0);
   const [placeholder, setPlaceholder] = useState('Type here!');
   const [incorrectCharCSS, setIncorrectCharCSS] = useState('');
+
+  const reset = () => {
+    setCounter(initialTimer);
+    setStarted(false);
+    setRandomWords(RandomWords({ time: 1, numWords: 225 }))
+    initialRandomWords = randomWords.toString();
+    setInput('');
+    setLeftWords([]);
+    setLeftChars('');
+    setRightChars(initialRandomWords.replace(/,/g, ' '));
+    setLastKey();
+    setCorrectChars(0);
+    setTotalChars(0);
+    setMistakes(0);
+    setWordsPerMinute('meatball');
+    setAccuracy('gabagool');
+    setIsComplete(false);
+    setXPosition(0);
+    setDivClassName('typing');
+    setTimerClass('timer');
+    setFullDivStyle({
+      position: 'relative', // set typing division style (in order to set position)
+      left: '0ch',
+    })
+    setLastCharIndex(0);
+    setBackspacePressed(false);
+    setNumCorrectChars(0);
+    setNumTotalChars(0);
+    setNumMistakes(0);
+    setPlaceholder('Type here!');
+    setIncorrectCharCSS('');
+  };
 
   // ---- TIMER FUNCTION ----
   useEffect(() => {
@@ -95,6 +127,8 @@ export default function TypingField() {
       setDivClassName('typing');
     }, 250);
   };
+
+
 
   // ---- INPUT FUNCTION ----
   const handleInput = function (event) {
@@ -179,6 +213,7 @@ export default function TypingField() {
         gameOver={isComplete}
         wpm={wordsPerMinute}
         accuracy={accuracy}
+        reset={() => {reset()}}
         // user={user ? user : 'anon'}
       />
       <div className="input-container my-20">

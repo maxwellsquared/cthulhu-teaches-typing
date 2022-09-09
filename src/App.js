@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { UserContext } from './helpers/context';
@@ -16,6 +16,14 @@ export default function App() {
   const [user, setUser] = useState(); // user state, set at login
   const [userKeyboards, setUserKeyboards] = useState(); // array of keyboards for the user, set at login
   const [currentKeyboard, setCurrentKeyboard] = useState(); // this is the id of the current keyboard, set when user goes to TypingField
+
+  useEffect(() => {
+    setUser(JSON.parse(window.localStorage.getItem("user")));
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   // this will wrap all other components
   return (
