@@ -1,5 +1,4 @@
 import { useEffect, useState, useContext } from 'react';
-// import io from 'socket.io-client';
 import io from 'socket.io-client';
 const ENDPOINT = 'http://127.0.0.1:8080';
 const socket = io(ENDPOINT);
@@ -7,7 +6,7 @@ const socket = io(ENDPOINT);
 import { UserContext } from '../helpers/context';
 import RandomWords from '../helpers/RandomWords';
 import SubmittedWords from '../components/SubmittedWords';
-import SocketTypingField from '../components/SocketTypingField';
+import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generator';
 
 const About = function () {
   const { user, userKeyboards, userScore, setUserScore } = useContext(UserContext);
@@ -100,10 +99,12 @@ const About = function () {
     setAccuracy(Math.floor(100 * (1 - numMistakes / numTotalChars)));
     setWordsPerMinute(Math.floor(numCorrectChars / 5 / (initialTimer / 60)));
 
+    const guestName = uniqueNamesGenerator({ dictionaries: [adjectives, animals] });
+
     // create data object to send to server
     // TODO: send score to server
     setUserScore({
-      user: user ? user.name : 'Guest Player',
+      user: user ? user.name : guestName,
       wpm: Math.floor(numCorrectChars / 5 / (initialTimer / 60)),
       accuracy: Math.floor((numCorrectChars / numTotalChars) * 100),
       numCorrectChars: numCorrectChars,
@@ -115,10 +116,7 @@ const About = function () {
   // --- UPDATES WORDS SECTIONS
   useEffect(() => {
     setFullDivStyle((prev) => {
-      // !! stretch
-      // if word mistake in the word and don't correct it, and update the word section, then we pass the mistake into the total mistake
-      // only update total mistakes on moving the word over
-      // allows you to pass a style into the entire div
+
       return { ...prev, left: `${xPosition}ch` };
     });
   }, [leftChars]);
