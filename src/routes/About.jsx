@@ -1,5 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
+import socketIOClient from 'socket.io-client';
+const ENDPOINT = 'http://127.0.0.1:8080';
+
 import { UserContext } from '../helpers/context';
 import RandomWords from '../helpers/RandomWords';
 import SubmittedWords from '../components/SubmittedWords';
@@ -54,16 +57,19 @@ const About = function () {
   const [textFromServer, setTextFromServer] = useState('');
 
   // setups socket connection
-  const socket = io('ws://localhost:8080'); // url of the server
-
+  // const socket = io('ws://localhost:8080'); // url of the server
   useEffect(() => {
-    // listen for a score being sent from the client
-    socket.on('highestWpm', (winner) => {
-      console.log('winner:', winner);
-      setTextFromServer(`Game over!  ${winner.name} has won with ${winner.wpm} words per minute!`);
-    });
+    //!! from article
+    const socket = socketIOClient(ENDPOINT);
 
-    return () => socket.disconnect(); // prevents memory leaks
+    socket.on('FromAPI', (data) => {
+      setTextFromServer(data);
+    });
+    // listen for a score being sent from the client
+    // socket.on('gameOver', (data) => {
+    //   console.log('winner in client :', data);
+    //   // setTextFromServer(`Game over!  ${winner.name} has won with ${winner.wpm} words per minute!`);
+    // });
   }, []);
 
   // TODO if a game is complete, send the score to the sockets server
@@ -84,7 +90,6 @@ const About = function () {
       socket.emit('scores', finalResult);
     }
   }, [isComplete]);
-
 
   /// sockets above
 

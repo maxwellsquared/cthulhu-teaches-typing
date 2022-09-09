@@ -17,5 +17,5 @@
     "nodemon": "^2.0.19",
     "socket.io": "^4.5.2"
   },
-  "type":"commonjs"
+  "type": "commonjs"
 }
