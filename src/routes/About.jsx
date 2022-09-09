@@ -53,28 +53,23 @@ const About = function () {
   /// sockets
   const [textFromServer, setTextFromServer] = useState('');
 
+  // setups socket connection
   const socket = io('ws://localhost:8080'); // url of the server
-  useEffect(() => {
-    // listen to the connection event from the server
-    socket.on('connection', (texts) => {
-      // set the messages to the state
-      console.log('texts', texts);
-    });
 
+  useEffect(() => {
+    // listen for a score being sent from the client
     socket.on('highestWpm', (winner) => {
-      console.log('highestWpm', highestWpm);
+      console.log('winner:', winner);
       setTextFromServer(`Game over!  ${winner.name} has won with ${winner.wpm} words per minute!`);
     });
 
-    // when user goes to page, send a message
-
     return () => socket.disconnect(); // prevents memory leaks
-  }, [textFromServer]);
+  }, []);
 
   // TODO if a game is complete, send the score to the sockets server
   useEffect(() => {
-    console.log('isComplete', isComplete);
-    console.log('words per minute', wordsPerMinute);
+    // if game is complete, create an object with the user's score
+    // send the object to the server
     if (isComplete) {
       const finalResult = {
         userName: user.name,
@@ -84,11 +79,12 @@ const About = function () {
         numCorrectChars: numCorrectChars,
         numMistakes: numMistakes,
       };
-      console.log('finalResult', finalResult);
+      console.log('finalResult', finalResult); // log the final result
       // where to send the score, access on server with arg.score
       socket.emit('scores', finalResult);
     }
   }, [isComplete]);
+
 
   /// sockets above
 

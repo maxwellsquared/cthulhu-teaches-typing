@@ -4,7 +4,7 @@ const io = require('socket.io')(http, {
   cors: { origin: '*' },
 });
 let scoresArr = [];
-let highestWpm;
+
 io.on('connection', (socket) => {
   // listen for a score being sent from the client
   socket.on('scores', (results) => {
@@ -29,7 +29,7 @@ io.on('connection', (socket) => {
       );
 
       // emit the highest wpm to the client
-      // io.emit('highestWpm', highestWpm);
+      io.emit('highestWpm', highestWpm);
     }
   });
 });
