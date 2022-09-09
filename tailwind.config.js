@@ -17,6 +17,7 @@ module.exports = {
         'blood-red-hover': '#662C26',
         candle: '#E9B12E',
         'link-green': '#2D888C',
+        'modal-purple': '#190019',
         incorrectInput: 'rgba(248, 41, 41, 0.09)',
       },
       fontFamily: {

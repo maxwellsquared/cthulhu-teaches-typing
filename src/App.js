@@ -10,6 +10,7 @@ import Nav from './components/Nav';
 import Leaderboard from './routes/Leaderboard';
 import LayoutWrapper from './components/LayoutWrapper';
 import './App.css';
+import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generator';
 
 // parent component for all other components
 export default function App() {
@@ -17,6 +18,9 @@ export default function App() {
   const [userKeyboards, setUserKeyboards] = useState(); // array of keyboards for the user, set at login
   const [currentKeyboard, setCurrentKeyboard] = useState(); // this is the id of the current keyboard, set when user goes to TypingField
   const [userScore, setUserScore] = useState(); // this is the score of the user, gets set when the user finishes typing
+  const [guestName, setGuestName] = useState(
+    uniqueNamesGenerator({ dictionaries: [adjectives, animals] }).toUpperCase()
+  ); // this is the name of the guest user, set when user goes to TypingField
 
   // this will wrap all other components
   return (
@@ -31,6 +35,8 @@ export default function App() {
           setCurrentKeyboard,
           userScore,
           setUserScore,
+          guestName,
+          setGuestName,
         }}
       >
         <Nav />

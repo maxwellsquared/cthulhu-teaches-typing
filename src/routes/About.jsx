@@ -6,12 +6,12 @@ const socket = io(ENDPOINT);
 import { UserContext } from '../helpers/context';
 import RandomWords from '../helpers/RandomWords';
 import SubmittedWords from '../components/SubmittedWords';
-import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generator';
+// import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generator';
 import MultiplayerResultsModal from '../components/MultiplayerResultsModal';
 import { BeatLoader } from 'react-spinners';
 
 const About = function () {
-  const { user, userScore, setUserScore } = useContext(UserContext);
+  const { user, userScore, setUserScore, guestName } = useContext(UserContext);
 
   // timer functionality
   const initialTimer = 5; // use constant for initial timer and pass to counter--needed for WPM
@@ -61,9 +61,9 @@ const About = function () {
 
   // if user is not logged in, generate a random username
   // const guestName = uniqueNamesGenerator({ dictionaries: [adjectives, animals] });
-  const [guestName, setGuestName] = useState(
-    uniqueNamesGenerator({ dictionaries: [adjectives, animals] }).toUpperCase()
-  );
+  // const [guestName, setGuestName] = useState(
+  //   uniqueNamesGenerator({ dictionaries: [adjectives, animals] }).toUpperCase()
+  // );
   const [disableTyping, setDisableTyping] = useState(true);
   const [waiting, setWaiting] = useState(true);
 

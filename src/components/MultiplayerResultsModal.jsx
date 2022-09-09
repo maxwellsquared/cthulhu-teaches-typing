@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 export default function ResultsModal(props) {
   const [modalIsOpen, setModalIsOpen] = useState(props.gameOver);
   const [userClosed, setUserClosed] = useState(props.gameOver);
-  const { user, currentKeyboard } = useContext(UserContext);
+  const { user, guestName } = useContext(UserContext);
   const [submitted, setSubmitted] = useState(false);
 
   const { gameOver, winner, scoresFromServer } = props;
@@ -54,39 +54,38 @@ export default function ResultsModal(props) {
               <span className="text-blood-red"> {winner.accuracy}%</span>
             </p>
           </div>
-          <ul>
-            {scoresFromServer.map((score, index) => {
-              // if score.user is the 
-              return (
-                <li key={index} className="text-red-500">
-                  {score.user} - {score.wpm} wpm
-                </li>
-              );
-            })}
-          </ul>
+
+          <table className="my-10 w-9/12 table-auto text-center text-lg">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 text-center">User</th>
+                <th className="px-4 py-2 text-center">WPM</th>
+                <th className="px-4 py-2 text-center">Accuracy</th>
+              </tr>
+            </thead>
+            <tbody>
+              {scoresFromServer.map((score, index) => {
+                // if score.user is the same as guestName, do not display it
+                return (
+                  <tr key={index}>
+                    <td className="border bg-modal-purple px-4 py-2 text-center">{score.user}</td>
+                    <td className="border bg-modal-purple px-4 py-2 text-center">{score.wpm}</td>
+                    <td className="border bg-modal-purple px-4 py-2 text-center">
+                      {score.accuracy}%
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+
           <button
-            className="text-xlg mt-10 transform rounded-lg
+            className="transform rounded-lg text-lg
 			text-cosmic-purple hover:bg-blood-red-hover"
             onClick={closeModal}
           >
             CLOSE
           </button>
-          {user ? (
-            <>
-              <div className="font-gold-hover mt-10 transform rounded-lg text-lg text-blood-red">
-                Results has been automatically added to your keyboard stats!
-              </div>
-              <Link
-                className="font-gold-hover mt-3 transform rounded-lg text-lg text-blood-red"
-                to="/user"
-              >
-                See all results{' '}
-                <span className="text-link-green underline hover:text-pale-gold">here</span>
-              </Link>
-            </>
-          ) : (
-            <div />
-          )}
         </div>
       </Modal>
     </>
