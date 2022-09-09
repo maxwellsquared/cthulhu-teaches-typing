@@ -18,6 +18,8 @@ export default function App() {
   const [currentKeyboard, setCurrentKeyboard] = useState(); // this is the id of the current keyboard, set when user goes to TypingField
   const [userScore, setUserScore] = useState(); // this is the score of the user, gets set when the user finishes typing
 
+  const [multiplayerConnected, setMultiplayerConnected] = useState(false); // determines if the user is connected to a multiplayer game
+
   // this will wrap all other components
   return (
     <BrowserRouter>
@@ -31,6 +33,8 @@ export default function App() {
           setCurrentKeyboard,
           userScore,
           setUserScore,
+          multiplayerConnected,
+          setMultiplayerConnected,
         }}
       >
         <Nav />

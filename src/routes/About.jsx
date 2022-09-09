@@ -10,7 +10,8 @@ import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generato
 import MultiplayerResultsModal from '../components/MultiplayerResultsModal';
 
 const About = function () {
-  const { user, userKeyboards, userScore, setUserScore } = useContext(UserContext);
+  const { user, userScore, setUserScore, multiplayerConnected, setMultiplayerConnected } =
+    useContext(UserContext);
 
   // timer functionality
   const initialTimer = 5; // use constant for initial timer and pass to counter--needed for WPM
@@ -55,10 +56,8 @@ const About = function () {
   const [incorrectCharCSS, setIncorrectCharCSS] = useState('');
 
   /// sockets
-  const [textFromServer, setTextFromServer] = useState('');
-  const [isConnected, setIsConnected] = useState(false);
-
   const [scoresFromServer, setScoresFromServer] = useState([]); // !! array of scores from server
+  const [numberInRoom, setNumberInRoom] = useState(0); // !! number of players in room
 
   // if user is not logged in, generate a random username
   const guestName = uniqueNamesGenerator({ dictionaries: [adjectives, animals] });
@@ -66,16 +65,25 @@ const About = function () {
   // !! setups socket connection
   useEffect(() => {
     socket.on('connect', () => {
-      setIsConnected(true);
+      setMultiplayerConnected(true);
+      console.log('connected to server');
+      //joins waiting room
+      socket.emit('waiting', 'waiting');
     });
 
     socket.on('disconnect', () => {
-      setIsConnected(false);
+      setMultiplayerConnected(false);
+      console.log('disconnected from server');
     });
 
     socket.on('FromAPI', (data) => {
       // add data to scoresFromServer
       setScoresFromServer((scoresFromServer) => [...scoresFromServer, data]);
+    });
+
+
+    socket.on('startGame', (seconds) => {
+      console.log('game starting in', seconds, 'seconds');
     });
 
     return () => {
@@ -240,14 +248,23 @@ const About = function () {
     return winnerStats;
   };
 
-  console.log('all scoresFromServer', scoresFromServer);
+  // once button clicked, emit to waiting room to start game
+  // increment the number of players in the waiting room
+  const joinWaitingRoom = () => {
+    //increment the number of players in the waiting room
+    socket.emit('joinWaitingRoom');
+  };
 
   return (
     <>
       <h1>MultiPlayer</h1>
+      <h1>{multiplayerConnected ? 'Connect!' : 'Not connected'}</h1>
 
       <div className="input-container my-20">
         {user ? null : <h1 className="font-mono text-2xl text-pale-gold">Welcome {guestName}</h1>}
+        <button className="btn btn-primary" onClick={joinWaitingRoom}>
+          Start
+        </button>
         <div className={timerClass}>TIME: {counter}</div>
         <div className={divClassName} style={fullDivStyle}>
           <div className="typing-left">
