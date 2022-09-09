@@ -262,28 +262,16 @@ const About = function () {
           radius="md"
           size="md"
           value={input}
-          // ^ sets to display nothing and not have any extra input chars
           onChange={(event) => handleInput(event.target.value)}
           onKeyDown={(event) => detailedInput(event)}
           autoFocus="autofocus"
         />
-        {/* {isComplete ? (
-          <div className="flex flex-col font-mono text-pale-gold">
-            <h1 className="text-2xl">Multiplayer Winner: {getHighestWpm(scoresFromServer).user}</h1>
-            <h3 className="text-xl">Words Per Minute: {getHighestWpm(scoresFromServer).wpm}</h3>
-            <h3 className="text-xl">Accuracy: {getHighestWpm(scoresFromServer).accuracy}%</h3>
-            <ul>
-              {scoresFromServer.map((score, index) => {
-                return (
-                  <li key={index} className="text-red-500">
-                    {score.user} - {score.wpm} wpm
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ) : null} */}
-        <MultiplayerResultsModal gameOver={isComplete} />
+
+        <MultiplayerResultsModal
+          gameOver={isComplete}
+          scoresFromServer={scoresFromServer}
+          winner={getHighestWpm(scoresFromServer)}
+        />
       </div>
     </>
   );

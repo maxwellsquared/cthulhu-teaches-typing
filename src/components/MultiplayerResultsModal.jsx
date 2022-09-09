@@ -13,7 +13,7 @@ export default function ResultsModal(props) {
   const { user, currentKeyboard } = useContext(UserContext);
   const [submitted, setSubmitted] = useState(false);
 
-  // const { gameOver, winner, resultsArray } = props;
+  const { gameOver, winner, scoresFromServer } = props;
 
   useEffect(() => {
     let localSwitch = props.gameOver;
@@ -41,10 +41,19 @@ export default function ResultsModal(props) {
         <div className="modal-container">
           <h1 className="modal-header">CONGRATULATIONS!</h1>
           <div className="player-data">
-            <p>WINNER: </p>
-            <p>WPM: </p>
-            <p>ACCURACY:%</p>
+            <p>WINNER: {winner.user}</p>
+            <p>WPM: {winner.wpm}</p>
+            <p>ACCURACY: {winner.accuracy}%</p>
           </div>
+          <ul>
+            {scoresFromServer.map((score, index) => {
+              return (
+                <li key={index} className="text-red-500">
+                  {score.user} - {score.wpm} wpm
+                </li>
+              );
+            })}
+          </ul>
           <button
             className="text-xlg mt-10 transform rounded-lg
 			text-cosmic-purple hover:bg-blood-red-hover"
