@@ -56,7 +56,7 @@ const Multiplayer = function () {
   const [disableTyping, setDisableTyping] = useState(true);
   const [waiting, setWaiting] = useState(true);
 
-  // !! setups socket connection
+  // --- setups socket connection ---
   useEffect(() => {
     socket.on('connect', () => {
       console.log('connected to server');
@@ -73,7 +73,7 @@ const Multiplayer = function () {
       setScoresFromServer((scoresFromServer) => [...scoresFromServer, data]);
     });
 
-    socket.on('startGame', (seconds) => {
+    socket.on('startGame', () => {
       // runs when numberInWaitingRoom === 2 on server
       startCountdown();
       // use setTimeout to start game after 5 seconds
@@ -143,7 +143,7 @@ const Multiplayer = function () {
     setXPosition((prev) => prev - (length + 1));
   };
 
-  // --- SCREENSHAKE ---
+  // --- SCREEN SHAKE ---
   const screenShake = () => {
     setDivClassName('typing shaken');
     setTimeout(() => {

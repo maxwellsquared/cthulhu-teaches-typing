@@ -16,7 +16,7 @@ import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generato
 export default function App() {
   const [user, setUser] = useState(); // user state, set at login
   const [userKeyboards, setUserKeyboards] = useState(); // array of keyboards for the user, set at login
-  const [currentKeyboard, setCurrentKeyboard] = useState(); // this is the id of the current keyboard, set when user goes to TypingField
+  const [currentKeyboard, setCurrentKeyboard] = useState(0); // this is the id of the current keyboard, set when user goes to TypingField
   const [codeEntered, setCodeEntered] = useState();
   const [userScore, setUserScore] = useState(); // this is the score of the user, gets set when the user finishes typing
   const [guestName, setGuestName] = useState(

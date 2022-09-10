@@ -1,9 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../helpers/context';
 import Modal from 'react-modal';
-import SubmitUserScore from './SubmitUserScore';
 import submitScore from '../helpers/submitScore';
-import { Link } from 'react-router-dom';
 
 // Modal.setAppElement(document.getElementById('app'));
 
@@ -25,7 +24,7 @@ export default function ResultsModal(props) {
 
   const closeModal = function () {
     setUserClosed(true);
-    window.localStorage.setItem("user", JSON.stringify(user));
+    window.localStorage.setItem('user', JSON.stringify(user));
     window.location.reload(false);
   };
 
@@ -41,13 +40,11 @@ export default function ResultsModal(props) {
         <div className="modal-container">
           <h1 className="modal-header">CONGRATULATIONS!</h1>
           <div className="player-data">
-            {/* <p>USER: {props.user}</p> */}
             <p>WPM: {props.wpm}</p>
             <p>ACCURACY: {props.accuracy}%</p>
           </div>
           <button
-            className="text-xlg mt-10 transform rounded-lg
-			text-cosmic-purple hover:bg-blood-red-hover"
+            className="text-xlg mt-10 transform rounded-lg text-cosmic-purple hover:bg-blood-red-hover"
             onClick={closeModal}
           >
             CLOSE

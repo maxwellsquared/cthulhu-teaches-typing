@@ -1,26 +1,20 @@
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../helpers/context';
 import Modal from 'react-modal';
-import SubmitUserScore from './SubmitUserScore';
-import submitScore from '../helpers/submitScore';
-import { Link } from 'react-router-dom';
-
-// Modal.setAppElement(document.getElementById('app'));
 
 export default function ResultsModal(props) {
   const [modalIsOpen, setModalIsOpen] = useState(props.gameOver);
   const [userClosed, setUserClosed] = useState(props.gameOver);
-  const { user, guestName } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [submitted, setSubmitted] = useState(false);
 
-  const { gameOver, winner, scoresFromServer } = props;
+  const { winner, scoresFromServer } = props;
 
   useEffect(() => {
     let localSwitch = props.gameOver;
     if (userClosed) localSwitch = false;
     setModalIsOpen(localSwitch);
     if (user && props.gameOver && !submitted) {
-      // submitScore(props.wpm, props.accuracy, user.id, currentKeyboard);
       setSubmitted(true);
     }
   });
