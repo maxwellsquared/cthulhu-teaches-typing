@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       // theme is where you can configure the colors, spacing, etc.
       colors: {
+        // dark mode colors (default)
         'cosmic-purple': '#1C122C',
         'lighter-purple': '#1C122B',
         'darker-purple': '#10142B',
@@ -20,6 +21,12 @@ module.exports = {
         'link-green': '#2D888C',
         'modal-purple': '#190019',
         incorrectInput: 'rgba(248, 41, 41, 0.09)',
+
+        // light mode colors
+        beige: '#F0E9D2',
+        'darker-beige': '#E6DDC4',
+        'kinda-teal': '#678983',
+        'dark-navy': '#181D31',
       },
       fontFamily: {
         // if changing, import font into 'src/index.css'

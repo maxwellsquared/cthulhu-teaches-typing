@@ -14,7 +14,6 @@ import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generato
 
 //!! toggle dark mode
 import { ThemeProvider } from './helpers/ThemeContext';
-import ThemeToggle from './components/ThemeToggle';
 
 // parent component for all other components
 export default function App() {
@@ -66,9 +65,8 @@ export default function App() {
           }}
         >
           <CodeContext.Provider value={{ codeEntered, setCodeEntered }}>
-            <div className="bg-cosmic-purple transition-all dark:bg-white">
+            <div className="bg-beige transition-all dark:bg-cosmic-purple">
               <Nav />
-              <ThemeToggle />
 
               <LayoutWrapper>
                 <Routes>

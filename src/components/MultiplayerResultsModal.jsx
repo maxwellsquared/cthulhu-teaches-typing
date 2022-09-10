@@ -35,19 +35,19 @@ export default function ResultsModal(props) {
         ariaHideApp={false}
       >
         <div className="modal-container">
-          <h1 className="text-pale-gold">CONGRATULATIONS!</h1>
+          <h1 className="text-dark-navy dark:text-pale-gold">CONGRATULATIONS!</h1>
           <div className="text-3xl text-pale-gold">
             <p>
               WINNER:
-              <span className="text-blood-red"> {winner.user}</span>
+              <span className="text-kinda-teal dark:text-blood-red"> {winner.user}</span>
             </p>
             <p>
               WPM:
-              <span className="text-blood-red"> {winner.wpm}</span>
+              <span className="text-kinda-teal dark:text-blood-red"> {winner.wpm}</span>
             </p>
             <p>
               ACCURACY:
-              <span className="text-blood-red"> {winner.accuracy}%</span>
+              <span className="text-kinda-teal dark:text-blood-red"> {winner.accuracy}%</span>
             </p>
           </div>
 

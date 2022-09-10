@@ -51,7 +51,6 @@ h1 {
 
 .timer {
   font-size: 40px;
-  color: #eedcb2;
   font-family: brother-1816, sans-serif;
 }
 
@@ -93,7 +92,6 @@ input:focus {
 }
 
 input::placeholder {
-  color: #EEDCB2;
   opacity: 0.5;
 }
 

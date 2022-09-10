@@ -38,28 +38,28 @@ export default function ResultsModal(props) {
         ariaHideApp={false}
       >
         <div className="modal-container">
-          <h1 className="modal-header text-pale-gold">CONGRATULATIONS!</h1>
+          <h1 className="modal-header text-dark-navy dark:text-pale-gold">CONGRATULATIONS!</h1>
           <div className="player-data">
             <p>WPM: {props.wpm}</p>
             <p>ACCURACY: {props.accuracy}%</p>
           </div>
           <button
-            className="text-xlg mt-10 transform rounded-lg text-cosmic-purple hover:bg-blood-red-hover"
+            className="text-xlg mt-10 transform rounded-lg dark:text-cosmic-purple dark:hover:bg-blood-red-hover"
             onClick={closeModal}
           >
             CLOSE
           </button>
           {user ? (
             <>
-              <div className="font-gold-hover mt-10 transform rounded-lg text-lg text-blood-red">
+              <div className="font-gold-hover mt-10 transform rounded-lg text-lg text-dark-navy dark:text-blood-red">
                 Results has been automatically added to your keyboard stats!
               </div>
               <Link
-                className="font-gold-hover mt-3 transform rounded-lg text-lg text-blood-red"
+                className="font-gold-hover mt-3 transform rounded-lg text-lg text-dark-navy dark:text-blood-red"
                 to="/user"
               >
                 See all results{' '}
-                <span className="text-link-green underline hover:text-pale-gold">here</span>
+                <span className="text-link-green underline dark:hover:text-pale-gold">here</span>
               </Link>
             </>
           ) : (

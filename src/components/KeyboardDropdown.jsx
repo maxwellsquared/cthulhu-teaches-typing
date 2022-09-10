@@ -20,12 +20,15 @@ const KeyboardDropdown = () => {
 
   return (
     <div className="justify flex items-center gap-2">
-      <label htmlFor="keyboards" className="block font-mono text-base text-pale-gold ">
+      <label
+        htmlFor="keyboards"
+        className="block font-mono text-base text-kinda-teal dark:text-pale-gold"
+      >
         Selected Keyboard:
       </label>
       <select
         value={currentKeyboard ? currentKeyboard : 1}
-        className="rounded-lg border bg-lighter-purple p-1 text-pale-gold focus:border-blood-red focus:ring-blood-red"
+        className="rounded-lg border bg-darker-beige p-1 text-dark-navy dark:bg-lighter-purple dark:text-pale-gold dark:focus:border-blood-red dark:focus:ring-blood-red"
         onChange={(event) => handleKeyboardClick(event.currentTarget.value)}
       >
         {userKeyboards.map((keyboard) => (
