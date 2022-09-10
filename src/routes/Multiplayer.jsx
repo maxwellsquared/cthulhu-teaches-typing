@@ -1,11 +1,13 @@
 import { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../helpers/context';
-import RandomWords from '../helpers/RandomWords';
 import SubmittedWords from '../components/SubmittedWords';
 import MultiplayerResultsModal from '../components/MultiplayerResultsModal';
 import { BeatLoader } from 'react-spinners';
 import io from 'socket.io-client';
-const ENDPOINT = 'http://127.0.0.1:8080';
+import multiplayerRandomWords from '../helpers/multiplayerRandomWords';
+
+// setup socket connection
+const ENDPOINT = 'http://127.0.0.1:8080'; // PORT used in the server/index.js file
 const socket = io(ENDPOINT);
 
 const Multiplayer = function () {
@@ -17,7 +19,7 @@ const Multiplayer = function () {
   const [started, setStarted] = useState(false);
 
   // text to be typed
-  const [randomWords, setRandomWords] = useState(RandomWords({ time: 1, numWords: 225 })); // returns array of 225 words
+  const [randomWords, setRandomWords] = useState(multiplayerRandomWords()); // returns array of 225 words
   let initialRandomWords = randomWords.toString(); // converts array to string
 
   // inputs from user
@@ -25,13 +27,9 @@ const Multiplayer = function () {
   const [leftWords, setLeftWords] = useState([]);
   const [leftChars, setLeftChars] = useState(''); // stores the characters on the left side of the cursor
   const [rightChars, setRightChars] = useState(initialRandomWords.replace(/,/g, ' ')); // stores the characters on the right side of the cursor
-  const [lastKey, setLastKey] = useState(); // stores the last character typed
 
   // stats
-  const [correctChars, setCorrectChars] = useState(0); // stores number of correct characters entered
-  const [totalChars, setTotalChars] = useState(0); // stores total number of characters entered
-  const [wordsPerMinute, setWordsPerMinute] = useState('meatball'); // set WPM to pass along
-  const [accuracy, setAccuracy] = useState('gabagool');
+
   const [isComplete, setIsComplete] = useState(false);
 
   // changes classNames
@@ -48,13 +46,12 @@ const Multiplayer = function () {
   const [backspacePressed, setBackspacePressed] = useState(false);
   const [numCorrectChars, setNumCorrectChars] = useState(0);
   const [numTotalChars, setNumTotalChars] = useState(0);
-  const [numMistakes, setNumMistakes] = useState(0);
   const [placeholder, setPlaceholder] = useState('Type here!');
   const [incorrectCharCSS, setIncorrectCharCSS] = useState('');
 
   /// sockets
-  const [scoresFromServer, setScoresFromServer] = useState([]); // !! array of scores from server
-  const [remainingSeconds, setRemainingSeconds] = useState(5); // !! seconds remaining before game starts
+  const [scoresFromServer, setScoresFromServer] = useState([]); // array of scores from server
+  const [remainingSeconds, setRemainingSeconds] = useState(5); //  seconds remaining before game starts
 
   const [disableTyping, setDisableTyping] = useState(true);
   const [waiting, setWaiting] = useState(true);
@@ -119,9 +116,6 @@ const Multiplayer = function () {
 
   // ---- GAME OVER ----
   const gameOver = function () {
-    setAccuracy(Math.floor(100 * (1 - numMistakes / numTotalChars)));
-    setWordsPerMinute(Math.floor(numCorrectChars / 5 / (initialTimer / 60)));
-
     // create data object to send to server
     setUserScore({
       user: user ? user.name : guestName,
@@ -165,9 +159,6 @@ const Multiplayer = function () {
 
     characterCheck(randomWords[0], lastCharIndex, event, backspacePressed);
 
-    setLastKey(input[input.length - 1]); // set the last key to be the last character of the input string
-
-    setTotalChars((prev) => prev + 1);
     setFullDivStyle((prev) => {
       return { ...prev, left: `${xPosition}ch` };
     });
@@ -178,7 +169,6 @@ const Multiplayer = function () {
       setLastCharIndex(0); // reset lastCharIndex to 0 if space pressed. Used by characterCheck
 
       if (input === randomWords[0]) {
-        setCorrectChars((prev) => prev + randomWords[0].length + 1);
         moveChars(randomWords[0].length, true); // move over characters and pass 'correct' to the styling component
       }
       if (input !== randomWords[0]) {
@@ -214,7 +204,6 @@ const Multiplayer = function () {
       setNumCorrectChars((prev) => prev + 1);
       setIncorrectCharCSS('');
     } else {
-      setNumMistakes((prev) => prev + 1);
       setIncorrectCharCSS('bg-incorrectInput');
     }
   };
