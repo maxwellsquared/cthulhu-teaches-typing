@@ -19,18 +19,16 @@ export default function App() {
   const [codeEntered, setCodeEntered] = useState();
 
   useEffect(() => {
-    // console.log(window.localStorage.getItem("user"));
-    // console.log(window.localStorage.getItem("keyboards"));
+    // continually updates, checking if no user is signed in. if there isnt, set the current user to the localStorage data for user, keyboards, and current keyboard.
     if (!user && (window.localStorage.getItem("user") !== 'undefined') && (window.localStorage.getItem("keyboards") !== 'undefined')) {
       setUser(JSON.parse(window.localStorage.getItem("user")));
       setUserKeyboards(JSON.parse(window.localStorage.getItem("keyboards")));
       setCurrentKeyboard(window.localStorage.getItem("currentKeyboard"));
     }
-    
-
   });
 
   useEffect(() => {
+    // when user is signed in, userkeyboards change, or currentkeyboard changes update the local data.
     window.localStorage.setItem("user", JSON.stringify(user));
     window.localStorage.setItem("keyboards", JSON.stringify(userKeyboards));
     window.localStorage.setItem("currentKeyboard", currentKeyboard);

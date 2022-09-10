@@ -12,6 +12,7 @@ const Nav = () => {
 
   // simulate a user user logging out by refreshing the page, which will reset the user context
   function refreshPage() {
+    // when logging out, clear local data.
     window.localStorage.clear();
     window.location.reload(false);
   }
