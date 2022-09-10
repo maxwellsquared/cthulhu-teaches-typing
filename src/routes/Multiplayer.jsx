@@ -18,7 +18,7 @@ const Multiplayer = function () {
 
   // text to be typed
   const [randomWords, setRandomWords] = useState(RandomWords({ time: 1, numWords: 225 })); // returns array of 225 words
-  const initialRandomWords = randomWords.toString(); // converts array to string
+  let initialRandomWords = randomWords.toString(); // converts array to string
 
   // inputs from user
   const [input, setInput] = useState('');
@@ -259,18 +259,24 @@ const Multiplayer = function () {
     setWaiting(false);
   };
 
+  function formatTime(seconds) {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.round(seconds % 60);
+    return [h, m > 9 ? m : h ? '0' + m : m || '0', s > 9 ? s : '0' + s].filter(Boolean).join(':');
+  }
+
   return (
     <>
       <h1 className="mt-20 text-center text-7xl text-blood-red underline">1 vs 1 Mode</h1>
-      <div className="input-container my-20">
+      <div className="input-container my-14">
         {user ? null : (
-          <h1 className="-ml-10 font-mono text-4xl text-pale-gold">
+          <h1 className="-ml-14 mb-10 font-mono text-4xl text-pale-gold">
             Welcome{' '}
             <span className="font-serif text-5xl font-extrabold text-blood-red"> {guestName}</span>
           </h1>
         )}
 
-        <div className={timerClass}>TIME: {counter}</div>
         <div className={divClassName} style={fullDivStyle}>
           <div className="typing-left">
             <SubmittedWords words={leftWords} />
@@ -289,6 +295,7 @@ const Multiplayer = function () {
           onKeyDown={(event) => detailedInput(event)}
           autoFocus="autofocus"
         />
+        <span className={timerClass}>{formatTime(counter)}</span>
 
         {!disableTyping ? null : (
           <div className="mt-10 flex flex-col align-middle">
