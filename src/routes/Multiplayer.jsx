@@ -18,7 +18,7 @@ const Multiplayer = function () {
 
   // text to be typed
   const [randomWords, setRandomWords] = useState(RandomWords({ time: 1, numWords: 225 })); // returns array of 225 words
-  const initialRandomWords = randomWords.toString(); // converts array to string
+  let initialRandomWords = randomWords.toString(); // converts array to string
 
   // inputs from user
   const [input, setInput] = useState('');
