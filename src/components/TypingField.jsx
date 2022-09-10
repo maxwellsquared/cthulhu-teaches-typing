@@ -52,38 +52,6 @@ export default function TypingField() {
   const [placeholder, setPlaceholder] = useState('Type here!');
   const [incorrectCharCSS, setIncorrectCharCSS] = useState('');
 
-  const reset = () => {
-    setCounter(initialTimer);
-    setStarted(false);
-    setRandomWords(RandomWords({ time: 1, numWords: 225 }))
-    initialRandomWords = randomWords.toString();
-    setInput('');
-    setLeftWords([]);
-    setLeftChars('');
-    setRightChars(initialRandomWords.replace(/,/g, ' '));
-    setLastKey();
-    setCorrectChars(0);
-    setTotalChars(0);
-    setMistakes(0);
-    setWordsPerMinute('meatball');
-    setAccuracy('gabagool');
-    setIsComplete(false);
-    setXPosition(0);
-    setDivClassName('typing');
-    setTimerClass('timer');
-    setFullDivStyle({
-      position: 'relative', // set typing division style (in order to set position)
-      left: '0ch',
-    })
-    setLastCharIndex(0);
-    setBackspacePressed(false);
-    setNumCorrectChars(0);
-    setNumTotalChars(0);
-    setNumMistakes(0);
-    setPlaceholder('Type here!');
-    setIncorrectCharCSS('');
-  };
-
   // ---- TIMER FUNCTION ----
   useEffect(() => {
     // checks if started or counter state changes, timer begins when the test starts. updates every second.
@@ -230,7 +198,6 @@ export default function TypingField() {
         gameOver={isComplete}
         wpm={wordsPerMinute}
         accuracy={accuracy}
-        reset={() => {reset()}}
         // user={user ? user : 'anon'}
       />
       <div style={{color: 'white', visibility: codeEntered ? 'visible' : 'hidden'}}>CONGRATULATION!!!! VISIBLE</div>
