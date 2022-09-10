@@ -270,7 +270,7 @@ const Multiplayer = function () {
           <div className="typing-left">
             <SubmittedWords words={leftWords} />
           </div>
-          <div className="typing-right">{rightChars}</div>
+          <div className={`typing-right ${started ? '' : 'blur'}`}>{rightChars}</div>
         </div>
 
         <input
@@ -289,7 +289,7 @@ const Multiplayer = function () {
         {!disableTyping ? null : (
           <div className="mt-10 flex flex-col align-middle">
             <button
-              className="h-24 w-80 rounded-lg bg-pale-gold py-1 px-6 text-center font-mono text-2xl text-cosmic-purple"
+              className="h-24 w-80 rounded-lg bg-pale-gold py-1 px-6 text-center font-mono text-2xl text-cosmic-purple hover:bg-gold-hover"
               onClick={joinWaitingRoom}
             >
               {waiting ? (
