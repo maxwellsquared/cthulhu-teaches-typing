@@ -25,13 +25,9 @@ const Multiplayer = function () {
   const [leftWords, setLeftWords] = useState([]);
   const [leftChars, setLeftChars] = useState(''); // stores the characters on the left side of the cursor
   const [rightChars, setRightChars] = useState(initialRandomWords.replace(/,/g, ' ')); // stores the characters on the right side of the cursor
-  const [lastKey, setLastKey] = useState(); // stores the last character typed
 
   // stats
-  const [correctChars, setCorrectChars] = useState(0); // stores number of correct characters entered
-  const [totalChars, setTotalChars] = useState(0); // stores total number of characters entered
-  const [wordsPerMinute, setWordsPerMinute] = useState('meatball'); // set WPM to pass along
-  const [accuracy, setAccuracy] = useState('gabagool');
+
   const [isComplete, setIsComplete] = useState(false);
 
   // changes classNames
@@ -48,7 +44,6 @@ const Multiplayer = function () {
   const [backspacePressed, setBackspacePressed] = useState(false);
   const [numCorrectChars, setNumCorrectChars] = useState(0);
   const [numTotalChars, setNumTotalChars] = useState(0);
-  const [numMistakes, setNumMistakes] = useState(0);
   const [placeholder, setPlaceholder] = useState('Type here!');
   const [incorrectCharCSS, setIncorrectCharCSS] = useState('');
 
@@ -119,9 +114,6 @@ const Multiplayer = function () {
 
   // ---- GAME OVER ----
   const gameOver = function () {
-    setAccuracy(Math.floor(100 * (1 - numMistakes / numTotalChars)));
-    setWordsPerMinute(Math.floor(numCorrectChars / 5 / (initialTimer / 60)));
-
     // create data object to send to server
     setUserScore({
       user: user ? user.name : guestName,
@@ -165,9 +157,6 @@ const Multiplayer = function () {
 
     characterCheck(randomWords[0], lastCharIndex, event, backspacePressed);
 
-    setLastKey(input[input.length - 1]); // set the last key to be the last character of the input string
-
-    setTotalChars((prev) => prev + 1);
     setFullDivStyle((prev) => {
       return { ...prev, left: `${xPosition}ch` };
     });
@@ -178,7 +167,6 @@ const Multiplayer = function () {
       setLastCharIndex(0); // reset lastCharIndex to 0 if space pressed. Used by characterCheck
 
       if (input === randomWords[0]) {
-        setCorrectChars((prev) => prev + randomWords[0].length + 1);
         moveChars(randomWords[0].length, true); // move over characters and pass 'correct' to the styling component
       }
       if (input !== randomWords[0]) {
@@ -214,7 +202,6 @@ const Multiplayer = function () {
       setNumCorrectChars((prev) => prev + 1);
       setIncorrectCharCSS('');
     } else {
-      setNumMistakes((prev) => prev + 1);
       setIncorrectCharCSS('bg-incorrectInput');
     }
   };
