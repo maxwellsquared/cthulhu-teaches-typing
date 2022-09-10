@@ -59,7 +59,7 @@ const Nav = () => {
                 <Link
                   to="/login"
                   className="mx-3 rounded-lg bg-pale-gold p-0 py-1 px-6 text-lg text-cosmic-purple shadow-lg hover:bg-gold-hover"
-                  aria-current="about"
+                  aria-current="login"
                 >
                   LOGIN
                 </Link>
@@ -68,7 +68,7 @@ const Nav = () => {
                 <Link
                   to="/login"
                   className="mx-3 rounded-lg bg-pale-gold p-0 py-1 px-6 text-lg text-cosmic-purple shadow-lg hover:bg-gold-hover"
-                  aria-current="about"
+                  aria-current="login"
                 >
                   SIGNUP
                 </Link>

@@ -1,0 +1,1 @@
+Run server with `npm run start` and open [http://localhost:8080](http://localhost:8080) in your browser.

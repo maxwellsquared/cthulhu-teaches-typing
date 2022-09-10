@@ -159,7 +159,7 @@ const User = () => {
           <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-blood-red-hover bg-darker-purple p-2">
             <h1 className="my-3 text-4xl font-bold text-pale-gold">Averages</h1>
 
-            <table class="mb-5 w-9/12 table-auto text-center text-lg">
+            <table className="mb-5 w-9/12 table-auto text-center text-lg">
               <thead>
                 <tr>
                   <th className="px-4 py-2 text-center">Words Per Minute</th>
