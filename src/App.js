@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { CodeContext, UserContext } from './helpers/context';
@@ -17,6 +17,23 @@ export default function App() {
   const [userKeyboards, setUserKeyboards] = useState(); // array of keyboards for the user, set at login
   const [currentKeyboard, setCurrentKeyboard] = useState(); // this is the id of the current keyboard, set when user goes to TypingField
   const [codeEntered, setCodeEntered] = useState();
+
+  useEffect(() => {
+    // continually updates, checking if no user is signed in. if there isnt, set the current user to the localStorage data for user, keyboards, and current keyboard.
+    if (!user && (window.localStorage.getItem("user") !== 'undefined') && (window.localStorage.getItem("keyboards") !== 'undefined')) {
+      setUser(JSON.parse(window.localStorage.getItem("user")));
+      setUserKeyboards(JSON.parse(window.localStorage.getItem("keyboards")));
+      setCurrentKeyboard(window.localStorage.getItem("currentKeyboard"));
+    }
+  });
+
+  useEffect(() => {
+    // when user is signed in, userkeyboards change, or currentkeyboard changes update the local data.
+    window.localStorage.setItem("user", JSON.stringify(user));
+    window.localStorage.setItem("keyboards", JSON.stringify(userKeyboards));
+    window.localStorage.setItem("currentKeyboard", currentKeyboard);
+
+  }, [user, userKeyboards, currentKeyboard]);
 
   // this will wrap all other components
   return (
