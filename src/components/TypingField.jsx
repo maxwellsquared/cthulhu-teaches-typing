@@ -192,6 +192,17 @@ export default function TypingField() {
     return true;
   };
 
+  function formatTime(seconds) {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.round(seconds % 60);
+    return [
+      h,
+      m > 9 ? m : (h ? '0' + m : m || '0'),
+      s > 9 ? s : '0' + s
+    ].filter(Boolean).join(':');
+  }
+
   return (
     <>
       <ResultsModal
@@ -202,7 +213,7 @@ export default function TypingField() {
       />
       <div style={{color: 'white', visibility: codeEntered ? 'visible' : 'hidden'}}>CONGRATULATION!!!! VISIBLE</div>
       <div className="input-container my-20">
-        <div className={timerClass}>TIME: {counter}</div>
+        
         <div className={divClassName} style={fullDivStyle}>
           <div className="typing-left">
             <SubmittedWords words={leftWords} />
@@ -221,7 +232,9 @@ export default function TypingField() {
           onKeyDown={(event) => detailedInput(event)}
           autoFocus="autofocus"
         />
+        <span className={timerClass}>{formatTime(counter)}</span>
       </div>
+      
       {/* <div className="testing-info">
         <div className="font-mono">LAST KEY: '{lastKey}'</div>
         <div className="font-mono">TOTAL ENTRIES: {totalChars}</div>
