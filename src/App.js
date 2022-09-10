@@ -18,9 +18,9 @@ export default function App() {
   const [currentKeyboard, setCurrentKeyboard] = useState(); // this is the id of the current keyboard, set when user goes to TypingField
 
   useEffect(() => {
-    if (!user && JSON.parse(window.localStorage.getItem("user")) && JSON.parse(window.localStorage.getItem("keyboards")) && (window.localStorage.getItem("user") !== 'undefined' || window.localStorage.getItem("keyboards") !== 'undefined')) {
-      console.log(JSON.parse(window.localStorage.getItem("user")));
-      console.log(JSON.parse(window.localStorage.getItem("keyboards")));
+    // console.log(window.localStorage.getItem("user"));
+    // console.log(window.localStorage.getItem("keyboards"));
+    if (!user && (window.localStorage.getItem("user") !== 'undefined') && (window.localStorage.getItem("keyboards") !== 'undefined')) {
       setUser(JSON.parse(window.localStorage.getItem("user")));
       setUserKeyboards(JSON.parse(window.localStorage.getItem("keyboards")));
       setCurrentKeyboard(window.localStorage.getItem("currentKeyboard"));
