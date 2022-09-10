@@ -1,11 +1,13 @@
 import { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../helpers/context';
-import RandomWords from '../helpers/RandomWords';
 import SubmittedWords from '../components/SubmittedWords';
 import MultiplayerResultsModal from '../components/MultiplayerResultsModal';
 import { BeatLoader } from 'react-spinners';
 import io from 'socket.io-client';
-const ENDPOINT = 'http://127.0.0.1:8080';
+import multiplayerRandomWords from '../helpers/multiplayerRandomWords';
+
+// setup socket connection
+const ENDPOINT = 'http://127.0.0.1:8080'; // PORT used in the server/index.js file
 const socket = io(ENDPOINT);
 
 const Multiplayer = function () {
@@ -17,7 +19,7 @@ const Multiplayer = function () {
   const [started, setStarted] = useState(false);
 
   // text to be typed
-  const [randomWords, setRandomWords] = useState(RandomWords({ time: 1, numWords: 225 })); // returns array of 225 words
+  const [randomWords, setRandomWords] = useState(multiplayerRandomWords()); // returns array of 225 words
   let initialRandomWords = randomWords.toString(); // converts array to string
 
   // inputs from user
@@ -48,8 +50,8 @@ const Multiplayer = function () {
   const [incorrectCharCSS, setIncorrectCharCSS] = useState('');
 
   /// sockets
-  const [scoresFromServer, setScoresFromServer] = useState([]); // !! array of scores from server
-  const [remainingSeconds, setRemainingSeconds] = useState(5); // !! seconds remaining before game starts
+  const [scoresFromServer, setScoresFromServer] = useState([]); // array of scores from server
+  const [remainingSeconds, setRemainingSeconds] = useState(5); //  seconds remaining before game starts
 
   const [disableTyping, setDisableTyping] = useState(true);
   const [waiting, setWaiting] = useState(true);
