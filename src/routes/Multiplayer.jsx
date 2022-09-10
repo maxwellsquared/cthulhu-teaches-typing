@@ -68,7 +68,6 @@ const Multiplayer = function () {
     });
 
     socket.on('disconnect', () => {
-      setMultiplayerConnected(false);
       console.log('disconnected from server');
     });
 
