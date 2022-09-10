@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { UserContext } from './helpers/context';
-import About from './routes/About';
+import Multiplayer from './routes/Multiplayer';
 import Login from './routes/Login';
 import Home from './routes/Home';
 import User from './routes/User';
@@ -44,7 +44,7 @@ export default function App() {
         <LayoutWrapper>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/multiplayer" element={<Multiplayer />} />
             <Route path="/login" element={<Login />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/user" element={<User />} />

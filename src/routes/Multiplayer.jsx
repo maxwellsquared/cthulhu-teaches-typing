@@ -1,16 +1,14 @@
 import { useEffect, useState, useContext } from 'react';
+import { UserContext } from '../helpers/context';
+import RandomWords from '../helpers/RandomWords';
+import SubmittedWords from '../components/SubmittedWords';
+import MultiplayerResultsModal from '../components/MultiplayerResultsModal';
+import { BeatLoader } from 'react-spinners';
 import io from 'socket.io-client';
 const ENDPOINT = 'http://127.0.0.1:8080';
 const socket = io(ENDPOINT);
 
-import { UserContext } from '../helpers/context';
-import RandomWords from '../helpers/RandomWords';
-import SubmittedWords from '../components/SubmittedWords';
-// import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generator';
-import MultiplayerResultsModal from '../components/MultiplayerResultsModal';
-import { BeatLoader } from 'react-spinners';
-
-const About = function () {
+const Multiplayer = function () {
   const { user, userScore, setUserScore, guestName } = useContext(UserContext);
 
   // timer functionality
@@ -32,7 +30,6 @@ const About = function () {
   // stats
   const [correctChars, setCorrectChars] = useState(0); // stores number of correct characters entered
   const [totalChars, setTotalChars] = useState(0); // stores total number of characters entered
-  const [mistakes, setMistakes] = useState(0); // set number of mistakes player has made
   const [wordsPerMinute, setWordsPerMinute] = useState('meatball'); // set WPM to pass along
   const [accuracy, setAccuracy] = useState('gabagool');
   const [isComplete, setIsComplete] = useState(false);
@@ -59,11 +56,6 @@ const About = function () {
   const [scoresFromServer, setScoresFromServer] = useState([]); // !! array of scores from server
   const [remainingSeconds, setRemainingSeconds] = useState(5); // !! seconds remaining before game starts
 
-  // if user is not logged in, generate a random username
-  // const guestName = uniqueNamesGenerator({ dictionaries: [adjectives, animals] });
-  // const [guestName, setGuestName] = useState(
-  //   uniqueNamesGenerator({ dictionaries: [adjectives, animals] }).toUpperCase()
-  // );
   const [disableTyping, setDisableTyping] = useState(true);
   const [waiting, setWaiting] = useState(true);
 
@@ -315,7 +307,9 @@ const About = function () {
               )}
             </button>
             {waiting ? null : (
-              <h1 className="mt-5 -ml-4 text-4xl">Remaining seconds: {remainingSeconds}</h1>
+              <h1 className="mt-5 ml-5 text-4xl">
+                Match starts in <span className="text-blood-red">{remainingSeconds}</span>
+              </h1>
             )}
           </div>
         )}
@@ -329,4 +323,4 @@ const About = function () {
   );
 };
 
-export default About;
+export default Multiplayer;
