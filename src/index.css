@@ -12,13 +12,11 @@ body {
 h1 {
   font-family: brother-1816, sans-serif;
   font-weight: 900;
-  color: #eedcb2;
   text-decoration: none;
 }
 
 .logo-text {
   font-family: brother-1816, sans-serif;
-  color: #eedcb2;
   text-decoration: none;
   font-size: 45px;
 }
@@ -31,9 +29,9 @@ h1 {
   font-weight: 400;
 }
 
+/* may have issue */
 .typing {
   font-size: 40px;
-  color: #eedcb2;
   display: flex;
   white-space: nowrap;
   font-family: courier-prime, monospace;

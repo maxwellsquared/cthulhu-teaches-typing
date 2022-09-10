@@ -82,7 +82,7 @@ function Login() {
               Sign in to your account
             </h2>
           </div>
-          {statusCode === 401 && <h1>Invalid Credentials</h1>}
+          {statusCode === 401 && <h1 className="text-pale-gold">Invalid Credentials</h1>}
           <form
             className="mt-8 space-y-6"
             onSubmit={(event) => {

@@ -302,7 +302,7 @@ const Multiplayer = function () {
               )}
             </button>
             {waiting ? null : (
-              <h1 className="mt-5 ml-5 text-4xl">
+              <h1 className="mt-5 ml-5 text-4xl text-pale-gold">
                 Match starts in <span className="text-blood-red">{remainingSeconds}</span>
               </h1>
             )}

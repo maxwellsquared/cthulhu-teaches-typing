@@ -38,7 +38,7 @@ export default function ResultsModal(props) {
         ariaHideApp={false}
       >
         <div className="modal-container">
-          <h1 className="modal-header">CONGRATULATIONS!</h1>
+          <h1 className="modal-header text-pale-gold">CONGRATULATIONS!</h1>
           <div className="player-data">
             <p>WPM: {props.wpm}</p>
             <p>ACCURACY: {props.accuracy}%</p>

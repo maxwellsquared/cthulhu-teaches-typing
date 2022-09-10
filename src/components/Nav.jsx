@@ -17,7 +17,7 @@ const Nav = () => {
   return (
     <nav className="rounded px-2 py-2.5 font-normal text-pale-gold">
       <div className="container mx-auto flex flex-wrap items-center justify-between">
-        <div className="logo-text">
+        <div className="logo-text text-pale-gold">
           <Link to="/" className="flex items-center hover:text-candle">
             <img src="./images/logo.png" className="mr-3 h-20 sm:h-20" alt="logo" />
             <span className="logo-drip">CTHULHU</span>{' '}

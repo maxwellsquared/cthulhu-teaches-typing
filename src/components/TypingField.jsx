@@ -42,7 +42,7 @@ export default function TypingField() {
 
   // changes classNames
   const [xPosition, setXPosition] = useState(0); // set number of characters typing division is offset by
-  const [divClassName, setDivClassName] = useState('typing'); // give the typing div the 'typing shaken' class and it'll turn red and shake
+  const [divClassName, setDivClassName] = useState('typing text-pale-gold'); // give the typing div the 'typing shaken' class and it'll turn red and shake
   const [timerClass, setTimerClass] = useState('timer');
   const [fullDivStyle, setFullDivStyle] = useState({
     position: 'relative', // set typing division style (in order to set position)
@@ -95,9 +95,9 @@ export default function TypingField() {
 
   // --- SCREEN SHAKE ---
   const screenShake = () => {
-    setDivClassName('typing shaken');
+    setDivClassName('typing text-pale-gold shaken');
     setTimeout(() => {
-      setDivClassName('typing');
+      setDivClassName('typing text-pale-gold');
     }, 250);
   };
 

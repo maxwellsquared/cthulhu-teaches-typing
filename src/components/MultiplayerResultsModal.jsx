@@ -35,7 +35,7 @@ export default function ResultsModal(props) {
         ariaHideApp={false}
       >
         <div className="modal-container">
-          <h1>CONGRATULATIONS!</h1>
+          <h1 className="text-pale-gold">CONGRATULATIONS!</h1>
           <div className="text-3xl text-pale-gold">
             <p>
               WINNER:
