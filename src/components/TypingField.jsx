@@ -1,11 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
 import RandomWords from '../helpers/RandomWords';
 import ResultsModal from './ResultsModal';
-import { UserContext, CodeContext } from '../helpers/context';
+import { CodeContext } from '../helpers/context';
 import SubmittedWords from './SubmittedWords';
 
 export default function TypingField() {
-  const { user, userKeyboards } = useContext(UserContext);
   const { codeEntered, setCodeEntered } = useContext(CodeContext);
 
   // timer functionality
@@ -20,16 +19,23 @@ export default function TypingField() {
   // inputs from user
   const [input, setInput] = useState('');
   const [keyStrokes, setKeyStrokes] = useState([]); // stores keystrokes for Konami Code
-  const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  const konamiCode = [
+    'ArrowUp',
+    'ArrowUp',
+    'ArrowDown',
+    'ArrowDown',
+    'ArrowLeft',
+    'ArrowRight',
+    'ArrowLeft',
+    'ArrowRight',
+    'b',
+    'a',
+  ];
   const [leftWords, setLeftWords] = useState([]);
   const [leftChars, setLeftChars] = useState(''); // stores the characters on the left side of the cursor
   const [rightChars, setRightChars] = useState(initialRandomWords.replace(/,/g, ' ')); // stores the characters on the right side of the cursor
-  const [lastKey, setLastKey] = useState(); // stores the last character typed
 
-  // stats
-  const [correctChars, setCorrectChars] = useState(0); // stores number of correct characters entered
-  const [totalChars, setTotalChars] = useState(0); // stores total number of characters entered
-  const [mistakes, setMistakes] = useState(0); // set number of mistakes player has made
+  // --- stats ---
   const [wordsPerMinute, setWordsPerMinute] = useState('meatball'); // set WPM to pass along
   const [accuracy, setAccuracy] = useState('gabagool');
   const [isComplete, setIsComplete] = useState(false);
@@ -74,10 +80,6 @@ export default function TypingField() {
   // --- UPDATES WORDS SECTIONS
   useEffect(() => {
     setFullDivStyle((prev) => {
-      // !! stretch
-      // if word mistake in the word and don't correct it, and update the word section, then we pass the mistake into the total mistake
-      // only update total mistakes on moving the word over
-      // allows you to pass a style into the entire div
       return { ...prev, left: `${xPosition}ch` };
     });
   }, [leftChars]);
@@ -87,11 +89,11 @@ export default function TypingField() {
     setLeftWords((prev) => [...prev, { word: randomWords[0], isCorrect: isCorrect }]);
     setLeftChars((prev) => prev + `${randomWords[0]} `);
     setRightChars((prev) => prev.slice(length + 1));
-    // set the amount to move the div over by
+    // set the amount to move the div over by one character
     setXPosition((prev) => prev - (length + 1));
   };
 
-  // --- SCREENSHAKE ---
+  // --- SCREEN SHAKE ---
   const screenShake = () => {
     setDivClassName('typing shaken');
     setTimeout(() => {
@@ -99,36 +101,27 @@ export default function TypingField() {
     }, 250);
   };
 
-
-
   // ---- INPUT FUNCTION ----
   const handleInput = function (event) {
     if (event === ' ' && input === '') {
       return;
     }
 
-    // TODO: add functionality to check if the last character typed was correct
     characterCheck(randomWords[0], lastCharIndex, event, backspacePressed);
 
-    setLastKey(input[input.length - 1]); // set the last key to be the last character of the input string
-
-    setTotalChars((prev) => prev + 1);
     setFullDivStyle((prev) => {
       return { ...prev, left: `${xPosition}ch` };
     });
 
     if (!started) {
-      // starts test status to 'started == true' on first input
-      setStarted(true);
+      setStarted(true); // starts test status to 'started == true' on first input
     }
 
+    // if space bar pressed
     if (event.slice(-1) === ' ') {
-      // if space bar pressed
-
       setLastCharIndex(0); // reset lastCharIndex to 0 if space pressed. Used by characterCheck
 
       if (input === randomWords[0]) {
-        setCorrectChars((prev) => prev + randomWords[0].length + 1);
         moveChars(randomWords[0].length, true); // move over characters and pass 'correct' to the styling component
       }
       if (input !== randomWords[0]) {
@@ -149,7 +142,7 @@ export default function TypingField() {
       return;
     }
 
-    let lastCharFromKey = keyPressed[keyPressed.length - 1];
+    const lastCharFromKey = keyPressed[keyPressed.length - 1];
 
     setLastCharIndex((prev) => prev + 1);
 
@@ -176,8 +169,9 @@ export default function TypingField() {
     } else {
       setBackspacePressed(false);
     }
-    setKeyStrokes(prev => [...prev, event.key]);
-    console.log(keyStrokes);
+
+    setKeyStrokes((prev) => [...prev, event.key]);
+
     if (compareArrays(keyStrokes, konamiCode)) {
       setCodeEntered(true);
     }
@@ -192,15 +186,12 @@ export default function TypingField() {
     return true;
   };
 
+  // --- format time ---
   function formatTime(seconds) {
     const h = Math.floor(seconds / 3600);
     const m = Math.floor((seconds % 3600) / 60);
     const s = Math.round(seconds % 60);
-    return [
-      h,
-      m > 9 ? m : (h ? '0' + m : m || '0'),
-      s > 9 ? s : '0' + s
-    ].filter(Boolean).join(':');
+    return [h, m > 9 ? m : h ? '0' + m : m || '0', s > 9 ? s : '0' + s].filter(Boolean).join(':');
   }
 
   return (
@@ -211,9 +202,10 @@ export default function TypingField() {
         accuracy={accuracy}
         // user={user ? user : 'anon'}
       />
-      <div style={{color: 'white', visibility: codeEntered ? 'visible' : 'hidden'}}>CONGRATULATION!!!! VISIBLE</div>
+      <div style={{ color: 'white', visibility: codeEntered ? 'visible' : 'hidden' }}>
+        CONGRATULATION!!!! VISIBLE
+      </div>
       <div className="input-container my-20">
-        
         <div className={divClassName} style={fullDivStyle}>
           <div className="typing-left">
             <SubmittedWords words={leftWords} />
@@ -227,23 +219,12 @@ export default function TypingField() {
           radius="md"
           size="md"
           value={input}
-          // ^ sets to display nothing and not have any extra input chars
           onChange={(event) => handleInput(event.target.value)}
           onKeyDown={(event) => detailedInput(event)}
           autoFocus="autofocus"
         />
         <span className={timerClass}>{formatTime(counter)}</span>
       </div>
-      
-      {/* <div className="testing-info">
-        <div className="font-mono">LAST KEY: '{lastKey}'</div>
-        <div className="font-mono">TOTAL ENTRIES: {totalChars}</div>
-        <div className="font-mono">SUCCESSFUL ENTRIES: {correctChars}</div>
-        <div className="font-mono">MISTAKES: {mistakes}</div>
-        <div className="font-mono">numCorrectChars: {numCorrectChars}</div>
-        <div className="font-mono">numTotalChars: {numTotalChars}</div>
-        <div className="font-mono">numMistakes: {numMistakes}</div>
-      </div> */}
     </>
   );
 }

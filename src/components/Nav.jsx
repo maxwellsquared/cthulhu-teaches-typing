@@ -1,11 +1,8 @@
 import { Link } from 'react-router-dom';
-
 import { useContext } from 'react';
 import { UserContext } from '../helpers/context';
-
 import { BiCog } from 'react-icons/bi';
 import KeyboardDropdown from './KeyboardDropdown';
-import LoginMessage from './LoginMessage';
 
 const Nav = () => {
   const { user, userKeyboards } = useContext(UserContext);
@@ -30,7 +27,7 @@ const Nav = () => {
         <ul className="flex items-center  gap-2 font-light">
           {user && user !== 'null' ? (
             <>
-              {user  && userKeyboards ? <KeyboardDropdown /> : null}
+              {user && userKeyboards ? <KeyboardDropdown /> : null}
 
               <li>
                 <Link

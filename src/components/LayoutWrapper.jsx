@@ -4,7 +4,7 @@ const LayoutWrapper = ({ children }) => {
   return (
     <div className="mx-auto max-w-3xl flex-col justify-between px-4 sm:px-6 xl:max-w-5xl xl:px-0 ">
       <div className="main-height flex flex-col justify-between font-sans">
-        <main className="mb-auto flex flex-col">{children}</main>
+        <main className="my-auto flex flex-col">{children}</main>
         <footer>
           <div className="container flex flex-wrap items-center justify-between font-light text-pale-gold">
             <Link to="/" className="flex items-center">

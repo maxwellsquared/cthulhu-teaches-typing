@@ -1,8 +1,5 @@
-import { useState, useEffect, useContext } from 'react';
-
 export default function SingleWord(props) {
-
-  const setStyle = function(correct) {
+  const setStyle = function (correct) {
     if (correct) return 'correct';
     return 'mistake';
   };

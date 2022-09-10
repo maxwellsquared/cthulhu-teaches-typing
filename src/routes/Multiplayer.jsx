@@ -56,7 +56,7 @@ const Multiplayer = function () {
   const [disableTyping, setDisableTyping] = useState(true);
   const [waiting, setWaiting] = useState(true);
 
-  // !! setups socket connection
+  // --- setups socket connection ---
   useEffect(() => {
     socket.on('connect', () => {
       console.log('connected to server');
@@ -73,7 +73,7 @@ const Multiplayer = function () {
       setScoresFromServer((scoresFromServer) => [...scoresFromServer, data]);
     });
 
-    socket.on('startGame', (seconds) => {
+    socket.on('startGame', () => {
       // runs when numberInWaitingRoom === 2 on server
       startCountdown();
       // use setTimeout to start game after 5 seconds
@@ -143,7 +143,7 @@ const Multiplayer = function () {
     setXPosition((prev) => prev - (length + 1));
   };
 
-  // --- SCREENSHAKE ---
+  // --- SCREEN SHAKE ---
   const screenShake = () => {
     setDivClassName('typing shaken');
     setTimeout(() => {
@@ -270,7 +270,7 @@ const Multiplayer = function () {
           <div className="typing-left">
             <SubmittedWords words={leftWords} />
           </div>
-          <div className="typing-right">{rightChars}</div>
+          <div className={`typing-right ${started ? '' : 'blur'}`}>{rightChars}</div>
         </div>
 
         <input
@@ -289,7 +289,7 @@ const Multiplayer = function () {
         {!disableTyping ? null : (
           <div className="mt-10 flex flex-col align-middle">
             <button
-              className="h-24 w-80 rounded-lg bg-pale-gold py-1 px-6 text-center font-mono text-2xl text-cosmic-purple"
+              className="h-24 w-80 rounded-lg bg-pale-gold py-1 px-6 text-center font-mono text-2xl text-cosmic-purple hover:bg-gold-hover"
               onClick={joinWaitingRoom}
             >
               {waiting ? (

@@ -36,7 +36,6 @@ const arr1 = [
   'allow',
   'elect',
   'print',
-  'sex',
   'if',
   'good',
   'aware',
@@ -91,7 +90,7 @@ const arr1 = [
   'complete',
   'the',
   'wednesday',
-  'practise',
+  'practice',
   'rose',
   'travel',
   'system',
@@ -456,7 +455,6 @@ const arr2 = [
 
 // if the current time is an even hour, send the first array
 // if the current time is an odd hour, send the second array
-
 const multiplayerRandomWords = () => {
   const date = new Date();
   const hour = date.getHours();
