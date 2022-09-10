@@ -26,7 +26,7 @@ io.on('connect', (socket) => {
     console.log('player joined waiting room');
     numberInRoom++;
     if (numberInRoom === 2) {
-      io.sockets.emit('startGame', 5);
+      io.sockets.emit('startGame', 15);
       numberInRoom = 0;
     }
   });

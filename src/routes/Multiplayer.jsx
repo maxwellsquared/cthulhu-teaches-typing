@@ -12,7 +12,7 @@ const Multiplayer = function () {
   const { user, userScore, setUserScore, guestName } = useContext(UserContext);
 
   // timer functionality
-  const initialTimer = 5; // use constant for initial timer and pass to counter--needed for WPM
+  const initialTimer = 15; // use constant for initial timer and pass to counter--needed for WPM
   const [counter, setCounter] = useState(initialTimer);
   const [started, setStarted] = useState(false);
 
@@ -84,7 +84,7 @@ const Multiplayer = function () {
       setTimeout(() => {
         setStarted(true);
         setDisableTyping(false);
-      }, seconds * 1000);
+      }, 5000);
     });
 
     return () => {
