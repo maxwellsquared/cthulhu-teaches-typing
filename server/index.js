@@ -4,7 +4,7 @@ const io = require('socket.io')(http, {
   cors: { origin: '*' },
 });
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 let numberInRoom = 0;
 
