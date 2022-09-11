@@ -4,6 +4,7 @@ import ResultsModal from './ResultsModal';
 import { CodeContext } from '../helpers/context';
 import SubmittedWords from './SubmittedWords';
 
+
 export default function TypingField() {
   const { codeEntered, setCodeEntered } = useContext(CodeContext);
 
