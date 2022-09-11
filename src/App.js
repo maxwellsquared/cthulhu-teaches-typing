@@ -11,6 +11,7 @@ import Leaderboard from './routes/Leaderboard';
 import LayoutWrapper from './components/LayoutWrapper';
 import './App.css';
 import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generator';
+import ForgotPassword from './routes/ForgotPassword';
 
 //!! toggle dark mode
 import { ThemeProvider } from './helpers/ThemeContext';
@@ -75,6 +76,7 @@ export default function App() {
                   <Route path="/login" element={<Login />} />
                   <Route path="/leaderboard" element={<Leaderboard />} />
                   <Route path="/user" element={<User />} />
+                  <Route path="/forgot-password" element={<ForgotPassword />} />
                 </Routes>
               </LayoutWrapper>
             </div>
