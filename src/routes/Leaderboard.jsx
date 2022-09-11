@@ -45,9 +45,9 @@ function Leaderboard() {
     <BarLoader color={'#5118a7'} width={'50%'} height={8} />
   ) : (
     <>
-      <h1 className="text-pale-gold">Leaderboard</h1>
+      <h1 className="text-dark-navy dark:text-pale-gold">Leaderboard</h1>
       <table>
-        <tr>
+        <tr className="bg-darker-beige text-dark-navy dark:bg-cosmic-purple dark:text-pale-gold">
           <th>Rank</th>
           <th>Name</th>
           <th>WPM</th>
@@ -62,7 +62,10 @@ function Leaderboard() {
             }
           }
           return (
-            <tr key={index}>
+            <tr
+              key={index}
+              className="bg-darker-beige text-dark-navy dark:bg-cosmic-purple dark:text-pale-gold"
+            >
               <td>{index + 1}</td>
               <td>{username}</td>
               <td>{item['wpm']}</td>

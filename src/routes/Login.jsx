@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FiLock } from 'react-icons/fi';
 
 function Login() {
-  const { user, setUser, userKeyboards, setUserKeyboards } = useContext(UserContext);
+  const { user, setUser, setUserKeyboards } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [statusCode, setStatusCode] = useState(0);
@@ -78,11 +78,13 @@ function Login() {
         <div className="w-full max-w-md space-y-8">
           <div>
             <img className="mx-auto h-60" src="./images/cthulhu.png" alt="cthulhu logo" />
-            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-blood-red">
+            <h2 className="mt-6 text-center text-3xl tracking-tight text-dark-navy dark:text-blood-red">
               Sign in to your account
             </h2>
           </div>
-          {statusCode === 401 && <h1 className="text-pale-gold">Invalid Credentials</h1>}
+          {statusCode === 401 && (
+            <h1 className="text-dark-navy dark:text-pale-gold">Invalid Credentials</h1>
+          )}
           <form
             className="mt-8 space-y-6"
             onSubmit={(event) => {
@@ -100,7 +102,7 @@ function Login() {
                   type="email"
                   name="email"
                   placeholder="Email Address"
-                  className="relative block w-full appearance-none rounded-t-lg border border-blood-red bg-incorrectInput px-3 py-2 text-pale-gold placeholder-gray-500 focus:z-10 focus:border-gold-hover focus:outline-none focus:ring-blood-red"
+                  className="relative block w-full appearance-none rounded-t-lg border border-blood-red bg-darker-beige px-3 py-2 text-dark-navy placeholder-gray-500 focus:z-10 focus:border-gold-hover focus:outline-none focus:ring-blood-red dark:bg-incorrectInput dark:text-pale-gold"
                   onChange={(event) => {
                     setEmail(event.target.value);
                   }}
@@ -116,7 +118,7 @@ function Login() {
                   name="password"
                   placeholder="Password"
                   required
-                  className="relative block w-full appearance-none rounded-b-lg border border-blood-red bg-incorrectInput px-3 py-2 text-pale-gold placeholder-gray-500 focus:z-10 focus:border-gold-hover focus:outline-none focus:ring-blood-red"
+                  className="relative block w-full appearance-none rounded-b-lg border border-blood-red bg-darker-beige px-3 py-2 text-dark-navy placeholder-gray-500 focus:z-10 focus:border-gold-hover focus:outline-none focus:ring-blood-red dark:bg-incorrectInput dark:text-pale-gold"
                   onChange={(event) => {
                     setPassword(event.target.value);
                   }}
@@ -126,27 +128,33 @@ function Login() {
 
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <input name="remember-me" type="checkbox" className="h-4 w-4" />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-blood-red">
+                <input name="remember-me" type="checkbox" className="h-4 w-4 accent-kinda-teal" />
+                <label
+                  htmlFor="remember-me"
+                  className="ml-2 block text-sm text-dark-navy dark:text-blood-red"
+                >
                   Remember me
                 </label>
               </div>
 
               <div className="text-sm">
-                <Link to="/login" className="font-medium text-blood-red hover:text-candle">
+                <Link
+                  to="/login"
+                  className="font-medium text-dark-navy hover:text-kinda-teal dark:text-blood-red dark:hover:text-candle"
+                >
                   Forgot your password?
                 </Link>
               </div>
             </div>
 
             <button
-              className="group relative flex w-full transform justify-center rounded-md border border-transparent bg-pale-gold py-2 px-4 text-lg font-medium text-blood-red transition duration-300 ease-in-out hover:scale-105 hover:bg-gold-hover focus:outline-none focus:ring-2 focus:ring-blood-red focus:ring-offset-2"
+              className="group relative flex w-full transform justify-center rounded-md border border-transparent bg-darker-beige py-2 px-4 text-lg font-medium text-dark-navy transition duration-300 ease-in-out hover:scale-105 hover:bg-kinda-teal focus:outline-none focus:ring-2 focus:ring-blood-red focus:ring-offset-2 dark:bg-pale-gold  dark:text-blood-red dark:hover:bg-gold-hover"
               onClick={() => {
                 sendRequest(email, password, user, setUser);
               }}
             >
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <FiLock className="h-5 w-5 text-blood-red" />
+                <FiLock className="h-5 w-5 text-dark-navy dark:text-blood-red" />
               </span>
               Login
             </button>

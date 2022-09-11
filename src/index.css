@@ -57,7 +57,7 @@ h1 {
 table {
   font-family: brother-1816, sans-serif;
   font-weight: 900;
-  color: #eedcb2;
+  /* color: #eedcb2; */
   text-decoration: none;
   border-collapse: collapse;
   width: 100%;
@@ -71,7 +71,9 @@ th {
 }
 
 tr:nth-child(even) {
-  background-color: #25173a;
+  /* background-color: #25173a; */
+  /* idk how to do this */
+  /* TODO */
 }
 
 input {
