@@ -12,6 +12,9 @@ import LayoutWrapper from './components/LayoutWrapper';
 import './App.css';
 import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generator';
 
+//!! toggle dark mode
+import { ThemeProvider } from './helpers/ThemeContext';
+
 // parent component for all other components
 export default function App() {
   const [user, setUser] = useState(); // user state, set at login
@@ -46,34 +49,38 @@ export default function App() {
   // this will wrap all other components
   return (
     <BrowserRouter>
-      <UserContext.Provider
-        value={{
-          user,
-          setUser,
-          userKeyboards,
-          setUserKeyboards,
-          currentKeyboard,
-          setCurrentKeyboard,
-          userScore,
-          setUserScore,
-          guestName,
-          setGuestName,
-        }}
-      >
-        <CodeContext.Provider value={{ codeEntered, setCodeEntered }}>
-          <Nav />
+      <ThemeProvider>
+        <UserContext.Provider
+          value={{
+            user,
+            setUser,
+            userKeyboards,
+            setUserKeyboards,
+            currentKeyboard,
+            setCurrentKeyboard,
+            userScore,
+            setUserScore,
+            guestName,
+            setGuestName,
+          }}
+        >
+          <CodeContext.Provider value={{ codeEntered, setCodeEntered }}>
+            <div className="bg-beige transition-all dark:bg-cosmic-purple">
+              <Nav />
 
-          <LayoutWrapper>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/multiplayer" element={<Multiplayer />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/leaderboard" element={<Leaderboard />} />
-              <Route path="/user" element={<User />} />
-            </Routes>
-          </LayoutWrapper>
-        </CodeContext.Provider>
-      </UserContext.Provider>
+              <LayoutWrapper>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/multiplayer" element={<Multiplayer />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/leaderboard" element={<Leaderboard />} />
+                  <Route path="/user" element={<User />} />
+                </Routes>
+              </LayoutWrapper>
+            </div>
+          </CodeContext.Provider>
+        </UserContext.Provider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

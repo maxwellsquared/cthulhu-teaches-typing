@@ -5,20 +5,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&family=Chakra+Petch:wght@300;400;600&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
 @import url('https://use.typekit.net/ktn2qhx.css');
 
-body {
-  background-color: #1c122c;
-}
 
 h1 {
   font-family: brother-1816, sans-serif;
   font-weight: 900;
-  color: #eedcb2;
   text-decoration: none;
 }
 
 .logo-text {
   font-family: brother-1816, sans-serif;
-  color: #eedcb2;
   text-decoration: none;
   font-size: 45px;
 }
@@ -31,9 +26,9 @@ h1 {
   font-weight: 400;
 }
 
+/* may have issue */
 .typing {
   font-size: 40px;
-  color: #eedcb2;
   display: flex;
   white-space: nowrap;
   font-family: courier-prime, monospace;
@@ -53,14 +48,13 @@ h1 {
 
 .timer {
   font-size: 40px;
-  color: #eedcb2;
   font-family: brother-1816, sans-serif;
 }
 
 table {
   font-family: brother-1816, sans-serif;
   font-weight: 900;
-  color: #eedcb2;
+  /* color: #eedcb2; */
   text-decoration: none;
   border-collapse: collapse;
   width: 100%;
@@ -74,7 +68,9 @@ th {
 }
 
 tr:nth-child(even) {
-  background-color: #25173a;
+  /* background-color: #25173a; */
+  /* idk how to do this */
+  /* TODO */
 }
 
 input {
@@ -95,7 +91,6 @@ input:focus {
 }
 
 input::placeholder {
-  color: #EEDCB2;
   opacity: 0.5;
 }
 
@@ -117,7 +112,7 @@ input::placeholder {
 
 
 .Modal {
-  background-color: rgba(25, 0, 25, 0.9);
+  /* background-color: rgba(25, 0, 25, 0.9); */
   margin: auto;
   margin-top: 100px;
   height: auto;
@@ -139,8 +134,8 @@ input::placeholder {
 }
 
 .Modal button {
-  color: #eedcb2;
-  background-color: #8c3d34;
+  /* color: #eedcb2; */
+  /* background-color: #8c3d34; */
   padding: 20px;
   font-family: brother-1816, sans-serif;
   font-weight: 900;

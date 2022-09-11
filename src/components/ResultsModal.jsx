@@ -32,34 +32,36 @@ export default function ResultsModal(props) {
     <>
       <Modal
         isOpen={modalIsOpen}
-        className="Modal"
+        className="Modal rounded-md bg-kinda-teal dark:bg-modal-bg"
         overlayClassName="Overlay"
         disableAutoFocus={true}
         ariaHideApp={false}
       >
         <div className="modal-container">
-          <h1 className="modal-header">CONGRATULATIONS!</h1>
+          <h1 className="modal-header text-dark-navy dark:text-pale-gold">CONGRATULATIONS!</h1>
           <div className="player-data">
             <p>WPM: {props.wpm}</p>
             <p>ACCURACY: {props.accuracy}%</p>
           </div>
           <button
-            className="text-xlg mt-10 transform rounded-lg text-cosmic-purple hover:bg-blood-red-hover"
+            className="text-xlg mt-10 transform rounded-lg bg-darker-beige p-2 px-6 text-dark-navy shadow-lg hover:scale-105 hover:bg-kinda-teal dark:bg-blood-red dark:text-pale-gold dark:hover:bg-blood-red-hover"
             onClick={closeModal}
           >
             CLOSE
           </button>
           {user ? (
             <>
-              <div className="font-gold-hover mt-10 transform rounded-lg text-lg text-blood-red">
+              <div className="font-gold-hover mt-10 transform rounded-lg text-lg text-dark-navy dark:text-blood-red">
                 Results has been automatically added to your keyboard stats!
               </div>
               <Link
-                className="font-gold-hover mt-3 transform rounded-lg text-lg text-blood-red"
+                className="font-gold-hover mt-3 transform rounded-lg text-lg text-dark-navy dark:text-blood-red"
                 to="/user"
               >
                 See all results{' '}
-                <span className="text-link-green underline hover:text-pale-gold">here</span>
+                <span className="text-darker-beige underline dark:text-link-green dark:hover:text-pale-gold">
+                  here
+                </span>
               </Link>
             </>
           ) : (

@@ -146,20 +146,20 @@ const User = () => {
     <div className="my-10 flex flex-col items-center justify-center">
       {userStats ? (
         <>
-          <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-blood-red-hover bg-darker-purple p-2">
-            <h1 className="my-3 text-4xl font-bold text-pale-gold">Keyboard Stats</h1>
+          <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-kinda-teal bg-darker-beige p-2 dark:border-blood-red-hover dark:bg-darker-purple">
+            <h1 className="my-3 text-4xl font-bold dark:text-pale-gold">Keyboard Stats</h1>
             <KeyboardDropdown />
             <div className="mr-7">{specificKeyboardStats}</div>
           </div>
 
-          <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-blood-red-hover bg-darker-purple p-2">
-            <h1 className="my-3 text-4xl font-bold text-pale-gold">Overall Stats</h1>
+          <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-kinda-teal bg-darker-beige p-2 dark:border-blood-red-hover dark:bg-darker-purple">
+            <h1 className="my-3 text-4xl font-bold dark:text-pale-gold">Overall Stats</h1>
             <div className="mr-7">{wpmStatsChart}</div>
             <div className="mr-7">{accuracyStatsChart}</div>
           </div>
 
-          <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-blood-red-hover bg-darker-purple p-2">
-            <h1 className="my-3 text-4xl font-bold text-pale-gold">Averages</h1>
+          <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-kinda-teal bg-darker-beige p-2 text-dark-navy dark:border-blood-red-hover dark:bg-darker-purple dark:text-pale-gold">
+            <h1 className="my-3 text-4xl font-bold dark:text-pale-gold">Averages</h1>
 
             <table className="mb-5 w-9/12 table-auto text-center text-lg">
               <thead>

@@ -5,8 +5,8 @@ const LoginMessage = () => {
   return (
     <Link
       to="/login"
-      className="flex max-w-sm transform items-center justify-center gap-2 rounded-lg bg-pale-gold px-4 py-3 text-lg
-			text-cosmic-purple shadow-lg transition duration-500 hover:scale-105 hover:bg-gold-hover"
+      className="flex max-w-sm transform items-center justify-center gap-2 rounded-lg bg-beige px-4 py-3 text-lg
+			text-dark-navy shadow-lg transition duration-500 hover:scale-105 hover:bg-darker-beige dark:bg-pale-gold dark:text-cosmic-purple dark:hover:bg-gold-hover"
       role="alert"
     >
       <FiLogIn size={25} />

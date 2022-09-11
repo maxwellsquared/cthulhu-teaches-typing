@@ -42,8 +42,8 @@ export default function TypingField() {
 
   // changes classNames
   const [xPosition, setXPosition] = useState(0); // set number of characters typing division is offset by
-  const [divClassName, setDivClassName] = useState('typing'); // give the typing div the 'typing shaken' class and it'll turn red and shake
-  const [timerClass, setTimerClass] = useState('timer');
+  const [divClassName, setDivClassName] = useState('typing text-pale-gold'); // give the typing div the 'typing shaken' class and it'll turn red and shake
+  const [timerClass, setTimerClass] = useState('timer text-dark-navy dark:text-pale-gold'); // give the timer the 'timer red' class and it'll turn red
   const [fullDivStyle, setFullDivStyle] = useState({
     position: 'relative', // set typing division style (in order to set position)
     left: '0ch',
@@ -95,9 +95,9 @@ export default function TypingField() {
 
   // --- SCREEN SHAKE ---
   const screenShake = () => {
-    setDivClassName('typing shaken');
+    setDivClassName('typing dark:text-pale-gold text-dark-navy shaken');
     setTimeout(() => {
-      setDivClassName('typing');
+      setDivClassName('typing dark:text-pale-gold text-dark-navy');
     }, 250);
   };
 
@@ -210,11 +210,11 @@ export default function TypingField() {
           <div className="typing-left">
             <SubmittedWords words={leftWords} />
           </div>
-          <div className="typing-right">{rightChars}</div>
+          <div className="typing-right text-dark-navy dark:text-pale-gold">{rightChars}</div>
         </div>
 
         <input
-          className={`rounded-t-lg font-sans ${incorrectCharCSS}`}
+          className={`rounded-t-lg font-sans ${incorrectCharCSS} bg-beige text-dark-navy placeholder:text-dark-navy dark:bg-cosmic-purple dark:text-pale-gold dark:placeholder:text-pale-gold`}
           placeholder={placeholder}
           radius="md"
           size="md"

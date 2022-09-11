@@ -35,7 +35,7 @@ const Multiplayer = function () {
   // changes classNames
   const [xPosition, setXPosition] = useState(0); // set number of characters typing division is offset by
   const [divClassName, setDivClassName] = useState('typing'); // give the typing div the 'typing shaken' class and it'll turn red and shake
-  const [timerClass, setTimerClass] = useState('timer');
+  const [timerClass, setTimerClass] = useState('timer text-dark-navy dark:text-pale-gold');
   const [fullDivStyle, setFullDivStyle] = useState({
     position: 'relative', // set typing division style (in order to set position)
     left: '0ch',
@@ -257,12 +257,17 @@ const Multiplayer = function () {
 
   return (
     <>
-      <h1 className="mt-20 text-center text-7xl text-blood-red underline">1 vs 1 Mode</h1>
+      <h1 className="mt-20 text-center text-7xl text-dark-navy underline dark:text-blood-red">
+        1 vs 1 Mode
+      </h1>
       <div className="input-container my-14">
         {user ? null : (
-          <h1 className="-ml-14 mb-10 font-mono text-4xl text-pale-gold">
+          <h1 className="-ml-14 mb-10 font-mono text-4xl text-kinda-teal dark:text-pale-gold">
             Welcome{' '}
-            <span className="font-serif text-5xl font-extrabold text-blood-red"> {guestName}</span>
+            <span className="font-serif text-5xl font-extrabold text-dark-navy dark:text-blood-red">
+              {' '}
+              {guestName}
+            </span>
           </h1>
         )}
 
@@ -270,11 +275,15 @@ const Multiplayer = function () {
           <div className="typing-left">
             <SubmittedWords words={leftWords} />
           </div>
-          <div className={`typing-right ${started ? '' : 'blur'}`}>{rightChars}</div>
+          <div
+            className={`typing-right ${started ? '' : 'blur'} text-dark-navy dark:text-pale-gold`}
+          >
+            {rightChars}
+          </div>
         </div>
 
         <input
-          className={`rounded-t-lg font-sans ${incorrectCharCSS}`}
+          className={`rounded-t-lg font-sans ${incorrectCharCSS} bg-beige text-dark-navy placeholder:text-dark-navy dark:bg-cosmic-purple dark:text-pale-gold dark:placeholder:text-pale-gold`}
           placeholder={placeholder}
           disabled={disableTyping}
           radius="md"
@@ -289,7 +298,7 @@ const Multiplayer = function () {
         {!disableTyping ? null : (
           <div className="mt-10 flex flex-col align-middle">
             <button
-              className="h-24 w-80 rounded-lg bg-pale-gold py-1 px-6 text-center font-mono text-2xl text-cosmic-purple hover:bg-gold-hover"
+              className="h-24 w-80 rounded-lg bg-darker-beige py-1 px-6 text-center font-mono text-2xl text-dark-navy hover:bg-kinda-teal hover:text-beige dark:bg-pale-gold dark:text-cosmic-purple dark:hover:bg-gold-hover"
               onClick={joinWaitingRoom}
             >
               {waiting ? (
@@ -302,8 +311,9 @@ const Multiplayer = function () {
               )}
             </button>
             {waiting ? null : (
-              <h1 className="mt-5 ml-5 text-4xl">
-                Match starts in <span className="text-blood-red">{remainingSeconds}</span>
+              <h1 className="mt-5 ml-5 text-4xl text-dark-navy dark:text-pale-gold">
+                Match starts in{' '}
+                <span className="text-kinda-teal dark:text-blood-red">{remainingSeconds}</span>
               </h1>
             )}
           </div>
