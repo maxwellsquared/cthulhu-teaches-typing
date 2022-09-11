@@ -21,6 +21,7 @@ module.exports = {
         'link-green': '#2D888C',
         'modal-purple': '#190019',
         incorrectInput: 'rgba(248, 41, 41, 0.09)',
+        'modal-bg': 'rgba(25, 0, 25, 0.9)',
 
         // light mode colors
         beige: '#F0E9D2',

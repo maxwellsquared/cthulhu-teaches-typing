@@ -32,7 +32,7 @@ export default function ResultsModal(props) {
     <>
       <Modal
         isOpen={modalIsOpen}
-        className="Modal"
+        className="Modal rounded-md bg-kinda-teal dark:bg-modal-bg"
         overlayClassName="Overlay"
         disableAutoFocus={true}
         ariaHideApp={false}
@@ -44,7 +44,7 @@ export default function ResultsModal(props) {
             <p>ACCURACY: {props.accuracy}%</p>
           </div>
           <button
-            className="text-xlg mt-10 transform rounded-lg dark:text-cosmic-purple dark:hover:bg-blood-red-hover"
+            className="text-xlg mt-10 transform rounded-lg bg-darker-beige p-2 px-6 text-dark-navy shadow-lg hover:scale-105 hover:bg-kinda-teal dark:bg-blood-red dark:text-pale-gold dark:hover:bg-blood-red-hover"
             onClick={closeModal}
           >
             CLOSE
@@ -59,7 +59,9 @@ export default function ResultsModal(props) {
                 to="/user"
               >
                 See all results{' '}
-                <span className="text-link-green underline dark:hover:text-pale-gold">here</span>
+                <span className="text-darker-beige underline dark:text-link-green dark:hover:text-pale-gold">
+                  here
+                </span>
               </Link>
             </>
           ) : (

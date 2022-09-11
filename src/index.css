@@ -115,7 +115,7 @@ input::placeholder {
 
 
 .Modal {
-  background-color: rgba(25, 0, 25, 0.9);
+  /* background-color: rgba(25, 0, 25, 0.9); */
   margin: auto;
   margin-top: 100px;
   height: auto;
@@ -137,8 +137,8 @@ input::placeholder {
 }
 
 .Modal button {
-  color: #eedcb2;
-  background-color: #8c3d34;
+  /* color: #eedcb2; */
+  /* background-color: #8c3d34; */
   padding: 20px;
   font-family: brother-1816, sans-serif;
   font-weight: 900;
