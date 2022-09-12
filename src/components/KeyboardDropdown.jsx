@@ -1,8 +1,10 @@
 import { UserContext } from '../helpers/context';
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // component for the TypingField to display the current keyboard and all keyboards for the user
 const KeyboardDropdown = () => {
+  const navigate = useNavigate();
   const { userKeyboards, currentKeyboard, setCurrentKeyboard } = useContext(UserContext);
   // userKeyboards is an array of objects, each object is a keyboard
   // currentKeyboard is the id of the current keyboard
@@ -15,6 +17,10 @@ const KeyboardDropdown = () => {
 
   // set the setCurrentKeyboard state to the keyboard that was clicked
   const handleKeyboardClick = (keyboard) => {
+    if (keyboard === '0') {
+      navigate("/leaderboard");
+    }
+    
     setCurrentKeyboard(keyboard);
   };
 
@@ -31,11 +37,14 @@ const KeyboardDropdown = () => {
         className="rounded-lg border bg-darker-beige p-1 text-dark-navy dark:bg-lighter-purple dark:text-pale-gold dark:focus:border-blood-red dark:focus:ring-blood-red"
         onChange={(event) => handleKeyboardClick(event.currentTarget.value)}
       >
+        
         {userKeyboards.map((keyboard) => (
           <option key={keyboard.id} value={keyboard.id}>
             {keyboard.name}
           </option>
+          
         ))}
+        <option value={ 0 }>Create New</option>
       </select>
     </div>
   );
