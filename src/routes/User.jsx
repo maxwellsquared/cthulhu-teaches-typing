@@ -148,7 +148,19 @@ const User = () => {
         <>
           <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-kinda-teal bg-darker-beige p-2 dark:border-blood-red-hover dark:bg-darker-purple">
             <h1 className="my-3 text-4xl font-bold dark:text-pale-gold">Keyboard Stats</h1>
-            <KeyboardDropdown />
+            <div display="flex">
+              <KeyboardDropdown />
+              <button
+              className="group relative flex w-full transform justify-center rounded-md border border-transparent bg-red py-2 px-4 text-lg font-medium text-dark-navy transition duration-300 ease-in-out hover:scale-105 hover:bg-kinda-teal focus:outline-none focus:ring-2 focus:ring-blood-red focus:ring-offset-2 dark:bg-pale-gold  dark:text-blood-red dark:hover:bg-gold-hover"
+              onClick={() => {
+                
+              }}
+            >
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+              </span>
+              Delete Keyboard
+            </button>
+            </div>
             <div className="mr-7">{specificKeyboardStats}</div>
           </div>
 
