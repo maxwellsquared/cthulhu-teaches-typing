@@ -1,11 +1,17 @@
 import { useState, useEffect, useContext } from 'react';
 import RandomWords from '../helpers/RandomWords';
+import difficultRandomWords from '../helpers/difficultRandomWords';
 import ResultsModal from './ResultsModal';
-import { CodeContext } from '../helpers/context';
+import { CodeContext, randomWordsContext } from '../helpers/context';
 import SubmittedWords from './SubmittedWords';
+import DifficultyDropdown from './DifficultyDropdown';
+import codeRandomWords from '../helpers/codeRandomWords';
+import codeLanguageRandom from '../helpers/codeLanguageRandom';
+import binaryCode from '../helpers/binaryCode';
 
 export default function TypingField() {
   const { codeEntered, setCodeEntered } = useContext(CodeContext);
+  const { randomWords, setRandomWords } = useContext(randomWordsContext); // use context to get randomWords
 
   // timer functionality
   const initialTimer = 15; // use constant for initial timer and pass to counter--needed for WPM
@@ -13,7 +19,6 @@ export default function TypingField() {
   const [started, setStarted] = useState(false);
 
   // text to be typed
-  const [randomWords, setRandomWords] = useState(RandomWords({ time: 1, numWords: 225 })); // returns array of 225 words
   let initialRandomWords = randomWords.toString(); // converts array to string
 
   // inputs from user
@@ -158,7 +163,7 @@ export default function TypingField() {
       setIncorrectCharCSS('');
     } else {
       setNumMistakes((prev) => prev + 1);
-      setIncorrectCharCSS('bg-incorrectInput');
+      setIncorrectCharCSS('bg-incorrectInput dark:bg-incorrectInput');
     }
   };
 
@@ -194,18 +199,60 @@ export default function TypingField() {
     return [h, m > 9 ? m : h ? '0' + m : m || '0', s > 9 ? s : '0' + s].filter(Boolean).join(':');
   }
 
+  const [difficulty, setDifficulty] = useState('normal');
+  // function to return 'normal ' or 'hard' depending on the difficulty
+  const changeDifficulty = (difficulty) => {
+    let updatedWords;
+
+    if (difficulty === 'normal') {
+      setDifficulty('normal');
+      setRandomWords(RandomWords({ time: 1, numWords: 225 }));
+      updatedWords = randomWords.toString();
+      setRightChars(updatedWords.replace(/,/g, ' '));
+    }
+
+    if (difficulty === 'hard') {
+      setDifficulty('hard');
+      setRandomWords(difficultRandomWords({ time: 1, numWords: 100 }));
+      updatedWords = randomWords.toString();
+      setRightChars(updatedWords.replace(/,/g, ' '));
+    }
+
+    if (difficulty === 'code') {
+      setDifficulty('code');
+      setRandomWords(codeRandomWords({ time: 1, numWords: 100 }));
+      updatedWords = randomWords.toString();
+      setRightChars(updatedWords.replace(/,/g, ' '));
+    }
+
+    if (difficulty === 'codeLanguageRandom') {
+      setDifficulty('codeLanguageRandom');
+      setRandomWords(codeLanguageRandom({ time: 1, numWords: 100 }));
+      updatedWords = randomWords.toString();
+      setRightChars(updatedWords.replace(/,/g, ' '));
+    }
+
+    if (difficulty === 'binary') {
+      setDifficulty('binary');
+      setRandomWords(binaryCode({ time: 1, numWords: 100 }));
+      updatedWords = randomWords.toString();
+      setRightChars(updatedWords.replace(/,/g, ' '));
+    }
+  };
+
+  // update the rightChars when the difficulty is changed, only runs when the difficulty is changed
+  useEffect(() => {
+    let updatedWords = randomWords.toString();
+    setRightChars(updatedWords.replace(/,/g, ' '));
+  }, [difficulty]);
+
   return (
     <>
-      <ResultsModal
-        gameOver={isComplete}
-        wpm={wordsPerMinute}
-        accuracy={accuracy}
-        // user={user ? user : 'anon'}
-      />
+      <ResultsModal gameOver={isComplete} wpm={wordsPerMinute} accuracy={accuracy} />
       <div style={{ color: 'white', visibility: codeEntered ? 'visible' : 'hidden' }}>
         CONGRATULATION!!!! VISIBLE
       </div>
-      <div className="input-container my-20">
+      <div className="input-container mt-20 mb-10">
         <div className={divClassName} style={fullDivStyle}>
           <div className="typing-left">
             <SubmittedWords words={leftWords} />
@@ -225,6 +272,13 @@ export default function TypingField() {
         />
         <span className={timerClass}>{formatTime(counter)}</span>
       </div>
+      {started ? (
+        <div className="invisible">
+          <DifficultyDropdown changeDifficulty={changeDifficulty} difficulty={difficulty} />
+        </div>
+      ) : (
+        <DifficultyDropdown changeDifficulty={changeDifficulty} difficulty={difficulty} />
+      )}
     </>
   );
 }

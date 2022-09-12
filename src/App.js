@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { CodeContext, UserContext } from './helpers/context';
+import { CodeContext, UserContext, randomWordsContext } from './helpers/context';
 import Multiplayer from './routes/Multiplayer';
 import Login from './routes/Login';
 import Home from './routes/Home';
@@ -13,6 +13,7 @@ import './App.css';
 import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generator';
 import ForgotPassword from './routes/ForgotPassword';
 import CreateKeyboard from './routes/CreateKeyboard';
+import RandomWords from './helpers/RandomWords';
 
 //!! toggle dark mode
 import { ThemeProvider } from './helpers/ThemeContext';
@@ -28,6 +29,9 @@ export default function App() {
     uniqueNamesGenerator({ dictionaries: [adjectives, animals] }).toUpperCase()
   ); // this is the name of the guest user, set when user goes to TypingField
 
+  // context for randomWords
+  const [randomWords, setRandomWords] = useState(RandomWords({ time: 1, numWords: 100 }));
+
   useEffect(() => {
     // continually updates, checking if no user is signed in. if there isnt, set the current user to the localStorage data for user, keyboards, and current keyboard.
     if (
@@ -37,7 +41,6 @@ export default function App() {
     ) {
       setUser(JSON.parse(window.localStorage.getItem('user')));
       setUserKeyboards(JSON.parse(window.localStorage.getItem('keyboards')));
-      setCurrentKeyboard(window.localStorage.getItem('currentKeyboard'));
     }
   });
 
@@ -52,38 +55,40 @@ export default function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
-        <UserContext.Provider
-          value={{
-            user,
-            setUser,
-            userKeyboards,
-            setUserKeyboards,
-            currentKeyboard,
-            setCurrentKeyboard,
-            userScore,
-            setUserScore,
-            guestName,
-            setGuestName,
-          }}
-        >
-          <CodeContext.Provider value={{ codeEntered, setCodeEntered }}>
-            <div className="bg-beige transition-all dark:bg-cosmic-purple">
-              <Nav />
+        <randomWordsContext.Provider value={{ randomWords, setRandomWords }}>
+          <UserContext.Provider
+            value={{
+              user,
+              setUser,
+              userKeyboards,
+              setUserKeyboards,
+              currentKeyboard,
+              setCurrentKeyboard,
+              userScore,
+              setUserScore,
+              guestName,
+              setGuestName,
+            }}
+          >
+            <CodeContext.Provider value={{ codeEntered, setCodeEntered }}>
+              <div className="bg-beige transition-all dark:bg-cosmic-purple">
+                <Nav />
 
-              <LayoutWrapper>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/multiplayer" element={<Multiplayer />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/leaderboard" element={<Leaderboard />} />
-                  <Route path="/user" element={<User />} />
-                  <Route path="/forgot-password" element={<ForgotPassword />} />
-                  <Route path="/create-keyboard" element={<CreateKeyboard />} />
-                </Routes>
-              </LayoutWrapper>
-            </div>
-          </CodeContext.Provider>
-        </UserContext.Provider>
+                <LayoutWrapper>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/multiplayer" element={<Multiplayer />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/leaderboard" element={<Leaderboard />} />
+                    <Route path="/user" element={<User />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/create-keyboard" element={<CreateKeyboard />} />
+                  </Routes>
+                </LayoutWrapper>
+              </div>
+            </CodeContext.Provider>
+          </UserContext.Provider>
+        </randomWordsContext.Provider>
       </ThemeProvider>
     </BrowserRouter>
   );

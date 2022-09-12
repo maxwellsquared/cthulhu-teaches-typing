@@ -11,7 +11,7 @@ const KeyboardDropdown = () => {
   // setCurrentKeyboard is a function that sets the current keyboard
 
   // sets a default keyboard if the user has no keyboards
-  if (currentKeyboard === undefined) {
+  if (currentKeyboard === undefined || currentKeyboard === null) {
     setCurrentKeyboard(userKeyboards[0].id);
   }
 
