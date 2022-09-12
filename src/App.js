@@ -48,7 +48,6 @@ export default function App() {
     // when user is signed in, userkeyboards change, or currentkeyboard changes update the local data.
     window.localStorage.setItem('user', JSON.stringify(user));
     window.localStorage.setItem('keyboards', JSON.stringify(userKeyboards));
-    window.localStorage.setItem('currentKeyboard', currentKeyboard);
   }, [user, userKeyboards, currentKeyboard]);
 
   // this will wrap all other components

@@ -11,7 +11,7 @@ Reset the db:
 ```
 /cd into backend/typing
 rails db:drop
-rails db: setup
+rails db:setup
 ```
 
 Users in the database:

@@ -6,7 +6,8 @@ import { CartesianGrid, XAxis, YAxis, Tooltip, Area, AreaChart, Legend } from 'r
 import KeyboardDropdown from '../components/KeyboardDropdown';
 
 const User = () => {
-  const { user, userKeyboards, setUserKeyboards, setCurrentKeyboard, currentKeyboard } = useContext(UserContext);
+  const { user, userKeyboards, setUserKeyboards, setCurrentKeyboard, currentKeyboard } =
+    useContext(UserContext);
 
   const [userStats, setUserStats] = useState();
 
@@ -24,25 +25,18 @@ const User = () => {
   };
 
   const deleteKeyboard = function (keyboard_id) {
-  
     axios
-      .delete(`http://localhost:3000/keyboards/${keyboard_id}`, {
-      })
+      .delete(`http://localhost:3000/keyboards/${keyboard_id}`, {})
       .then((res) => {
         console.log('Success: Keyboard deleted');
       })
-      .then(
-        getKeyboardsByUserId(user.id)
-      )
-      .then(
-        setCurrentKeyboard("1")
-      )
+      .then(getKeyboardsByUserId(user.id))
+      .then(setCurrentKeyboard('1'))
       .catch((err) => {
         console.log('Error has occurred');
         console.log(err);
       });
-  
-  }
+  };
 
   const getKeyboardsByUserId = (userId) => {
     const config = {
@@ -68,23 +62,6 @@ const User = () => {
       getUserData(user.id);
     }
   }, []);
-
-  // array of keyboard names as a list
-  const keyboardList = (keyboards) => {
-    if (keyboards) {
-      const keyboardNames = userKeyboards.map((keyboard) => {
-        return (
-          <li className="text-lg text-pale-gold" key={keyboard.id}>
-            {keyboard.name}
-          </li>
-        );
-      });
-      return keyboardNames;
-    }
-
-    const noKeyboards = <li>You have no keyboards</li>;
-    return noKeyboards;
-  };
 
   // returns data for a specific keyboard_id, or all keyboards if keyboard_id is undefined
   // used to generate graph with wpm and accuracy data
@@ -185,24 +162,25 @@ const User = () => {
         <>
           <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-kinda-teal bg-darker-beige p-2 dark:border-blood-red-hover dark:bg-darker-purple">
             <h1 className="my-3 text-4xl font-bold dark:text-pale-gold">Keyboard Stats</h1>
-            <div display="flex">
+            <div className="flex justify-center gap-3">
               <KeyboardDropdown />
               <button
-              className="group relative flex w-full transform justify-center rounded-md border border-transparent bg-red py-2 px-4 text-lg font-medium text-dark-navy transition duration-300 ease-in-out hover:scale-105 hover:bg-kinda-teal focus:outline-none focus:ring-2 focus:ring-blood-red focus:ring-offset-2 dark:bg-pale-gold  dark:text-blood-red dark:hover:bg-gold-hover"
-              onClick={() => {
-                deleteKeyboard(currentKeyboard)
-                setTimeout(() => {
-                  setUserKeyboards(userKeyboards.filter(function(keyboard) {
-                    return keyboard.id != currentKeyboard
-                  }))
-                }, 200)
-
-              }}
-            >
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-              </span>
-              Delete Keyboard
-            </button>
+                className="bg-red group relative flex transform justify-center rounded-md border border-transparent py-1  px-2 text-sm font-medium text-dark-navy transition duration-300 ease-in-out hover:scale-105 hover:bg-kinda-teal focus:outline-none focus:ring-2 focus:ring-blood-red focus:ring-offset-2 dark:bg-pale-gold  dark:text-blood-red dark:hover:bg-blood-red dark:hover:text-pale-gold"
+                onClick={() => {
+                  deleteKeyboard(currentKeyboard);
+                  setTimeout(() => {
+                    setUserKeyboards(
+                      userKeyboards.filter(function (keyboard) {
+                        // eslint-disable-next-line eqeqeq
+                        return keyboard.id != currentKeyboard;
+                      })
+                    );
+                  }, 200);
+                }}
+              >
+                <span className="absolute inset-y-0 left-0 flex items-center pl-3"></span>
+                Delete Keyboard
+              </button>
             </div>
             <div className="mr-7">{specificKeyboardStats}</div>
           </div>
