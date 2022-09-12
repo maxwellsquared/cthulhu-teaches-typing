@@ -162,7 +162,7 @@ export default function TypingField() {
       setIncorrectCharCSS('');
     } else {
       setNumMistakes((prev) => prev + 1);
-      setIncorrectCharCSS('bg-incorrectInput');
+      setIncorrectCharCSS('bg-incorrectInput dark:bg-incorrectInput');
     }
   };
 
@@ -221,15 +221,34 @@ export default function TypingField() {
   console.log(difficulty);
   console.log(randomWords);
 
-  // useeffect to update the rightChars when the difficulty is changed, only runs when the difficulty is changed
+  // update the rightChars when the difficulty is changed, only runs when the difficulty is changed
   useEffect(() => {
     let updatedWords = randomWords.toString();
     setRightChars(updatedWords.replace(/,/g, ' '));
   }, [difficulty]);
-  
 
   return (
     <>
+      {/* testing below */}
+      <div className="absolute">
+        <div className="justify flex items-center gap-2">
+          <label
+            htmlFor="keyboards"
+            className="block font-mono text-base text-kinda-teal dark:text-pale-gold"
+          >
+            Difficulty:
+          </label>
+          <select
+            value={difficulty}
+            className="rounded-lg border bg-darker-beige p-1 text-dark-navy dark:bg-lighter-purple dark:text-pale-gold dark:focus:border-blood-red dark:focus:ring-blood-red"
+            onChange={(event) => changeDifficulty(event.currentTarget.value)}
+          >
+            <option value="normal">Standard</option>
+            <option value="hard">Complex</option>
+          </select>
+        </div>
+      </div>
+      {/* to here */}
       <ResultsModal
         gameOver={isComplete}
         wpm={wordsPerMinute}
@@ -258,23 +277,6 @@ export default function TypingField() {
           autoFocus="autofocus"
         />
         <span className={timerClass}>{formatTime(counter)}</span>
-      </div>
-      {/* testing below */}
-      <div className="justify flex items-center gap-2">
-        <label
-          htmlFor="keyboards"
-          className="block font-mono text-base text-kinda-teal dark:text-pale-gold"
-        >
-          Selected Difficulty:
-        </label>
-        <select
-          value={difficulty}
-          className="rounded-lg border bg-darker-beige p-1 text-dark-navy dark:bg-lighter-purple dark:text-pale-gold dark:focus:border-blood-red dark:focus:ring-blood-red"
-          onChange={(event) => changeDifficulty(event.currentTarget.value)}
-        >
-          <option value="normal">Normal</option>
-          <option value="hard">Hard</option>
-        </select>
       </div>
     </>
   );
