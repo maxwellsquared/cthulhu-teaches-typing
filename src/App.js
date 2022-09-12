@@ -40,7 +40,6 @@ export default function App() {
     ) {
       setUser(JSON.parse(window.localStorage.getItem('user')));
       setUserKeyboards(JSON.parse(window.localStorage.getItem('keyboards')));
-      setCurrentKeyboard(window.localStorage.getItem('currentKeyboard'));
     }
   });
 

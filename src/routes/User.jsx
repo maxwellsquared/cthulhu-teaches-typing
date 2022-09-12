@@ -8,8 +8,6 @@ import KeyboardDropdown from '../components/KeyboardDropdown';
 const User = () => {
   const { user, userKeyboards, currentKeyboard } = useContext(UserContext);
 
-  console.log('currentKeyboard', currentKeyboard);
-
   const [userStats, setUserStats] = useState();
 
   // axios get request to get user data
