@@ -27,9 +27,17 @@ class KeyboardsController < ApplicationController
   private
 
   def keyboard_params
-    params.require(:keyboard).permit(:name, :user_id)
+    params.require(:keyboard).permit(:name, :keyboard_type, :color1, :color2, :user_id)
   end
 end
 
-# curl POST http://localhost:3000/keyboards/new -H 'Content-Type: application/json' -d '{"name": "Test Keyboard","user_id": 1}' -v
+# curl POST http://localhost:3000/keyboards/new -H 'Content-Type: application/json' -d '
+#{
+# "name": "Test Keyboard", 
+# "keyboard_type": "full", 
+# "color1": "red", 
+# "color2": "green", 
+# "user_id": 1}' -v
+#
+#
 # curl GET http://localhost:3000/keyboards/1 -H 'Content-Type: application/json' -v
