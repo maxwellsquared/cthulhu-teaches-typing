@@ -271,29 +271,63 @@ const Multiplayer = function () {
           </h1>
         )}
 
-        <div className={divClassName} style={fullDivStyle}>
-          <div className="typing-left">
-            <SubmittedWords words={leftWords} />
-          </div>
-          <div
-            className={`typing-right ${started ? '' : 'blur'} text-dark-navy dark:text-pale-gold`}
-          >
-            {rightChars}
-          </div>
-        </div>
+        {waiting ? (
+          <div className="invisible">
+            <div className={divClassName} style={fullDivStyle}>
+              <div className="typing-left">
+                <SubmittedWords words={leftWords} />
+              </div>
+              <div
+                className={`typing-right ${
+                  started ? '' : 'blur'
+                } text-dark-navy dark:text-pale-gold`}
+              >
+                {rightChars}
+              </div>
+            </div>
 
-        <input
-          className={`rounded-t-lg font-sans ${incorrectCharCSS} bg-beige text-dark-navy placeholder:text-dark-navy dark:bg-cosmic-purple dark:text-pale-gold dark:placeholder:text-pale-gold`}
-          placeholder={placeholder}
-          disabled={disableTyping}
-          radius="md"
-          size="md"
-          value={input}
-          onChange={(event) => handleInput(event.target.value)}
-          onKeyDown={(event) => detailedInput(event)}
-          autoFocus="autofocus"
-        />
-        <span className={timerClass}>{formatTime(counter)}</span>
+            <input
+              className={`rounded-t-lg font-sans ${incorrectCharCSS} bg-beige text-dark-navy placeholder:text-dark-navy dark:bg-cosmic-purple dark:text-pale-gold dark:placeholder:text-pale-gold`}
+              placeholder={placeholder}
+              disabled={disableTyping}
+              radius="md"
+              size="md"
+              value={input}
+              onChange={(event) => handleInput(event.target.value)}
+              onKeyDown={(event) => detailedInput(event)}
+              autoFocus="autofocus"
+            />
+            <span className={timerClass}>{formatTime(counter)}</span>
+          </div>
+        ) : (
+          <>
+            <div className={divClassName} style={fullDivStyle}>
+              <div className="typing-left">
+                <SubmittedWords words={leftWords} />
+              </div>
+              <div
+                className={`typing-right ${
+                  started ? '' : 'blur'
+                } text-dark-navy dark:text-pale-gold`}
+              >
+                {rightChars}
+              </div>
+            </div>
+
+            <input
+              className={`rounded-t-lg font-sans ${incorrectCharCSS} bg-beige text-dark-navy placeholder:text-dark-navy dark:bg-cosmic-purple dark:text-pale-gold dark:placeholder:text-pale-gold`}
+              placeholder={placeholder}
+              disabled={disableTyping}
+              radius="md"
+              size="md"
+              value={input}
+              onChange={(event) => handleInput(event.target.value)}
+              onKeyDown={(event) => detailedInput(event)}
+              autoFocus="autofocus"
+            />
+            <span className={timerClass}>{formatTime(counter)}</span>
+          </>
+        )}
 
         {!disableTyping ? null : (
           <div className="mt-10 flex flex-col align-middle">
@@ -310,9 +344,14 @@ const Multiplayer = function () {
                 </>
               )}
             </button>
-            {waiting ? null : (
-              <h1 className="mt-5 ml-5 text-4xl text-dark-navy dark:text-pale-gold">
+            {waiting ? (
+              <h1 className="invisible mt-5 ml-5 text-4xl text-dark-navy dark:text-pale-gold">
                 Match starts in{' '}
+                <span className="text-kinda-teal dark:text-blood-red">{remainingSeconds}</span>
+              </h1>
+            ) : (
+              <h1 className="mt-5 ml-5 text-4xl text-dark-navy dark:text-pale-gold">
+                Match starts in &nbsp;
                 <span className="text-kinda-teal dark:text-blood-red">{remainingSeconds}</span>
               </h1>
             )}
