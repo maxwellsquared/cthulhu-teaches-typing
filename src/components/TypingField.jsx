@@ -5,6 +5,7 @@ import ResultsModal from './ResultsModal';
 import { CodeContext, randomWordsContext } from '../helpers/context';
 import SubmittedWords from './SubmittedWords';
 import DifficultyDropdown from './DifficultyDropdown';
+import codeRandomWords from '../helpers/codeRandomWords';
 
 export default function TypingField() {
   const { codeEntered, setCodeEntered } = useContext(CodeContext);
@@ -211,6 +212,13 @@ export default function TypingField() {
     if (difficulty === 'hard') {
       setDifficulty('hard');
       setRandomWords(difficultRandomWords({ time: 1, numWords: 100 }));
+      updatedWords = randomWords.toString();
+      setRightChars(updatedWords.replace(/,/g, ' '));
+    }
+
+    if (difficulty === 'code') {
+      setDifficulty('code');
+      setRandomWords(codeRandomWords({ time: 1, numWords: 100 }));
       updatedWords = randomWords.toString();
       setRightChars(updatedWords.replace(/,/g, ' '));
     }

@@ -14,6 +14,7 @@ const DifficultyDropdown = ({ difficulty, changeDifficulty }) => {
       >
         <option value="normal">Standard</option>
         <option value="hard">Complex</option>
+        <option value="code">Code</option>
       </select>
     </div>
   );
