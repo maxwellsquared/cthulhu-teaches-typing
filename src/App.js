@@ -12,6 +12,7 @@ import LayoutWrapper from './components/LayoutWrapper';
 import './App.css';
 import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generator';
 import ForgotPassword from './routes/ForgotPassword';
+import CreateKeyboard from './routes/CreateKeyboard';
 import RandomWords from './helpers/RandomWords';
 
 //!! toggle dark mode
@@ -81,6 +82,7 @@ export default function App() {
                     <Route path="/leaderboard" element={<Leaderboard />} />
                     <Route path="/user" element={<User />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/create-keyboard" element={<CreateKeyboard />} />
                   </Routes>
                 </LayoutWrapper>
               </div>
