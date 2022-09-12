@@ -6,7 +6,7 @@ import { CartesianGrid, XAxis, YAxis, Tooltip, Area, AreaChart, Legend } from 'r
 import KeyboardDropdown from '../components/KeyboardDropdown';
 
 const User = () => {
-  const { user, userKeyboards, currentKeyboard } = useContext(UserContext);
+  const { user, userKeyboards, setUserKeyboards, setCurrentKeyboard, currentKeyboard } = useContext(UserContext);
 
   console.log('currentKeyboard', currentKeyboard);
 
@@ -18,6 +18,53 @@ const User = () => {
       .get(`http://localhost:3000/api/user/${userId}`)
       .then((res) => {
         setUserStats(res.data); // set user data to state
+      })
+      .catch((err) => {
+        console.log('Error has occurred');
+        console.log(err);
+      });
+  };
+
+  const deleteKeyboard = function (keyboard_id) {
+  
+    axios
+      .delete(`http://localhost:3000/keyboards/${keyboard_id}`, {
+      })
+      .then((res) => {
+        console.log('Success: Keyboard deleted');
+      })
+      .then(
+        getKeyboardsByUserId(user.id)
+      )
+      .then(
+        console.log(userKeyboards)
+      )
+      .then(
+          setUserKeyboards({keyboards: userKeyboards.filter(function(keyboard) {
+            return keyboard.id != currentKeyboard
+          })})
+      )
+      .then(
+        setCurrentKeyboard("1")
+      )
+      .catch((err) => {
+        console.log('Error has occurred');
+        console.log(err);
+      });
+  
+  }
+
+  const getKeyboardsByUserId = (userId) => {
+    const config = {
+      method: 'get',
+      url: `http://localhost:3000/keyboards/${userId}`,
+      headers: {},
+    };
+
+    axios(config)
+      .then((res) => {
+        console.log('Success: user keyboards retrieved');
+        setUserKeyboards(res.data); // set user keyboards to state
       })
       .catch((err) => {
         console.log('Error has occurred');
@@ -153,7 +200,7 @@ const User = () => {
               <button
               className="group relative flex w-full transform justify-center rounded-md border border-transparent bg-red py-2 px-4 text-lg font-medium text-dark-navy transition duration-300 ease-in-out hover:scale-105 hover:bg-kinda-teal focus:outline-none focus:ring-2 focus:ring-blood-red focus:ring-offset-2 dark:bg-pale-gold  dark:text-blood-red dark:hover:bg-gold-hover"
               onClick={() => {
-                
+                deleteKeyboard(currentKeyboard)
               }}
             >
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">

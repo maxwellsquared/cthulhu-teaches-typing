@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'api/user/:id', to: 'submissions#history'
   post 'keyboards/new', to: 'keyboards#create' # create a new keyboard for a user
   get 'keyboards/:id', to: 'keyboards#show' # get keyboard by user_id
+  delete 'keyboards/:id', to: 'keyboards#destroy' #delete keyboard by keyboard_id
 
   match '*all', controller: 'application', action: 'cors_preflight_check', via: [:options]
 end

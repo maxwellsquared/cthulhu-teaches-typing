@@ -18,6 +18,12 @@ class KeyboardsController < ApplicationController
     render json: @keyboards
   end
 
+  def destroy
+    # destroy a single keyboard and all its submissions
+    Keyboard.find(params[:id]).destroy
+    Submission.where(keyboard_id: params[:id]).destroy_all
+  end
+
   private
 
   def keyboard_params
