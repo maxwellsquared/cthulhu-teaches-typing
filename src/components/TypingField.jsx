@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import RandomWords from '../helpers/RandomWords';
+import difficultRandomWords from '../helpers/difficultRandomWords';
 import ResultsModal from './ResultsModal';
 import { CodeContext } from '../helpers/context';
 import SubmittedWords from './SubmittedWords';
@@ -14,7 +15,10 @@ export default function TypingField() {
 
   // text to be typed
   const [randomWords, setRandomWords] = useState(RandomWords({ time: 1, numWords: 225 })); // returns array of 225 words
+  // const [randomWords, setRandomWords] = useState(difficultRandomWords({ time: 1, numWords: 100 })); // returns array of 225 words
   let initialRandomWords = randomWords.toString(); // converts array to string
+
+  // console.log('difficultRandomWords', difficultRandomWords({ time: 1, numWords: 100 }));
 
   // inputs from user
   const [input, setInput] = useState('');
@@ -158,7 +162,7 @@ export default function TypingField() {
       setIncorrectCharCSS('');
     } else {
       setNumMistakes((prev) => prev + 1);
-      setIncorrectCharCSS('bg-incorrectInput');
+      setIncorrectCharCSS('bg-incorrectInput dark:bg-incorrectInput');
     }
   };
 
@@ -194,8 +198,57 @@ export default function TypingField() {
     return [h, m > 9 ? m : h ? '0' + m : m || '0', s > 9 ? s : '0' + s].filter(Boolean).join(':');
   }
 
+  const [difficulty, setDifficulty] = useState('normal');
+  // function to return 'normal ' or 'hard' depending on the difficulty
+  const changeDifficulty = (difficulty) => {
+    let updatedWords;
+
+    if (difficulty === 'normal') {
+      setDifficulty('normal');
+      setRandomWords(RandomWords({ time: 1, numWords: 225 }));
+      updatedWords = randomWords.toString();
+      setRightChars(updatedWords.replace(/,/g, ' '));
+    }
+
+    if (difficulty === 'hard') {
+      setDifficulty('hard');
+      setRandomWords(difficultRandomWords({ time: 1, numWords: 100 }));
+      updatedWords = randomWords.toString();
+      setRightChars(updatedWords.replace(/,/g, ' '));
+    }
+  };
+
+  console.log(difficulty);
+  console.log(randomWords);
+
+  // update the rightChars when the difficulty is changed, only runs when the difficulty is changed
+  useEffect(() => {
+    let updatedWords = randomWords.toString();
+    setRightChars(updatedWords.replace(/,/g, ' '));
+  }, [difficulty]);
+
   return (
     <>
+      {/* testing below */}
+      <div className="absolute">
+        <div className="justify flex items-center gap-2">
+          <label
+            htmlFor="keyboards"
+            className="block font-mono text-base text-kinda-teal dark:text-pale-gold"
+          >
+            Difficulty:
+          </label>
+          <select
+            value={difficulty}
+            className="rounded-lg border bg-darker-beige p-1 text-dark-navy dark:bg-lighter-purple dark:text-pale-gold dark:focus:border-blood-red dark:focus:ring-blood-red"
+            onChange={(event) => changeDifficulty(event.currentTarget.value)}
+          >
+            <option value="normal">Standard</option>
+            <option value="hard">Complex</option>
+          </select>
+        </div>
+      </div>
+      {/* to here */}
       <ResultsModal
         gameOver={isComplete}
         wpm={wordsPerMinute}
