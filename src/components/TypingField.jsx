@@ -6,6 +6,8 @@ import { CodeContext, randomWordsContext } from '../helpers/context';
 import SubmittedWords from './SubmittedWords';
 import DifficultyDropdown from './DifficultyDropdown';
 import codeRandomWords from '../helpers/codeRandomWords';
+import codeLanguageRandom from '../helpers/codeLanguageRandom';
+import binaryCode from '../helpers/binaryCode';
 
 export default function TypingField() {
   const { codeEntered, setCodeEntered } = useContext(CodeContext);
@@ -219,6 +221,20 @@ export default function TypingField() {
     if (difficulty === 'code') {
       setDifficulty('code');
       setRandomWords(codeRandomWords({ time: 1, numWords: 100 }));
+      updatedWords = randomWords.toString();
+      setRightChars(updatedWords.replace(/,/g, ' '));
+    }
+
+    if (difficulty === 'codeLanguageRandom') {
+      setDifficulty('codeLanguageRandom');
+      setRandomWords(codeLanguageRandom({ time: 1, numWords: 100 }));
+      updatedWords = randomWords.toString();
+      setRightChars(updatedWords.replace(/,/g, ' '));
+    }
+
+    if (difficulty === 'binary') {
+      setDifficulty('binary');
+      setRandomWords(binaryCode({ time: 1, numWords: 100 }));
       updatedWords = randomWords.toString();
       setRightChars(updatedWords.replace(/,/g, ' '));
     }
