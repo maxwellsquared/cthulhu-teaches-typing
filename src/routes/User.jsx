@@ -35,14 +35,6 @@ const User = () => {
         getKeyboardsByUserId(user.id)
       )
       .then(
-        console.log(userKeyboards)
-      )
-      .then(
-          setUserKeyboards({keyboards: userKeyboards.filter(function(keyboard) {
-            return keyboard.id != currentKeyboard
-          })})
-      )
-      .then(
         setCurrentKeyboard("1")
       )
       .catch((err) => {
@@ -199,6 +191,12 @@ const User = () => {
               className="group relative flex w-full transform justify-center rounded-md border border-transparent bg-red py-2 px-4 text-lg font-medium text-dark-navy transition duration-300 ease-in-out hover:scale-105 hover:bg-kinda-teal focus:outline-none focus:ring-2 focus:ring-blood-red focus:ring-offset-2 dark:bg-pale-gold  dark:text-blood-red dark:hover:bg-gold-hover"
               onClick={() => {
                 deleteKeyboard(currentKeyboard)
+                setTimeout(() => {
+                  setUserKeyboards(userKeyboards.filter(function(keyboard) {
+                    return keyboard.id != currentKeyboard
+                  }))
+                }, 200)
+
               }}
             >
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">
