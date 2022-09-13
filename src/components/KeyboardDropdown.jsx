@@ -38,7 +38,7 @@ const KeyboardDropdown = () => {
         Selected Keyboard:
       </label>
       <select
-        value={currentKeyboard || currentKeyboard != '0' ? currentKeyboard : 1}
+        value={currentKeyboard || currentKeyboard !== '0' ? currentKeyboard : 1}
         className="rounded-lg border bg-darker-beige p-1 text-dark-navy dark:bg-lighter-purple dark:text-pale-gold dark:focus:border-blood-red dark:focus:ring-blood-red"
         onChange={(event) => handleKeyboardClick(event.currentTarget.value)}
       >

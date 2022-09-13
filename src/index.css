@@ -162,6 +162,20 @@ input::placeholder {
   color: #eedcb2;
 }
 
+.display-keyboard {
+  display: grid;
+  width: 100%;
+}
+
+.keyboard-bg, .keyboard-keys {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.keyboard-keys {
+  z-index: 5;
+}
+
 @keyframes shake {
 
   10%,
