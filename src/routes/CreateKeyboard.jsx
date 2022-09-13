@@ -116,7 +116,9 @@ function CreateKeyboard() {
                 <label for="keyboard_type">Keyboard Type</label>
                 <select name="keyboard_type" id="keyboard_type"                   placeholder="Select keyboard type"
  className="relative block w-full appearance-none rounded-t-lg border border-blood-red bg-darker-beige px-3 py-2 text-dark-navy placeholder-gray-500 focus:z-10 focus:border-gold-hover focus:outline-none focus:ring-blood-red dark:bg-incorrectInput dark:text-pale-gold"
->
+ onChange={(event) => {
+  setKeyboardType(event.target.value);
+}}>
                   <option value="full">Full-size</option>
                   <option value="tenkeyless">Tenkeyless</option>
                   <option value="75%">75%</option>
