@@ -4,6 +4,7 @@ import { UserContext } from '../helpers/context';
 import { BiCog } from 'react-icons/bi';
 import KeyboardDropdown from './KeyboardDropdown';
 import ThemeToggle from './ThemeToggle';
+import DisplayKeyboard from './DisplayKeyboard';
 
 const Nav = () => {
   const { user, userKeyboards } = useContext(UserContext);
@@ -34,7 +35,7 @@ const Nav = () => {
           {user && user !== 'null' ? (
             <>
               {user && userKeyboards ? <KeyboardDropdown /> : null}
-
+              {user && userKeyboards ? <DisplayKeyboard /> : null}
               <li>
                 <Link
                   to="/user"

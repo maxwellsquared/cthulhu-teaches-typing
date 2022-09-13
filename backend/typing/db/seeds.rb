@@ -26,43 +26,72 @@ User.create({
 #  seeds for keyboards table
 Keyboard.create({
                   name: 'GMMK Pro',
-                  user_id: 1
+                  user_id: 1,
+                  keyboard_type: '75%',
+                  color1: '#383838',
+                  color2: '#191919'
                 })
 Keyboard.create({
                   name: 'Keychron Q1',
-                  user_id: 1
+                  user_id: 1,
+                  keyboard_type: '75%',
+                  color1: '#0e4eb5',
+                  color2: '#5086de'
                 })
 Keyboard.create({
                   name: 'Owlab Mr Suit',
-                  user_id: 1
+                  user_id: 1,
+                  keyboard_type: 'tenkeyless',
+                  color1: '#124c8a',
+                  color2: '#b9bbbd'
                 })
 Keyboard.create({
                   name: 'QK65',
-                  user_id: 2
+                  user_id: 2,
+                  keyboard_type: '65%',
+                  color1: '#989a9c',
+                  color2: '#c4e5f2'
                 })
 Keyboard.create({
                   name: 'Zoom 65',
-                  user_id: 2
+                  user_id: 2,
+                  color1: '#e5e8e3',
+                  color2: '#caccc8'
                 })
 Keyboard.create({
                   name: 'GMMK Pro',
-                  user_id: 2
+                  user_id: 2,
+                  keyboard_type: '75%',
+                  color1: '#383838',
+                  color2: '#191919'
                 })
 Keyboard.create({
                   name: 'Portico 75',
-                  user_id: 2
+                  user_id: 2,
+                  keyboard_type: '75%',
+                  color1: '#9c8b7c',
+                  color2: '#615e5c'
                 })
 Keyboard.create({
                   name: 'Apple Butterfly Keyboard',
-                  user_id: 3
+                  user_id: 3,
+                  keyboard_type: 'laptop',
+                  color1: '#575757',
+                  color2: '#141414'
                 })
 Keyboard.create({
                   name: 'Mode Sonnet',
-                  user_id: 3
+                  user_id: 3,
+                  keyboard_type: '75%',
+                  color1: '#262626',
+                  color2: '#121212'
                 })
 Keyboard.create({
                   name: 'Keycult No. 2/65',
-                  user_id: 3
+                  user_id: 3,
+                  keyboard_type: '65%',
+                  color1: '#495c55',
+                  color2: '#c3a9c9'
                 })
 
 Submission.create({
