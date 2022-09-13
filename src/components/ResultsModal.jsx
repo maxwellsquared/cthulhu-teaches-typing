@@ -49,6 +49,9 @@ export default function ResultsModal(props) {
           >
             CLOSE
           </button>
+          <div>
+            <p font-size="20">Want to submit your results?</p>
+          </div>
           {user ? (
             <>
               <div className="font-gold-hover mt-10 transform rounded-lg text-lg text-dark-navy dark:text-blood-red">
