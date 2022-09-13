@@ -17,13 +17,18 @@ const Nav = () => {
   }
 
   return (
-    <nav className="rounded px-2 py-2.5 font-normal text-dark-navy dark:text-pale-gold">
+    <nav className="rounded px-2 py-2.5 text-dark-navy dark:text-pale-gold">
       <div className="container mx-auto flex flex-wrap items-center justify-between">
         <div className="logo-text text-dark-navy dark:text-pale-gold">
-          <Link to="/" className="flex items-center hover:text-kinda-teal dark:hover:text-candle">
+          <Link
+            to="/"
+            className="flex items-center font-sans hover:text-kinda-teal dark:hover:text-candle"
+          >
             <img src="./images/logo.png" className="mr-3 h-20 sm:h-20" alt="logo" />
-            <span className="logo-drip">CTHULHU</span>{' '}
-            <span className="logo-lite">&nbsp;TEACHES TYPING</span>
+            <div className="font-brother-1816 flex flex-col text-3xl">
+              <span className="font-black tracking-huge">CTHULHU</span>
+              <span className="font-extralight">TEACHES TYPING</span>
+            </div>
           </Link>
         </div>
         <ul className="flex items-center  gap-2 font-light">

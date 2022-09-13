@@ -39,6 +39,9 @@ module.exports = {
       minWidth: {
         45: '45px',
       },
+      letterSpacing: {
+        huge: '.9rem',
+      },
     },
   },
   darkMode: 'class',
