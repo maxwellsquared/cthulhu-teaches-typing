@@ -12,7 +12,7 @@ export default function ResultsModal(props) {
   const [userClosed, setUserClosed] = useState(props.gameOver);
   const { user, currentKeyboard } = useContext(UserContext);
   const [submitted, setSubmitted] = useState(false);
-  const [guestName, setGuestName] = useState("");
+  const [guestName, setGuestName] = useState('');
 
   useEffect(() => {
     let localSwitch = props.gameOver;
@@ -75,9 +75,9 @@ export default function ResultsModal(props) {
             )}
           </div>
 
-          {user ? 
+          {user ? (
             <>
-              <div className="font-gold-hover mt-10 transform rounded-lg text-lg text-dark-navy dark:text-blood-red">
+              <div className="font-gold-hover mt-1 transform rounded-lg text-lg text-dark-navy dark:text-blood-red">
                 Results has been automatically added to your keyboard stats!
               </div>
               <Link
@@ -90,11 +90,11 @@ export default function ResultsModal(props) {
                 </span>
               </Link>
             </>
-           :  !submitted  ? 
-            <div className='guest-submit'>
-              <p className='guest-submit'>Want to submit your results?</p>
+          ) : !submitted ? (
+            <div className="guest-submit flex flex-col justify-center">
+              <p className="guest-submit">Want to submit your results?</p>
               <input
-                className='guest-submit'
+                className="guest-submit"
                 type="text"
                 name="Name"
                 placeholder="Enter a username"
@@ -103,16 +103,24 @@ export default function ResultsModal(props) {
                 }}
               />
               <button
-                className='guest-submit transform rounded-lg bg-darker-beige p-2 px-2 text-dark-navy shadow-lg hover:scale-105 hover:bg-kinda-teal dark:bg-blood-red dark:text-pale-gold dark:hover:bg-blood-red-hover'
+                className="guest-submit mt-5 transform rounded-lg bg-darker-beige p-2 px-2 text-dark-navy shadow-lg hover:scale-105 hover:bg-kinda-teal dark:bg-blood-red dark:text-pale-gold dark:hover:bg-blood-red-hover"
                 onClick={() => {
-                  submitGuestScore(props.wpm, props.accuracy, guestName, currentKeyboard, props.difficulty);
+                  submitGuestScore(
+                    props.wpm,
+                    props.accuracy,
+                    guestName,
+                    currentKeyboard,
+                    props.difficulty
+                  );
                   setSubmitted(true);
                 }}
               >
                 Submit
               </button>
             </div>
-          : <p className='guest-submit'>Your score has been submitted!</p> }
+          ) : (
+            <p className="guest-submit">Your score has been submitted!</p>
+          )}
         </div>
       </Modal>
     </>

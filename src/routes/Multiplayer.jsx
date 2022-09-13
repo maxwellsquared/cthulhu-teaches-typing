@@ -215,7 +215,7 @@ const Multiplayer = function () {
       setNumCorrectChars((prev) => prev + 1);
       setIncorrectCharCSS('');
     } else {
-      setIncorrectCharCSS('bg-incorrectInput');
+      setIncorrectCharCSS('bg-incorrectInput dark:bg-incorrectInput');
     }
   };
 

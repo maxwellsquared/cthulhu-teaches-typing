@@ -35,53 +35,55 @@ export default function ResultsModal(props) {
         ariaHideApp={false}
       >
         <div className="modal-container">
-          <h1 className="text-dark-navy dark:text-pale-gold">CONGRATULATIONS!</h1>
-          <div className="text-3xl text-beige dark:text-pale-gold">
-            <p>
-              WINNER:
-              <span className="text-dark-navy dark:text-blood-red"> {winner.user}</span>
-            </p>
-            <p>
-              WPM:
-              <span className="text-dark-navy dark:text-blood-red"> {winner.wpm}</span>
-            </p>
-            <p>
-              ACCURACY:
-              <span className="text-dark-navy dark:text-blood-red"> {winner.accuracy}%</span>
-            </p>
+          <div className="justify-self-start">
+            <button
+              className=" transform rounded-lg bg-darker-beige text-center text-lg text-dark-navy shadow-lg hover:scale-105 hover:bg-kinda-teal dark:bg-blood-red dark:text-pale-gold dark:hover:bg-blood-red-hover"
+              onClick={closeModal}
+            >
+              X
+            </button>
           </div>
+          <div className="-mt-8 mr-20 flex flex-col items-center text-center">
+            <div className="text-3xl text-beige dark:text-pale-gold">
+              <h1 className="my-1 text-4xl">
+                WINNER:
+                <span className="text-dark-navy dark:text-blood-red"> {winner.user}</span>
+              </h1>
+              <p className="my-1">
+                WPM:
+                <span className="text-dark-navy dark:text-blood-red"> {winner.wpm}</span>
+              </p>
+              <p className="my-1">
+                ACCURACY:
+                <span className="text-dark-navy dark:text-blood-red"> {winner.accuracy}%</span>
+              </p>
+            </div>
 
-          <table className="my-10 w-9/12 table-auto text-center text-lg">
-            <thead>
-              <tr className="bg-darker-beige text-dark-navy dark:bg-cosmic-purple dark:text-pale-gold">
-                <th className="px-4 py-2 text-center">User</th>
-                <th className="px-4 py-2 text-center">WPM</th>
-                <th className="px-4 py-2 text-center">Accuracy</th>
-              </tr>
-            </thead>
-            <tbody>
-              {scoresFromServer.map((score, index) => {
-                // if score.user is the same as guestName, do not display it
-                return (
-                  <tr
-                    key={index}
-                    className="bg-darker-beige text-dark-navy dark:bg-cosmic-purple dark:text-pale-gold"
-                  >
-                    <td className="border px-4 py-2 text-center">{score.user}</td>
-                    <td className="border px-4 py-2 text-center">{score.wpm}</td>
-                    <td className="border px-4 py-2 text-center">{score.accuracy}%</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-
-          <button
-            className="text-dark-nav transform rounded-lg bg-darker-beige text-lg text-dark-navy shadow-lg  hover:scale-105 hover:bg-dark-navy hover:text-beige dark:bg-blood-red dark:text-pale-gold dark:hover:bg-blood-red-hover "
-            onClick={closeModal}
-          >
-            CLOSE
-          </button>
+            <table className="my-8 w-9/12 table-auto text-center text-lg">
+              <thead>
+                <tr className="bg-darker-beige text-dark-navy dark:bg-cosmic-purple dark:text-pale-gold">
+                  <th className="px-4 py-2 text-center">User</th>
+                  <th className="px-4 py-2 text-center">WPM</th>
+                  <th className="px-4 py-2 text-center">Accuracy</th>
+                </tr>
+              </thead>
+              <tbody>
+                {scoresFromServer.map((score, index) => {
+                  // if score.user is the same as guestName, do not display it
+                  return (
+                    <tr
+                      key={index}
+                      className="bg-darker-beige text-dark-navy dark:bg-cosmic-purple dark:text-pale-gold"
+                    >
+                      <td className="border px-4 py-2 text-center">{score.user}</td>
+                      <td className="border px-4 py-2 text-center">{score.wpm}</td>
+                      <td className="border px-4 py-2 text-center">{score.accuracy}%</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </Modal>
     </>

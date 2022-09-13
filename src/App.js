@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 import { CodeContext, UserContext, randomWordsContext } from './helpers/context';
 import Multiplayer from './routes/Multiplayer';
@@ -71,7 +71,7 @@ export default function App() {
             }}
           >
             <CodeContext.Provider value={{ codeEntered, setCodeEntered }}>
-              <div className="bg-beige transition-all dark:bg-cosmic-purple">
+              <div className="flex min-h-screen flex-col justify-between bg-beige transition-all dark:bg-cosmic-purple">
                 <Nav />
 
                 <LayoutWrapper>
@@ -85,6 +85,35 @@ export default function App() {
                     <Route path="/create-keyboard" element={<CreateKeyboard />} />
                   </Routes>
                 </LayoutWrapper>
+
+                <footer>
+                  <div className="dark:hover-text-candle container flex w-full items-center justify-between font-light text-kinda-teal dark:text-pale-gold">
+                    <Link to="/">
+                      <span className="self-center pl-64 text-xl hover:text-dark-navy dark:hover:text-candle">
+                        HOME
+                      </span>
+                    </Link>
+                    <ul className="mt-0 flex flex-row p-4">
+                      <li>
+                        <Link
+                          to="/leaderboard"
+                          className="p-0 py-2 pr-4 pl-3 hover:text-dark-navy dark:hover:text-candle"
+                        >
+                          LEADERBOARD
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/multiplayer"
+                          className="p-0 py-2 pl-3 hover:text-dark-navy dark:hover:text-candle"
+                          aria-current="multiplayer"
+                        >
+                          MULTIPLAYER
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </footer>
               </div>
             </CodeContext.Provider>
           </UserContext.Provider>
