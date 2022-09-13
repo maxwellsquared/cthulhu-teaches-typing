@@ -4,10 +4,12 @@ import BarLoader from 'react-spinners/BarLoader';
 import { useContext } from 'react';
 import { UserContext } from '../helpers/context';
 import { TbMedal } from 'react-icons/tb';
+import DifficultyDropdown from '../components/DifficultyDropdown';
 
 function Leaderboard() {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
+  const [difficulty, setDifficulty] = useState("standard");
   const [leaderboardData, setLeaderboardData] = useState();
   function sendRequest(setLeaderboardData, setLoading) {
     return new Promise((resolve, reject) => {
@@ -51,6 +53,7 @@ function Leaderboard() {
           <div className="flex items-center gap-3">
             <h1 className="my-3 text-4xl font-bold dark:text-pale-gold">Leaderboard</h1>
             <TbMedal className="inline-block text-4xl text-candle" />
+            <DifficultyDropdown />
           </div>
           <table className="mb-5 w-9/12 table-auto text-center text-lg font-light">
             <tr className="bg-darker-beige text-dark-navy dark:bg-cosmic-purple dark:text-pale-gold">

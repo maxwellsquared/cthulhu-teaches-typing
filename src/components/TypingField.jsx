@@ -223,20 +223,20 @@ export default function TypingField() {
     return [h, m > 9 ? m : h ? '0' + m : m || '0', s > 9 ? s : '0' + s].filter(Boolean).join(':');
   }
 
-  const [difficulty, setDifficulty] = useState('normal');
-  // function to return 'normal ' or 'hard' depending on the difficulty
+  const [difficulty, setDifficulty] = useState('standard');
+  // function to return 'standard' or 'complex' depending on the difficulty
   const changeDifficulty = (difficulty) => {
     let updatedWords;
 
-    if (difficulty === 'normal') {
-      setDifficulty('normal');
+    if (difficulty === 'standard') {
+      setDifficulty('standard');
       setRandomWords(RandomWords({ time: 1, numWords: 225 }));
       updatedWords = randomWords.toString();
       setRightChars(updatedWords.replace(/,/g, ' '));
     }
 
-    if (difficulty === 'hard') {
-      setDifficulty('hard');
+    if (difficulty === 'complex') {
+      setDifficulty('complex');
       setRandomWords(difficultRandomWords({ time: 1, numWords: 100 }));
       updatedWords = randomWords.toString();
       setRightChars(updatedWords.replace(/,/g, ' '));
@@ -249,8 +249,8 @@ export default function TypingField() {
       setRightChars(updatedWords.replace(/,/g, ' '));
     }
 
-    if (difficulty === 'codeLanguageRandom') {
-      setDifficulty('codeLanguageRandom');
+    if (difficulty === 'codeLanimpossibleguageRandom') {
+      setDifficulty('impossible');
       setRandomWords(codeLanguageRandom({ time: 1, numWords: 100 }));
       updatedWords = randomWords.toString();
       setRightChars(updatedWords.replace(/,/g, ' '));
