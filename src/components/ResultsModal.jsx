@@ -17,7 +17,7 @@ export default function ResultsModal(props) {
     if (userClosed) localSwitch = false;
     setModalIsOpen(localSwitch);
     if (user && props.gameOver && !submitted) {
-      submitScore(props.wpm, props.accuracy, user.id, currentKeyboard, difficulty);
+      submitScore(props.wpm, props.accuracy, user.id, currentKeyboard, props.difficulty);
       setSubmitted(true);
     }
   });
