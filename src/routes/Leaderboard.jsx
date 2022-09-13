@@ -9,7 +9,7 @@ import DifficultyDropdown from '../components/DifficultyDropdown';
 function Leaderboard() {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
-  const [difficulty, setDifficulty] = useState("standard");
+  const [difficulty, setDifficulty] = useState('standard');
   const [leaderboardData, setLeaderboardData] = useState();
   function sendRequest(setLeaderboardData, setLoading, difficulty) {
     return new Promise((resolve, reject) => {
@@ -54,7 +54,12 @@ function Leaderboard() {
             <h1 className="my-3 text-4xl font-bold dark:text-pale-gold">Leaderboard</h1>
             <TbMedal className="inline-block text-4xl text-candle" />
           </div>
-          <DifficultyDropdown changeDifficulty={(difficulty) => {setDifficulty(difficulty)}} difficulty={difficulty}/>
+          <DifficultyDropdown
+            changeDifficulty={(difficulty) => {
+              setDifficulty(difficulty);
+            }}
+            difficulty={difficulty}
+          />
           <table className="mb-5 w-9/12 table-auto text-center text-lg font-light">
             <tr className="bg-darker-beige text-dark-navy dark:bg-cosmic-purple dark:text-pale-gold">
               <th className="px-4 py-2 text-center">Rank</th>
