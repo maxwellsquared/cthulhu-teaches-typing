@@ -12,11 +12,11 @@ const DifficultyDropdown = ({ difficulty, changeDifficulty }) => {
         className="rounded-lg border bg-darker-beige p-1 text-dark-navy dark:bg-lighter-purple dark:text-pale-gold dark:focus:border-blood-red dark:focus:ring-blood-red"
         onChange={(event) => changeDifficulty(event.currentTarget.value)}
       >
-        <option value="normal">Standard</option>
-        <option value="hard">Complex</option>
+        <option value="standard">Standard</option>
+        <option value="complex">Complex</option>
         <option value="code">Code</option>
         <option value="binary">Binary</option>
-        <option value="codeLanguageRandom">Impossible</option>
+        <option value="impossible">Impossible</option>
       </select>
     </div>
   );

@@ -99,385 +99,449 @@ Submission.create({
                     wpm: 25,
                     user_id: 1,
                     accuracy: 88,
-                    keyboard_id: 1
+                    keyboard_id: 1,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 32,
                     user_id: 1,
                     accuracy: 95,
-                    keyboard_id: 2
+                    keyboard_id: 2,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 56,
                     user_id: 1,
                     accuracy: 90,
-                    keyboard_id: 3
+                    keyboard_id: 3,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 43,
                     user_id: 1,
                     accuracy: 75,
-                    keyboard_id: 1
+                    keyboard_id: 1,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 25,
                     user_id: 1,
                     accuracy: 88,
-                    keyboard_id: 2
+                    keyboard_id: 2,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 39,
                     user_id: 1,
                     accuracy: 95,
-                    keyboard_id: 3
+                    keyboard_id: 3,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 58,
                     user_id: 1,
                     accuracy: 90,
-                    keyboard_id: 1
+                    keyboard_id: 1,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 62,
                     user_id: 1,
                     accuracy: 75,
-                    keyboard_id: 2
+                    keyboard_id: 2,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 51,
                     user_id: 1,
                     accuracy: 88,
-                    keyboard_id: 3
+                    keyboard_id: 3,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 54,
                     user_id: 1,
                     accuracy: 95,
-                    keyboard_id: 1
+                    keyboard_id: 1,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 36,
                     user_id: 1,
                     accuracy: 90,
-                    keyboard_id: 2
+                    keyboard_id: 2,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 43,
                     user_id: 1,
                     accuracy: 75,
-                    keyboard_id: 3
+                    keyboard_id: 3,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 55,
                     user_id: 1,
                     accuracy: 99,
-                    keyboard_id: 2
+                    keyboard_id: 2,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 25,
                     user_id: 1,
                     accuracy: 100,
-                    keyboard_id: 2
+                    keyboard_id: 2,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 32,
                     user_id: 1,
                     accuracy: 92,
-                    keyboard_id: 2
+                    keyboard_id: 2,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 56,
                     user_id: 1,
                     accuracy: 88,
-                    keyboard_id: 3
+                    keyboard_id: 3,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 43,
                     user_id: 1,
                     accuracy: 65,
-                    keyboard_id: 3
+                    keyboard_id: 3,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 56,
                     user_id: 1,
                     accuracy: 88,
-                    keyboard_id: 3
+                    keyboard_id: 3,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 43,
                     user_id: 1,
                     accuracy: 65,
-                    keyboard_id: 3
+                    keyboard_id: 3,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 55,
                     user_id: 1,
                     accuracy: 97,
-                    keyboard_id: 2
+                    keyboard_id: 2,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 15,
                     user_id: 2,
                     accuracy: 100,
-                    keyboard_id: 4
+                    keyboard_id: 4,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 45,
                     user_id: 2,
                     accuracy: 87,
-                    keyboard_id: 4
+                    keyboard_id: 4,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 61,
                     user_id: 2,
                     accuracy: 99,
-                    keyboard_id: 4
+                    keyboard_id: 4,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 52,
                     user_id: 2,
                     accuracy: 90,
-                    keyboard_id: 4
+                    keyboard_id: 4,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 38,
                     user_id: 2,
                     accuracy: 100,
-                    keyboard_id: 5
+                    keyboard_id: 5,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 15,
                     user_id: 2,
                     accuracy: 100,
-                    keyboard_id: 5
+                    keyboard_id: 5,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 45,
                     user_id: 2,
                     accuracy: 76,
-                    keyboard_id: 5
+                    keyboard_id: 5,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 38,
                     user_id: 2,
                     accuracy: 100,
-                    keyboard_id: 5
+                    keyboard_id: 5,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 15,
                     user_id: 2,
                     accuracy: 100,
-                    keyboard_id: 5
+                    keyboard_id: 5,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 45,
                     user_id: 2,
                     accuracy: 76,
-                    keyboard_id: 5
+                    keyboard_id: 5,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 49,
                     user_id: 2,
                     accuracy: 98,
-                    keyboard_id: 6
+                    keyboard_id: 6,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 52,
                     user_id: 2,
                     accuracy: 89,
-                    keyboard_id: 6
+                    keyboard_id: 6,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 58,
                     user_id: 2,
                     accuracy: 98,
-                    keyboard_id: 6
+                    keyboard_id: 6,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 32,
                     user_id: 2,
                     accuracy: 89,
-                    keyboard_id: 6
+                    keyboard_id: 6,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 41,
                     user_id: 2,
                     accuracy: 100,
-                    keyboard_id: 7
+                    keyboard_id: 7,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 50,
                     user_id: 2,
                     accuracy: 99,
-                    keyboard_id: 7
+                    keyboard_id: 7,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 38,
                     user_id: 2,
                     accuracy: 100,
-                    keyboard_id: 7
+                    keyboard_id: 7,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 40,
                     user_id: 2,
                     accuracy: 99,
-                    keyboard_id: 7
+                    keyboard_id: 7,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 52,
                     user_id: 2,
                     accuracy: 90,
-                    keyboard_id: 4
+                    keyboard_id: 4,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 38,
                     user_id: 2,
                     accuracy: 100,
-                    keyboard_id: 4
+                    keyboard_id: 4,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 15,
                     user_id: 2,
                     accuracy: 100,
-                    keyboard_id: 4
+                    keyboard_id: 4,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 45,
                     user_id: 2,
                     accuracy: 76,
-                    keyboard_id: 4
+                    keyboard_id: 4,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 60,
                     user_id: 2,
                     accuracy: 98,
-                    keyboard_id: 4
+                    keyboard_id: 4,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 52,
                     user_id: 2,
                     accuracy: 89,
-                    keyboard_id: 4
+                    keyboard_id: 4,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 38,
                     user_id: 2,
                     accuracy: 100,
-                    keyboard_id: 4
+                    keyboard_id: 4,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 59,
                     user_id: 3,
                     accuracy: 82,
-                    keyboard_id: 1
+                    keyboard_id: 1,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 50,
                     user_id: 3,
                     accuracy: 76,
-                    keyboard_id: 8
+                    keyboard_id: 8,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 34,
                     user_id: 3,
                     accuracy: 100,
-                    keyboard_id: 8
+                    keyboard_id: 8,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 50,
                     user_id: 3,
                     accuracy: 76,
-                    keyboard_id: 8
+                    keyboard_id: 8,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 34,
                     user_id: 3,
                     accuracy: 100,
-                    keyboard_id: 8
+                    keyboard_id: 8,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 50,
                     user_id: 3,
                     accuracy: 76,
-                    keyboard_id: 8
+                    keyboard_id: 8,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 34,
                     user_id: 3,
                     accuracy: 100,
-                    keyboard_id: 8
+                    keyboard_id: 8,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 57,
                     user_id: 3,
                     accuracy: 98,
-                    keyboard_id: 9
+                    keyboard_id: 9,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 43,
                     user_id: 3,
                     accuracy: 92,
-                    keyboard_id: 9
+                    keyboard_id: 9,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 49,
                     user_id: 3,
                     accuracy: 94,
-                    keyboard_id: 9
+                    keyboard_id: 9,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 32,
                     user_id: 3,
                     accuracy: 82,
-                    keyboard_id: 9
+                    keyboard_id: 9,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 57,
                     user_id: 3,
                     accuracy: 98,
-                    keyboard_id: 9
+                    keyboard_id: 9,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 43,
                     user_id: 3,
                     accuracy: 92,
-                    keyboard_id: 9
+                    keyboard_id: 9,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 49,
                     user_id: 3,
                     accuracy: 94,
-                    keyboard_id: 9
+                    keyboard_id: 9,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 53,
                     user_id: 3,
                     accuracy: 82,
-                    keyboard_id: 9
+                    keyboard_id: 9,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 50,
                     user_id: 3,
                     accuracy: 76,
-                    keyboard_id: 10
+                    keyboard_id: 10,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 65,
                     user_id: 3,
                     accuracy: 96,
-                    keyboard_id: 10
+                    keyboard_id: 10,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 50,
                     user_id: 3,
                     accuracy: 76,
-                    keyboard_id: 10
+                    keyboard_id: 10,
+                    difficulty: "standard"
                   })
 Submission.create({
                     wpm: 57,
                     user_id: 3,
                     accuracy: 96,
-                    keyboard_id: 10
+                    keyboard_id: 10,
+                    difficulty: "standard"
                   })
 
 puts 'Done'
