@@ -22,7 +22,7 @@ import { ThemeProvider } from './helpers/ThemeContext';
 export default function App() {
   const [user, setUser] = useState(); // user state, set at login
   const [userKeyboards, setUserKeyboards] = useState(); // array of keyboards for the user, set at login
-  const [currentKeyboard, setCurrentKeyboard] = useState(0); // this is the id of the current keyboard, set when user goes to TypingField
+  const [currentKeyboard, setCurrentKeyboard] = useState(); // this is the id of the current keyboard, set when user goes to TypingField
   const [codeEntered, setCodeEntered] = useState();
   const [userScore, setUserScore] = useState(); // this is the score of the user, gets set when the user finishes typing
   const [guestName, setGuestName] = useState(
@@ -48,6 +48,7 @@ export default function App() {
     // when user is signed in, userkeyboards change, or currentkeyboard changes update the local data.
     window.localStorage.setItem('user', JSON.stringify(user));
     window.localStorage.setItem('keyboards', JSON.stringify(userKeyboards));
+    window.localStorage.setItem('currentKeyboard', currentKeyboard);
   }, [user, userKeyboards, currentKeyboard]);
 
   // this will wrap all other components

@@ -54,6 +54,7 @@ Keyboard.create({
                 })
 Keyboard.create({
                   name: 'Zoom 65',
+                  keyboard_type: '65%',
                   user_id: 2,
                   color1: '#e5e8e3',
                   color2: '#caccc8'
@@ -104,19 +105,67 @@ Submission.create({
                     wpm: 32,
                     user_id: 1,
                     accuracy: 95,
-                    keyboard_id: 1
+                    keyboard_id: 2
                   })
 Submission.create({
                     wpm: 56,
                     user_id: 1,
                     accuracy: 90,
-                    keyboard_id: 1
+                    keyboard_id: 3
                   })
 Submission.create({
                     wpm: 43,
                     user_id: 1,
                     accuracy: 75,
                     keyboard_id: 1
+                  })
+Submission.create({
+                    wpm: 25,
+                    user_id: 1,
+                    accuracy: 88,
+                    keyboard_id: 2
+                  })
+Submission.create({
+                    wpm: 39,
+                    user_id: 1,
+                    accuracy: 95,
+                    keyboard_id: 3
+                  })
+Submission.create({
+                    wpm: 58,
+                    user_id: 1,
+                    accuracy: 90,
+                    keyboard_id: 1
+                  })
+Submission.create({
+                    wpm: 62,
+                    user_id: 1,
+                    accuracy: 75,
+                    keyboard_id: 2
+                  })
+Submission.create({
+                    wpm: 51,
+                    user_id: 1,
+                    accuracy: 88,
+                    keyboard_id: 3
+                  })
+Submission.create({
+                    wpm: 54,
+                    user_id: 1,
+                    accuracy: 95,
+                    keyboard_id: 1
+                  })
+Submission.create({
+                    wpm: 36,
+                    user_id: 1,
+                    accuracy: 90,
+                    keyboard_id: 2
+                  })
+Submission.create({
+                    wpm: 43,
+                    user_id: 1,
+                    accuracy: 75,
+                    keyboard_id: 3
                   })
 Submission.create({
                     wpm: 55,
@@ -227,7 +276,7 @@ Submission.create({
                     keyboard_id: 5
                   })
 Submission.create({
-                    wpm: 61,
+                    wpm: 49,
                     user_id: 2,
                     accuracy: 98,
                     keyboard_id: 6
@@ -239,25 +288,25 @@ Submission.create({
                     keyboard_id: 6
                   })
 Submission.create({
-                    wpm: 61,
+                    wpm: 58,
                     user_id: 2,
                     accuracy: 98,
                     keyboard_id: 6
                   })
 Submission.create({
-                    wpm: 52,
+                    wpm: 32,
                     user_id: 2,
                     accuracy: 89,
                     keyboard_id: 6
                   })
 Submission.create({
-                    wpm: 38,
+                    wpm: 41,
                     user_id: 2,
                     accuracy: 100,
                     keyboard_id: 7
                   })
 Submission.create({
-                    wpm: 61,
+                    wpm: 50,
                     user_id: 2,
                     accuracy: 99,
                     keyboard_id: 7
@@ -269,7 +318,7 @@ Submission.create({
                     keyboard_id: 7
                   })
 Submission.create({
-                    wpm: 61,
+                    wpm: 40,
                     user_id: 2,
                     accuracy: 99,
                     keyboard_id: 7
@@ -299,7 +348,7 @@ Submission.create({
                     keyboard_id: 4
                   })
 Submission.create({
-                    wpm: 61,
+                    wpm: 60,
                     user_id: 2,
                     accuracy: 98,
                     keyboard_id: 4
@@ -317,7 +366,7 @@ Submission.create({
                     keyboard_id: 4
                   })
 Submission.create({
-                    wpm: 62,
+                    wpm: 59,
                     user_id: 3,
                     accuracy: 82,
                     keyboard_id: 1
@@ -377,7 +426,7 @@ Submission.create({
                     keyboard_id: 9
                   })
 Submission.create({
-                    wpm: 62,
+                    wpm: 32,
                     user_id: 3,
                     accuracy: 82,
                     keyboard_id: 9
@@ -401,7 +450,7 @@ Submission.create({
                     keyboard_id: 9
                   })
 Submission.create({
-                    wpm: 62,
+                    wpm: 53,
                     user_id: 3,
                     accuracy: 82,
                     keyboard_id: 9
@@ -413,7 +462,7 @@ Submission.create({
                     keyboard_id: 10
                   })
 Submission.create({
-                    wpm: 80,
+                    wpm: 65,
                     user_id: 3,
                     accuracy: 96,
                     keyboard_id: 10
@@ -425,7 +474,7 @@ Submission.create({
                     keyboard_id: 10
                   })
 Submission.create({
-                    wpm: 80,
+                    wpm: 57,
                     user_id: 3,
                     accuracy: 96,
                     keyboard_id: 10

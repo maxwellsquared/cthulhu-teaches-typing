@@ -14,6 +14,7 @@ const Nav = () => {
     // when logging out, clear local data.
     window.localStorage.clear();
     window.location.reload(false);
+    
   };
 
   return (
@@ -43,7 +44,7 @@ const Nav = () => {
                   className="mx-2 flex gap-2 hover:text-kinda-teal dark:hover:text-blood-red"
                 >
                   <BiCog className="text-2xl" />
-                  <span>{user.name}</span>
+                  <span>{user.name.split(' ')[0]}</span>
                 </Link>
               </li>
               <li>
