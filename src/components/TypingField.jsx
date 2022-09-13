@@ -8,6 +8,13 @@ import DifficultyDropdown from './DifficultyDropdown';
 import codeRandomWords from '../helpers/codeRandomWords';
 import codeLanguageRandom from '../helpers/codeLanguageRandom';
 import binaryCode from '../helpers/binaryCode';
+import {Howl, Howler} from 'howler';
+
+// setup howler sounds
+const keyStroke = new Howl({src: './sounds/thwock.wav', volume: 0.1});
+const countdown = new Howl({src: './sounds/countdown-tick.wav', rate: 1.1});
+const bell = new Howl({src: './sounds/bell-tolling.mp3'});
+const splat = new Howl({src: './sounds/splat.mp3'});
 
 export default function TypingField() {
   const { codeEntered, setCodeEntered } = useContext(CodeContext);
@@ -17,6 +24,8 @@ export default function TypingField() {
   const initialTimer = 15; // use constant for initial timer and pass to counter--needed for WPM
   const [counter, setCounter] = useState(initialTimer);
   const [started, setStarted] = useState(false);
+  const [soundStarted, setSoundStarted] = useState(false); // sound for countdown
+
 
   // text to be typed
   let initialRandomWords = randomWords.toString(); // converts array to string
@@ -69,14 +78,27 @@ export default function TypingField() {
     if (started) {
       setPlaceholder('');
       const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-      if (counter < 10) setTimerClass('timer timer-countdown'); // set the timer red for the last 10 seconds
+      if (counter < 10) {
+        setTimerClass('timer timer-countdown'); // set the timer red for the last 10 seconds
+        playCountdown();
+      }
       if (counter === 0) gameOver(); // call gameOver, calculate states and display modal
       return () => clearInterval(timer);
     }
   }, [counter, started]);
 
+    // setup countdown noise
+    const playCountdown = function() {
+      let localTruth = false;
+      if (soundStarted) localTruth = true;
+      if (!soundStarted) countdown.play();
+      setSoundStarted(true);
+    };
+  
+
   // ---- GAME OVER ----
   const gameOver = function () {
+    bell.play();
     setAccuracy(Math.floor(100 * (1 - numMistakes / numTotalChars)));
     setWordsPerMinute(Math.floor(numCorrectChars / 5 / (initialTimer / 60)));
     setIsComplete(true);
@@ -108,6 +130,7 @@ export default function TypingField() {
 
   // ---- INPUT FUNCTION ----
   const handleInput = function (event) {
+    keyStroke.play();
     if (event === ' ' && input === '') {
       return;
     }
@@ -131,6 +154,7 @@ export default function TypingField() {
       }
       if (input !== randomWords[0]) {
         moveChars(randomWords[0].length, false); // move over characters and pass 'mistake' to styling
+        splat.play();
         screenShake();
       }
       setRandomWords((prev) => [...prev.slice(1)]);

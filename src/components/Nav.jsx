@@ -10,11 +10,11 @@ const Nav = () => {
   const { user, userKeyboards } = useContext(UserContext);
 
   // simulate a user user logging out by refreshing the page, which will reset the user context
-  function refreshPage() {
+  const refreshPage = function () {
     // when logging out, clear local data.
     window.localStorage.clear();
     window.location.reload(false);
-  }
+  };
 
   return (
     <nav className="rounded px-2 py-2.5 text-dark-navy dark:text-pale-gold">
