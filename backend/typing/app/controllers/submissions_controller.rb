@@ -17,6 +17,15 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def guest
+    @submission = Submission.new(submission_guest_params)
+    if @submission.save
+      render json: @submission
+    else
+      render json: @submission.errors.full_messages
+    end
+  end
+
   def history
     @submissions = Submission.where(user_id: params[:id]).order(created_at: :asc)
     render json: @submissions
@@ -26,6 +35,10 @@ class SubmissionsController < ApplicationController
 
   def submission_params
     params.require(:submission).permit(:wpm, :user_id, :accuracy, :keyboard_id, :difficulty)
+  end
+
+  def submission_guest_params
+    params.require(:submission).permit(:wpm, :user_id, :accuracy, :difficulty, :guest_name)
   end
 end
 

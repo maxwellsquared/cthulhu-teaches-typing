@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { UserContext } from '../helpers/context';
 import Modal from 'react-modal';
 import submitScore from '../helpers/submitScore';
+import submitGuestScore from '../helpers/submitGuestScore';
 
 // Modal.setAppElement(document.getElementById('app'));
 
@@ -11,6 +12,7 @@ export default function ResultsModal(props) {
   const [userClosed, setUserClosed] = useState(props.gameOver);
   const { user, currentKeyboard } = useContext(UserContext);
   const [submitted, setSubmitted] = useState(false);
+  const [guestName, setGuestName] = useState("");
 
   useEffect(() => {
     let localSwitch = props.gameOver;
@@ -21,6 +23,10 @@ export default function ResultsModal(props) {
       setSubmitted(true);
     }
   });
+
+  useEffect(() => {
+    console.log('guestName', guestName)
+  }, [guestName])
 
   const closeModal = function () {
     setUserClosed(true);
@@ -50,10 +56,8 @@ export default function ResultsModal(props) {
           >
             CLOSE
           </button>
-          <div>
-            <p className='guest-submit'>Want to submit your results?</p>
-          </div>
-          {user ? (
+
+          {user ? 
             <>
               <div className="font-gold-hover mt-10 transform rounded-lg text-lg text-dark-navy dark:text-blood-red">
                 Results has been automatically added to your keyboard stats!
@@ -68,9 +72,29 @@ export default function ResultsModal(props) {
                 </span>
               </Link>
             </>
-          ) : (
-            <div />
-          )}
+           :  !submitted  ? 
+            <div>
+              <p className='guest-submit'>Want to submit your results?</p>
+              <input
+                className='guest-submit'
+                type="text"
+                name="Name"
+                placeholder="Enter a username"
+                onChange={(event) => {
+                  setGuestName(event.target.value);
+                }}
+              />
+              <button
+                className='guest-submit transform rounded-lg bg-darker-beige p-2 px-2 text-dark-navy shadow-lg hover:scale-105 hover:bg-kinda-teal dark:bg-blood-red dark:text-pale-gold dark:hover:bg-blood-red-hover'
+                onClick={() => {
+                  submitGuestScore(props.wpm, props.accuracy, guestName, currentKeyboard, props.difficulty);
+                  setSubmitted(true);
+                }}
+              >
+                Submit
+              </button>
+            </div>
+          : <p className='guest-submit'>Your score has been submitted!</p> }
         </div>
       </Modal>
     </>

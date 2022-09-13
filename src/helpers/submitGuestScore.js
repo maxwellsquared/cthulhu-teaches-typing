@@ -1,21 +1,23 @@
 import axios from 'axios';
 
-const submitScore = function (wpm, accuracy, user_id, keyboard_id, difficulty) {
+const submitGuestScore = function (wpm, accuracy, guestName, keyboard_id, difficulty) {
   const data = {
     wpm: wpm,
-    user_id: user_id,
+    user_id: 4,
+    guest_name: guestName,
     accuracy: accuracy,
+    keyboard_id: keyboard_id,
     difficulty: difficulty,
   };
 
   axios
-    .post(`http://localhost:3000/submit`, data, {
+    .post(`http://localhost:3000/submit/guest`, data, {
       headers: {
         'content-type': 'application/json',
       },
     })
     .then((res) => {
-      console.log('Success: user score submitted');
+      console.log('Success: guest score submitted');
     })
     .catch((err) => {
       console.log('Error has occurred');
@@ -24,4 +26,4 @@ const submitScore = function (wpm, accuracy, user_id, keyboard_id, difficulty) {
 
 }
 
-export default submitScore;
+export default submitGuestScore;

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_13_174211) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_13_185728) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_13_174211) do
     t.bigint "keyboard_id"
     t.integer "accuracy"
     t.string "difficulty"
+    t.string "guest_name"
     t.index ["keyboard_id"], name: "index_submissions_on_keyboard_id"
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :users, except: [:new]
 
   post 'submit', to: 'submissions#create'
+  post 'submit/guest', to: 'submissions#guest'
   get 'api/leaderboard/:id', to: 'submissions#show'
   get 'api/user/:id', to: 'submissions#history'
   post 'keyboards/new', to: 'keyboards#create' # create a new keyboard for a user
