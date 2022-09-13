@@ -142,10 +142,10 @@ input::placeholder {
 }
 
 .modal-container {
-  margin: 100px;
+  padding: 0 20px 100px 100px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   width: 100%;
 }
 
@@ -167,7 +167,8 @@ input::placeholder {
   width: 100%;
 }
 
-.keyboard-bg, .keyboard-keys {
+.keyboard-bg,
+.keyboard-keys {
   grid-column: 1;
   grid-row: 1;
 }
