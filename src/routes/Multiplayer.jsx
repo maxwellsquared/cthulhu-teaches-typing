@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useRef } from 'react';
 import { UserContext } from '../helpers/context';
 import SubmittedWords from '../components/SubmittedWords';
 import MultiplayerResultsModal from '../components/MultiplayerResultsModal';
@@ -56,6 +56,16 @@ const Multiplayer = function () {
   const [disableTyping, setDisableTyping] = useState(true);
   const [waiting, setWaiting] = useState(true);
 
+  // create a reference to the input element
+  const ref = useRef(null);
+
+  // after typing field is not disabled, focus on it
+  useEffect(() => {
+    if (!disableTyping) {
+      ref.current.focus();
+    }
+  }, [disableTyping]);
+
   // --- setups socket connection ---
   useEffect(() => {
     socket.on('connect', () => {
@@ -75,6 +85,7 @@ const Multiplayer = function () {
 
     socket.on('startGame', () => {
       // runs when numberInWaitingRoom === 2 on server
+
       startCountdown();
       // use setTimeout to start game after 5 seconds
       setTimeout(() => {
@@ -295,7 +306,6 @@ const Multiplayer = function () {
               value={input}
               onChange={(event) => handleInput(event.target.value)}
               onKeyDown={(event) => detailedInput(event)}
-              autoFocus="autofocus"
             />
             <span className={timerClass}>{formatTime(counter)}</span>
           </div>
@@ -324,6 +334,7 @@ const Multiplayer = function () {
               onChange={(event) => handleInput(event.target.value)}
               onKeyDown={(event) => detailedInput(event)}
               autoFocus="autofocus"
+              ref={ref}
             />
             <span className={timerClass}>{formatTime(counter)}</span>
           </>
