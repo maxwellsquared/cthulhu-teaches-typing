@@ -50,7 +50,7 @@ export default function ResultsModal(props) {
             CLOSE
           </button>
           <div>
-            <p font-size="20">Want to submit your results?</p>
+            <p className='guest-submit'>Want to submit your results?</p>
           </div>
           {user ? (
             <>

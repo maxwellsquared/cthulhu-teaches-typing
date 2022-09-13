@@ -37,6 +37,9 @@ h1 {
 .correct {
   color: #e9b12e;
 }
+.guest-submit {
+  font-size: large;
+}
 
 .mistake {
   color: #8c3d34;
