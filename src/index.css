@@ -40,6 +40,7 @@ h1 {
 .guest-submit {
   font-size: large;
   padding: 10px;
+  align-self: center;
 }
 
 .mistake {

@@ -24,10 +24,6 @@ export default function ResultsModal(props) {
     }
   });
 
-  useEffect(() => {
-    console.log('guestName', guestName)
-  }, [guestName])
-
   const closeModal = function () {
     setUserClosed(true);
     window.localStorage.setItem('user', JSON.stringify(user));
@@ -78,12 +74,6 @@ export default function ResultsModal(props) {
               <div />
             )}
           </div>
-          <button
-            className="text-xlg mt-10 transform rounded-lg bg-darker-beige p-2 px-6 text-dark-navy shadow-lg hover:scale-105 hover:bg-kinda-teal dark:bg-blood-red dark:text-pale-gold dark:hover:bg-blood-red-hover"
-            onClick={closeModal}
-          >
-            CLOSE
-          </button>
 
           {user ? 
             <>
@@ -101,7 +91,7 @@ export default function ResultsModal(props) {
               </Link>
             </>
            :  !submitted  ? 
-            <div>
+            <div className='guest-submit'>
               <p className='guest-submit'>Want to submit your results?</p>
               <input
                 className='guest-submit'
