@@ -19,7 +19,7 @@ function CreateKeyboard() {
   const getKeyboardsByUserId = (userId) => {
     const config = {
       method: 'get',
-      url: `http://localhost:3000/keyboards/${userId}`,
+      url: `https://stark-fortress-32519.herokuapp.com/keyboards/${userId}`,
       headers: {},
     };
 
@@ -49,7 +49,7 @@ function CreateKeyboard() {
 
     const postRequest = new Promise((resolve, reject) => {
       axios
-        .post(`http://localhost:3000/keyboards/new`, keyboardData, {
+        .post(`https://stark-fortress-32519.herokuapp.com/keyboards/new`, keyboardData, {
           headers: {
             'content-type': 'application/json',
           },

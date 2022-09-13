@@ -9,7 +9,7 @@ const submitScore = function (wpm, accuracy, user_id, keyboard_id, difficulty) {
   };
 
   axios
-    .post(`http://localhost:3000/submit`, data, {
+    .post(`https://stark-fortress-32519.herokuapp.com/submit`, data, {
       headers: {
         'content-type': 'application/json',
       },

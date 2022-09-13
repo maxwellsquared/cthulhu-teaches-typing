@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 import multiplayerRandomWords from '../helpers/multiplayerRandomWords';
 
 // setup socket connection
-const ENDPOINT = 'http://127.0.0.1:8080'; // PORT used in the server/index.js file
+const ENDPOINT = 'https://shrouded-lake-98413.herokuapp.com/'; // PORT used in the server/index.js file
 const socket = io(ENDPOINT);
 
 const Multiplayer = function () {

@@ -28,7 +28,7 @@ function Login() {
 
     const postRequest = new Promise((resolve, reject) => {
       axios
-        .post(`http://localhost:3000/login`, loginData, {
+        .post(`https://stark-fortress-32519.herokuapp.com/login`, loginData, {
           headers: {
             'content-type': 'application/json',
           },
@@ -56,7 +56,7 @@ function Login() {
   const getKeyboardsByUserId = (userId) => {
     const config = {
       method: 'get',
-      url: `http://localhost:3000/keyboards/${userId}`,
+      url: `https://stark-fortress-32519.herokuapp.com/keyboards/${userId}`,
       headers: {},
     };
 
