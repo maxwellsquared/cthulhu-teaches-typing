@@ -48,7 +48,7 @@ function Leaderboard() {
     <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-kinda-teal bg-darker-beige p-2 text-dark-navy dark:border-blood-red-hover dark:bg-darker-purple dark:text-pale-gold">
       {loading ? (
         <BarLoader color={'#5118a7'} width={'50%'} height={8} />
-      ) : (
+      ) : (leaderboardData[0] ?
         <>
           <div className="flex items-center gap-3">
             <h1 className="my-3 text-4xl font-bold dark:text-pale-gold">Leaderboard</h1>
@@ -72,11 +72,11 @@ function Leaderboard() {
               let username;
               if (item.guest_name) {
                 username = item.guest_name;
-                
+
               } else {
                 username = item.name;
               }
-              
+
               if (user) {
                 if (user.id === item.user_id) {
                   username = `${item.name} (you)`;
@@ -96,6 +96,16 @@ function Leaderboard() {
             })}
           </table>
         </>
+        :
+        <div>
+          <DifficultyDropdown
+            changeDifficulty={(difficulty) => {
+              setDifficulty(difficulty);
+            }}
+            difficulty={difficulty}
+          />
+          <p> No Results For This Difficulty.</p>
+        </div>
       )}
     </div>
   );
