@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import BarLoader from 'react-spinners/BarLoader';
 import { useContext } from 'react';
 import { UserContext } from '../helpers/context';
+import { TbMedal } from 'react-icons/tb';
 
 function Leaderboard() {
   const { user } = useContext(UserContext);
@@ -47,8 +48,11 @@ function Leaderboard() {
         <BarLoader color={'#5118a7'} width={'50%'} height={8} />
       ) : (
         <>
-          <h1 className="my-3 text-4xl font-bold dark:text-pale-gold">Leaderboard</h1>
-          <table className="mb-5 w-9/12 table-auto text-center text-lg">
+          <div className="flex items-center gap-3">
+            <h1 className="my-3 text-4xl font-bold dark:text-pale-gold">Leaderboard</h1>
+            <TbMedal className="inline-block text-4xl text-candle" />
+          </div>
+          <table className="mb-5 w-9/12 table-auto text-center text-lg font-light">
             <tr className="bg-darker-beige text-dark-navy dark:bg-cosmic-purple dark:text-pale-gold">
               <th className="px-4 py-2 text-center">Rank</th>
               <th className="px-4 py-2 text-center">Name</th>
