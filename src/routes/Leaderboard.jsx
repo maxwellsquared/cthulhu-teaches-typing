@@ -44,17 +44,11 @@ function Leaderboard() {
     }
   }, [leaderboardData]);
 
-  useEffect(() => {
-    if (difficulty) {
-      console.log(difficulty);
-    }
-  }, [difficulty]);
-
   return (
     <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-kinda-teal bg-darker-beige p-2 text-dark-navy dark:border-blood-red-hover dark:bg-darker-purple dark:text-pale-gold">
       {loading ? (
         <BarLoader color={'#5118a7'} width={'50%'} height={8} />
-      ) : (
+      ) : (leaderboardData[0] ?
         <>
           <div className="flex items-center gap-3">
             <h1 className="my-3 text-4xl font-bold dark:text-pale-gold">Leaderboard</h1>
@@ -74,11 +68,18 @@ function Leaderboard() {
               <th className="px-4 py-2 text-center">Date</th>
             </tr>
             {leaderboardData.map((item, index) => {
-              let date = new Date(item['created_at']);
-              let username = item['name'];
+              let date = new Date(item.created_at);
+              let username;
+              if (item.guest_name) {
+                username = item.guest_name;
+
+              } else {
+                username = item.name;
+              }
+
               if (user) {
                 if (user.id === item.user_id) {
-                  username = `${item['name']} (you)`;
+                  username = `${item.name} (you)`;
                 }
               }
               return (
@@ -95,6 +96,16 @@ function Leaderboard() {
             })}
           </table>
         </>
+        :
+        <div>
+          <DifficultyDropdown
+            changeDifficulty={(difficulty) => {
+              setDifficulty(difficulty);
+            }}
+            difficulty={difficulty}
+          />
+          <p> No Results For This Difficulty.</p>
+        </div>
       )}
     </div>
   );

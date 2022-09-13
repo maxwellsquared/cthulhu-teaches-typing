@@ -10,7 +10,7 @@ const LoginMessage = () => {
       role="alert"
     >
       <FiLogIn size={25} />
-      <p>Log in to submit your score!</p>
+      <p>Log in to save your stats!</p>
     </Link>
   );
 };

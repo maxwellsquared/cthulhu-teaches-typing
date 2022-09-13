@@ -37,6 +37,11 @@ h1 {
 .correct {
   color: #e9b12e;
 }
+.guest-submit {
+  font-size: large;
+  padding: 10px;
+  align-self: center;
+}
 
 .mistake {
   color: #8c3d34;

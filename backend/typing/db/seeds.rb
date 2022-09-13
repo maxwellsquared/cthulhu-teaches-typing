@@ -22,6 +22,11 @@ User.create({
               email: 'maxkuhn@gmail.com',
               password: 'test'
             })
+User.create({
+              name: 'Guest',
+              email: 'guest@guest.guest',
+              password: 'guest'
+            })          
 
 #  seeds for keyboards table
 Keyboard.create({
