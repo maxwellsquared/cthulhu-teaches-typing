@@ -25,10 +25,10 @@ class SubmissionsController < ApplicationController
   private
 
   def submission_params
-    params.require(:submission).permit(:wpm, :user_id, :accuracy, :keyboard_id)
+    params.require(:submission).permit(:wpm, :user_id, :accuracy, :keyboard_id, :difficulty)
   end
 end
 
-# curl POST http://localhost:3000/submit -H 'Content-Type: application/json' -d '{"wpm":100,"user_id": 1,"accuracy": 100, "keyboard_id": 1 }' -v
+# curl POST http://localhost:3000/submit -H 'Content-Type: application/json' -d '{"wpm":100,"user_id": 1,"accuracy": 100, "keyboard_id": 1, "difficulty": "standard" }' -v
 # curl GET http://localhost:3000/api/leaderboard -H 'Content-Type: application/json' -v
 # curl GET http://localhost:3000/api/user/1 -H 'Content-Type: application/json' -v
