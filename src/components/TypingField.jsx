@@ -249,7 +249,7 @@ export default function TypingField() {
       setRightChars(updatedWords.replace(/,/g, ' '));
     }
 
-    if (difficulty === 'codeLanimpossibleguageRandom') {
+    if (difficulty === 'impossible') {
       setDifficulty('impossible');
       setRandomWords(codeLanguageRandom({ time: 1, numWords: 100 }));
       updatedWords = randomWords.toString();
