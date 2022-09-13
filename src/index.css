@@ -37,6 +37,7 @@ h1 {
 .correct {
   color: #e9b12e;
 }
+
 .guest-submit {
   font-size: large;
   padding: 10px;
@@ -119,7 +120,7 @@ input::placeholder {
 .Modal {
   /* background-color: rgba(25, 0, 25, 0.9); */
   margin: auto;
-  margin-top: 100px;
+  margin-top: 20%;
   height: auto;
   width: fit-content;
   display: flex;
@@ -147,7 +148,7 @@ input::placeholder {
 }
 
 .modal-container {
-  padding: 0 20px 100px 100px;
+  padding: 0 20px 80px 100px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
