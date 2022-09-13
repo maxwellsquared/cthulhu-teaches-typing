@@ -17,7 +17,7 @@ export default function ResultsModal(props) {
     if (userClosed) localSwitch = false;
     setModalIsOpen(localSwitch);
     if (user && props.gameOver && !submitted) {
-      submitScore(props.wpm, props.accuracy, user.id, currentKeyboard);
+      submitScore(props.wpm, props.accuracy, user.id, currentKeyboard, difficulty);
       setSubmitted(true);
     }
   });
@@ -42,6 +42,7 @@ export default function ResultsModal(props) {
           <div className="player-data">
             <p>WPM: {props.wpm}</p>
             <p>ACCURACY: {props.accuracy}%</p>
+            <p>DIFFICULTY: {props.difficulty.toUpperCase()}</p>
           </div>
           <button
             className="text-xlg mt-10 transform rounded-lg bg-darker-beige p-2 px-6 text-dark-navy shadow-lg hover:scale-105 hover:bg-kinda-teal dark:bg-blood-red dark:text-pale-gold dark:hover:bg-blood-red-hover"

@@ -1,11 +1,12 @@
 import axios from 'axios';
 
-const submitScore = function (wpm, accuracy, user_id, keyboard_id) {
+const submitScore = function (wpm, accuracy, user_id, keyboard_id, difficulty) {
   const data = {
     wpm: wpm,
     user_id: user_id,
     accuracy: accuracy,
     keyboard_id: keyboard_id,
+    difficulty: difficulty,
   };
 
   axios

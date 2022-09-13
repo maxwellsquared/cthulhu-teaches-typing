@@ -272,7 +272,7 @@ export default function TypingField() {
 
   return (
     <>
-      <ResultsModal gameOver={isComplete} wpm={wordsPerMinute} accuracy={accuracy} />
+      <ResultsModal difficulty={difficulty} gameOver={isComplete} wpm={wordsPerMinute} accuracy={accuracy} />
       <div style={{ color: 'white', visibility: codeEntered ? 'visible' : 'hidden' }}>
         CONGRATULATION!!!! VISIBLE
       </div>
