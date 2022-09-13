@@ -11,10 +11,10 @@ function Leaderboard() {
   const [loading, setLoading] = useState(true);
   const [difficulty, setDifficulty] = useState("standard");
   const [leaderboardData, setLeaderboardData] = useState();
-  function sendRequest(setLeaderboardData, setLoading) {
+  function sendRequest(setLeaderboardData, setLoading, difficulty) {
     return new Promise((resolve, reject) => {
       axios
-        .get(`http://localhost:3000/api/leaderboard`, {
+        .get(`http://localhost:3000/api/leaderboard/${difficulty}`, {
           headers: {
             'content-type': 'application/json',
           },
@@ -35,14 +35,20 @@ function Leaderboard() {
     });
   }
   useEffect(() => {
-    sendRequest(setLeaderboardData, setLoading);
-  }, []);
+    sendRequest(setLeaderboardData, setLoading, difficulty);
+  }, [difficulty]);
 
   useEffect(() => {
     if (leaderboardData) {
       console.log(leaderboardData);
     }
   }, [leaderboardData]);
+
+  useEffect(() => {
+    if (difficulty) {
+      console.log(difficulty);
+    }
+  }, [difficulty]);
 
   return (
     <div className="mb-5 flex w-full flex-col items-center justify-center rounded-lg border-2 border-kinda-teal bg-darker-beige p-2 text-dark-navy dark:border-blood-red-hover dark:bg-darker-purple dark:text-pale-gold">
@@ -53,8 +59,8 @@ function Leaderboard() {
           <div className="flex items-center gap-3">
             <h1 className="my-3 text-4xl font-bold dark:text-pale-gold">Leaderboard</h1>
             <TbMedal className="inline-block text-4xl text-candle" />
-            <DifficultyDropdown />
           </div>
+          <DifficultyDropdown changeDifficulty={(difficulty) => {setDifficulty(difficulty)}} difficulty={difficulty}/>
           <table className="mb-5 w-9/12 table-auto text-center text-lg font-light">
             <tr className="bg-darker-beige text-dark-navy dark:bg-cosmic-purple dark:text-pale-gold">
               <th className="px-4 py-2 text-center">Rank</th>

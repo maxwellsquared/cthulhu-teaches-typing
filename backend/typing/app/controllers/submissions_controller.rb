@@ -4,7 +4,7 @@ class SubmissionsController < ApplicationController
   end
 
   def show # /api/leaderboard
-    @submissions = Submission.joins(:user).select('submissions.*, users.name, users.id').order(wpm: :desc).limit(10)
+    @submissions = Submission.joins(:user).select('submissions.*, users.name, users.id').where(difficulty: params[:id]).order(wpm: :desc).limit(10)
     render json: @submissions
   end
 
