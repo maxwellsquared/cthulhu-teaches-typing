@@ -15,7 +15,6 @@ const KeyboardDropdown = () => {
   if (currentKeyboard === undefined || currentKeyboard === null) {
     setCurrentKeyboard(userKeyboards[0].id);
   }
-  console.log(userKeyboards);
 
   // set the setCurrentKeyboard state to the keyboard that was clicked
   const handleKeyboardClick = (keyboard) => {

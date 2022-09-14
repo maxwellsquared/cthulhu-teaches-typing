@@ -140,7 +140,6 @@ function CreateKeyboard() {
                     value={color1}
                     name="color1"
                     onChange={(event) => {
-                      console.log('New color:', event.target.value);
                       setColor1(event.target.value);
                     }}
                   />

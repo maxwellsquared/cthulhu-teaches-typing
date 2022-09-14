@@ -12,9 +12,6 @@ export default function DisplayKeyboard(props) {
   const [color2, setColor2] = useState('#808080');
   // const [bgStyle, setBgStyle] = useState({fill: '#666666', "fill-rule": "evenodd"});
   const { userKeyboards, currentKeyboard, setCurrentKeyboard } = useContext(UserContext);
-  console.log("current keyboard:", currentKeyboard);
-  console.log("user keyboards:", userKeyboards);
-  console.log("user keyboard at current keyboard:", userKeyboards[currentKeyboard]);
 
   useEffect(() => {
     let myKeyboardType = null;

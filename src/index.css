@@ -183,6 +183,27 @@ input::placeholder {
   z-index: 5;
 }
 
+.code-hidden {
+  visibility: hidden;
+}
+
+.code-hidden {
+  visibility: hidden;
+}
+
+.code-visible {
+  font-family: metalista-web, serif;
+  text-align: center;
+  font-size: 15px;
+  animation: konami 3s;
+  color: rgba(0, 0, 0, 0);
+  position: absolute;
+  top: 50vh;
+  left: 40vw;
+  right: auto;
+  z-index: 99;
+}
+
 @keyframes shake {
 
   10%,
@@ -216,6 +237,31 @@ input::placeholder {
 
   50% {
     color: red;
+  }
+}
+
+@keyframes konami {
+
+  0% {
+    transform: scale(3, 3);
+    color: rgba(120, 0, 0, 0);
+    letter-spacing: 1px;
+  }
+
+  30% {
+    transform: scale(4, 4);
+    color: rgba(180, 0, 15, 0.9);
+  }
+  70% {
+    transform: scale(5, 5);
+    color: rgba(180, 0, 15, 0.9);
+  }
+
+
+  100% {
+    transform: scale(8, 8);
+    color:rgba(80, 0, 0, 0);
+    letter-spacing: 4px;
   }
 }
 
