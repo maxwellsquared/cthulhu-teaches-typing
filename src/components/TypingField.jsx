@@ -8,6 +8,7 @@ import DifficultyDropdown from './DifficultyDropdown';
 import codeRandomWords from '../helpers/codeRandomWords';
 import codeLanguageRandom from '../helpers/codeLanguageRandom';
 import binaryCode from '../helpers/binaryCode';
+import zalgoText from '../helpers/zalgoText';
 import {Howl, Howler} from 'howler';
 
 // setup howler sounds
@@ -62,6 +63,7 @@ export default function TypingField() {
     position: 'relative', // set typing division style (in order to set position)
     left: '0ch',
   });
+  const [codeDisplay, setCodeDisplay] = useState('code-hidden'); // hide FORBIDDEN KNOWLEDGE UNLOCKED until user enters Konami Code
 
   //  used in characterCheck to check if the last character typed was correct
   const [lastCharIndex, setLastCharIndex] = useState(0);
@@ -191,7 +193,7 @@ export default function TypingField() {
     }
   };
 
-  // ---- BACKSPACE FUNCTION AND CODE CHECK ----
+  // ---- BACKSPACE FUNCTION AND SECRET CODE CHECK ----
   const detailedInput = (event) => {
     if (event.key === 'Backspace') {
       setBackspacePressed(true);
@@ -203,6 +205,8 @@ export default function TypingField() {
 
     if (compareArrays(keyStrokes, konamiCode)) {
       setCodeEntered(true);
+      setDifficulty('cursed');
+      setCodeDisplay('code-visible');
     }
   };
 
@@ -262,19 +266,30 @@ export default function TypingField() {
       updatedWords = randomWords.toString();
       setRightChars(updatedWords.replace(/,/g, ' '));
     }
+
+    if (difficulty === 'cursed') {
+      setDifficulty('cursed');
+      setRandomWords(RandomWords({ time: 1, numWords: 225 }));
+      updatedWords = randomWords.toString();
+      setRightChars(updatedWords.replace(/,/g, ' '));
+    }
   };
 
   // update the rightChars when the difficulty is changed, only runs when the difficulty is changed
   useEffect(() => {
     let updatedWords = randomWords.toString();
-    setRightChars(updatedWords.replace(/,/g, ' '));
+    if (difficulty === 'cursed') {
+      setRightChars(zalgoText(updatedWords.replace(/,/g, ' ')));
+    } else {
+      setRightChars(updatedWords.replace(/,/g, ' '));
+    }
   }, [difficulty]);
 
   return (
     <>
       <ResultsModal difficulty={difficulty} gameOver={isComplete} wpm={wordsPerMinute} accuracy={accuracy} />
-      <div style={{ color: 'white', visibility: codeEntered ? 'visible' : 'hidden' }}>
-        CONGRATULATION!!!! VISIBLE
+      <div className={codeDisplay}>
+        FORBIDDEN KNOWLEDGE UNLOCKED
       </div>
       <div className="input-container mt-20 mb-10">
         <div className={divClassName} style={fullDivStyle}>
