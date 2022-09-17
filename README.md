@@ -11,7 +11,7 @@
   <p align="center">
     A typing game for learning to type in the style of the Cthulhu Mythos.
     <br />
-    Hosted at <a href="https://www.cthulhuteachestyping.com/" target="_blank">www.cthulhuteachestyping.com/</a>
+    Hosted at <a href="https://www.cthulhuteachestyping.com/" target="_blank">www.cthulhuteachestyping.com</a>
   </p>
 </div>
 </details>
