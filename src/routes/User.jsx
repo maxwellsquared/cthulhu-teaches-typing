@@ -14,7 +14,7 @@ const User = () => {
   // axios get request to get user data
   const getUserData = (userId) => {
     axios
-      .get(`http://localhost:3000/api/user/${userId}`)
+      .get(`https://stark-fortress-32519.herokuapp.com/api/user/${userId}`)
       .then((res) => {
         setUserStats(res.data); // set user data to state
       })
@@ -26,7 +26,7 @@ const User = () => {
 
   const deleteKeyboard = function (keyboard_id) {
     axios
-      .delete(`http://localhost:3000/keyboards/${keyboard_id}`, {})
+      .delete(`https://stark-fortress-32519.herokuapp.com/keyboards/${keyboard_id}`, {})
       .then((res) => {
         console.log('Success: Keyboard deleted');
       })
@@ -41,7 +41,7 @@ const User = () => {
   const getKeyboardsByUserId = (userId) => {
     const config = {
       method: 'get',
-      url: `http://localhost:3000/keyboards/${userId}`,
+      url: `https://stark-fortress-32519.herokuapp.com/keyboards/${userId}`,
       headers: {},
     };
 

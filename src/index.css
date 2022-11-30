@@ -120,7 +120,7 @@ input::placeholder {
 .Modal {
   /* background-color: rgba(25, 0, 25, 0.9); */
   margin: auto;
-  margin-top: 20%;
+  margin-top: 100px;
   height: auto;
   width: fit-content;
   display: flex;

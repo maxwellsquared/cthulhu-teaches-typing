@@ -11,7 +11,7 @@ const submitGuestScore = function (wpm, accuracy, guestName, keyboard_id, diffic
   };
 
   axios
-    .post(`http://localhost:3000/submit/guest`, data, {
+    .post(`https://stark-fortress-32519.herokuapp.com/submit/guest`, data, {
       headers: {
         'content-type': 'application/json',
       },
